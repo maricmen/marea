@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ecology Field Guide — ALS 3153</title>
+<style>
+:root{
+  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea; --card2:#f5eeddff;
+  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
+  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
+  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#7c95a3;
+  --line:#d9ccb0; --line2:#c7b797;
+  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #efe6d2 0%, transparent 60%),
+    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+  color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding:0 16px 60px; min-height:100vh;
+}
+.wrap{max-width:940px;margin:0 auto}
+
+/* header */
+.top{padding:26px 4px 6px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.crest{width:52px;height:52px;flex:none}
+.hgroup h1{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0;letter-spacing:.2px;color:var(--soil)}
+.hgroup .sub{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.09em;margin-top:6px}
+.hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:64ch}
+
+/* progress */
+.prog{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progbar{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
+.progfill{height:100%;width:0;background:linear-gradient(90deg,var(--moss),var(--wheat));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.progtxt{font-size:13px;color:var(--ink2)}
+.progtxt b{color:var(--soil);font-size:15px}
+
+/* tabs */
+.tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 18px;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--line2)}
+.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+
+.view{display:none;animation:fade .25s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* guide */
+.theme{margin-top:26px}
+.themehead{display:flex;align-items:baseline;gap:10px;margin:0 4px 12px}
+.themehead .n{font-family:var(--serif);font-size:13px;color:#fff;background:var(--clay);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-weight:700}
+.themehead h2{font-family:var(--serif);font-size:20px;margin:0;color:var(--soil)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 16px 12px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--moss);opacity:.55}
+.card.m1::before{background:var(--ink3);opacity:.4}
+.card.m2::before{background:var(--wheat)}
+.card.m3::before{background:var(--moss)}
+.lec{display:inline-block;font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700;background:#efe0cf;padding:2px 8px;border-radius:99px;margin-bottom:8px}
+.card h3{font-family:var(--serif);font-size:17px;margin:0 0 6px;color:var(--ink);line-height:1.2}
+.card p{margin:0 0 10px;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.card .fig{margin:2px 0 10px}
+.mastery{display:flex;gap:6px;border-top:1px dashed var(--line2);padding-top:10px;margin-top:2px}
+.mbtn{flex:1;font:inherit;font-size:11px;font-weight:600;border:1px solid var(--line);background:var(--paper);color:var(--ink3);border-radius:9px;padding:6px 4px;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1}
+.mbtn .ic{font-size:14px}
+.mbtn:hover{border-color:var(--line2)}
+.mbtn.on1{background:#efe7d8;color:var(--ink2);border-color:var(--line2)}
+.mbtn.on2{background:#f3e7c6;color:#8a6a1e;border-color:#dcc487}
+.mbtn.on3{background:#e2e7cf;color:var(--moss-d);border-color:#b6c188}
+
+/* flashcards */
+.deckwrap{margin-top:22px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.flash{width:100%;max-width:460px;height:280px;perspective:1400px;cursor:pointer}
+.flinner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flash.flip .flinner{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:28px 26px;text-align:center}
+.ffront{background:var(--card)}
+.fback{background:linear-gradient(180deg,#efe7d5,#e8ddc4);transform:rotateY(180deg)}
+.fface .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin-bottom:14px}
+.fface .qq{font-family:var(--serif);font-size:21px;color:var(--soil);line-height:1.3}
+.fface .aa{font-size:15px;color:var(--ink);line-height:1.55}
+.fhint{font-size:12px;color:var(--ink3);position:absolute;bottom:14px;left:0;right:0;text-align:center}
+.deckctl{display:flex;align-items:center;gap:12px}
+.dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 20px;cursor:pointer}
+.dbtn:hover{border-color:var(--line2)}
+.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.dcount{font-size:13px;color:var(--ink2);min-width:70px;text-align:center}
+
+/* quiz */
+.quiz{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px}
+.q .qh{font-family:var(--serif);font-size:16.5px;color:var(--ink);margin:0 0 12px;line-height:1.35}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
+.opt:hover{border-color:var(--line2)}
+.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt:disabled{cursor:default}
+.qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
+.qexp.show{display:block}
+.quizscore{position:sticky;bottom:14px;align-self:center;background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow);margin-top:6px}
+
+/* coverage strip */
+.cover{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px}
+.cover h2{font-family:var(--serif);font-size:18px;margin:0 0 4px;color:var(--soil)}
+.cover .cs{font-size:12.5px;color:var(--ink2);margin-bottom:12px}
+.covrow{display:flex;gap:10px;align-items:baseline;padding:7px 0;border-top:1px solid var(--line)}
+.covrow .cl{font-size:11px;font-weight:700;color:#fff;background:var(--moss);border-radius:6px;padding:2px 7px;flex:none;min-width:34px;text-align:center}
+.covrow .ct{font-size:13.5px;color:var(--ink2)}
+.covrow .ct b{color:var(--ink)}
+
+.foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic}
+svg{display:block}
+.dl{font-size:11px;fill:var(--ink2);font-family:var(--sans)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
+      <rect x="2" y="34" width="48" height="14" rx="3" fill="#6b4a31"/>
+      <rect x="2" y="40" width="48" height="8" rx="3" fill="#573f2c"/>
+      <path d="M26 34 C26 22 26 14 26 10" stroke="#4d5a2a" stroke-width="2.4" fill="none"/>
+      <path d="M26 20 C20 18 16 12 17 7 C23 7 27 12 26 20 Z" fill="#6d7b41"/>
+      <path d="M26 25 C32 24 37 19 37 13 C31 12 26 17 26 25 Z" fill="#7f8e4c"/>
+      <circle cx="26" cy="9" r="3.2" fill="#c69537"/>
+    </svg>
+    <div class="hgroup">
+      <h1>Ecology Field Guide</h1>
+      <div class="sub">ALS 3153 · Module 1 · Energy &amp; Carbon in Agroecosystems</div>
+    </div>
+  </div>
+  <p class="hnote">A place to learn this module by looking, not just reading. Move through the concepts, flip the cards to test yourself, take the quick quiz, and mark what has taken root. Everything here is drawn from your cleaned lecture transcripts and slides.</p>
+
+  <div class="prog">
+    <div class="progbar"><div class="progfill" id="pf"></div></div>
+    <div class="progtxt"><b id="psolid">0</b> of <span id="ptot">0</span> concepts solid · <span id="pgrow">0</span> taking root</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-v="guide">Field guide</button>
+    <button class="tab" data-v="flash">Flashcards</button>
+    <button class="tab" data-v="quiz">Quiz</button>
+  </div>
+
+  <div class="view on" id="v-guide"></div>
+
+  <div class="view" id="v-flash">
+    <div class="deckwrap">
+      <div class="flash" id="flash"><div class="flinner">
+        <div class="fface ffront"><div class="tag" id="fqtag"></div><div class="qq" id="fq"></div><div class="fhint">tap to flip</div></div>
+        <div class="fface fback"><div class="aa" id="fa"></div><div class="fhint">tap to flip back</div></div>
+      </div></div>
+      <div class="deckctl">
+        <button class="dbtn" id="fprev">‹ Back</button>
+        <span class="dcount" id="fcount"></span>
+        <button class="dbtn pri" id="fnext">Next ›</button>
+      </div>
+      <div class="progtxt" style="margin-top:2px">Shuffle a fresh pass anytime — <button class="dbtn" id="fshuf" style="padding:5px 12px;font-size:12px">shuffle</button></div>
+    </div>
+  </div>
+
+  <div class="view" id="v-quiz">
+    <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="cover" id="cover"></div>
+
+  <div class="foot">A prototype. Tell me what to keep, cut, or add — then I'll pour in the rest of the course.</div>
+</div>
+
+<script>
+/* ---------- content: Module 1 concepts ---------- */
+var THEMES = [
+ {n:1, title:"The modern farm and its costs", lec:"Lecture 1.1"},
+ {n:2, title:"Reading agriculture as an ecosystem", lec:"Lecture 1.2"},
+ {n:3, title:"Following the carbon and the energy", lec:"Lectures 1.3–1.4"},
+ {n:4, title:"The energy bill of a farm", lec:"Lectures 1.5–1.6"},
+ {n:5, title:"Agriculture and the changing climate", lec:"Lectures 1.7–1.8"}
+];
+var C = [
+ {t:1,lec:"1.1",title:"Conventional agriculture",
+  idea:`Large-scale farming built to maximize production and profit, leaning on layers of external inputs — fossil fuels, synthetic fertilizer, chemicals, machinery.`,
+  q:`What two goals define conventional agriculture, and what does it lean on?`, a:`Maximize production and profit — resting on heavy external inputs (fossil fuels, synthetic fertilizer, chemicals, machinery).`},
+ {t:1,lec:"1.1",title:"Monoculture",
+  idea:`One crop grown over large areas. Efficient — one set of machinery and chemicals, economies of scale — but it means low biodiversity, heavy input reliance, and a high risk of pest outbreaks.`,
+  q:`Why is monoculture efficient, and what does that efficiency cost?`, a:`Efficient because one crop needs one set of machinery/chemicals (economies of scale); it costs biodiversity, raises input reliance, and invites pest outbreaks.`},
+ {t:1,lec:"1.1",title:"Intensive tillage",
+  idea:`Turning the soil loosens it, controls weeds, and adds oxygen — but over seasons it degrades soil structure into a hardpan, burns through organic matter, and drives erosion.`,
+  q:`Give one benefit and one long-term cost of intensive tillage.`, a:`Benefit: loosens soil, controls weeds, aerates. Cost: hardpan, lost organic matter, and erosion over time.`},
+ {t:1,lec:"1.1",title:"Synthetic fertilizer & Haber–Bosch",
+  idea:`The Haber–Bosch process (c.1910) pulls inert nitrogen from the air and, with high heat and pressure, turns it into plant-usable ammonia. It's fossil-fuel hungry, and the yield gains it unlocked have now plateaued.`,
+  q:`What does the Haber–Bosch process do, and why is it a concern?`, a:`Fixes atmospheric N₂ into plant-usable ammonia using lots of heat/pressure — hence heavy fossil-fuel use; its yield gains have plateaued.`},
+ {t:1,lec:"1.1",title:"Irrigation",
+  idea:`About 20% of US ag land is irrigated, but it grows roughly 40% of the food. The catch: we drain groundwater from aquifers faster than they can recharge.`,
+  q:`Irrigation covers ~20% of US ag land but produces what share of food — and what's the problem?`, a:`~40% of food; the problem is draining aquifers faster than they recharge.`},
+ {t:1,lec:"1.1",title:"Chemical pest control",
+  idea:`Fast and effective in an outbreak, but non-selective (off-target harm, e.g. to bees), it breeds resistance in an evolutionary arms race, and it's costly and often toxic.`,
+  q:`Name the three main downsides of chemical pest control.`, a:`Non-selective/off-target effects, evolved resistance (arms race), and high cost/toxicity.`},
+ {t:1,lec:"1.1",title:"Genetic engineering",
+  idea:`We've "engineered" crops for millennia — teosinte was bred into corn. Modern tools are faster and more precise, but can deepen herbicide reliance, narrow crop diversity, and concentrate control in a few corporations.`,
+  q:`What ancient example shows genetic engineering isn't new, and what are the modern worries?`, a:`Teosinte bred into corn. Worries: herbicide reliance, reduced diversity, corporate control of seed.`},
+ {t:1,lec:"1.1",title:"Factory farming (CAFOs)",
+  idea:`Concentrated animal feeding operations: high output at low cost, but they lean on antibiotics, generate enormous waste streams, and raise real welfare concerns.`,
+  q:`What does CAFO stand for, and what are its main costs?`, a:`Concentrated Animal Feeding Operation — costs: antibiotic use, waste, and animal welfare.`},
+
+ {t:2,lec:"1.2",title:"Biotic vs abiotic",
+  idea:`Two halves of every ecosystem: biotic = the living parts and their interactions (competition, predation, parasitism); abiotic = the physical setting (energy, water, climate, chemicals).`,
+  q:`Biotic vs abiotic — which is which?`, a:`Biotic = living parts and their interactions; abiotic = the physical environment (energy, water, climate).`},
+ {t:2,lec:"1.2",title:"Levels of organization",
+  idea:`Ecology nests upward: individual (autecology) → population → community → ecosystem (a community plus its abiotic environment). Boundaries grow fuzzier as you climb.`,
+  q:`Put the levels of ecological organization in order.`, a:`Individual → population → community → ecosystem (community + abiotic environment).`},
+ {t:2,lec:"1.2",title:"Agroecosystems",
+  idea:`A farm is an ecosystem in its own right, so every law of ecology still applies. That's the whole move of this course: use ecology to manage agriculture better.`,
+  q:`Why treat a farm as an ecosystem?`, a:`Because ecological laws apply to it too — so we can use ecology to manage it more wisely.`},
+ {t:2,lec:"1.2",title:"Natural vs agricultural systems", fig:"nat",
+  idea:`Natural systems are closed, diverse, self-regulating, stable, and permanent. Agricultural systems are open (the harvest removes nutrients and energy), low-diversity, human-managed, unstable, and reset each season.`,
+  q:`Name three ways agricultural systems differ from natural ones.`, a:`They're open (harvest removes nutrients/energy), low-diversity, and human-managed/unstable — reset each season — vs. closed, diverse, self-regulating natural systems.`},
+
+ {t:3,lec:"1.3",title:"The carbon–energy link",
+  idea:`Energy is stored in the carbon–hydrogen bonds of organic compounds. So if you can measure carbon, you can track energy — the key that makes energy budgets in agriculture possible.`,
+  q:`Why does tracking carbon let us track energy?`, a:`Because energy is stored in the C–H bonds of organic compounds, so carbon and energy move together.`},
+ {t:3,lec:"1.3",title:"The carbon cycle", fig:"carbon",
+  idea:`Carbon has one way IN — photosynthesis (carbon fixation by autotrophs) — and many ways OUT: respiration, fire, decay, consumption. Natural systems recycle it; agriculture removes it in the harvest.`,
+  q:`How many ways does carbon enter an ecosystem, and how does agriculture break the cycle?`, a:`One way in — photosynthesis/fixation. Agriculture removes carbon in the harvest instead of recycling it.`},
+ {t:3,lec:"1.3",title:"Photosynthesis ↔ respiration",
+  idea:`Two mirror images. Photosynthesis stores energy: CO₂ + water + light → sugars + O₂. Respiration is the reverse — breaking those sugars to release the energy and CO₂.`,
+  q:`How are photosynthesis and respiration related?`, a:`They're opposites: photosynthesis stores energy (CO₂+water+light→sugars+O₂); respiration releases it (sugars+O₂→energy+CO₂).`},
+ {t:3,lec:"1.4",title:"The 2% rule", fig:"two",
+  idea:`Of all the sunlight striking a leaf, plants capture only about 2% and turn it into stored production. The rest is reflected, scattered, or the wrong wavelength.`,
+  q:`What share of the sunlight hitting a leaf do plants actually capture?`, a:`About 2%.`},
+ {t:3,lec:"1.4",title:"The 10% law", fig:"pyramid",
+  idea:`Only about 10% of the energy at one trophic level passes up to the next. Energy shrinks fast as you climb the pyramid, which is why top predators are rare.`,
+  q:`How much energy transfers between trophic levels?`, a:`Roughly 10% per step up the pyramid.`},
+ {t:3,lec:"1.4",title:"Production efficiency",
+  idea:`How much assimilated energy becomes growth. Plants ~50%, insects 35–45%, and endotherms (warm-blooded) much less — they burn energy holding body temperature. Predators sit below herbivores; ectotherms above endotherms.`,
+  q:`Why do warm-blooded animals have low production efficiency?`, a:`Because endotherms spend a lot of energy maintaining body temperature, leaving less for growth (ectotherms, not paying that cost, are more efficient).`},
+
+ {t:4,lec:"1.5",title:"Direct vs indirect energy",
+  idea:`Direct energy is solar — what the plant harvests itself (ecological). Indirect, or "cultural," energy is everything we add: human and animal labor plus industrial fossil-fuel inputs (fertilizer, pesticides, machinery, transport).`,
+  q:`Direct vs indirect (cultural) energy in agriculture?`, a:`Direct = solar energy the plant captures. Indirect/cultural = human/animal labor + industrial fossil-fuel inputs.`},
+ {t:4,lec:"1.5",title:"Liebig's law of the minimum",
+  idea:`Growth is limited by the single scarcest resource, not the total supply. All the nitrogen in the world won't help if phosphorus is the thing running short.`,
+  q:`What does Liebig's law of the minimum say?`, a:`Growth is capped by the most limiting nutrient, not the overall amount.`},
+ {t:4,lec:"1.5",title:"Harvest index", fig:"harvest",
+  idea:`The fraction of a plant's biomass you actually use. Lettuce is ~85% (you eat almost all of it); corn is ~10% (just the cob — the stalk is waste). Raising the harvest index raises yield.`,
+  q:`What is harvest index — and how do lettuce and corn compare?`, a:`The share of biomass actually used: lettuce ~85%, corn ~10% (only the cob).`},
+ {t:4,lec:"1.6",title:"The efficiency paradox", fig:"eff",
+  idea:`More input has not meant more efficiency. US corn's yield-per-energy-unit fell from ~1.44 in 1910 to ~0.63 by 1980. We grow far more, but burn far more energy to do it.`,
+  q:`Did modern inputs make corn more energy-efficient?`, a:`No — yield-per-energy fell from ~1.44 (1910) to ~0.63 (1980). More output, but much more energy in.`},
+ {t:4,lec:"1.6",title:"Ethanol: grain vs cellulosic",
+  idea:`Grain ethanol uses only the corn kernel — it competes with food and is energy-hungry. Cellulosic ethanol uses the whole plant, even switchgrass on marginal land, but its lignin is stubborn and the enzymes to break it are still expensive.`,
+  q:`What's the trade-off between grain and cellulosic ethanol?`, a:`Grain: food-vs-fuel + energy-hungry. Cellulosic: whole-plant/marginal-land, but lignin needs costly enzymes to break down.`},
+
+ {t:5,lec:"1.7",title:"The greenhouse effect", fig:"green",
+  idea:`Greenhouse gases — CO₂, methane, nitrous oxide, CFCs, and water vapor — let sunlight in but trap the heat trying to radiate back out, warming the planet and unsettling the climate.`,
+  q:`In one line, how does the greenhouse effect work?`, a:`Greenhouse gases let sunlight in but trap outgoing heat, warming the Earth.`},
+ {t:5,lec:"1.7",title:"CO₂ vs methane",
+  idea:`Carbon dioxide lingers ~100 years; methane only ~10. But molecule for molecule, methane traps heat about 20× more potently — a shorter but far stronger punch.`,
+  q:`Compare CO₂ and methane as greenhouse gases.`, a:`CO₂ lasts ~100 yr; methane ~10 yr but is ~20× more potent at trapping heat.`},
+ {t:5,lec:"1.7",title:"Albedo feedback", fig:"albedo",
+  idea:`Ice is bright and reflects sunlight (high albedo). As it melts, the darker ocean beneath absorbs more heat, which melts more ice — a self-amplifying loop.`,
+  q:`What is the albedo feedback loop?`, a:`Melting ice exposes dark ocean that absorbs more heat, melting still more ice — a self-reinforcing cycle.`},
+ {t:5,lec:"1.7",title:"Ocean acidification",
+  idea:`The ocean soaks up much of our CO₂, but that lowers its pH. More acidic water makes carbonate less available — bad news for corals and any shell-building life.`,
+  q:`How does CO₂ drive ocean acidification, and who's harmed?`, a:`Dissolved CO₂ lowers ocean pH, reducing carbonate for shells and coral.`},
+ {t:5,lec:"1.8",title:"Methane from agriculture",
+  idea:`Agriculture's biggest climate contribution is methane — mostly ruminant enteric fermentation (cow burps, not the back end) plus manure management. Grass-fed cattle actually emit more, since grass has more lignin to break down.`,
+  q:`Where does agricultural methane mostly come from?`, a:`Ruminant enteric fermentation (burps) and manure management — and grass-fed cattle emit more.`},
+ {t:5,lec:"1.8",title:"Carbon balance of a farm",
+  idea:`A farm both stores and emits carbon. Growing vegetation is a sink (photosynthesis pulls CO₂ in); idle or plowed fields, livestock, and fossil-fuel inputs are all sources.`,
+  q:`On a farm, what's a carbon sink and what's a source?`, a:`Sink: growing vegetation. Sources: idle/plowed fields, livestock, and fossil-fuel inputs.`},
+ {t:5,lec:"1.8",title:"Biogas",
+  idea:`Instead of venting methane, capture it. Anaerobic digestion of manure and organic waste yields biogas (mostly methane) that can be burned for energy — turning a pollutant into a fuel.`,
+  q:`What is biogas and why does it help?`, a:`Methane captured from manure/organic waste via anaerobic digestion, burned for energy instead of vented.`}
+];
+
+/* ---------- diagrams (inline SVG) ---------- */
+function fig(kind){
+ var W=248,H=150,s='<svg viewBox="0 0 '+W+' '+H+'" width="100%">';
+ if(kind==='pyramid'){
+   var lv=[['Plants','#6d7b41',10],['Herbivores','#8a9450',82],['Carnivores','#b0623b',126],['Top','#8c4a2b',158]];
+   var y=[118,86,54,24],h=26,cx=124;
+   s+='<text class="dl" x="4" y="14">Energy shrinks ~10% each step up</text>';
+   for(var i=0;i<4;i++){var wd=[200,140,80,36][i];s+='<rect x="'+(cx-wd/2)+'" y="'+y[i]+'" width="'+wd+'" height="'+h+'" rx="3" fill="'+lv[i][1]+'"/>';s+='<text x="'+cx+'" y="'+(y[i]+17)+'" text-anchor="middle" font-size="11" fill="#fff" font-family="var(--sans)">'+lv[i][0]+'</text>';}
+   s+='<text class="dl" x="'+(cx+108)+'" y="132" text-anchor="end">10% ➜ 10% ➜ 10%</text>';
+ } else if(kind==='two'){
+   s+='<circle cx="52" cy="60" r="34" fill="#e9d79b"/><circle cx="52" cy="60" r="34" fill="none" stroke="#c69537" stroke-width="2"/>';
+   s+='<path d="M52 60 L52 26 A34 34 0 0 1 55 26 Z" fill="#6d7b41"/>';
+   s+='<text x="52" y="112" text-anchor="middle" class="dl">sunlight on a leaf</text>';
+   s+='<text x="150" y="52" font-family="var(--serif)" font-size="30" fill="#4d5a2a">2%</text>';
+   s+='<text x="150" y="72" class="dl">captured &amp; stored</text>';
+   s+='<text x="150" y="92" class="dl">the other 98% is</text>';
+   s+='<text x="150" y="106" class="dl">reflected or lost</text>';
+ } else if(kind==='carbon'){
+   s+='<rect x="8" y="10" width="232" height="24" rx="6" fill="#cfe0e6"/><text x="124" y="26" text-anchor="middle" font-size="11" fill="#4a6b78">atmosphere · CO₂</text>';
+   s+='<rect x="86" y="98" width="76" height="34" rx="6" fill="#6d7b41"/><text x="124" y="119" text-anchor="middle" font-size="11" fill="#fff">plants</text>';
+   s+='<path d="M108 96 L108 38" stroke="#4d5a2a" stroke-width="3" fill="none" marker-end="url(#ah)"/><text x="70" y="70" class="dl">photosynthesis</text><text x="82" y="83" class="dl">(1 way IN)</text>';
+   s+='<path d="M150 38 L150 96" stroke="#b0623b" stroke-width="2" fill="none" stroke-dasharray="4 3" marker-end="url(#ah2)"/><text x="156" y="70" class="dl">respiration,</text><text x="156" y="83" class="dl">fire, decay</text>';
+   s+='<defs><marker id="ah" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#4d5a2a"/></marker><marker id="ah2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#b0623b"/></marker></defs>';
+ } else if(kind==='harvest'){
+   s+='<text class="dl" x="4" y="14">Share of biomass you actually use</text>';
+   s+='<rect x="30" y="40" width="34" height="80" rx="3" fill="#e6ddc4"/><rect x="30" y="40" width="34" height="68" rx="3" fill="#6d7b41"/><text x="47" y="134" text-anchor="middle" class="dl">lettuce</text><text x="47" y="34" text-anchor="middle" font-size="12" fill="#4d5a2a" font-weight="bold">85%</text>';
+   s+='<rect x="150" y="40" width="34" height="80" rx="3" fill="#e6ddc4"/><rect x="150" y="112" width="34" height="8" rx="3" fill="#c69537"/><text x="167" y="134" text-anchor="middle" class="dl">corn</text><text x="167" y="106" text-anchor="middle" font-size="12" fill="#8a6a1e" font-weight="bold">10%</text>';
+ } else if(kind==='eff'){
+   s+='<text class="dl" x="4" y="14">Corn yield per unit of energy in</text>';
+   s+='<rect x="34" y="30" width="46" height="90" rx="3" fill="#6d7b41"/><text x="57" y="24" text-anchor="middle" font-size="13" fill="#4d5a2a" font-weight="bold">1.44</text><text x="57" y="134" text-anchor="middle" class="dl">1910</text>';
+   s+='<rect x="150" y="80" width="46" height="40" rx="3" fill="#b0623b"/><text x="173" y="74" text-anchor="middle" font-size="13" fill="#8c4a2b" font-weight="bold">0.63</text><text x="173" y="134" text-anchor="middle" class="dl">1980</text>';
+   s+='<path d="M80 44 C110 60 128 78 150 90" stroke="#8c4a2b" stroke-width="2" fill="none" stroke-dasharray="4 3"/>';
+ } else if(kind==='green'){
+   s+='<rect x="0" y="0" width="248" height="150" fill="#e8ecc9" opacity=".0"/>';
+   s+='<line x1="34" y1="6" x2="86" y2="58" stroke="#c69537" stroke-width="3"/><path d="M80 52 l7 6 l-9 1 Z" fill="#c69537"/>';
+   s+='<rect x="6" y="60" width="236" height="18" rx="4" fill="#d9c7a0" opacity=".7"/><text x="124" y="73" text-anchor="middle" font-size="10" fill="#7a5c2f">greenhouse-gas layer</text>';
+   s+='<rect x="20" y="118" width="208" height="20" rx="4" fill="#6b4a31"/><text x="124" y="132" text-anchor="middle" font-size="10" fill="#efe0cf">Earth surface</text>';
+   s+='<path d="M150 116 C150 100 176 96 176 80" stroke="#b0623b" stroke-width="2.4" fill="none"/><path d="M176 84 l3 -8 l4 7 Z" fill="#b0623b"/>';
+   s+='<path d="M176 80 C176 92 150 96 150 112" stroke="#b0623b" stroke-width="2.4" fill="none" opacity=".6"/><path d="M150 108 l-3 8 l-4 -7 Z" fill="#b0623b" opacity=".6"/>';
+   s+='<text class="dl" x="6" y="16">sun in</text><text class="dl" x="188" y="102">heat trapped</text>';
+ } else if(kind==='albedo'){
+   s+='<circle cx="124" cy="75" r="52" fill="none" stroke="#7c95a3" stroke-width="2" stroke-dasharray="5 4"/>';
+   s+='<text x="124" y="30" text-anchor="middle" font-size="11" fill="#4a6b78">less ice</text>';
+   s+='<text x="196" y="80" text-anchor="middle" font-size="11" fill="#8c4a2b">darker ocean</text>';
+   s+='<text x="124" y="128" text-anchor="middle" font-size="11" fill="#8c4a2b">absorbs more heat</text>';
+   s+='<text x="52" y="80" text-anchor="middle" font-size="11" fill="#4a6b78">melts more ice</text>';
+   s+='<path d="M150 32 A52 52 0 0 1 176 58" stroke="#b0623b" stroke-width="2.4" fill="none" marker-end="url(#a1)"/>';
+   s+='<path d="M182 96 A52 52 0 0 1 150 120" stroke="#b0623b" stroke-width="2.4" fill="none" marker-end="url(#a1)"/>';
+   s+='<path d="M98 118 A52 52 0 0 1 70 92" stroke="#7c95a3" stroke-width="2.4" fill="none" marker-end="url(#a2)"/>';
+   s+='<path d="M72 56 A52 52 0 0 1 98 32" stroke="#7c95a3" stroke-width="2.4" fill="none" marker-end="url(#a2)"/>';
+   s+='<defs><marker id="a1" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#b0623b"/></marker><marker id="a2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#7c95a3"/></marker></defs>';
+ } else if(kind==='nat'){
+   s+='<text x="62" y="16" text-anchor="middle" font-size="11" fill="#4d5a2a" font-weight="bold">natural</text>';
+   s+='<circle cx="62" cy="72" r="40" fill="none" stroke="#6d7b41" stroke-width="2"/>';
+   s+='<path d="M62 34 A38 38 0 1 1 61 34" fill="none" stroke="#6d7b41" stroke-width="2" marker-end="url(#c1)"/>';
+   s+='<text x="62" y="70" text-anchor="middle" class="dl">closed</text><text x="62" y="84" text-anchor="middle" class="dl">loop</text>';
+   s+='<text x="186" y="16" text-anchor="middle" font-size="11" fill="#8c4a2b" font-weight="bold">agricultural</text>';
+   s+='<rect x="156" y="52" width="60" height="40" rx="6" fill="none" stroke="#b0623b" stroke-width="2"/>';
+   s+='<path d="M186 40 L186 50" stroke="#6d7b41" stroke-width="3" marker-end="url(#c2)"/><text x="186" y="36" text-anchor="middle" class="dl">inputs</text>';
+   s+='<path d="M186 94 L186 108" stroke="#b0623b" stroke-width="3" marker-end="url(#c3)"/><text x="186" y="122" text-anchor="middle" class="dl">harvest out</text>';
+   s+='<text x="186" y="76" text-anchor="middle" class="dl">open</text>';
+   s+='<defs><marker id="c1" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#6d7b41"/></marker><marker id="c2" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#6d7b41"/></marker><marker id="c3" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#b0623b"/></marker></defs>';
+ }
+ return s+'</svg>';
+}
+
+/* ---------- state ---------- */
+var LS='ecoALS3153_v1';
+var state=JSON.parse(localStorage.getItem(LS)||'{}');
+function save(){localStorage.setItem(LS,JSON.stringify(state));}
+C.forEach(function(c,i){c.id='c'+i;});
+
+/* ---------- render guide ---------- */
+function renderGuide(){
+ var host=document.getElementById('v-guide'); host.innerHTML='';
+ THEMES.forEach(function(th){
+   var sec=document.createElement('div'); sec.className='theme';
+   sec.innerHTML='<div class="themehead"><span class="n">'+th.n+'</span><h2>'+th.title+'</h2></div>';
+   var grid=document.createElement('div'); grid.className='cards';
+   C.filter(function(c){return c.t===th.n;}).forEach(function(c){
+     var m=state[c.id]||0;
+     var card=document.createElement('div'); card.className='card'+(m?' m'+m:'');
+     card.innerHTML='<span class="lec">Lecture '+c.lec+'</span>'+
+       '<h3>'+c.title+'</h3>'+
+       (c.fig?'<div class="fig">'+fig(c.fig)+'</div>':'')+
+       '<p>'+c.idea+'</p>'+
+       '<div class="mastery">'+
+         '<button class="mbtn'+(m===1?' on1':'')+'" data-m="1"><span class="ic">•</span>shaky</button>'+
+         '<button class="mbtn'+(m===2?' on2':'')+'" data-m="2"><span class="ic">◐</span>getting it</button>'+
+         '<button class="mbtn'+(m===3?' on3':'')+'" data-m="3"><span class="ic">✦</span>solid</button>'+
+       '</div>';
+     card.querySelectorAll('.mbtn').forEach(function(b){
+       b.addEventListener('click',function(){
+         var v=+b.getAttribute('data-m');
+         state[c.id]=(state[c.id]===v?0:v); save(); renderGuide(); updateProg();
+       });
+     });
+     grid.appendChild(card);
+   });
+   sec.appendChild(grid); host.appendChild(sec);
+ });
+}
+function updateProg(){
+ var solid=0,grow=0;
+ C.forEach(function(c){var m=state[c.id]||0; if(m===3)solid++; else if(m===2)grow++;});
+ document.getElementById('psolid').textContent=solid;
+ document.getElementById('pgrow').textContent=grow;
+ document.getElementById('ptot').textContent=C.length;
+ document.getElementById('pf').style.width=(100*solid/C.length)+'%';
+}
+
+/* ---------- flashcards ---------- */
+var order=C.map(function(_,i){return i;}), fi=0;
+function shuffle(){ for(var i=order.length-1;i>0;i--){var j=(i*7+3)%(i+1);var t=order[i];order[i]=order[j];order[j]=t;} fi=0; showFlash(); }
+function showFlash(){
+ var c=C[order[fi]]; var fl=document.getElementById('flash'); fl.classList.remove('flip');
+ document.getElementById('fqtag').textContent='Lecture '+c.lec+' · '+c.title;
+ document.getElementById('fq').textContent=c.q;
+ document.getElementById('fa').textContent=c.a;
+ document.getElementById('fcount').textContent=(fi+1)+' / '+C.length;
+}
+document.getElementById('flash').addEventListener('click',function(){this.classList.toggle('flip');});
+document.getElementById('fnext').addEventListener('click',function(){fi=(fi+1)%C.length;showFlash();});
+document.getElementById('fprev').addEventListener('click',function(){fi=(fi-1+C.length)%C.length;showFlash();});
+document.getElementById('fshuf').addEventListener('click',shuffle);
+
+/* ---------- quiz ---------- */
+var QUIZ=[
+ {q:"Only about what fraction of the sunlight hitting a leaf do plants actually capture?",o:["2%","10%","30%","50%"],c:0,e:"The 2% rule — most sunlight is reflected, scattered, or the wrong wavelength."},
+ {q:"Roughly how much energy transfers from one trophic level to the next?",o:["1%","10%","50%","90%"],c:1,e:"The 10% law — which is why energy (and top predators) thin out up the pyramid."},
+ {q:"The Haber–Bosch process is significant because it…",o:["removes salt from soil","fixes atmospheric nitrogen into fertilizer","breeds drought-resistant corn","captures methane from manure"],c:1,e:"It pulls inert N₂ from the air into plant-usable ammonia — but is fossil-fuel intensive."},
+ {q:"Which best describes an agricultural system compared with a natural one?",o:["closed and self-regulating","open, with nutrients removed at harvest","high biodiversity","permanent and stable"],c:1,e:"Agriculture is an open system — the harvest carries nutrients and energy out."},
+ {q:"Liebig's law of the minimum says growth is limited by…",o:["total nutrients available","the single scarcest nutrient","the amount of sunlight only","soil temperature"],c:1,e:"The scarcest resource sets the ceiling, no matter how much of the others you have."},
+ {q:"Corn's harvest index (~10%) is low because…",o:["only the cob is used, the stalk is waste","corn grows slowly","it needs no fertilizer","it's grown in deserts"],c:0,e:"Harvest index is the share of biomass used — lettuce ~85%, corn ~10%."},
+ {q:"Comparing greenhouse gases, methane…",o:["lasts longer than CO₂","is weaker than CO₂","is shorter-lived but ~20× more potent","is not produced by agriculture"],c:2,e:"Methane lasts ~10 yr vs CO₂'s ~100, but traps heat ~20× more strongly."},
+ {q:"Most agricultural methane comes from…",o:["tractor exhaust","ruminant burps and manure","irrigation water","crop photosynthesis"],c:1,e:"Enteric fermentation (cow burps) plus manure management — grass-fed cattle emit more."},
+ {q:"In the albedo feedback loop, melting ice leads to…",o:["more sunlight reflected","darker ocean absorbing more heat, melting more ice","cooler oceans","more carbonate for shells"],c:1,e:"Less bright ice means darker water absorbs more heat — a self-amplifying loop."},
+ {q:"A carbon SINK on a farm is…",o:["a plowed idle field","growing vegetation","the cattle herd","the diesel tractor"],c:1,e:"Growing plants pull CO₂ in; idle/plowed soil, animals, and fossil fuels are sources."}
+];
+function renderQuiz(){
+ var host=document.getElementById('quiz'); host.innerHTML=''; var answered=0, right=0;
+ QUIZ.forEach(function(item,qi){
+   var q=document.createElement('div'); q.className='q';
+   var h='<div class="qh">'+(qi+1)+'. '+item.q+'</div>';
+   item.o.forEach(function(opt,oi){ h+='<button class="opt" data-o="'+oi+'">'+opt+'</button>'; });
+   h+='<div class="qexp">'+item.e+'</div>';
+   q.innerHTML=h;
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; q.dataset.done='1'; answered++;
+       var pick=+b.getAttribute('data-o');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===item.c)x.classList.add('correct'); });
+       if(pick!==item.c) b.classList.add('wrong'); else right++;
+       q.querySelector('.qexp').classList.add('show');
+       document.getElementById('qscore').textContent='Score '+right+' / '+answered;
+     });
+   });
+   host.appendChild(q);
+ });
+ var sc=document.createElement('div'); sc.className='quizscore'; sc.id='qscore'; sc.textContent='Pick an answer to begin'; host.appendChild(sc);
+}
+
+/* ---------- coverage ---------- */
+function renderCover(){
+ var cov=[
+  ['1.1','Tenets of modern agriculture',8],['1.2','Natural vs managed systems',4],
+  ['1.3','Carbon &amp; energy in ecosystems',3],['1.4','Energy &amp; trophic pyramids',3],
+  ['1.5','Energy inputs in agriculture',3],['1.6','Energy input efficiencies',2],
+  ['1.7','Altering the carbon cycle · 1',5],['1.8','Altering the carbon cycle · 2',3]
+ ];
+ var h='<h2>What each recording covers</h2><div class="cs">The nine Module 1 transcripts, mapped to the concepts above.</div>';
+ cov.forEach(function(r){ h+='<div class="covrow"><span class="cl">'+r[0]+'</span><span class="ct"><b>'+r[1]+'</b></span></div>'; });
+ document.getElementById('cover').innerHTML=h;
+}
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tab').forEach(function(t){
+ t.addEventListener('click',function(){
+   document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on');});
+   document.querySelectorAll('.view').forEach(function(x){x.classList.remove('on');});
+   t.classList.add('on'); document.getElementById('v-'+t.getAttribute('data-v')).classList.add('on');
+ });
+});
+
+renderGuide(); updateProg(); showFlash(); renderQuiz(); renderCover();
+</script>
+</body>
+</html>
