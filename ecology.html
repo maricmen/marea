@@ -65,6 +65,9 @@ body{
 .card h3{font-family:var(--serif);font-size:17px;margin:0 0 6px;color:var(--ink);line-height:1.2}
 .card p{margin:0 0 10px;font-size:13.5px;color:var(--ink2);line-height:1.5}
 .card .fig{margin:2px 0 10px}
+.cardimg{margin:2px 0 12px}
+.cardimg img{width:100%;border-radius:10px;border:1px solid var(--line2);box-shadow:0 1px 4px rgba(60,44,24,.1);display:block;background:#fbf6ea}
+.cardimg figcaption{font-size:11.5px;color:var(--ink3);margin-top:6px;line-height:1.35;font-style:italic;font-family:var(--serif)}
 .mastery{display:flex;gap:6px;border-top:1px dashed var(--line2);padding-top:10px;margin-top:2px}
 .mbtn{flex:1;font:inherit;font-size:11px;font-weight:600;border:1px solid var(--line);background:var(--paper);color:var(--ink3);border-radius:9px;padding:6px 4px;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1}
 .mbtn .ic{font-size:14px}
@@ -103,6 +106,23 @@ body{
 .qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
 .qexp.show{display:block}
 .quizscore{position:sticky;bottom:14px;align-self:center;background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow);margin-top:6px}
+
+/* connect game */
+.connintro{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:14.5px;margin:22px 4px 14px;max-width:64ch}
+.connboard{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.conncol{display:flex;flex-direction:column;gap:10px}
+.ctile{font:inherit;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px;cursor:pointer;color:var(--ink);font-size:13.5px;line-height:1.35;transition:transform .12s,border-color .12s,background .12s;position:relative}
+.conncol#connL .ctile{font-family:var(--serif);font-size:15px;color:var(--soil)}
+.ctile:hover{border-color:var(--line2)}
+.ctile.sel{border-color:var(--clay);background:#f3e4d8;box-shadow:0 0 0 2px rgba(176,98,59,.18),var(--shadow)}
+.ctile.matched{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);cursor:default;box-shadow:none}
+.ctile.matched::after{content:"✦";position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--moss);font-size:13px}
+.conncol#connL .ctile.matched{color:var(--moss-d)}
+.ctile.miss{animation:shake .34s;border-color:var(--clay-d);background:#f0dcd2}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.connfoot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px}
+.conndone{text-align:center;font-family:var(--serif);font-size:17px;color:var(--moss-d);margin-top:14px}
+@media(max-width:520px){.ctile{font-size:12.5px;padding:10px 11px}.conncol#connL .ctile{font-size:13.5px}}
 
 /* coverage strip */
 .cover{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px}
@@ -145,6 +165,7 @@ svg{display:block}
     <button class="tab on" data-v="guide">Field guide</button>
     <button class="tab" data-v="flash">Flashcards</button>
     <button class="tab" data-v="quiz">Quiz</button>
+    <button class="tab" data-v="connect">Connect</button>
   </div>
 
   <div class="view on" id="v-guide"></div>
@@ -166,6 +187,16 @@ svg{display:block}
 
   <div class="view" id="v-quiz">
     <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="view" id="v-connect">
+    <p class="connintro">Tap a term on the left, then the idea it belongs with on the right. Get it right and the pair wires together and locks in. Get it wrong and they flash and let go.</p>
+    <div class="connboard">
+      <div class="conncol" id="connL"></div>
+      <div class="conncol" id="connR"></div>
+    </div>
+    <div class="connfoot"><span class="dcount" id="conncount"></span><button class="dbtn" id="connreset">shuffle &amp; reset</button></div>
+    <div class="conndone" id="conndone" hidden>Every pair wired. Nicely done.</div>
   </div>
 
   <div class="cover" id="cover"></div>
@@ -194,7 +225,8 @@ var C = [
   q:`Give one benefit and one long-term cost of intensive tillage.`, a:`Benefit: loosens soil, controls weeds, aerates. Cost: hardpan, lost organic matter, and erosion over time.`},
  {t:1,lec:"1.1",title:"Synthetic fertilizer & Haber–Bosch",
   idea:`The Haber–Bosch process (c.1910) pulls inert nitrogen from the air and, with high heat and pressure, turns it into plant-usable ammonia. It's fossil-fuel hungry, and the yield gains it unlocked have now plateaued.`,
-  q:`What does the Haber–Bosch process do, and why is it a concern?`, a:`Fixes atmospheric N₂ into plant-usable ammonia using lots of heat/pressure — hence heavy fossil-fuel use; its yield gains have plateaued.`},
+  q:`What does the Haber–Bosch process do, and why is it a concern?`, a:`Fixes atmospheric N₂ into plant-usable ammonia using lots of heat/pressure — hence heavy fossil-fuel use; its yield gains have plateaued.`,
+  img:"eco-assets/corn_yield.png", cap:"From the slides: US corn yields climb with fertilizer, then level off."},
  {t:1,lec:"1.1",title:"Irrigation",
   idea:`About 20% of US ag land is irrigated, but it grows roughly 40% of the food. The catch: we drain groundwater from aquifers faster than they can recharge.`,
   q:`Irrigation covers ~20% of US ag land but produces what share of food — and what's the problem?`, a:`~40% of food; the problem is draining aquifers faster than they recharge.`},
@@ -249,9 +281,10 @@ var C = [
  {t:4,lec:"1.5",title:"Harvest index", fig:"harvest",
   idea:`The fraction of a plant's biomass you actually use. Lettuce is ~85% (you eat almost all of it); corn is ~10% (just the cob — the stalk is waste). Raising the harvest index raises yield.`,
   q:`What is harvest index — and how do lettuce and corn compare?`, a:`The share of biomass actually used: lettuce ~85%, corn ~10% (only the cob).`},
- {t:4,lec:"1.6",title:"The efficiency paradox", fig:"eff",
+ {t:4,lec:"1.6",title:"The efficiency paradox",
   idea:`More input has not meant more efficiency. US corn's yield-per-energy-unit fell from ~1.44 in 1910 to ~0.63 by 1980. We grow far more, but burn far more energy to do it.`,
-  q:`Did modern inputs make corn more energy-efficient?`, a:`No — yield-per-energy fell from ~1.44 (1910) to ~0.63 (1980). More output, but much more energy in.`},
+  q:`Did modern inputs make corn more energy-efficient?`, a:`No — yield-per-energy fell from ~1.44 (1910) to ~0.63 (1980). More output, but much more energy in.`,
+  img:"eco-assets/eff_table.png", cap:"From the slides: energy in vs. yield out for 1 ha of US corn (Carroll, 1990). Watch the bottom row."},
  {t:4,lec:"1.6",title:"Ethanol: grain vs cellulosic",
   idea:`Grain ethanol uses only the corn kernel — it competes with food and is energy-hungry. Cellulosic ethanol uses the whole plant, even switchgrass on marginal land, but its lignin is stubborn and the enzymes to break it are still expensive.`,
   q:`What's the trade-off between grain and cellulosic ethanol?`, a:`Grain: food-vs-fuel + energy-hungry. Cellulosic: whole-plant/marginal-land, but lignin needs costly enzymes to break down.`},
@@ -261,7 +294,8 @@ var C = [
   q:`In one line, how does the greenhouse effect work?`, a:`Greenhouse gases let sunlight in but trap outgoing heat, warming the Earth.`},
  {t:5,lec:"1.7",title:"CO₂ vs methane",
   idea:`Carbon dioxide lingers ~100 years; methane only ~10. But molecule for molecule, methane traps heat about 20× more potently — a shorter but far stronger punch.`,
-  q:`Compare CO₂ and methane as greenhouse gases.`, a:`CO₂ lasts ~100 yr; methane ~10 yr but is ~20× more potent at trapping heat.`},
+  q:`Compare CO₂ and methane as greenhouse gases.`, a:`CO₂ lasts ~100 yr; methane ~10 yr but is ~20× more potent at trapping heat.`,
+  img:"eco-assets/co2_curve.png", cap:"From the slides: atmospheric CO₂ climbing since 1958 (CDIAC)."},
  {t:5,lec:"1.7",title:"Albedo feedback", fig:"albedo",
   idea:`Ice is bright and reflects sunlight (high albedo). As it melts, the darker ocean beneath absorbs more heat, which melts more ice — a self-amplifying loop.`,
   q:`What is the albedo feedback loop?`, a:`Melting ice exposes dark ocean that absorbs more heat, melting still more ice — a self-reinforcing cycle.`},
@@ -270,7 +304,8 @@ var C = [
   q:`How does CO₂ drive ocean acidification, and who's harmed?`, a:`Dissolved CO₂ lowers ocean pH, reducing carbonate for shells and coral.`},
  {t:5,lec:"1.8",title:"Methane from agriculture",
   idea:`Agriculture's biggest climate contribution is methane — mostly ruminant enteric fermentation (cow burps, not the back end) plus manure management. Grass-fed cattle actually emit more, since grass has more lignin to break down.`,
-  q:`Where does agricultural methane mostly come from?`, a:`Ruminant enteric fermentation (burps) and manure management — and grass-fed cattle emit more.`},
+  q:`Where does agricultural methane mostly come from?`, a:`Ruminant enteric fermentation (burps) and manure management — and grass-fed cattle emit more.`,
+  img:"eco-assets/methane_pie.png", cap:"From the slides: US methane sources. Enteric fermentation (25%) + manure (9%) are the farm's share (EPA)."},
  {t:5,lec:"1.8",title:"Carbon balance of a farm",
   idea:`A farm both stores and emits carbon. Growing vegetation is a sink (photosynthesis pulls CO₂ in); idle or plowed fields, livestock, and fossil-fuel inputs are all sources.`,
   q:`On a farm, what's a carbon sink and what's a source?`, a:`Sink: growing vegetation. Sources: idle/plowed fields, livestock, and fossil-fuel inputs.`},
@@ -365,6 +400,7 @@ function renderGuide(){
        '<h3>'+c.title+'</h3>'+
        (c.fig?'<div class="fig">'+fig(c.fig)+'</div>':'')+
        '<p>'+c.idea+'</p>'+
+       (c.img?'<figure class="cardimg"><img loading="lazy" src="'+c.img+'" alt="'+c.title+' figure from the slides"><figcaption>'+c.cap+'</figcaption></figure>':'')+
        '<div class="mastery">'+
          '<button class="mbtn'+(m===1?' on1':'')+'" data-m="1"><span class="ic">•</span>shaky</button>'+
          '<button class="mbtn'+(m===2?' on2':'')+'" data-m="2"><span class="ic">◐</span>getting it</button>'+
@@ -454,6 +490,52 @@ function renderCover(){
  document.getElementById('cover').innerHTML=h;
 }
 
+/* ---------- connect game ---------- */
+var PAIRS=[
+ {l:"Ammonia", r:"Made by the Haber–Bosch process"},
+ {l:"Teosinte", r:"The wild ancestor of corn"},
+ {l:"The 2% rule", r:"Sunlight a leaf actually captures"},
+ {l:"The 10% law", r:"Energy passed up each trophic level"},
+ {l:"Liebig's law", r:"The scarcest nutrient sets the limit"},
+ {l:"Harvest index", r:"Share of biomass you actually use"},
+ {l:"Enteric fermentation", r:"Methane from cow burps"},
+ {l:"Albedo", r:"How much a surface reflects sunlight"}
+];
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=(i*13+5)%(i+1);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var selL=null, selR=null, matchedN=0;
+function renderConnect(){
+ matchedN=0; selL=null; selR=null;
+ document.getElementById('conndone').hidden=true;
+ var L=document.getElementById('connL'), R=document.getElementById('connR');
+ L.innerHTML=''; R.innerHTML='';
+ shuf(PAIRS.map(function(_,i){return i;})).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].l; b.setAttribute('data-id',id); b.setAttribute('data-side','L'); L.appendChild(b); });
+ shuf(PAIRS.map(function(_,i){return i;})).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].r; b.setAttribute('data-id',id); b.setAttribute('data-side','R'); R.appendChild(b); });
+ updateConnCount();
+ [L,R].forEach(function(col){ col.querySelectorAll('.ctile').forEach(function(b){ b.addEventListener('click',function(){onConn(b);}); }); });
+}
+function onConn(b){
+ if(b.classList.contains('matched')||b.classList.contains('miss')) return;
+ var side=b.getAttribute('data-side');
+ if(side==='L'){ if(selL)selL.classList.remove('sel'); selL=(selL===b?null:b); }
+ else { if(selR)selR.classList.remove('sel'); selR=(selR===b?null:b); }
+ if(selL&&selL.getAttribute('data-side')==='L')selL.classList.add('sel');
+ if(selR&&selR.getAttribute('data-side')==='R')selR.classList.add('sel');
+ if(selL&&selR){
+   var a=selL, c=selR;
+   if(a.getAttribute('data-id')===c.getAttribute('data-id')){
+     a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('matched'); c.classList.add('matched');
+     selL=null; selR=null; matchedN++; updateConnCount();
+     if(matchedN===PAIRS.length) document.getElementById('conndone').hidden=false;
+   } else {
+     a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('miss'); c.classList.add('miss');
+     selL=null; selR=null;
+     setTimeout(function(){ a.classList.remove('miss'); c.classList.remove('miss'); }, 360);
+   }
+ }
+}
+function updateConnCount(){ document.getElementById('conncount').textContent=matchedN+' / '+PAIRS.length+' connected'; }
+document.getElementById('connreset').addEventListener('click',renderConnect);
+
 /* ---------- tabs ---------- */
 document.querySelectorAll('.tab').forEach(function(t){
  t.addEventListener('click',function(){
@@ -463,7 +545,7 @@ document.querySelectorAll('.tab').forEach(function(t){
  });
 });
 
-renderGuide(); updateProg(); showFlash(); renderQuiz(); renderCover();
+renderGuide(); updateProg(); showFlash(); renderQuiz(); renderConnect(); renderCover();
 </script>
 </body>
 </html>
