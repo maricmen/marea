@@ -50,6 +50,15 @@ body{
 .view.on{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
+/* big picture */
+.bigpic{margin-top:22px}
+.oneliner{font-family:var(--serif);font-size:18px;line-height:1.42;color:var(--soil);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--clay);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:0 4px 18px}
+.mapwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 8px;margin:0 4px 8px;overflow-x:auto}
+.mapwrap svg{max-width:420px;margin:0 auto}
+.mapcap{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink3);margin:0 10px 22px;text-align:center;line-height:1.4}
+.bigtext p{font-size:14.5px;color:var(--ink2);line-height:1.6;margin:0 4px 13px;max-width:66ch}
+.bigtext b{color:var(--soil);font-family:var(--serif)}
+
 /* guide */
 .theme{margin-top:26px}
 .themehead{display:flex;align-items:baseline;gap:10px;margin:0 4px 12px}
@@ -162,13 +171,65 @@ svg{display:block}
   </div>
 
   <div class="tabs">
-    <button class="tab on" data-v="guide">Field guide</button>
+    <button class="tab on" data-v="overview">Big picture</button>
+    <button class="tab" data-v="guide">Field guide</button>
     <button class="tab" data-v="flash">Flashcards</button>
     <button class="tab" data-v="quiz">Quiz</button>
     <button class="tab" data-v="connect">Connect</button>
   </div>
 
-  <div class="view on" id="v-guide"></div>
+  <div class="view on" id="v-overview">
+    <div class="bigpic">
+      <div class="oneliner">Module 1 in one breath: a farm is a simplified, open ecosystem kept alive by pouring in fossil energy, and that same fossil dependence is both losing efficiency and unsettling the very climate the farm depends on.</div>
+      <div class="mapwrap">
+        <svg viewBox="0 0 380 460" width="100%" role="img" aria-label="How the Module 1 concepts connect">
+          <defs>
+            <marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#573f2c"/></marker>
+            <marker id="arc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#b0623b"/></marker>
+          </defs>
+          <rect x="88" y="8" width="204" height="50" rx="12" fill="#faf5e9" stroke="#b0623b" stroke-width="1.6"/>
+          <text x="190" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#8c4a2b" font-family="var(--serif)">Conventional agriculture</text>
+          <text x="190" y="45" text-anchor="middle" font-size="10.5" fill="#6c5d45">maximize yield, heavy external inputs</text>
+          <path d="M190 58 L190 84" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <text x="198" y="75" font-size="9.5" fill="#93856a" font-style="italic">but a farm is an…</text>
+          <rect x="88" y="86" width="204" height="50" rx="12" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
+          <text x="190" y="106" text-anchor="middle" font-size="14" font-weight="700" fill="#4d5a2a" font-family="var(--serif)">Open ecosystem</text>
+          <text x="190" y="123" text-anchor="middle" font-size="10.5" fill="#6c5d45">harvest carries energy + nutrients off the land</text>
+          <path d="M190 136 L190 162" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <text x="198" y="153" font-size="9.5" fill="#93856a" font-style="italic">can't recycle, so it needs…</text>
+          <rect x="88" y="164" width="204" height="50" rx="12" fill="#efe6d4" stroke="#8a6a3a" stroke-width="1.6"/>
+          <text x="190" y="184" text-anchor="middle" font-size="14" font-weight="700" fill="#6b4a2a" font-family="var(--serif)">A fossil-energy subsidy</text>
+          <text x="190" y="201" text-anchor="middle" font-size="10.5" fill="#6c5d45">the indirect, cultural energy that props it up</text>
+          <path d="M160 214 C128 242 112 252 100 276" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <path d="M220 214 C252 242 268 252 280 276" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <rect x="20" y="278" width="152" height="62" rx="12" fill="#f3e7c6" stroke="#c69537" stroke-width="1.6"/>
+          <text x="96" y="300" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8a6a1e" font-family="var(--serif)">Diminishing returns</text>
+          <text x="96" y="317" text-anchor="middle" font-size="10" fill="#6c5d45">more input, less yield</text>
+          <text x="96" y="331" text-anchor="middle" font-size="10" fill="#6c5d45">per energy (1.44 → 0.63)</text>
+          <rect x="208" y="278" width="152" height="62" rx="12" fill="#dfe6e9" stroke="#7c95a3" stroke-width="1.6"/>
+          <text x="284" y="300" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4a6b78" font-family="var(--serif)">Climate disruption</text>
+          <text x="284" y="317" text-anchor="middle" font-size="10" fill="#6c5d45">CO₂ + methane</text>
+          <text x="284" y="331" text-anchor="middle" font-size="10" fill="#6c5d45">from farms</text>
+          <path d="M360 305 C378 250 378 62 294 32" stroke="#b0623b" stroke-width="1.8" fill="none" stroke-dasharray="5 4" marker-end="url(#arc)"/>
+          <text x="372" y="175" font-size="9.5" fill="#b0623b" font-style="italic" text-anchor="middle" transform="rotate(90 372 175)">loops back</text>
+          <path d="M96 340 C96 366 150 380 168 392" stroke="#6d7b41" stroke-width="1.4" fill="none" opacity="0.45"/>
+          <path d="M284 340 C284 366 230 380 212 392" stroke="#6d7b41" stroke-width="1.4" fill="none" opacity="0.45"/>
+          <rect x="50" y="392" width="280" height="54" rx="14" fill="#6d7b41"/>
+          <text x="190" y="414" text-anchor="middle" font-size="12.5" font-weight="700" fill="#f4ecdd" font-family="var(--serif)">The way out</text>
+          <text x="190" y="433" text-anchor="middle" font-size="11" fill="#eef0e2">close the loops, cut the subsidy</text>
+        </svg>
+      </div>
+      <div class="mapcap">Read it top to bottom. The dashed line on the right is the feedback loop: the climate disruption farming drives loops back to threaten farming itself.</div>
+      <div class="bigtext">
+        <p><b>Start here.</b> Conventional agriculture is built to do one thing, maximize yield, and to do it, it simplifies a diverse ecosystem down to one crop and pours in external inputs.</p>
+        <p><b>The catch.</b> A farm is an open ecosystem. Every harvest carries energy and nutrients off the land, so unlike a forest it cannot recycle what it loses. Following the carbon and the energy shows why: energy enters only once, from the sun, and plants catch only about 2% of it, and carbon has just one way in, photosynthesis. Remove the crop and the loop is broken, so the farm survives only by being subsidized, mostly with fossil-fuel energy.</p>
+        <p><b>Where it bites.</b> That subsidy is the whole tension. More input has stopped buying more efficiency, yield per unit of energy fell from 1.44 to 0.63, and the same fossil energy, plus the methane from the animals and the soil, is warming the planet. A warmer planet then loops back to threaten the agriculture that helped cause it.</p>
+        <p><b>So the arc points one way.</b> Close the loops and cut the subsidy, design farming to work more like the ecosystem it actually is. Every card in the field guide is one piece of that single story.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="v-guide"></div>
 
   <div class="view" id="v-flash">
     <div class="deckwrap">
