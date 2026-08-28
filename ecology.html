@@ -247,6 +247,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
+    <div class="oneliner" style="margin:22px 4px 16px">Quiz 2 exam pool — the real questions, collected across three attempts. Covers Week 1 &amp; 2 readings plus the Week 2 presentations. These are extremely likely to show up on the exam.</div>
     <div class="quiz" id="quiz"></div>
   </div>
 
@@ -503,17 +504,35 @@ document.getElementById('fprev').addEventListener('click',function(){fi=(fi-1+C.
 document.getElementById('fshuf').addEventListener('click',shuffle);
 
 /* ---------- quiz ---------- */
+/* Quiz 2 exam pool — the actual questions Mariel pulled across three attempts
+   (2026-08-28). Covers Week 1 & 2 readings + Week 2 presentations. 26 unique. */
 var QUIZ=[
- {q:"Only about what fraction of the sunlight hitting a leaf do plants actually capture?",o:["2%","10%","30%","50%"],c:0,e:"The 2% rule — most sunlight is reflected, scattered, or the wrong wavelength."},
- {q:"Roughly how much energy transfers from one trophic level to the next?",o:["1%","10%","50%","90%"],c:1,e:"The 10% law — which is why energy (and top predators) thin out up the pyramid."},
- {q:"The Haber–Bosch process is significant because it…",o:["removes salt from soil","fixes atmospheric nitrogen into fertilizer","breeds drought-resistant corn","captures methane from manure"],c:1,e:"It pulls inert N₂ from the air into plant-usable ammonia — but is fossil-fuel intensive."},
- {q:"Which best describes an agricultural system compared with a natural one?",o:["closed and self-regulating","open, with nutrients removed at harvest","high biodiversity","permanent and stable"],c:1,e:"Agriculture is an open system — the harvest carries nutrients and energy out."},
- {q:"Liebig's law of the minimum says growth is limited by…",o:["total nutrients available","the single scarcest nutrient","the amount of sunlight only","soil temperature"],c:1,e:"The scarcest resource sets the ceiling, no matter how much of the others you have."},
- {q:"Corn's harvest index (~10%) is low because…",o:["only the cob is used, the stalk is waste","corn grows slowly","it needs no fertilizer","it's grown in deserts"],c:0,e:"Harvest index is the share of biomass used — lettuce ~85%, corn ~10%."},
- {q:"Comparing greenhouse gases, methane…",o:["lasts longer than CO₂","is weaker than CO₂","is shorter-lived but ~20× more potent","is not produced by agriculture"],c:2,e:"Methane lasts ~10 yr vs CO₂'s ~100, but traps heat ~20× more strongly."},
- {q:"Most agricultural methane comes from…",o:["tractor exhaust","ruminant burps and manure","irrigation water","crop photosynthesis"],c:1,e:"Enteric fermentation (cow burps) plus manure management — grass-fed cattle emit more."},
- {q:"In the albedo feedback loop, melting ice leads to…",o:["more sunlight reflected","darker ocean absorbing more heat, melting more ice","cooler oceans","more carbonate for shells"],c:1,e:"Less bright ice means darker water absorbs more heat — a self-amplifying loop."},
- {q:"A carbon SINK on a farm is…",o:["a plowed idle field","growing vegetation","the cattle herd","the diesel tractor"],c:1,e:"Growing plants pull CO₂ in; idle/plowed soil, animals, and fossil fuels are sources."}
+ {q:"Salts are considered an environmental pollutant.",o:["True","False"],c:0,e:"True — irrigation and fertilizer leave salts that salinize soil and run off into waterways."},
+ {q:"Synthetic pesticides are quick-acting and effective.",o:["True","False"],c:0,e:"True — speed and effectiveness are the advantage; the costs are resistance, off-target harm, and persistence."},
+ {q:"Natural ecosystems typically have lower net productivity but higher species diversity than agroecosystems.",o:["True","False"],c:0,e:"True — natural systems sit near equilibrium (lower net productivity) but hold far more diversity; agroecosystems are simplified and managed for yield."},
+ {q:"Which of the following is NOT a characteristic shared between agroecosystems and natural ecosystems?",o:["Both require nutrient inputs","Both impact surrounding habitats","Both must utilize fire","Both require population regulation"],c:2,e:"Fire is the odd one out. Both share nutrient needs, habitat impacts, and population regulation. (On the exam this is asked as select-all — pick the other three.)"},
+ {q:"Greenhouse gases…",o:["trap heat in the atmosphere","trap nutrients","release nutrients","release heat into space"],c:0,e:"They let sunlight in but trap the outgoing heat."},
+ {q:"'Primary producer' is synonymous with all of these EXCEPT…",o:["phytoplankton","autotroph","heterotroph","plant"],c:2,e:"Producers are autotrophs; heterotrophs are consumers — the opposite."},
+ {q:"What is biogas?",o:["carbon dioxide released by cattle","gaseous product of anaerobic digestion","all the gases in our atmosphere","smoke from slash-and-burn"],c:1,e:"Mostly methane, from organic matter broken down without oxygen; can be captured for energy."},
+ {q:"How does large-scale shifting cultivation impact climate change?",o:["minimizes CO₂ release","removes carbon sinks","increases carbon fixation","increases carbon sinks"],c:1,e:"Slash-and-burn clears carbon-storing forest and releases a CO₂ pulse — a double whammy."},
+ {q:"Plants are classified as…",o:["polytrophs","heterotrophs","multitrophs","autotrophs"],c:3,e:"They make their own food via photosynthesis."},
+ {q:"Improper use of fertilizers can lead to eutrophication.",o:["True","False"],c:0,e:"True — excess N and P run off and feed algal blooms."},
+ {q:"Conventional agriculture is synonymous with organic agriculture.",o:["True","False"],c:1,e:"False — opposites. Conventional uses synthetic fertilizer/pesticides; organic avoids them."},
+ {q:"Synthetic fertilizers are made using…",o:["compost and recycled landfill","manure and recycled landfill","fossil fuels and mined minerals","manure and fossil fuels"],c:2,e:"N via fossil-fuel-heavy Haber-Bosch; P and K are mined."},
+ {q:"Which is NOT a way nutrients are removed from agricultural systems?",o:["erosion","harvest","CAFOs","leaching"],c:2,e:"Erosion, harvest, and leaching remove nutrients; CAFOs concentrate them."},
+ {q:"In any community, some species may be more dominant as a result of…",o:["relative abundance","size","ecological role","any of these"],c:3,e:"Dominance can come from abundance, size, or ecological role."},
+ {q:"The percentage of energy transferred between trophic levels is typically about…",o:["2%","10%","25%","50%"],c:1,e:"The 10% law. (2% is the solar energy plants capture — don't mix them up.)"},
+ {q:"Indirect energy in agroecosystems can reduce a plant's need to invest energy in…",o:["symbiosis","reproduction","polyculture","secondary plant compounds"],c:3,e:"Secondary compounds are chemical defenses; protect the plant and it needn't make them."},
+ {q:"Warm-blooded animals have a higher production:assimilation (P/A) efficiency than cold-blooded animals.",o:["True","False"],c:1,e:"False — endotherms burn energy on body heat, so lower P/A; ectotherms are more efficient."},
+ {q:"Chlorophyll does not readily absorb which colors of light?",o:["green-yellow","red-orange","violet-blue","blue-orange"],c:0,e:"It absorbs red-orange and violet-blue and reflects green — which is what your eye sees."},
+ {q:"Plants growing toward or away from light is called…",o:["phototropism","LGE (Leaf Growth Efficiency)","photoperiod","photogermination"],c:0,e:"Phototropism = growth directed by light. (photoperiod = a day-length response.)"},
+ {q:"The Haber-Bosch process is related to…",o:["synthetic fertilizer","tillage","irrigation","genetic engineering"],c:0,e:"It fixes atmospheric N into ammonia — the base of synthetic N fertilizer."},
+ {q:"Fertilizers leached from fields are problematic because…",o:["they interact with pesticides to make toxic by-products","they cause an overgrowth of algae in waterways","they are acutely toxic","they persist for decades in soils"],c:1,e:"Eutrophication — leached N and P feed algal blooms."},
+ {q:"Conventional agricultural ecosystems typically involve a frequent reset of the successional process.",o:["True","False"],c:0,e:"True — tilling, planting, and harvesting knock the field back to early succession each season."},
+ {q:"The shape of trophic pyramids is a result of…",o:["the 2% rule","the inefficiency of energy transfer between trophic levels","UV light absorbed by plants","immobilization of nutrients"],c:1,e:"~10% passes up each level, so each level is smaller — giving the pyramid its shape."},
+ {q:"Which best describes the ocean-acidification chain harming marine food chains?",o:["↑CO₂ atmosphere → ↑CO₂ ocean → ↓pH","↑CO₂ atmosphere → ↓CO₂ ocean → ↓pH","↑CO₂ atmosphere → ↑CO₂ ocean → ↑pH","↓CO₂ atmosphere → ↓CO₂ ocean → ↑pH"],c:0,e:"More dissolved CO₂ lowers ocean pH (more acidic), reducing carbonate for shells and coral."},
+ {q:"As the climate warms, continued melting of glacial ice will…",o:["not affect the planet's albedo","increase the planet's albedo","decrease the planet's albedo"],c:2,e:"Less reflective ice → darker ocean absorbs more heat — a self-amplifying loop."},
+ {q:"According to the readings, which crop is most efficient at converting solar energy to biomass?",o:["potatoes","soybeans","sugarcane","strawberries"],c:2,e:"Sugarcane — a fast-growing C4 grass, exceptional at turning sunlight into biomass."}
 ];
 function renderQuiz(){
  var host=document.getElementById('quiz'); host.innerHTML=''; var answered=0, right=0;
