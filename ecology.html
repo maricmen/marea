@@ -114,7 +114,8 @@ body{
 .opt:disabled{cursor:default}
 .qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
 .qexp.show{display:block}
-.quizscore{position:sticky;bottom:14px;align-self:center;background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow);margin-top:6px}
+.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
 
 /* connect game */
 .connintro{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:14.5px;margin:22px 4px 14px;max-width:64ch}
@@ -247,7 +248,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 16px">Quiz 2 exam pool — the real questions, collected across three attempts. Covers Week 1 &amp; 2 readings plus the Week 2 presentations. These are extremely likely to show up on the exam.</div>
+    <div class="oneliner" style="margin:22px 4px 16px">A looping study bank drawn from every Module-1 lecture so far (1.1 through 1.10), including your Quiz 2 exam pool plus harder application questions. Ten at a time, answers shuffled. Tap <b>Fresh set</b> for a new draw, it cycles through the whole bank before repeating.</div>
     <div class="quiz" id="quiz"></div>
   </div>
 
@@ -257,8 +258,8 @@ svg{display:block}
       <div class="conncol" id="connL"></div>
       <div class="conncol" id="connR"></div>
     </div>
-    <div class="connfoot"><span class="dcount" id="conncount"></span><button class="dbtn" id="connreset">shuffle &amp; reset</button></div>
-    <div class="conndone" id="conndone" hidden>Every pair wired. Nicely done.</div>
+    <div class="connfoot"><span class="dcount" id="conncount"></span><button class="dbtn" id="connreset">new round &#8594;</button></div>
+    <div class="conndone" id="conndone" hidden>Every pair wired. Tap <b>new round</b> for a fresh set from the bank.</div>
   </div>
 
   <div class="cover" id="cover"></div>
@@ -532,29 +533,86 @@ var QUIZ=[
  {q:"The shape of trophic pyramids is a result of…",o:["the 2% rule","the inefficiency of energy transfer between trophic levels","UV light absorbed by plants","immobilization of nutrients"],c:1,e:"~10% passes up each level, so each level is smaller — giving the pyramid its shape."},
  {q:"Which best describes the ocean-acidification chain harming marine food chains?",o:["↑CO₂ atmosphere → ↑CO₂ ocean → ↓pH","↑CO₂ atmosphere → ↓CO₂ ocean → ↓pH","↑CO₂ atmosphere → ↑CO₂ ocean → ↑pH","↓CO₂ atmosphere → ↓CO₂ ocean → ↑pH"],c:0,e:"More dissolved CO₂ lowers ocean pH (more acidic), reducing carbonate for shells and coral."},
  {q:"As the climate warms, continued melting of glacial ice will…",o:["not affect the planet's albedo","increase the planet's albedo","decrease the planet's albedo"],c:2,e:"Less reflective ice → darker ocean absorbs more heat — a self-amplifying loop."},
- {q:"According to the readings, which crop is most efficient at converting solar energy to biomass?",o:["potatoes","soybeans","sugarcane","strawberries"],c:2,e:"Sugarcane — a fast-growing C4 grass, exceptional at turning sunlight into biomass."}
+ {q:"According to the readings, which crop is most efficient at converting solar energy to biomass?",o:["potatoes","soybeans","sugarcane","strawberries"],c:2,e:"Sugarcane — a fast-growing C4 grass, exceptional at turning sunlight into biomass."},
+ /* ---- expanded pool: all Module-1 lectures 1.1–1.10 + harder application/synthesis questions ---- */
+ {q:"A key ecological drawback of monoculture is…",o:["higher biodiversity","low biodiversity and high pest-outbreak risk","less need for machinery","richer soil structure"],c:1,e:"One crop over large areas means low diversity, heavy input reliance, and easy pest outbreaks."},
+ {q:"Over many seasons, intensive tillage tends to…",o:["build soil organic matter","degrade soil structure and drive erosion","end the need for irrigation","raise biodiversity"],c:1,e:"It loosens soil short-term, but long-term burns organic matter, forms hardpan, and erodes."},
+ {q:"Irrigation covers ~20% of US farmland but grows about ___ of the food; its main problem is ___.",o:["40%; draining aquifers faster than they recharge","10%; too much rainfall","80%; soil erosion","5%; pests"],c:0,e:"~20% of land, ~40% of food, but it draws down groundwater faster than aquifers refill."},
+ {q:"CAFOs (concentrated animal feeding operations) are associated with…",o:["low antibiotic use","high output but antibiotics, huge waste streams, and welfare concerns","carbon sequestration","more wild biodiversity"],c:1,e:"High output at low cost, but heavy antibiotic use, concentrated waste, and welfare issues."},
+ {q:"Put the ecological levels of organization in order:",o:["ecosystem → community → population → individual","individual → population → community → ecosystem","population → individual → ecosystem → community","community → ecosystem → individual → population"],c:1,e:"Individual → population → community → ecosystem (a community plus its abiotic environment)."},
+ {q:"An ecosystem is best defined as…",o:["all the plants in an area","a community plus its physical (abiotic) environment","a single population over time","the soil and water only"],c:1,e:"Community (interacting living things) + the abiotic setting = ecosystem."},
+ {q:"Which is an ABIOTIC factor?",o:["competition","predation","temperature","parasitism"],c:2,e:"Abiotic = the physical setting (energy, water, temperature, chemicals). The others are biotic interactions."},
+ {q:"Tracking carbon lets us track energy because…",o:["carbon is radioactive","energy is stored in the carbon–hydrogen bonds of organic compounds","carbon glows when heated","carbon and nitrogen are the same"],c:1,e:"Energy lives in the C–H bonds, so carbon and energy move together through the system."},
+ {q:"Carbon enters an ecosystem through how many main pathways?",o:["one — photosynthesis (fixation)","two — photosynthesis and respiration","many pathways","none, carbon is always present"],c:0,e:"One way IN (photosynthesis/fixation); many ways OUT (respiration, fire, decay, consumption)."},
+ {q:"Respiration is best described as…",o:["the same as photosynthesis","the reverse of photosynthesis — breaking sugars to release energy and CO₂","a way plants fix nitrogen","only done by animals"],c:1,e:"Photosynthesis stores energy; respiration reverses it to release energy and CO₂."},
+ {q:"Net primary production (NPP) equals…",o:["gross primary production minus plant respiration","gross primary production plus respiration","total sunlight hitting the leaf","10% of the sunlight"],c:0,e:"NPP = GPP minus the energy the plant burns in its own respiration."},
+ {q:"Endotherms (warm-blooded animals) have LOW production efficiency because…",o:["they don't eat much","they spend most assimilated energy maintaining body temperature","they are always small","they photosynthesize"],c:1,e:"Holding body temperature burns energy, leaving less for growth; ectotherms are more efficient."},
+ {q:"A food web is a more accurate model than a trophic pyramid because…",o:["it has fewer species","organisms feed at multiple trophic levels","it ignores decomposers","it only applies to farms"],c:1,e:"Real systems have omnivores and predators feeding across several levels, which a simple pyramid misses."},
+ {q:"'Indirect' (cultural) energy in agriculture includes everything EXCEPT…",o:["fossil-fuel fertilizer and pesticides","machinery and its fuel","human and animal labor","the sunlight the plant captures"],c:3,e:"Sunlight is the DIRECT (ecological) energy; cultural/indirect energy is labor + fossil-fuel inputs."},
+ {q:"Harvest index compares lettuce vs corn as…",o:["lettuce ~10%, corn ~85%","lettuce ~85%, corn ~10%","both ~50%","both ~100%"],c:1,e:"Harvest index = share of biomass actually used. Lettuce ~85%, corn ~10% (just the cob)."},
+ {q:"One benefit of intercropping (e.g., maize with red amaranth) is…",o:["more bare soil for weeds","more harvest per hectare and fewer weeds, so less herbicide","higher fossil-fuel use","slower growth"],c:1,e:"Two crops at once raises yield per area and crowds out weeds, cutting herbicide need."},
+ {q:"From 1910 to 1980, US corn's yield PER ENERGY UNIT…",o:["rose steadily","fell (about 1.44 to 0.63) — less efficient despite higher yield","stayed the same","doubled"],c:1,e:"We grow far more corn but burn far more energy to do it, so energy efficiency dropped."},
+ {q:"The trade-off between grain and cellulosic ethanol is…",o:["grain uses the whole plant; cellulosic only the kernel","grain competes with food and is energy-hungry; cellulosic uses the whole plant but needs costly enzymes for lignin","they are identical","cellulosic can't use switchgrass"],c:1,e:"Cellulosic can use whole plants and marginal land, but breaking lignin needs expensive enzymes."},
+ {q:"Why is CO₂ singled out among greenhouse gases?",o:["it is the most abundant gas in air","it has a very long residence time (~100 years) in the atmosphere","it is heavier than methane","it comes only from volcanoes"],c:1,e:"CO₂ lingers ~100 years, so its warming effect persists for a long time."},
+ {q:"Slash-and-burn (shifting cultivation) is a climate 'double whammy' because it…",o:["cools the planet twice","releases a CO₂ pulse AND removes the forest carbon sink","adds carbon to the soil","only affects local weather"],c:1,e:"Burning emits CO₂ and destroys the vegetation that had been sequestering carbon."},
+ {q:"The albedo feedback loop is self-amplifying because…",o:["ice reflects more as it melts","melting ice exposes darker ocean that absorbs more heat, melting still more ice","oceans cool as ice melts","clouds block all sunlight"],c:1,e:"Less bright ice → more heat absorbed → more melting → a runaway loop."},
+ {q:"Compared with CO₂, methane is…",o:["longer-lived and weaker","shorter-lived (~10 yr) but ~20× more potent at trapping heat","identical","not a greenhouse gas"],c:1,e:"Methane lasts ~10 years vs CO₂'s ~100, but traps heat about 20× more strongly."},
+ {q:"Most agricultural methane comes from…",o:["tractor exhaust","ruminant enteric fermentation (cow burps) and manure management","irrigation water","crop photosynthesis"],c:1,e:"Cattle and other ruminants belch methane from the rumen; manure adds more."},
+ {q:"Surprisingly, grass-fed cattle vs grain-fed…",o:["emit less methane","emit MORE methane, because grass has more lignin to break down","emit no methane","don't produce manure"],c:1,e:"More fibrous grass means more fermentation in the rumen, so more methane."},
+ {q:"On a farm, which is a carbon SOURCE (not a sink)?",o:["a field of growing corn","a plowed or idle field","a young forest","standing vegetation"],c:1,e:"Growing plants are a sink; plowed/idle soil, livestock, and fossil fuels are sources."},
+ {q:"The three characteristics of light that shape plant growth are…",o:["color, weight, and speed","quality (color), intensity, and duration","heat, pressure, and pH","red, green, and blue only"],c:1,e:"Quality = color, intensity = amount per time, duration = photoperiod."},
+ {q:"Chlorophyll absorbs most strongly in which colors?",o:["green and yellow","violet-blue and orange-red","only red","all colors equally"],c:1,e:"It absorbs violet-blue and orange-red and reflects green — which is why plants look green."},
+ {q:"The light COMPENSATION point is where…",o:["light damages the plant","photosynthesis rate equals respiration rate","the plant flowers","chlorophyll breaks down"],c:1,e:"At the compensation point, light is so low that photosynthesis just balances respiration. (Saturation = light so high it damages the plant.)"},
+ {q:"C4 plants (corn, sorghum) beat C3 plants in high light and heat because they…",o:["have no chlorophyll","avoid photorespiration using PEP carboxylase and lose less water","grow only in shade","don't need CO₂"],c:1,e:"C4 fixes carbon into a 4-carbon compound via PEP carboxylase, sidestepping photorespiration and saving water."},
+ {q:"Photorespiration happens when…",o:["plants respire at night","rubisco binds O₂ instead of CO₂ under high light and heat","stomata close in the dark","roots absorb oxygen"],c:1,e:"At high light/heat, rubisco grabs O₂ instead of CO₂, so respiration can exceed photosynthesis."},
+ {q:"Which pathway do ALL plants have?",o:["C4","CAM","C3","none"],c:2,e:"Every plant has the C3 pathway (rubisco); only some also have C4 or CAM."},
+ {q:"CAM plants (cacti, pineapple) open their stomata…",o:["at midday","at night, an adaptation to dry environments","never","only in winter"],c:1,e:"Opening stomata at night minimizes water loss in arid habitats."},
+ {q:"In photoperiodism, plants actually respond to…",o:["total hours of light","the length of uninterrupted DARKNESS (sensed by phytochrome)","soil moisture","wind"],c:1,e:"It's uninterrupted darkness, not day length, that triggers the response, via phytochrome."},
+ {q:"Short-day plants (e.g., soybean, poinsettia) flower when the dark period is…",o:["shorter than ~12 hours","longer than ~12 hours","exactly 6 hours","irrelevant"],c:1,e:"Short-day = long-night: they flower when darkness exceeds ~12 hours."},
+ {q:"The Three Sisters intercrop layers corn (C4 canopy) with…",o:["wheat and barley","beans and squash (C3, in the understory)","rice and cotton","only more corn"],c:1,e:"Corn tops the canopy; shade-tolerant beans and squash grow beneath — a Mesoamerican technique."},
+ {q:"Shade-grown coffee is kept in a forest understory because coffee is a ___ plant…",o:["C4 that loves full sun","C3 that can't tolerate prolonged high light","CAM that opens stomata at night","non-photosynthetic"],c:1,e:"Coffee is C3, so intense direct light for long periods harms it; the canopy moderates the light."},
+ {q:"Which factors together determine a location's temperature?",o:["only latitude","latitude, altitude, season, proximity to water, and topography","only the sun's distance","only wind"],c:1,e:"All of these interact; none acts in isolation."},
+ {q:"Seasons are caused mainly by…",o:["the Earth's changing distance from the sun","the tilt of the Earth's axis","ocean currents","sunspots"],c:1,e:"Axial tilt, not the near-circular orbit, drives the seasons."},
+ {q:"Coastal (maritime) climates have milder swings than inland (continental) ones because water has…",o:["low thermal inertia","high thermal inertia (it resists temperature change)","no effect on temperature","higher albedo"],c:1,e:"Oceans change temperature slowly, moderating nearby land: cooler summers, warmer winters."},
+ {q:"The optimal temperature range for most agricultural crops is about…",o:["32–50°F","68–86°F","95–110°F","below freezing"],c:1,e:"Roughly 68–86°F; below is deficient, above can damage the plant."},
+ {q:"Excess heat can REDUCE grain yield because…",o:["it kills all insects","faster growth shortens the grain-filling period (plus enzyme damage)","it adds nitrogen","plants stop respiring"],c:1,e:"Speeding up growth cuts the time to fill grain, and very high heat denatures enzymes."},
+ {q:"'Heat units' (degree days) measure…",o:["rainfall","accumulated time above a threshold temperature a crop needs","soil pH","wind speed"],c:1,e:"They tally warmth over time — used to decide where/when to plant and to time pest treatments."},
+ {q:"Chilling hours are…",o:["hours of frost that kill a crop","hours below ~45°F a plant needs to break dormancy","hours of darkness","cold-storage time for seeds"],c:1,e:"Temperate stone fruits (peaches, apples) need enough hours under ~45°F to set fruit."},
+ {q:"Why can't a standard peach fruit well in Florida, and how did UF address it?",o:["too much rain; UF built greenhouses","not enough chilling hours; UF bred low-chill varieties (e.g., UFSun ~100 hrs)","too little sun; UF added lights","poor soil; UF imported soil"],c:1,e:"Florida gets ~420–540 chill hours; UF/UGA bred low-chill peaches like UFSun (~100 hrs)."},
+ {q:"'Hardening' a greenhouse seedling before transplanting means…",o:["adding fertilizer","gradually cutting irrigation and exposing it to outdoor temperatures to reduce transplant shock","freezing it","keeping it warmer"],c:1,e:"Easing the plant toward outdoor conditions so the move outside isn't a physiological shock."}
 ];
+var QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
+function updateQuizScore(){ var s=document.getElementById('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
 function renderQuiz(){
- var host=document.getElementById('quiz'); host.innerHTML=''; var answered=0, right=0;
- QUIZ.forEach(function(item,qi){
+ var host=document.getElementById('quiz'); host.innerHTML='';
+ if(quizQueue.length<Math.min(QUIZ_BATCH,QUIZ.length)) quizQueue=shuffle(QUIZ.map(function(_,i){return i;}));  /* reshuffle whole pool when it runs low */
+ var batch=quizQueue.splice(0,Math.min(QUIZ_BATCH,QUIZ.length));
+ batch.forEach(function(idx,qi){
+   var item=QUIZ[idx];
+   var order=shuffle(item.o.map(function(_,i){return i;}));      /* shuffle answer positions */
+   var correctPos=order.indexOf(item.c);
    var q=document.createElement('div'); q.className='q';
    var h='<div class="qh">'+(qi+1)+'. '+item.q+'</div>';
-   item.o.forEach(function(opt,oi){ h+='<button class="opt" data-o="'+oi+'">'+opt+'</button>'; });
+   order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+item.o[origI]+'</button>'; });
    h+='<div class="qexp">'+item.e+'</div>';
    q.innerHTML=h;
    q.querySelectorAll('.opt').forEach(function(b){
      b.addEventListener('click',function(){
-       if(q.dataset.done)return; q.dataset.done='1'; answered++;
-       var pick=+b.getAttribute('data-o');
-       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===item.c)x.classList.add('correct'); });
-       if(pick!==item.c) b.classList.add('wrong'); else right++;
+       if(q.dataset.done)return; q.dataset.done='1'; quizAnswered++;
+       var pick=+b.getAttribute('data-pos');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===correctPos)x.classList.add('correct'); });
+       if(pick!==correctPos) b.classList.add('wrong'); else quizRight++;
        q.querySelector('.qexp').classList.add('show');
-       document.getElementById('qscore').textContent='Score '+right+' / '+answered;
+       updateQuizScore();
      });
    });
    host.appendChild(q);
  });
- var sc=document.createElement('div'); sc.className='quizscore'; sc.id='qscore'; sc.textContent='Pick an answer to begin'; host.appendChild(sc);
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ foot.innerHTML='<span class="quizscore" id="qscore"></span><button class="dbtn" id="qnew">Fresh set &#8594;</button>';
+ host.appendChild(foot);
+ document.getElementById('qnew').addEventListener('click',function(){ window.scrollTo(0,document.getElementById('v-quiz').offsetTop-10); renderQuiz(); });
+ updateQuizScore();
 }
 
 /* ---------- coverage ---------- */
@@ -563,9 +621,10 @@ function renderCover(){
   ['1.1','Tenets of modern agriculture',8],['1.2','Natural vs managed systems',4],
   ['1.3','Carbon &amp; energy in ecosystems',3],['1.4','Energy &amp; trophic pyramids',3],
   ['1.5','Energy inputs in agriculture',3],['1.6','Energy input efficiencies',2],
-  ['1.7','Altering the carbon cycle · 1',5],['1.8','Altering the carbon cycle · 2',3]
+  ['1.7','Altering the carbon cycle · 1',5],['1.8','Altering the carbon cycle · 2',3],
+  ['1.9','Light (quality, intensity, duration; C3/C4/CAM)',6],['1.10','Temperature (latitude, altitude, chilling hours)',5]
  ];
- var h='<h2>What each recording covers</h2><div class="cs">The nine Module 1 transcripts, mapped to the concepts above.</div>';
+ var h='<h2>What each recording covers</h2><div class="cs">The ten Module 1 transcripts, mapped to the concepts above.</div>';
  cov.forEach(function(r){ h+='<div class="covrow"><span class="cl">'+r[0]+'</span><span class="ct"><b>'+r[1]+'</b></span></div>'; });
  document.getElementById('cover').innerHTML=h;
 }
@@ -579,17 +638,31 @@ var PAIRS=[
  {l:"Liebig's law", r:"The scarcest nutrient sets the limit"},
  {l:"Harvest index", r:"Share of biomass you actually use"},
  {l:"Enteric fermentation", r:"Methane from cow burps"},
- {l:"Albedo", r:"How much a surface reflects sunlight"}
+ {l:"Albedo", r:"How much a surface reflects sunlight"},
+ {l:"Rubisco", r:"Enzyme of the C3 pathway"},
+ {l:"PEP carboxylase", r:"Enzyme of the C4 pathway"},
+ {l:"Photorespiration", r:"Rubisco binds O₂ instead of CO₂"},
+ {l:"CAM pathway", r:"Stomata open at night (cacti, pineapple)"},
+ {l:"Compensation point", r:"Photosynthesis equals respiration"},
+ {l:"Phytochrome", r:"Senses uninterrupted darkness"},
+ {l:"Thermal inertia", r:"Why coasts have milder temperatures"},
+ {l:"Axial tilt", r:"The real cause of the seasons"},
+ {l:"Chilling hours", r:"Hours below 45°F to break dormancy"},
+ {l:"Heat units", r:"Accumulated warmth a crop needs"},
+ {l:"Methane", r:"~20× more potent than CO₂, shorter-lived"},
+ {l:"Three Sisters", r:"Corn, beans, and squash intercrop"}
 ];
-function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=(i*13+5)%(i+1);var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-var selL=null, selR=null, matchedN=0;
+var CONN_N=7;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var selL=null, selR=null, matchedN=0, connPick=[];
 function renderConnect(){
  matchedN=0; selL=null; selR=null;
  document.getElementById('conndone').hidden=true;
+ connPick=shuffle(PAIRS.map(function(_,i){return i;})).slice(0,Math.min(CONN_N,PAIRS.length));  /* fresh random subset each round */
  var L=document.getElementById('connL'), R=document.getElementById('connR');
  L.innerHTML=''; R.innerHTML='';
- shuf(PAIRS.map(function(_,i){return i;})).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].l; b.setAttribute('data-id',id); b.setAttribute('data-side','L'); L.appendChild(b); });
- shuf(PAIRS.map(function(_,i){return i;})).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].r; b.setAttribute('data-id',id); b.setAttribute('data-side','R'); R.appendChild(b); });
+ shuffle(connPick).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].l; b.setAttribute('data-id',id); b.setAttribute('data-side','L'); L.appendChild(b); });
+ shuffle(connPick).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].r; b.setAttribute('data-id',id); b.setAttribute('data-side','R'); R.appendChild(b); });
  updateConnCount();
  [L,R].forEach(function(col){ col.querySelectorAll('.ctile').forEach(function(b){ b.addEventListener('click',function(){onConn(b);}); }); });
 }
@@ -605,7 +678,7 @@ function onConn(b){
    if(a.getAttribute('data-id')===c.getAttribute('data-id')){
      a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('matched'); c.classList.add('matched');
      selL=null; selR=null; matchedN++; updateConnCount();
-     if(matchedN===PAIRS.length) document.getElementById('conndone').hidden=false;
+     if(matchedN===connPick.length) document.getElementById('conndone').hidden=false;
    } else {
      a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('miss'); c.classList.add('miss');
      selL=null; selR=null;
@@ -613,7 +686,7 @@ function onConn(b){
    }
  }
 }
-function updateConnCount(){ document.getElementById('conncount').textContent=matchedN+' / '+PAIRS.length+' connected'; }
+function updateConnCount(){ document.getElementById('conncount').textContent=matchedN+' / '+connPick.length+' connected'; }
 document.getElementById('connreset').addEventListener('click',renderConnect);
 
 /* ---------- tabs ---------- */
