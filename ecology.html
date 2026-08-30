@@ -490,19 +490,120 @@ function updateProg(){
 }
 
 /* ---------- flashcards ---------- */
-var order=C.map(function(_,i){return i;}), fi=0;
-function shuffle(){ for(var i=order.length-1;i>0;i--){var j=(i*7+3)%(i+1);var t=order[i];order[i]=order[j];order[j]=t;} fi=0; showFlash(); }
+/* ---- Exam 1 flashcard deck (from Mariel's ALS3153 Exam 1 Quizlet set, added 2026-08-30) ---- */
+var QC=[
+ {q:"Primary Producers vs Heterotrophs", a:"Primary producers = plants (autotrophs, 'self food'). Heterotrophs = consumers (things that eat plants)."},
+ {q:"Why do plants appear green?", a:"The chlorophyll does not readily absorb green-yellow light, it reflects it."},
+ {q:"Primary Production", a:"The energy accumulated by plants via photosynthesis."},
+ {q:"True or False: Does Ag use solar energy to produce biomass that we harvest?", a:"True."},
+ {q:"Carbon Fixation", a:"Occurs during photosynthesis. Plants harvest CO2 from the atmosphere."},
+ {q:"Plants typically only use ___ % of incoming solar radiation", a:"2%."},
+ {q:"What is the percentage of energy that is transferred between trophic levels?", a:"Typically around 10%."},
+ {q:"Production efficiency (P/A)", a:"Predators have lower P/A than herbivores (they have to find food). Endotherms (warm-blooded) have lower P/A than poikilotherms (cold-blooded) because they raise their own body temperature."},
+ {q:"Phototropism", a:"Plant response to length of light/dark periods; plants growing to or from the sunlight."},
+ {q:"Biomass", a:"Total amount of energy in an ecosystem at a given point in time."},
+ {q:"Trophic Pyramids", a:"Represent energy between trophic levels. Shape is reflective of the inefficiency of energy transfer between the levels."},
+ {q:"Shifting cultivation", a:"Basically slash and burn to clear a forest, farm it briefly, then leave it. Associated with removing carbon sinks."},
+ {q:"Example of a carbon sink?", a:"Trees, because they store carbon. Remove forests, remove carbon sinks."},
+ {q:"How does carbon and energy leave the ag ecosystem?", a:"Respiration, burning in shifting cultivation, or harvest."},
+ {q:"How does carbon re-enter the ag system?", a:"Photosynthesis. Only one form to enter."},
+ {q:"Are plants genetically modified to contain vaccines currently available in the market?", a:"No."},
+ {q:"Why do we invest indirect energy (fertilizer or pesticides) into an ag ecosystem?", a:"It changes how a plant allocates energy. Instead of investing in secondary plant compounds, it can invest in reproduction (produce more fruit)."},
+ {q:"Fertilizer", a:"A type of indirect energy. Requires a lot of fossil fuels to make, via the Haber-Bosch process. Heavy use can destroy soil structure."},
+ {q:"Conventional Agriculture", a:"Requires intensive energy inputs (fertilizer, pesticides, irrigation, all heavily fossil-fuel reliant). Typically involves reset of the successional process (remove biomass in harvest, disc the land, and replant)."},
+ {q:"Monoculture", a:"Growing one crop at a time (very efficient, economies of scale). Cornerstone of conventional ag."},
+ {q:"Has genetic engineering decreased or increased diversity of crops grown?", a:"Decreased (we grow a lot of a single cultivar of GE corn and soybean on much of our ag land)."},
+ {q:"Why has genetic diversity of plants/animals decreased recently?", a:"We tend to grow or raise the fastest, largest, disease-resistant varieties, rather than a diversity of different types."},
+ {q:"Gross Primary Production (GPP)", a:"All the energy captured by plants during photosynthesis. Doesn't account for energy lost in respiration (R)."},
+ {q:"Net Primary Production (NPP)", a:"Does account for production (P) and respiration (R). NPP = P - R."},
+ {q:"Assimilated energy", a:"Energy actually used by a consumer for P and R."},
+ {q:"Not assimilated", a:"Not utilized by the animal (passed through the digestive system and excreted)."},
+ {q:"Why is a food web more accurate than a food chain?", a:"It doesn't just show linear relationships; organisms feed at multiple trophic levels (or on multiple organisms)."},
+ {q:"Why is cellulosic ethanol more environmentally friendly than grain ethanol?", a:"It uses the entire plant, not just the grain (corn kernels). Can use other crops besides corn, potentially plants that grow faster, accumulate more biomass, need less water or fertilizer."},
+ {q:"Cellulosic ethanol", a:"Requires enzymes. Can use a variety of crops. Waste can be used to create nanotubes. Problem: not cheap."},
+ {q:"C4 Plants", a:"Very efficient at converting solar energy to biomass. No photorespiration. Bring CO2 in faster, less transpiration, adapted to high sunlight and heat. Grasses/corn."},
+ {q:"Synthetic pesticides", a:"Quick-acting and effective. Non-selective, resistance, costly, toxic, off-target effects."},
+ {q:"Pesticide treadmill", a:"Reliance of ag on increasing amounts and types of pesticides. Evolutionary arms race."},
+ {q:"Resilience", a:"A property of communities."},
+ {q:"Natural systems", a:"Do not require nutrient inputs. Lower NPP, higher species diversity. Not less stable than ag."},
+ {q:"Ag Systems", a:"Not closed systems, influenced by things outside the system like fertilizer. Not more complex than natural (could argue the opposite, because they invest a lot of energy)."},
+ {q:"Are both natural and ag systems closed systems?", a:"No. They both have impacts on the surrounding habitats."},
+ {q:"Do all inorganic fertilizers require a massive input of fossil fuels?", a:"Yes (nitrogen gas to NH4, and phosphorus mined from rock)."},
+ {q:"Can intercropping increase yield?", a:"In many cases, yes. It is dependent on the specific scenario."},
+ {q:"Polyculture", a:"Contains multiple different crops grown together at the same time, along with other organisms."},
+ {q:"Individual", a:"Interacts and adapts to the environment."},
+ {q:"Population", a:"Group of individual interactions. Single species. Geographic barriers."},
+ {q:"Community", a:"Many populations of different species interacting in the same space. No boundaries."},
+ {q:"Ecosystem", a:"Communities and abiotic components. Boundary is arbitrary."},
+ {q:"Why are salts considered an environmental pollutant?", a:"They destroy the soil structure, making it difficult for the soil to hold nutrients and water."},
+ {q:"What is the third largest contributor of GHGs?", a:"Ag. (Natural Gas/Petroleum 29%, Coal Mining 10%.)"},
+ {q:"What are the major contributors to the build-up of GHGs?", a:"Water vapor, methane, carbon dioxide."},
+ {q:"Ocean Acidification (sequence of events) / impacts on marine ecosystem", a:"Increased CO2 in atm leads to increased CO2 in ocean (dissolves readily, a sink), which decreases ocean pH (acidic). Less able to absorb CO2 and less CaCO3 for coral and shell growth."},
+ {q:"Greenhouse effect", a:"Gases build up in the atmosphere and trap heat. More and more gases are produced and become trapped and can't escape. Anthropogenic (human-induced)."},
+ {q:"Albedo", a:"Measure of reflectance. Decrease ice -> decrease albedo -> more heat absorbed by Earth -> warmer oceans melt ice -> produces water vapor (a GHG)."},
+ {q:"Off-target effect", a:"When an ag practice has an unintended negative consequence."},
+ {q:"Hardpan", a:"Negative development in ag fields associated with intensive tillage."},
+ {q:"Tillage", a:"Cultivation of land, plowing (turning of soil), and preparing for seeds."},
+ {q:"Mineralization (ammonification)", a:"A nutrient is converted from an organic form to an inorganic form."},
+ {q:"Organic nutrient", a:"Part of the organism, humus, etc. Not charged and unavailable to plant. Immobilized because incorporated within tissues. Needs help from microbes to be mineralized."},
+ {q:"Inorganic nutrient", a:"Has a charge, water-soluble, uptake by roots. Utilized and taken up by plants."},
+ {q:"Organic fertilizers", a:"Slow-release fertilizers. Nutrients immobilized in manure or compost. Bacteria/fungal decomposers mineralize it into the inorganic form that plants can then take up."},
+ {q:"Synthetic (chemical or inorganic) fertilizer", a:"Quick-acting/fast-release. Human-manufactured in the inorganic form so it can be readily taken by plants. No microbes needed."},
+ {q:"Inorganic forms of nutrients of phosphorus and nitrogen?", a:"Phosphates, nitrate, ammonium."},
+ {q:"Macronutrient vs Micronutrient", a:"Macro: needed the most for plant and animal growth but limited in the environment. Micro: needed too, but in smaller amounts and more available."},
+ {q:"Biological N fixation", a:"Adds available N to soil (by conversion of organic to inorganic by specific bacteria) so it can be utilized by plants."},
+ {q:"Nitrification", a:"NH4+ to NO2- to NO3-. Conversion by nitrifying bacteria (nitrobacteria). Relatively rapid conversion."},
+ {q:"Symbiotic relationship between plants and bacteria (which plants, which bacteria)", a:"Legumes like soybeans + rhizobia. Nodulation of plant roots by bacteria. Plant supplies sugars/nutrients; bacteria gives the plant N. These plants require less N-based fertilizer."},
+ {q:"What is a source of Phosphorus?", a:"No atmospheric connection, mined from a rock (happens a lot in FL)."},
+ {q:"What is the role of fungal organisms in association with plants?", a:"Plants provide carbohydrates and the fungi improve nutrient uptake (P, N, Ca). Called mycorrhizae."},
+ {q:"Haber-Bosch process (industrial N fixation)", a:"Creates inorganic fertilizer. Inputs: energy-intensive (heat and pressure, N2). Outputs: NH3."},
+ {q:"Process of nutrients begins with what? Ends with what?", a:"Begins with mineralization. Ends with immobilization."},
+ {q:"Denitrification", a:"Loss of N from soil because bacteria use NO3 as a source of oxygen in low-oxygen (anaerobic) conditions. Releases N2 back to atm."},
+ {q:"Ammonium / Nitrite / Nitrate / Nitrogen gas / Ammonia", a:"NH4+ / NO2- / NO3- / N2 / NH3."},
+ {q:"Potassium importance and cycle", a:"Osmoregulation / enzyme activation. Main reservoir in soil / mined salts. Abundant and reacts with clays (insoluble). Plants can take up excessive amounts. Leaches rapidly."},
+ {q:"C3", a:"More efficient under cooler, 'normal' conditions, lower intensity. All plants have the C3 path; some ONLY have the C3 path (legumes/rice)."},
+ {q:"C3 vs C4 light management", a:"C3 is adapted for various light levels. C4 is adapted to high sunlight and heat."},
+ {q:"Rubisco", a:"Enzyme that fixes C in the C3 pathway."},
+ {q:"Photorespiration", a:"Rubisco grabs O2 instead of CO2. Some energy produced by photosynthesis is wasted."},
+ {q:"Do leaf surfaces have sunblock compounds?", a:"Yes, to keep out a lot of the UV (mostly UV-B) radiation."},
+ {q:"Saturation point", a:"Light levels are too high; plant is damaged."},
+ {q:"Compensation point", a:"Light levels are too low; rate of photosynthesis = respiration."},
+ {q:"True or False: Infrared radiation influences germination hormones?", a:"True."},
+ {q:"What is a chill hour? What crops are associated with chill-hour requirements?", a:"Number of hours needed below 45 degrees to break dormancy. Bulbs / deciduous fruit trees."},
+ {q:"Heat units", a:"Temperature: indirect measure of heat available for growth. Days or hrs of accumulated temp above some threshold. Measured in degree-days. Known for most crops."},
+ {q:"Photoperiod", a:"Hours of light in 24 hrs. Based on the uninterrupted hours of darkness."},
+ {q:"Short-day plant", a:"Flowers only when darkness > 12 hrs. Spring, fall. Coffee, poinsettia, soybean."},
+ {q:"Long-day plant", a:"Flowers only when darkness < 12 hrs. Summer. Lettuce, spinach."},
+ {q:"Day-neutral plant", a:"Does not flower in response to light as the main cue. Roses, tomatoes, cucumbers, tropical plants."},
+ {q:"Global fertilizer use", a:"China releases ~200 out of 500 lbs of N fertilizer, could cut use in half and have the same yield. Africa: annual net loss of N. Midwest US: reined in fertilizer use, uses less than China and the yield is the same."},
+ {q:"Windbreaks", a:"Planting that helps deflect the wind moving across an ag field. Decreases erosion."},
+ {q:"Atmospheric mixing", a:"Changing abundance of gases at the site of gas exchange. Can increase amount of CO2 at the leaf surface."},
+ {q:"Volatilization of nutrients", a:"Abiotic effect of fire."},
+ {q:"Lodging", a:"Bending of stalk or entire plant. Minimal tillage will not minimize this."},
+ {q:"Does swidden / slash and burn require a long fallow period?", a:"Yes, you need a substantial amount of time for recolonization of plants after harvest so nutrients can be added back. If not, nutrients will be rapidly depleted and soil damaged."},
+ {q:"Would you find higher quantities of N, Ca, or K after a fire in the soil environment?", a:"Ca and K will have higher concentrations. N is volatilized into the air during fires."},
+ {q:"Abiotic effects of fire", a:"Decreased O.M., soil aggregates, moisture holding. Release CO2 and nutrients (N and S volatilize, Ca/K to soil). Increase runoff, leaching, erosion."},
+ {q:"Biotic effects of fire", a:"Kills above-ground biomass. Kills below-ground organisms (direct by heat or indirect by pH change)."},
+ {q:"What does a decrease in soil aggregates mean?", a:"Damaged soil structure. Negative outcome of shifting cultivation."},
+ {q:"Direct effects of wind on plants", a:"Dwarfing/deforming. Desiccation (drying out, decreases boundary layer). Isolated events (hurricanes, tornadoes). Significant yield loss. Increase fuel costs (time-intensive harvest)."},
+ {q:"Indirect effects of wind on plants", a:"Soil erosion. Salt transported. Pests transported (bacteria, fungi, insects). Atmospheric mixing."},
+ {q:"Serotinous cones", a:"Require fire to open and release seeds. Associated with catastrophic crown fires."}
+];
+/* combined flashcard deck: the Field Guide concepts + the Exam 1 Quizlet cards */
+var FCARDS=C.map(function(c){return {tag:"Lecture "+c.lec+" · "+c.title, q:c.q, a:c.a};}).concat(QC.map(function(x){return {tag:"Exam 1 flashcard", q:x.q, a:x.a};}));
+var order=FCARDS.map(function(_,i){return i;}), fi=0;
+function shuffleCards(){ for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} fi=0; showFlash(); }
 function showFlash(){
- var c=C[order[fi]]; var fl=document.getElementById('flash'); fl.classList.remove('flip');
- document.getElementById('fqtag').textContent='Lecture '+c.lec+' · '+c.title;
+ var c=FCARDS[order[fi]]; var fl=document.getElementById('flash'); fl.classList.remove('flip');
+ document.getElementById('fqtag').textContent=c.tag;
  document.getElementById('fq').textContent=c.q;
  document.getElementById('fa').textContent=c.a;
- document.getElementById('fcount').textContent=(fi+1)+' / '+C.length;
+ document.getElementById('fcount').textContent=(fi+1)+' / '+FCARDS.length;
 }
 document.getElementById('flash').addEventListener('click',function(){this.classList.toggle('flip');});
-document.getElementById('fnext').addEventListener('click',function(){fi=(fi+1)%C.length;showFlash();});
-document.getElementById('fprev').addEventListener('click',function(){fi=(fi-1+C.length)%C.length;showFlash();});
-document.getElementById('fshuf').addEventListener('click',shuffle);
+document.getElementById('fnext').addEventListener('click',function(){fi=(fi+1)%FCARDS.length;showFlash();});
+document.getElementById('fprev').addEventListener('click',function(){fi=(fi-1+FCARDS.length)%FCARDS.length;showFlash();});
+document.getElementById('fshuf').addEventListener('click',shuffleCards);
 
 /* ---------- quiz ---------- */
 /* Quiz 2 exam pool — the actual questions Mariel pulled across three attempts
@@ -698,7 +799,7 @@ document.querySelectorAll('.tab').forEach(function(t){
  });
 });
 
-renderGuide(); updateProg(); showFlash(); renderQuiz(); renderConnect(); renderCover();
+renderGuide(); updateProg(); shuffleCards(); renderQuiz(); renderConnect(); renderCover();
 </script>
 </body>
 </html>
