@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nutrient Management — SWS 4116</title>
+<style>
+:root{
+  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea; --card2:#f5eeddff;
+  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
+  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
+  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#4d7a8c; --sky-d:#365a69;
+  --gain:#5f7d3a; --loss:#b0463b; --intern:#8a7a55; --n2o:#9a6bbf;
+  --line:#d9ccb0; --line2:#c7b797;
+  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"SFMono-Regular",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #efe6d2 0%, transparent 60%),
+    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+  color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding:0 16px 70px; min-height:100vh;
+}
+.wrap{max-width:960px;margin:0 auto}
+
+/* header */
+.top{padding:26px 4px 6px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.crest{width:54px;height:54px;flex:none}
+.hgroup h1{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0;letter-spacing:.2px;color:var(--soil)}
+.hgroup .sub{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.09em;margin-top:6px}
+.hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:66ch}
+
+/* tabs */
+.tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 16px;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--line2)}
+.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+
+.view{display:none;animation:fade .25s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.oneliner{font-family:var(--serif);font-size:18px;line-height:1.42;color:var(--soil);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--clay);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:22px 4px 18px}
+h2.sec{font-family:var(--serif);font-size:21px;color:var(--soil);margin:26px 4px 12px}
+h3.sub{font-family:var(--serif);font-size:17px;color:var(--soil);margin:20px 4px 8px}
+p.body{font-size:14.5px;color:var(--ink2);line-height:1.6;margin:0 4px 13px;max-width:70ch}
+p.body b{color:var(--soil)}
+
+/* N cycle diagram */
+.diagramwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 6px;margin:0 4px 12px;overflow-x:auto}
+.diagramwrap svg{display:block;margin:0 auto;max-width:760px;width:100%;min-width:560px}
+.pool{font-family:var(--sans);font-weight:700;font-size:15px}
+.poolsub{font-size:11px;fill:var(--ink3);font-weight:400}
+.plabel{font-size:12.5px;font-weight:600;cursor:pointer}
+.plabel.dim{opacity:.32}
+.parrow{cursor:pointer;transition:opacity .15s}
+.parrow.dim{opacity:.18}
+.chiprow{display:flex;flex-wrap:wrap;gap:7px;margin:4px 4px 4px}
+.chip{font:inherit;font-size:12.5px;font-weight:600;border:1px solid var(--line);background:var(--paper);color:var(--ink2);border-radius:99px;padding:7px 13px;cursor:pointer;transition:.12s;display:flex;align-items:center;gap:7px}
+.chip:hover{border-color:var(--line2)}
+.chip .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.chip.on{background:var(--soil);color:#f4ecdd;border-color:var(--soil)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:10px 6px 2px;font-size:11.5px;color:var(--ink3)}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:14px;height:3px;border-radius:2px;display:inline-block}
+
+/* explain panel */
+.explain{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:0;margin:12px 4px 8px;overflow:hidden;min-height:120px}
+.exhead{padding:14px 18px;color:#f6efe0;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.exhead h3{margin:0;font-family:var(--serif);font-size:19px}
+.exbadge{font-size:11px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;background:rgba(255,255,255,.22);padding:3px 10px;border-radius:99px}
+.exbody{padding:14px 18px 16px}
+.eq{font-family:var(--mono);font-size:14px;background:#efe6d2;border:1px solid var(--line2);border-radius:10px;padding:11px 13px;margin:0 0 12px;color:var(--soil);overflow-x:auto;white-space:nowrap}
+.exgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+.exitem{font-size:13.5px;line-height:1.5;color:var(--ink2)}
+.exitem .k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--clay-d);font-weight:700;display:block;margin-bottom:3px}
+.exitem b{color:var(--soil)}
+.exhint{font-family:var(--serif);font-style:italic;color:var(--ink3);font-size:13px;margin:22px 18px;text-align:center}
+
+/* generic cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin:2px 4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:15px 16px 13px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;opacity:.7;background:var(--intern)}
+.card.gain::before{background:var(--gain)} .card.loss::before{background:var(--loss)} .card.intern::before{background:var(--intern)}
+.card h3{font-family:var(--serif);font-size:17px;margin:0 0 4px;color:var(--ink);line-height:1.2}
+.card .tagline{font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;margin-bottom:8px}
+.card.gain .tagline{color:var(--gain)} .card.loss .tagline{color:var(--loss)} .card.intern .tagline{color:var(--clay-d)}
+.card p{margin:0 0 9px;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.card p b{color:var(--soil)}
+.card .eq{font-size:12.5px;margin:8px 0 10px;white-space:normal}
+.card ul{margin:6px 0 4px;padding-left:18px;font-size:13px;color:var(--ink2);line-height:1.5}
+.card ul li{margin-bottom:3px}
+
+/* C:N lab */
+.lab{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:20px 20px 22px;margin:6px 4px}
+.cnval{font-family:var(--serif);font-size:44px;color:var(--soil);text-align:center;line-height:1;margin:4px 0 2px}
+.cnval small{font-size:18px;color:var(--ink3)}
+.cnbar{position:relative;height:44px;border-radius:12px;margin:20px 0 6px;overflow:hidden;border:1px solid var(--line2);
+  background:linear-gradient(90deg,#7d9147 0%,#a9a25a 34%,#c9a15a 42%,#c9a15a 50%,#c98a5a 58%,#b0623b 100%)}
+.cnticks{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);margin-bottom:16px;padding:0 2px}
+.cnmark{position:absolute;top:-4px;bottom:-4px;width:3px;background:var(--ink);border-radius:2px;box-shadow:0 0 0 2px rgba(251,246,234,.9)}
+input[type=range]{width:100%;accent-color:var(--clay);height:26px}
+.cnout{border-radius:12px;padding:14px 16px;margin-top:16px;font-size:14.5px;line-height:1.55;border:1px solid var(--line2)}
+.cnout.min{background:#e2e7cf;color:var(--moss-d)}
+.cnout.immob{background:#f0dcd2;color:var(--clay-d)}
+.cnout.gray{background:#efe7d3;color:var(--ink2)}
+.cnout b{font-weight:700}
+.cnlabel{font-size:13px;color:var(--ink2);text-align:center;margin-bottom:4px}
+.pill{display:inline-block;font-family:var(--mono);font-size:12px;background:#efe6d2;border:1px solid var(--line2);border-radius:7px;padding:1px 7px;color:var(--soil)}
+
+/* study guide */
+.qa{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);margin:0 4px 10px;overflow:hidden}
+.qa summary{cursor:pointer;padding:14px 16px;font-family:var(--serif);font-size:15.5px;color:var(--soil);list-style:none;display:flex;gap:10px;align-items:flex-start}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary .qn{flex:none;font-size:12px;font-weight:700;color:#fff;background:var(--clay);border-radius:6px;padding:2px 7px;margin-top:1px;font-family:var(--sans)}
+.qa summary:hover{background:var(--card2)}
+.qa[open] summary{border-bottom:1px dashed var(--line2)}
+.qa .ans{padding:12px 16px 15px 16px;font-size:14px;color:var(--ink2);line-height:1.6}
+.qa .ans b{color:var(--soil)}
+.qa .ans .eq{white-space:normal;font-size:12.5px}
+.qa .ans ul{padding-left:20px;margin:6px 0}
+.ggroup{margin:6px 4px 4px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700}
+
+/* flashcards */
+.deckwrap{margin-top:20px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.flash{width:100%;max-width:470px;height:270px;perspective:1400px;cursor:pointer}
+.flinner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flash.flip .flinner{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:26px 24px;text-align:center}
+.ffront{background:var(--card)}
+.fback{background:linear-gradient(180deg,#efe7d5,#e8ddc4);transform:rotateY(180deg)}
+.fface .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin-bottom:14px}
+.fface .qq{font-family:var(--serif);font-size:20px;color:var(--soil);line-height:1.3}
+.fface .aa{font-size:15px;color:var(--ink);line-height:1.55}
+.fhint{font-size:12px;color:var(--ink3);position:absolute;bottom:14px;left:0;right:0;text-align:center}
+.deckctl{display:flex;align-items:center;gap:12px}
+.dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 20px;cursor:pointer}
+.dbtn:hover{border-color:var(--line2)}
+.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.dcount{font-size:13px;color:var(--ink2);min-width:70px;text-align:center}
+
+/* quiz */
+.quiz{margin-top:14px;display:flex;flex-direction:column;gap:14px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:16px 18px}
+.q.flagged{border-color:#d9a487;box-shadow:0 0 0 2px rgba(176,70,59,.13),var(--shadow)}
+.q .qh{font-family:var(--serif);font-size:16.5px;color:var(--ink);margin:0 0 12px;line-height:1.35}
+.q .missed{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;color:var(--loss);background:#f0dcd2;border:1px solid #d9a487;border-radius:99px;padding:2px 9px;margin-left:8px;white-space:nowrap}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
+.opt:hover{border-color:var(--line2)}
+.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt:disabled{cursor:default}
+.qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none;line-height:1.5}
+.qexp.show{display:block}
+.qexp b{color:var(--soil)}
+.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 4px 0;flex-wrap:wrap}
+.footer{text-align:center;font-family:var(--serif);font-style:italic;color:var(--ink3);font-size:12.5px;margin:34px 4px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <svg class="crest" viewBox="0 0 52 52" fill="none">
+      <circle cx="26" cy="26" r="25" fill="#fbf6ea" stroke="#573f2c" stroke-width="1.5"/>
+      <path d="M26 9 C20 16 20 24 26 30 C32 24 32 16 26 9Z" fill="#6d7b41"/>
+      <path d="M26 30 L26 43" stroke="#573f2c" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="17" cy="34" r="3.4" fill="#c69537"/><circle cx="35" cy="34" r="3.4" fill="#b0623b"/>
+      <circle cx="26" cy="41" r="3.4" fill="#4d7a8c"/>
+    </svg>
+    <div class="hgroup">
+      <h1>Nutrient Management</h1>
+      <div class="sub">SWS 4116 · Environmental Nutrient Management · Study Dashboard</div>
+    </div>
+  </div>
+  <p class="hnote">Built to be looked at, not just read. Start on the <b>N Cycle</b> tab, click any process to see its equation and controls, then use the <b>C:N Lab</b> to feel how mineralization flips to immobilization. Everything ties back to the two Havlin study guides and the quiz.</p>
+
+  <div class="tabs" id="tabs">
+    <button class="tab on" data-v="cycle">N Cycle</button>
+    <button class="tab" data-v="proc">Processes</button>
+    <button class="tab" data-v="cn">C:N Lab</button>
+    <button class="tab" data-v="soil">Soil Basics</button>
+    <button class="tab" data-v="symp">N &amp; Symptoms</button>
+    <button class="tab" data-v="guide">Study Guide</button>
+    <button class="tab" data-v="cards">Flashcards</button>
+    <button class="tab" data-v="quiz">Quiz</button>
+  </div>
+
+  <!-- ============ N CYCLE ============ -->
+  <section class="view on" id="v-cycle">
+    <div class="oneliner">The whole nitrogen cycle is four pools and the arrows between them. New N enters by <b>fixation</b>, leaves by <b>volatilization, leaching, denitrification</b>, and everything else just shuffles N between organic matter, ammonium, and nitrate.</div>
+
+    <div class="diagramwrap">
+      <svg viewBox="0 0 760 440" id="ncy" role="img" aria-label="Nitrogen cycle diagram">
+        <defs>
+          <marker id="ah" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#8a7a55"/></marker>
+          <marker id="ahg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#5f7d3a"/></marker>
+          <marker id="ahl" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#b0463b"/></marker>
+          <marker id="ahp" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 Z" fill="#9a6bbf"/></marker>
+        </defs>
+
+        <!-- pools -->
+        <g id="pN2">
+          <rect x="300" y="16" width="160" height="52" rx="12" fill="#e7eef1" stroke="#4d7a8c" stroke-width="1.5"/>
+          <text x="380" y="40" text-anchor="middle" class="pool" fill="#365a69">N₂  gas</text>
+          <text x="380" y="57" text-anchor="middle" class="poolsub">atmosphere · inert</text>
+        </g>
+        <g id="pGas">
+          <rect x="560" y="16" width="176" height="52" rx="12" fill="#efe6f2" stroke="#9a6bbf" stroke-width="1.5"/>
+          <text x="648" y="40" text-anchor="middle" class="pool" fill="#6f4a94">N₂O / N₂</text>
+          <text x="648" y="57" text-anchor="middle" class="poolsub">gas losses</text>
+        </g>
+        <g id="pOrg">
+          <rect x="26" y="176" width="176" height="60" rx="12" fill="#e6ebd6" stroke="#6d7b41" stroke-width="1.5"/>
+          <text x="114" y="202" text-anchor="middle" class="pool" fill="#4d5a2a">Organic N</text>
+          <text x="114" y="220" text-anchor="middle" class="poolsub">residues · humus · biomass</text>
+        </g>
+        <g id="pNH4">
+          <rect x="300" y="176" width="160" height="60" rx="12" fill="#f6ead2" stroke="#c69537" stroke-width="1.6"/>
+          <text x="380" y="202" text-anchor="middle" class="pool" fill="#8a6a1e">NH₄⁺</text>
+          <text x="380" y="220" text-anchor="middle" class="poolsub">ammonium (cation)</text>
+        </g>
+        <g id="pNO3">
+          <rect x="560" y="176" width="176" height="60" rx="12" fill="#f3ded3" stroke="#b0623b" stroke-width="1.6"/>
+          <text x="648" y="202" text-anchor="middle" class="pool" fill="#8c4a2b">NO₃⁻</text>
+          <text x="648" y="220" text-anchor="middle" class="poolsub">nitrate (mobile anion)</text>
+        </g>
+        <g id="pPlant">
+          <rect x="300" y="356" width="160" height="52" rx="12" fill="#e6ebd6" stroke="#6d7b41" stroke-width="1.5"/>
+          <text x="380" y="380" text-anchor="middle" class="pool" fill="#4d5a2a">Plant uptake</text>
+          <text x="380" y="397" text-anchor="middle" class="poolsub">mostly NO₃⁻, by mass flow</text>
+        </g>
+
+        <!-- arrows (each id p_<key>) -->
+        <!-- fixation N2 -> Org -->
+        <path class="parrow" data-k="fixation" d="M300 52 C170 70 120 120 114 170" fill="none" stroke="#5f7d3a" stroke-width="2.6" marker-end="url(#ahg)"/>
+        <!-- mineralization Org -> NH4 -->
+        <path class="parrow" data-k="mineralization" d="M202 198 L294 200" fill="none" stroke="#8a7a55" stroke-width="2.6" marker-end="url(#ah)"/>
+        <!-- immobilization NH4 -> Org (below) -->
+        <path class="parrow" data-k="immobilization" d="M296 216 L204 224" fill="none" stroke="#8a7a55" stroke-width="2.2" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+        <!-- nitrification NH4 -> NO3 -->
+        <path class="parrow" data-k="nitrification" d="M460 206 L554 206" fill="none" stroke="#8a7a55" stroke-width="2.6" marker-end="url(#ah)"/>
+        <!-- volatilization NH4 -> up loss -->
+        <path class="parrow" data-k="volatilization" d="M420 176 C440 130 470 95 500 74" fill="none" stroke="#b0463b" stroke-width="2.6" marker-end="url(#ahl)"/>
+        <!-- clay fixation NH4 small loop (hangs bottom-left, clear of uptake arrow) -->
+        <path class="parrow" data-k="clayfix" d="M322 236 C298 262 303 288 333 288 C363 288 366 260 348 238" fill="none" stroke="#8a7a55" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#ah)"/>
+        <!-- plant uptake NH4/NO3 -> plant -->
+        <path class="parrow" data-k="uptake" d="M380 236 L380 350" fill="none" stroke="#5f7d3a" stroke-width="2.4" marker-end="url(#ahg)"/>
+        <path class="parrow" data-k="uptake" d="M620 236 C560 300 470 340 432 360" fill="none" stroke="#5f7d3a" stroke-width="2" marker-end="url(#ahg)"/>
+        <!-- leaching NO3 down loss -->
+        <path class="parrow" data-k="leaching" d="M648 236 L648 356" fill="none" stroke="#b0463b" stroke-width="2.6" marker-end="url(#ahl)"/>
+        <!-- denitrification NO3 -> gas -->
+        <path class="parrow" data-k="denitrification" d="M648 176 C650 130 650 100 648 74" fill="none" stroke="#b0463b" stroke-width="2.6" marker-end="url(#ahl)"/>
+        <!-- N2O from nitrification -->
+        <path class="parrow" data-k="n2o" d="M520 200 C560 150 600 100 632 72" fill="none" stroke="#9a6bbf" stroke-width="2" stroke-dasharray="2 5" marker-end="url(#ahp)"/>
+
+        <!-- arrow labels -->
+        <text class="plabel" data-k="fixation" x="150" y="112" fill="#4d5a2a">N-fixation</text>
+        <text class="plabel" data-k="mineralization" x="212" y="188" fill="#6c5d45">mineralize →</text>
+        <text class="plabel" data-k="immobilization" x="206" y="244" fill="#6c5d45">← immobilize</text>
+        <text class="plabel" data-k="nitrification" x="468" y="196" fill="#6c5d45">nitrify →</text>
+        <text class="plabel" data-k="volatilization" x="440" y="120" fill="#8c4a2b">volatilize</text>
+        <text class="plabel" data-k="clayfix" x="286" y="316" fill="#6c5d45">clay fixation</text>
+        <text class="plabel" data-k="uptake" x="392" y="300" fill="#4d5a2a">uptake</text>
+        <text class="plabel" data-k="leaching" x="656" y="300" fill="#8c4a2b">leaching</text>
+        <text class="plabel" data-k="denitrification" x="656" y="128" fill="#8c4a2b">denitrify</text>
+        <text class="plabel" data-k="n2o" x="574" y="128" fill="#6f4a94">N₂O</text>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <span><i style="background:#5f7d3a"></i> gain (N added)</span>
+      <span><i style="background:#8a7a55"></i> internal transfer</span>
+      <span><i style="background:#b0463b"></i> loss from system</span>
+      <span><i style="background:#9a6bbf"></i> N₂O (greenhouse gas)</span>
+    </div>
+
+    <div class="chiprow" id="chips"></div>
+    <div class="explain" id="explain"><p class="exhint">Tap a process above (or an arrow in the diagram) to unpack it: the equation, who does it, what controls it, and whether N is actually lost.</p></div>
+  </section>
+
+  <!-- ============ PROCESSES ============ -->
+  <section class="view" id="v-proc">
+    <div class="oneliner">Six transformations do all the work. Three are internal shuffles (mineralize, immobilize, nitrify), one adds N (fixation), and three lose it (volatilize, leach, denitrify). Know the equation, the organisms, and the controlling factors for each.</div>
+    <div class="cards" id="proccards"></div>
+  </section>
+
+  <!-- ============ C:N LAB ============ -->
+  <section class="view" id="v-cn">
+    <div class="oneliner">The single most testable number in this module. Microbes hold a fixed C:N of about <span class="pill">8:1</span>. Feed them a residue and its C:N decides whether they <b>release</b> N to your crop or <b>steal</b> it.</div>
+    <div class="lab">
+      <div class="cnlabel">Residue / amendment C:N ratio</div>
+      <div class="cnval" id="cnval">30<small>:1</small></div>
+      <div class="cnbar"><div class="cnmark" id="cnmark" style="left:50%"></div></div>
+      <div class="cnticks"><span>0</span><span>15</span><span>20</span><span>25</span><span>35</span><span>60</span></div>
+      <input type="range" id="cnrange" min="2" max="60" value="30" step="1">
+      <div class="cnout gray" id="cnout"></div>
+    </div>
+    <p class="body"><b>Why 8:1 for microbes but ~20:1 for the tipping point?</b> Microbes respire a big chunk of the carbon they eat as CO₂ (they don't keep it all as biomass), so a residue can carry more carbon than 8:1 and still have enough N to spare. Above roughly 25:1 there is too little N in the residue, so microbes pull mineral N out of the soil to build biomass — that is immobilization.</p>
+    <p class="body"><b>Lability matters too.</b> C:N converts everything to elemental C and N, but simple sugars and tough aromatic (lignin) structures with the same C:N decompose at very different rates, which is why the threshold is a gray zone, not a hard line.</p>
+    <h3 class="sub">Timing: the asynchrony problem</h3>
+    <p class="body">Even when a manure releases <i>enough</i> N over a season, it releases it gradually while corn demands it in a narrow peak. N released before the crop can use it (or after uptake ends) is exposed to leaching. Matching release to demand — and catching the tail with a cover crop — is the whole game.</p>
+  </section>
+
+  <!-- ============ SOIL BASICS (Module 1 / Havlin Ch 1-2) ============ -->
+  <section class="view" id="v-soil">
+    <div class="oneliner">Module 1 groundwork: what plants need, how nutrients reach the root, and why soil holds cations. This is the Havlin Ch 1–2 material — CEC, the lyotropic series, and the three uptake paths.</div>
+
+    <h2 class="sec">Essential elements &amp; availability</h2>
+    <div class="cards">
+      <div class="card intern"><h3>17 essential elements</h3>
+        <p><b>Non-mineral:</b> C, H, O (from air &amp; water).</p>
+        <p><b>Macronutrients</b> (≥ 0.2% dry weight): N, P, K, Ca, Mg, S.</p>
+        <p><b>Micronutrients</b> (≤ 0.01%): Fe, Mn, Zn, Cu, B, Mo, Cl, Ni.</p>
+        <p><b>Beneficial</b> (not essential): Na, Co, V, Si.</p>
+      </div>
+      <div class="card intern"><h3>Stages of availability</h3>
+        <ul>
+          <li><b>Deficient</b> — yield limited, visible symptoms.</li>
+          <li><b>Critical range</b> — threshold below which yield drops.</li>
+          <li><b>Sufficient / luxury</b> — no more yield gain, but tissue concentration can still rise (<b>luxury consumption</b>).</li>
+          <li><b>Excessive / toxic</b> — high enough to cut yield via toxicity or nutrient interactions.</li>
+        </ul>
+      </div>
+      <div class="card intern"><h3>Law of the Minimum</h3>
+        <p>Growth is limited by the nutrient in <b>shortest supply relative to need</b>, not the total amount of nutrients. Fixing anything else won't help until the limiting one is corrected.</p>
+        <p><i>Example:</i> a field with ample P, K, water and light but low N yields as if only that low N were available — adding more P or K does nothing until N is raised.</p>
+      </div>
+    </div>
+
+    <h2 class="sec">How nutrients reach the root</h2>
+    <div class="cards">
+      <div class="card gain"><h3>Root interception</h3><div class="tagline">smallest share</div>
+        <p>Roots grow into new soil and contact nutrients directly — but roots only occupy about <b>1–3%</b> of the soil volume, so this is minor.</p></div>
+      <div class="card gain"><h3>Diffusion</h3><div class="tagline">immobile nutrients</div>
+        <p>Nutrient moves down a concentration gradient from high (bulk soil) to low (depleted rhizosphere). Slow. Dominant for <b>immobile</b> ions like H₂PO₄⁻ and K⁺. Faster with warmth &amp; moisture.</p></div>
+      <div class="card gain"><h3>Mass flow</h3><div class="tagline">mobile nutrients</div>
+        <p>Nutrient rides along with water pulled to the root by transpiration. Dominant for <b>mobile</b> ions like <b>NO₃⁻</b>, Ca²⁺, Mg²⁺, S. Needs soil moisture + transpiration.</p></div>
+    </div>
+    <p class="body"><b>Texture effect:</b> fine (clayey) soils hold more water and nutrients, so mass flow and diffusion supply more; coarse sandy soils supply less and lose mobile nutrients faster. <b>Mycorrhizae (AMF)</b> extend the absorbing surface (hyphae reach ~8 cm out), which especially helps with immobile P.</p>
+
+    <h2 class="sec">Cation Exchange Capacity (CEC)</h2>
+    <p class="body"><b>CEC</b> = the total amount of exchangeable cations a soil can hold on its negatively charged surfaces, expressed in <span class="pill">meq / 100 g soil</span>. It rises with <b>clay, organic matter, and pH</b>. Higher CEC = more nutrient retention. <span class="pill">CEC = Ca + Mg + K + Na + H + Al</span></p>
+    <div class="cards">
+      <div class="card intern"><h3>Two sources of negative charge</h3>
+        <ul>
+          <li><b>Permanent (isomorphic substitution):</b> a lower-charge cation swaps into the clay lattice (Al³⁺→Mg²⁺ in the octahedral sheet, Si⁴⁺→Al³⁺ in the tetrahedral). Leaves a net negative charge that is <b>pH-independent</b>.</li>
+          <li><b>pH-dependent:</b> deprotonation of OH groups on clay edges and organic matter. As pH rises, H⁺ leaves, exposing more negative charge — so CEC <b>increases</b>.</li>
+        </ul>
+      </div>
+      <div class="card intern"><h3>Lyotropic series</h3>
+        <p>Order of how tightly cations are held on the exchange:</p>
+        <div class="eq">Al³⁺ &gt; Ca²⁺ &gt; Mg²⁺ &gt; K⁺ = NH₄⁺ &gt; Na⁺</div>
+        <p><b>Basis:</b> higher valence + smaller <b>hydrated</b> radius = stronger attraction. Small ions hydrate more (bigger water shell), so Na⁺ is held weakly and leaches first.</p></div>
+      <div class="card intern"><h3>AEC &amp; why ultisols &gt; mollisols</h3>
+        <p><b>AEC</b> (anion exchange) comes from pH-dependent <b>positive</b> charge on Fe/Al oxides &amp; kaolinite at low pH. <b>Ultisols</b> are highly weathered (more oxides, more kaolinite, lower pH) so they carry more AEC than the less-weathered, base-rich <b>mollisols</b>. Anion order: PO₄³⁻ &gt; SO₄²⁻ &gt; NO₃⁻ &gt; Cl⁻ — which is why NO₃⁻ is barely held and leaches.</p></div>
+    </div>
+
+    <h2 class="sec">Soil formation &amp; profile</h2>
+    <div class="cards">
+      <div class="card intern"><h3>Soil forming factors — CLORPT</h3>
+        <p><b>Cl</b>imate · <b>O</b>rganisms (biota) · <b>R</b>elief (topography) · <b>P</b>arent material · <b>T</b>ime — plus <b>Humans</b>. Processes: additions, losses, transformations, translocations.</p></div>
+      <div class="card intern"><h3>Horizons (O-A-E-B-C-R)</h3>
+        <ul>
+          <li><b>O</b> — organic matter accumulation</li>
+          <li><b>A</b> — mineral topsoil enriched in OM</li>
+          <li><b>E</b> — zone of eluviation (leached out)</li>
+          <li><b>B</b> — zone of illuviation (accumulation)</li>
+          <li><b>C</b> — parent material</li>
+          <li><b>R</b> — unweathered rock</li>
+        </ul></div>
+    </div>
+  </section>
+
+  <!-- ============ N & SYMPTOMS ============ -->
+  <section class="view" id="v-symp">
+    <div class="oneliner">Nitrogen is usually the #1 limiting nutrient because it builds chlorophyll, RUBISCO, proteins and nucleic acids — all needed in bulk. Deficiency and excess each have a tell.</div>
+    <div class="cards">
+      <div class="card gain"><h3>What N builds</h3>
+        <ul>
+          <li><b>Chlorophyll</b> — captures light energy</li>
+          <li><b>Proteins / enzymes</b>, esp. <b>RUBISCO</b> — fixes CO₂ in photosynthesis</li>
+          <li><b>Nucleic acids</b> — DNA &amp; ribosomal RNA</li>
+        </ul>
+        <p>Needed in large quantities → the nutrient we add most.</p></div>
+      <div class="card loss"><h3>Deficiency symptoms</h3><div class="tagline">old leaves first</div>
+        <p><b>General, uniform yellowing</b> (not edge or spotty patterns) plus slow growth.</p>
+        <p><b>Key diagnostic:</b> N is <b>mobile</b> in the plant, so it is pulled from old lower leaves into new growth — so <b>old leaves yellow first</b>. An immobile nutrient would show on young leaves first.</p></div>
+      <div class="card loss"><h3>Excess symptoms</h3><div class="tagline">too much of a good thing</div>
+        <ul>
+          <li>Biomass goes to <b>leaves over fruit</b> (lush tomato, few tomatoes)</li>
+          <li><b>Delayed maturity</b></li>
+          <li><b>Lodging</b> — weak stems flatten in wind</li>
+          <li>Greater <b>pest susceptibility</b></li>
+        </ul>
+        <p>Wasteful: more fertilizer, no more yield.</p></div>
+      <div class="card intern"><h3>Uptake form</h3>
+        <p>Plants take up both <b>NH₄⁺</b> and <b>NO₃⁻</b>, but <b>nitrate usually dominates</b> (most NH₄⁺ gets nitrified). Uptake is mostly by <b>mass flow</b>. Organic N (amino acids) is minor except in harsh cold systems (Arctic sedges). Exceptions prefer NH₄⁺: blueberries (acid soils), flooded rice.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ STUDY GUIDE ============ -->
+  <section class="view" id="v-guide">
+    <div class="oneliner">Both assigned Havlin question sets, answered. Click any question to check yourself. Chapter 1–2 is the soil-chemistry base; Chapter 4 is the nitrogen module.</div>
+    <div id="guidewrap"></div>
+  </section>
+
+  <!-- ============ FLASHCARDS ============ -->
+  <section class="view" id="v-cards">
+    <div class="deckwrap">
+      <div class="flash" id="flash"><div class="flinner">
+        <div class="fface ffront"><div class="tag" id="ftag">term</div><div class="qq" id="fq"></div><div class="fhint">tap to flip</div></div>
+        <div class="fface fback"><div class="aa" id="fa"></div><div class="fhint">tap to flip</div></div>
+      </div></div>
+      <div class="deckctl">
+        <button class="dbtn" id="prev">‹ Prev</button>
+        <span class="dcount" id="dcount">1 / 1</span>
+        <button class="dbtn pri" id="next">Next ›</button>
+      </div>
+      <button class="dbtn" id="shuf">↻ Shuffle deck</button>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="view" id="v-quiz">
+    <div class="oneliner">Your saved exam-likely pool. The two you missed on the real quiz are <b>flagged</b> — drill those first. Options shuffle each round.</div>
+    <div class="quiz" id="quiz"></div>
+    <div class="quizfoot">
+      <span class="quizscore" id="qscore">0 / 0</span>
+      <button class="dbtn pri" id="qfresh">Fresh set ↻</button>
+    </div>
+  </section>
+
+  <div class="footer">Marea · SWS 4116 companion · sources: Maltais-Landry lecture slides + Havlin et al. study guides. Keep it honest, keep it curious.</div>
+</div>
+
+<script>
+/* ---------- data: processes ---------- */
+var PROC=[
+ {k:"fixation",name:"Biological N fixation",type:"gain",color:"#5f7d3a",
+  eq:"N₂ + 16 ATP + 2 H⁺ → 2 NH₄⁺ + 16 ADP + H₂",
+  what:"Converts inert atmospheric N₂ into plant-available N. The main <b>natural addition</b> of new N to a system.",
+  who:"Rhizobia in legume nodules (symbiosis); also free-living heterotrophs, cyanobacteria, Azolla in rice. Enzyme <b>nitrogenase</b> needs Fe, Mo, S. <b>Leghaemoglobin</b> keeps nodules anoxic.",
+  ctrl:"Inoculation (+15–25% yield); more BNF at <b>low soil N</b> (it's carbon-expensive); pH threshold ~5.5; P, Fe, Mo availability.",
+  loss:"No — this adds N. (Industrial version = Haber-Bosch.)"},
+ {k:"mineralization",name:"Mineralization",type:"internal",color:"#8a7a55",
+  eq:"Organic N →(aminization) amino acids →(ammonification) NH₄⁺",
+  what:"Frees N locked in organic matter into plant-available <b>ammonium</b>. Two steps: aminization then ammonification.",
+  who:"Heterotrophic <b>bacteria</b> (dominate in neutral/alkaline soils) and <b>fungi</b> (more in acid soils).",
+  ctrl:"Moisture 50–70% WFPS; temp 25–35 °C; pH 6.5–8; <b>tillage increases it</b>. About 1–3% of soil organic N mineralizes per year. C:N ratio predicts it.",
+  loss:"No — internal, makes N available."},
+ {k:"immobilization",name:"Immobilization",type:"internal",color:"#8a7a55",
+  eq:"NH₄⁺ / NO₃⁻ → Organic N (in microbial biomass)",
+  what:"The reverse of mineralization — microbes take up mineral N and lock it into biomass, temporarily starving the crop.",
+  who:"Soil microbes, which <b>outcompete plants</b> for N (they're an order of magnitude more effective at uptake).",
+  ctrl:"Driven by <b>high-C:N residues (&gt;25:1)</b>. Not permanent — N is released later as microbes die.",
+  loss:"No — N stays in the system, just unavailable for a while. (See the C:N Lab.)"},
+ {k:"nitrification",name:"Nitrification",type:"internal",color:"#8a7a55",
+  eq:"NH₄⁺ + 2 O₂ → NO₃⁻ + H₂O + 2 H⁺   (acidifying)",
+  what:"Oxidizes ammonium to nitrate. Two steps: NH₄⁺→NO₂⁻ (ammonium oxidation, the acid-generating, rate-limiting step) then NO₂⁻→NO₃⁻. <b>Main N₂O source in aerated soils.</b>",
+  who:"Chemoautotrophs: <b>Nitrosomonas</b> (NH₄⁺→NO₂⁻), <b>Nitrobacter</b> (NO₂⁻→NO₃⁻). Use CO₂/carbonate for carbon — <b>not organic C</b>. Archaea can also nitrify.",
+  ctrl:"NH₄⁺ supply; <b>O₂</b> (texture, bulk density); moisture (70–90% WHC); temp 25–35 °C; pH 5–8.5.",
+  loss:"No — but it makes mobile NO₃⁻ (→ leaching) and emits some N₂O, and it acidifies soil."},
+ {k:"volatilization",name:"Volatilization",type:"loss",color:"#b0463b",
+  eq:"NH₄⁺ → NH₃↑ + H⁺   ·   urea: CO(NH₂)₂ + H⁺ + 2 H₂O → 2 NH₄⁺ + HCO₃⁻",
+  what:"Ammonium converts to <b>ammonia gas</b> and escapes. A real N loss, big with surface urea.",
+  who:"Chemical (not microbial), but <b>urease</b> enzyme drives urea hydrolysis — and that reaction <b>raises soil pH</b>, which is the part students forget.",
+  ctrl:"Worse at <b>pH &gt; 7.5</b>, high temp (up to 45 °C), high moisture, high wind. Surface residues / no-till increase it. <b>Irrigating it in reduces it</b> (pushes N deeper).",
+  loss:"YES — gas lost from the system."},
+ {k:"clayfix",name:"Clay fixation of NH₄⁺",type:"internal",color:"#8a7a55",
+  eq:"NH₄⁺ replaces K⁺ between 2:1 clay layers (vermiculite, micas)",
+  what:"Ammonium (small, monovalent, like K⁺) slots into 2:1 clay interlayers. Up to 60% of fertilizer NH₄⁺ in the right minerals.",
+  who:"Physico-chemical, in vermiculite &amp; mica clays. Minor in Florida's sandy, low-clay soils.",
+  ctrl:"Reversible — adding K⁺ (fertilizer) can bump NH₄⁺ back out.",
+  loss:"No — not a net loss; like immobilization, just temporarily unavailable."},
+ {k:"leaching",name:"Nitrate leaching",type:"loss",color:"#b0463b",
+  eq:"NO₃⁻ washes down through the soil profile with water",
+  what:"Nitrate is a mobile anion the soil barely holds, so water carries it below the root zone. <b>Losses rise exponentially past the yield optimum.</b>",
+  who:"Physical transport. Florida is high-risk: sandy soils + heavy rain.",
+  ctrl:"Favored by humid climate, coarse texture, release/demand asynchrony. Reduced by cover crops, drip irrigation, right rate/time/place.",
+  loss:"YES — the dominant N loss in most agroecosystems."},
+ {k:"denitrification",name:"Denitrification",type:"loss",color:"#b0463b",
+  eq:"5 CH₂O + 4 NO₃⁻ + 4 H⁺ → 5 CO₂ + 2 N₂ + 7 H₂O   (steps: NO₃⁻→NO₂⁻→NO→N₂O→N₂)",
+  what:"Microbes 'breathe' nitrate instead of O₂ when oxygen runs out, converting NO₃⁻ to N₂ gas. Produces <b>N₂O</b> along the way.",
+  who:"Broad range of facultative anaerobes: <b>Pseudomonas, Bacillus, Paracoccus</b>.",
+  ctrl:"Needs NO₃⁻, <b>anaerobic conditions</b> (wet/flooded soil), and <b>labile carbon</b>. pH: rates highest 8–8.6; N₂O dominates at pH &lt; 6, N₂ at pH &gt; 6. Temp 25–60 °C.",
+  loss:"YES — gas loss. N₂ is harmless; N₂O is a greenhouse gas + ozone depleter."},
+ {k:"uptake",name:"Plant uptake",type:"gain",color:"#5f7d3a",
+  eq:"NH₄⁺ and NO₃⁻ → plant  (mostly NO₃⁻, by mass flow)",
+  what:"Crop removes mineral N. Harvesting it off the field is a <b>net export</b> of N from the system.",
+  who:"The crop. Nitrate usually dominates uptake; some crops (blueberry, rice) favor ammonium.",
+  ctrl:"Driven by transpiration (mass flow) and root growth. Organic-N uptake minor except in cold, low-mineralization systems.",
+  loss:"Removal to plant — a net loss only when the biomass is harvested off-site."},
+ {k:"n2o",name:"N₂O emission",type:"n2o",color:"#9a6bbf",
+  eq:"produced by BOTH nitrification and denitrification",
+  what:"Nitrous oxide — a potent greenhouse gas and ozone depleter. In well-aerated soils it comes mostly from <b>nitrification</b>; in wet soils from <b>denitrification</b>.",
+  who:"Highest N₂O:N₂ ratio at <b>low but not zero O₂</b> (moist-but-not-flooded, anaerobic microsites).",
+  ctrl:"Emission factor is <b>not constant</b> — it rises exponentially with N rate. A bigger share of inputs is lost as N₂O at high fertilization.",
+  loss:"YES — and the climate-relevant one. Another reason to nail the optimum rate."}
+];
+
+/* ---------- N cycle interactive ---------- */
+var chips=document.getElementById('chips'), explain=document.getElementById('explain');
+var typeName={gain:"adds N",loss:"lost from system",internal:"internal transfer",n2o:"greenhouse gas"};
+PROC.forEach(function(p){
+  var b=document.createElement('button'); b.className='chip'; b.dataset.k=p.k;
+  b.innerHTML='<span class="dot" style="background:'+p.color+'"></span>'+p.name;
+  b.onclick=function(){selectProc(p.k)}; chips.appendChild(b);
+});
+function selectProc(k){
+  var p=PROC.filter(function(x){return x.k===k})[0]; if(!p)return;
+  document.querySelectorAll('#chips .chip').forEach(function(c){c.classList.toggle('on',c.dataset.k===k)});
+  document.querySelectorAll('#ncy .parrow').forEach(function(a){a.classList.toggle('dim',a.dataset.k!==k)});
+  document.querySelectorAll('#ncy .plabel').forEach(function(a){a.classList.toggle('dim',a.dataset.k!==k)});
+  explain.innerHTML=
+   '<div class="exhead" style="background:'+p.color+'"><h3>'+p.name+'</h3><span class="exbadge">'+typeName[p.type]+'</span></div>'+
+   '<div class="exbody"><div class="eq">'+p.eq+'</div><div class="exgrid">'+
+   '<div class="exitem"><span class="k">What it does</span>'+p.what+'</div>'+
+   '<div class="exitem"><span class="k">Who / how</span>'+p.who+'</div>'+
+   '<div class="exitem"><span class="k">Controlling factors</span>'+p.ctrl+'</div>'+
+   '<div class="exitem"><span class="k">Is N lost?</span>'+p.loss+'</div>'+
+   '</div></div>';
+}
+document.querySelectorAll('#ncy .parrow, #ncy .plabel').forEach(function(el){
+  el.style.cursor='pointer'; el.addEventListener('click',function(){selectProc(el.dataset.k)});
+});
+
+/* ---------- process cards ---------- */
+var pc=document.getElementById('proccards');
+PROC.filter(function(p){return p.k!=='n2o'&&p.k!=='uptake'}).forEach(function(p){
+  var d=document.createElement('div'); d.className='card '+(p.type==='gain'?'gain':p.type==='loss'?'loss':'intern');
+  d.innerHTML='<div class="tagline">'+typeName[p.type]+'</div><h3>'+p.name+'</h3>'+
+    '<div class="eq">'+p.eq+'</div>'+
+    '<p>'+p.what+'</p>'+
+    '<ul><li><b>Who:</b> '+p.who+'</li><li><b>Controls:</b> '+p.ctrl+'</li><li><b>Lost?</b> '+p.loss+'</li></ul>';
+  pc.appendChild(d);
+});
+
+/* ---------- C:N lab ---------- */
+var cnrange=document.getElementById('cnrange'),cnval=document.getElementById('cnval'),
+    cnout=document.getElementById('cnout'),cnmark=document.getElementById('cnmark');
+function cnUpdate(){
+  var v=+cnrange.value;
+  cnval.innerHTML=v+'<small>:1</small>';
+  var pct=Math.max(0,Math.min(100,(v-2)/58*100)); cnmark.style.left=pct+'%';
+  var cls,msg;
+  if(v<20){cls='min';msg='<b>Net mineralization.</b> The residue has plenty of N for microbial needs, so surplus N is released as NH₄⁺ to the soil — your crop gets fed.'+(v<15?' Well below 15:1, this is fast and reliable (think fresh legume residue, manures, blood meal).':'');}
+  else if(v>25){cls='immob';msg='<b>Net immobilization.</b> Too little N in the residue, so microbes pull mineral N <i>out</i> of the soil to build biomass — your crop is starved temporarily.'+(v>35?' Above 35:1 (straw, sawdust, woody mulch) this tie-up is strong and lasts a while.':'');}
+  else{cls='gray';msg='<b>Gray zone (~20–25:1).</b> Right around the tipping point — could go either way depending on how labile the carbon is. Near the ~24:1 of many mature composts, N is roughly held steady.';}
+  cnout.className='cnout '+cls; cnout.innerHTML=msg;
+}
+cnrange.addEventListener('input',cnUpdate); cnUpdate();
+
+/* ---------- study guide ---------- */
+var GUIDE=[
+ {g:"Havlin Chapter 1–2 · Soil chemistry & nutrient availability"},
+ {q:"State the Law of the Minimum and give an example.",
+  a:"Growth is controlled by the essential nutrient that is <b>most deficient relative to the plant's need</b>, not by the total supply of nutrients. Raising any other factor won't increase yield until the limiting one is corrected. <b>Example:</b> a field with abundant P, K, water and light but low N will yield only as much as that low N allows — adding more P or K does nothing until N is raised."},
+ {q:"List and classify the essential elements for plant growth.",
+  a:"<b>Non-mineral:</b> C, H, O. <b>Macronutrients</b> (≥ 0.2% dry weight): N, P, K, Ca, Mg, S. <b>Micronutrients</b> (≤ 0.01%): Fe, Mn, Zn, Cu, B, Mo, Cl, Ni. <b>Beneficial</b> (helpful, not essential): Na, Co, V, Si."},
+ {q:"What is luxury consumption?",
+  a:"Uptake of a nutrient <b>beyond</b> what is needed for maximum yield. Tissue concentration keeps rising, but yield does not increase. It sits in the 'sufficient' stage between the critical range and toxicity."},
+ {q:"Define CEC.",
+  a:"<b>Cation Exchange Capacity</b> = the total quantity of exchangeable cations a soil can hold on its negatively charged surfaces, expressed in <b>meq/100 g</b> of soil. CEC = Ca + Mg + K + Na + H + Al. It increases with clay, organic matter, and pH; higher CEC means greater nutrient-holding capacity."},
+ {q:"How is CEC influenced by: raising pH 6.0→7.5; weathering intensity; adding Ca²⁺/Mg²⁺?",
+  a:"<b>pH 6.0→7.5:</b> CEC <b>increases</b> — higher pH deprotonates OH groups on clay edges and organic matter, exposing more pH-dependent negative charge. <b>Weathering intensity:</b> intense weathering destroys high-CEC 2:1 clays and leaves low-CEC kaolinite and Fe/Al oxides, so permanent CEC <b>drops</b> (and AEC rises) — highly weathered soils have low CEC. <b>Adding Ca²⁺/Mg²⁺:</b> raises base saturation and tends to raise pH, which increases pH-dependent CEC; these divalent bases are also held more tightly than K⁺/Na⁺."},
+ {q:"Two sources of negative charge on clay minerals.",
+  a:"<b>(1) Permanent charge from isomorphic substitution</b> — a lower-valence cation substitutes in the lattice (Al³⁺→Mg²⁺ octahedral, Si⁴⁺→Al³⁺ tetrahedral), giving a net negative charge that is pH-independent. <b>(2) pH-dependent charge</b> — deprotonation of hydroxyl (–OH) groups on broken edges; grows as pH rises."},
+ {q:"What is the basis for the lyotropic series?",
+  a:"The strength of cation adsorption follows <b>Al³⁺ &gt; Ca²⁺ &gt; Mg²⁺ &gt; K⁺ = NH₄⁺ &gt; Na⁺</b>. Basis: <b>higher valence</b> and <b>smaller hydrated radius</b> = stronger attraction to the negative surface. Small ions hold a larger hydration shell, so their effective (hydrated) size is bigger and they're held more weakly — Na⁺ is loosest and leaches first."},
+ {q:"What other soil constituents contribute to total CEC?",
+  a:"Besides silicate clays: <b>organic matter / humus</b> (a large, highly pH-dependent source of negative charge, often the biggest per unit mass) and, to a lesser degree, Fe/Al <b>oxides</b> (which are mostly variable-charge and can be positive at low pH)."},
+ {q:"Why is the AEC of ultisols greater than that of mollisols?",
+  a:"<b>Ultisols</b> are highly weathered and acidic, dominated by <b>kaolinite and Fe/Al oxides</b> that carry <b>pH-dependent positive charge</b> at low pH → higher AEC. <b>Mollisols</b> are less weathered, base-rich, higher pH, dominated by 2:1 clays with permanent negative charge → high CEC but low AEC."},
+ {q:"Relative importance of root interception, diffusion, and mass flow (and the effect of soil texture).",
+  a:"<b>Root interception</b> supplies the least (roots occupy only 1–3% of soil volume). <b>Mass flow</b> supplies mobile nutrients carried in soil water (NO₃⁻, Ca, Mg, S). <b>Diffusion</b> supplies immobile nutrients along a concentration gradient (H₂PO₄⁻, K⁺). <b>Texture:</b> finer soils hold more water and nutrients so mass flow and diffusion deliver more; coarse sandy soils deliver less and lose mobile nutrients to leaching faster."},
+ {q:"What influences ion diffusion (temperature, moisture, texture, buffer capacity, specific ions)?",
+  a:"<b>Temperature:</b> higher temp → faster diffusion. <b>Moisture:</b> more water → more continuous, less tortuous paths → faster diffusion. <b>Texture:</b> fine soils hold more water (helps) but have more tortuous paths and stronger sorption (slows) — net effect varies by nutrient. <b>Buffer capacity:</b> a strongly buffered (sorbing) soil replenishes the depleted zone but lowers the free-solution gradient, slowing net diffusive flux. <b>Specific ions:</b> mobile, weakly held ions (NO₃⁻) diffuse readily; strongly sorbed ions (H₂PO₄⁻) diffuse very slowly."},
+ {g:"Havlin Chapter 4 · The nitrogen cycle"},
+ {q:"Major functions of N in plants and how they relate to deficiency symptoms.",
+  a:"N builds <b>chlorophyll, proteins/enzymes (RUBISCO), and nucleic acids</b>. Because chlorophyll is N-rich, deficiency shows as <b>general yellowing (chlorosis)</b> and slow growth. Because N is <b>mobile</b>, the plant moves it from old to new leaves, so <b>older/lower leaves yellow first</b>."},
+ {q:"Do crops use both ammonium and nitrate? Which is preferred and why?",
+  a:"Both are taken up, but <b>nitrate usually dominates</b> — in aerated soils most NH₄⁺ is quickly nitrified to NO₃⁻, and NO₃⁻ is mobile so it reaches roots by mass flow. Some crops favor NH₄⁺ where nitrification is suppressed: blueberries (acid soils), flooded rice."},
+ {q:"How is atmospheric N made usable to plants (excluding synthetic fixation)? Which microorganisms?",
+  a:"By <b>biological nitrogen fixation</b> — N₂ reduced to NH₄⁺/organic N using the enzyme nitrogenase. Chiefly <b>rhizobia</b> in symbiosis with legume nodules; also free-living heterotrophs, <b>cyanobacteria</b>, and Azolla symbionts. (Lightning and combustion also fix small amounts.)"},
+ {q:"What soil property strongly influences survival/growth of Rhizobia?",
+  a:"<b>Soil pH.</b> Rhizobia and nodulation decline sharply below about pH 5.5 (few nodules under ~5.2). P, Ca, and Mo availability also matter, but pH is the big lever."},
+ {q:"Define ammonification and nitrification. What factors affect them?",
+  a:"<b>Ammonification</b> = microbial conversion of organic N to NH₄⁺ (the second step of mineralization). <b>Nitrification</b> = oxidation of NH₄⁺ to NO₃⁻ (via NO₂⁻). Both need warmth (25–35 °C) and adequate moisture. Ammonification is done by broad heterotrophs across a wide pH; nitrification needs <b>O₂</b>, ammonium supply, and near-neutral pH (~5–8.5) and is done by specialist chemoautotrophs, so it's more restricted."},
+ {q:"Why does intensive cultivation speed OM decomposition, and how does that affect N availability short- and long-term?",
+  a:"Tillage breaks up residues and aggregates, increasing surface area and aeration, which speeds microbial decomposition and mineralization. <b>Short term:</b> a flush of available N (mineralization exceeds immobilization). <b>Long term:</b> soil organic matter — and the N stock stored in it — is depleted, lowering the soil's native N-supplying capacity."},
+ {q:"Difference between N fixation and nitrification.",
+  a:"<b>N fixation</b> converts inert N₂ gas into plant-available N (a new input to the system). <b>Nitrification</b> converts existing NH₄⁺ into NO₃⁻ (an internal transformation, no new N added). Different substrates, different organisms."},
+ {q:"Nitrification's two steps and organisms — and why is it a 'mixed blessing'?",
+  a:"<b>Step 1:</b> NH₄⁺→NO₂⁻ by <b>Nitrosomonas</b> (ammonium oxidation, generates acidity). <b>Step 2:</b> NO₂⁻→NO₃⁻ by <b>Nitrobacter</b>. <b>Mixed blessing:</b> it converts N to the form crops mostly use, but that form (NO₃⁻) is mobile and prone to <b>leaching and denitrification</b>, plus the process <b>acidifies</b> soil and emits <b>N₂O</b>."},
+ {q:"What is ammonium fixation? Under what conditions? How important to N availability?",
+  a:"NH₄⁺ becomes trapped between the layers of <b>2:1 clays (vermiculite, micas)</b>, replacing interlayer K⁺. Occurs where those clays are present; up to ~60% of applied NH₄⁺ can be fixed. It's <b>reversible</b> (not a true loss) and often minor overall — negligible in low-clay soils like Florida's sands."},
+ {q:"In what forms can N gas be lost, under what conditions, and how would you minimize each?",
+  a:"<b>Ammonia (NH₃) volatilization</b> — from surface NH₄⁺/urea at high pH, heat, wind; minimize by incorporating or irrigating fertilizer in and using urease inhibitors. <b>N₂O and N₂ from denitrification</b> — in wet/anaerobic soils with nitrate and labile carbon; minimize by improving drainage, avoiding excess NO₃⁻, matching rate to demand. <b>N₂O from nitrification</b> — in aerated soils; minimize with nitrification inhibitors and right-rate N. Yes, gaseous losses can be large, especially at over-fertilization."},
+ {q:"Factors that maximize ammonia volatilization from urea, and management to minimize it.",
+  a:"<b>Maximize:</b> surface-applied urea, high soil pH (or calcareous soil), warm temperature, moist surface then drying, high wind, high urease activity (surface residues/no-till), no incorporation. <b>Minimize:</b> incorporate or band below the surface, irrigate it in (~½ inch), use <b>urease inhibitors</b> (e.g. NBPT), apply before rain, avoid surface urea on high-pH soils."},
+ {q:"Explain the N cycle with a diagram.",
+  a:"See the <b>N Cycle</b> tab — four pools (N₂, organic N, NH₄⁺, NO₃⁻) linked by fixation (in), mineralization/immobilization, nitrification, plus the loss arrows: volatilization, leaching, and denitrification, with N₂O emitted by nitrification and denitrification."},
+ {q:"What is the C:N ratio and how does it affect mineralization?",
+  a:"C:N is the mass ratio of carbon to nitrogen in a residue. Microbes need ~<b>8:1</b>. <b>Low C:N (&lt; ~20:1)</b> → surplus N released = <b>net mineralization</b>. <b>High C:N (&gt; ~25:1)</b> → microbes scavenge soil N = <b>net immobilization</b>. In between is a gray zone. (Play with the C:N Lab tab.)"}
+];
+var gw=document.getElementById('guidewrap');
+GUIDE.forEach(function(item){
+  if(item.g){var h=document.createElement('div');h.className='ggroup';h.textContent=item.g;gw.appendChild(h);return;}
+  var d=document.createElement('details');d.className='qa';
+  d.innerHTML='<summary><span class="qn">Q</span><span>'+item.q+'</span></summary><div class="ans">'+item.a+'</div>';
+  gw.appendChild(d);
+});
+
+/* ---------- flashcards ---------- */
+var FC=[
+ {t:"loss vs not-loss",q:"Which N processes are true losses from the system?",a:"Volatilization, leaching, denitrification. NOT losses: immobilization & clay fixation (reversible)."},
+ {t:"equation",q:"Nitrification equation (and its side effect)?",a:"NH₄⁺ + 2 O₂ → NO₃⁻ + H₂O + 2 H⁺. Side effect: it acidifies the soil."},
+ {t:"equation",q:"Denitrification — what and what gas?",a:"5 CH₂O + 4 NO₃⁻ + 4 H⁺ → 5 CO₂ + 2 N₂ + 7 H₂O. Respires C using NO₃⁻ instead of O₂; produces N₂O en route."},
+ {t:"C:N",q:"C:N above 25:1 does what?",a:"Net immobilization — microbes pull mineral N out of the soil (crop starved temporarily)."},
+ {t:"C:N",q:"Microbial C:N ratio?",a:"About 8:1, and roughly constant."},
+ {t:"organisms",q:"Nitrifiers: which genus does each step?",a:"Nitrosomonas: NH₄⁺→NO₂⁻. Nitrobacter: NO₂⁻→NO₃⁻. Both chemoautotrophs (use CO₂, not organic C)."},
+ {t:"deficiency",q:"Why does N deficiency show in OLD leaves first?",a:"N is mobile in the plant, so it's remobilized from old leaves to new growth."},
+ {t:"uptake",q:"Which N form dominates plant uptake, and by what pathway?",a:"Nitrate (NO₃⁻), mostly by mass flow. Most NH₄⁺ gets nitrified."},
+ {t:"leaching",q:"Conditions for highest nitrate leaching?",a:"Sandy (coarse) soil + wet/humid climate. Losses rise exponentially past the yield optimum."},
+ {t:"fixation",q:"Enzyme for N fixation and its key metals?",a:"Nitrogenase — needs Fe, Mo, and S. Leghaemoglobin keeps the nodule anoxic."},
+ {t:"volatilization",q:"The urease fact students miss?",a:"Urea hydrolysis doesn't just make NH₄⁺ — it RAISES soil pH, which drives NH₃ volatilization."},
+ {t:"volatilization",q:"When is NH₃ volatilization worst?",a:"pH > 7.5, warm, moist-then-drying surface, windy, surface-applied urea."},
+ {t:"CEC",q:"Lyotropic (cation strength) series?",a:"Al³⁺ > Ca²⁺ > Mg²⁺ > K⁺ = NH₄⁺ > Na⁺. Basis: higher valence + smaller hydrated radius = held tighter."},
+ {t:"CEC",q:"Two sources of negative charge on clay?",a:"Permanent (isomorphic substitution, pH-independent) and pH-dependent (–OH deprotonation on edges & OM)."},
+ {t:"CEC",q:"CEC increases with…?",a:"Clay, organic matter, and pH."},
+ {t:"AEC",q:"Why do ultisols have more AEC than mollisols?",a:"Highly weathered, acidic, more Fe/Al oxides + kaolinite = pH-dependent positive charge."},
+ {t:"elements",q:"Macronutrient cutoff vs micronutrient?",a:"Macros ≥ 0.2% dry weight (N,P,K,Ca,Mg,S); micros ≤ 0.01% (Fe,Mn,Zn,Cu,B,Mo,Cl,Ni)."},
+ {t:"uptake paths",q:"Three nutrient uptake pathways?",a:"Root interception (1–3%), diffusion (immobile: P, K), mass flow (mobile: NO₃⁻)."},
+ {t:"mineralization",q:"Two steps of mineralization?",a:"Aminization (proteins→amino acids) then ammonification (→NH₄⁺). ~1–3% of soil organic N/yr."},
+ {t:"N2O",q:"Where does N₂O come from, and when is the N₂O:N₂ ratio highest?",a:"Both nitrification (aerated soils) and denitrification (wet). Ratio highest at low-but-not-zero O₂."},
+ {t:"fertilizer",q:"Highest-N commercial fertilizer?",a:"Anhydrous ammonia (~82% N)."},
+ {t:"fertilizer",q:"Organic vs inorganic N fertilizer — the chemistry test?",a:"Organic = contains carbon (urea, feather meal, alfalfa, manures). Inorganic/mineral = no carbon (Chilean nitrate/NaNO₃, ammonium nitrate, ammonium sulfate)."},
+ {t:"fertilizer",q:"Best N source for a high-pH soil, and why?",a:"Ammonium sulfate — acidifies as it nitrifies and volatilizes far less than urea/anhydrous ammonia on alkaline soils."}
+];
+var fi=0,flash=document.getElementById('flash');
+function drawFC(){var c=FC[fi];document.getElementById('ftag').textContent=c.t;
+  document.getElementById('fq').textContent=c.q;document.getElementById('fa').textContent=c.a;
+  flash.classList.remove('flip');document.getElementById('dcount').textContent=(fi+1)+' / '+FC.length;}
+flash.onclick=function(){flash.classList.toggle('flip')};
+document.getElementById('next').onclick=function(){fi=(fi+1)%FC.length;drawFC()};
+document.getElementById('prev').onclick=function(){fi=(fi-1+FC.length)%FC.length;drawFC()};
+document.getElementById('shuf').onclick=function(){for(var i=FC.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=FC[i];FC[i]=FC[j];FC[j]=t;}fi=0;drawFC();};
+drawFC();
+
+/* ---------- quiz ---------- */
+var QUIZ=[
+ {q:"Denitrification is an oxidation reaction that generates nitrate.",o:["True","False"],c:1,
+  e:"False. Denitrification is a REDUCTION reaction that CONSUMES nitrate (NO₃⁻→…→N₂). Nitrification generates nitrate."},
+ {q:"Nitrification is an acid-producing reaction.",o:["True","False"],c:0,
+  e:"True. NH₄⁺ + 2 O₂ → NO₃⁻ + H₂O + 2 H⁺ — the released H⁺ acidifies soil."},
+ {q:"Anhydrous ammonia has the highest N content among all N fertilizers.",o:["True","False"],c:0,
+  e:"True. Anhydrous ammonia is ~82% N, the highest of any commercial N fertilizer."},
+ {q:"Ammonium sulfate is an acidifying fertilizer.",o:["True","False"],c:0,
+  e:"True. Its ammonium nitrifies and releases H⁺; the sulfate doesn't neutralize it. One of the most acidifying N sources."},
+ {q:"Your tomato's top (young) leaves are yellow only around the edges, center still green. Consistent with N deficiency?",o:["True","False"],c:1,
+  e:"False. N deficiency shows in OLD leaves first (N is mobile) and as GENERAL yellowing, not edge patterns on young leaves."},
+ {q:"Plants obtain nitrogen from the soil by taking up N as:",o:["NO₃⁻ anion","NH₄⁺ cation","Both NO₃⁻ and NH₄⁺"],c:2,
+  e:"Both. Nitrate usually dominates (ammonium gets nitrified), but plants take up both forms."},
+ {q:"Which is NOT a limiting factor of nitrification?",o:["Oxygen","Ammonium","Organic carbon","Temperature"],c:2,
+  e:"Organic carbon. Nitrifiers are chemoautotrophs — they use CO₂/carbonate for carbon, so organic C doesn't limit them. O₂, NH₄⁺ supply and temperature do."},
+ {q:"In which conditions is N leaching highest?",o:["Clay soil, dry climate","Sandy soil, wet climate","Clay soil, wet climate"],c:1,flag:"you missed this",
+  e:"Sandy soil, wet climate. Coarse texture drains fast; wet climate pushes water through the profile. (On the real quiz this option appeared twice — a broken question. Your concept was right.)"},
+ {q:"Which of the following is NOT an organic N fertilizer?",o:["Feather meal","Urea","Alfalfa pellets","Chilean nitrate"],c:3,flag:"you missed this",
+  e:"Chilean nitrate (NaNO₃) — no carbon, so it's mineral/inorganic. The course uses organic = carbon-containing, so urea CO(NH₂)₂ IS organic even though it's synthetic. Feather meal & alfalfa are organic too."},
+ {q:"Which N fertilizer is most suitable for high-pH soils?",o:["Anhydrous ammonia","Urea","Ammonium sulfate"],c:2,
+  e:"Ammonium sulfate — it acidifies as it nitrifies and volatilizes far less than urea or anhydrous ammonia on alkaline soils."},
+ {q:"A residue with a C:N ratio of 40:1 added to soil will cause:",o:["Net mineralization (N released)","Net immobilization (N tied up)","No microbial response"],c:1,
+  e:"Net immobilization. Above ~25:1 there's too little N in the residue, so microbes scavenge soil mineral N to build biomass."},
+ {q:"Nitrous oxide (N₂O) is produced by:",o:["Only denitrification","Only nitrification","Both nitrification and denitrification"],c:2,
+  e:"Both. In well-aerated soils nitrification is the main N₂O source; in wet soils denitrification dominates."},
+ {q:"The main reason urease increases ammonia volatilization is that it:",o:["Converts urea to nitrate","Raises soil pH as it hydrolyzes urea","Lowers soil temperature"],c:1,
+  e:"It raises soil pH (CO(NH₂)₂ + H⁺ + 2H₂O → 2NH₄⁺ + HCO₃⁻), and high pH shifts NH₄⁺ to volatile NH₃. The pH effect is the part students forget."},
+ {q:"Which cation is held MOST tightly on the exchange complex?",o:["Na⁺","K⁺","Ca²⁺","Al³⁺"],c:3,
+  e:"Al³⁺. Lyotropic series Al³⁺ > Ca²⁺ > Mg²⁺ > K⁺ = NH₄⁺ > Na⁺: higher valence + smaller hydrated radius = held tighter."},
+ {q:"Biological N fixation tends to be highest when soil N is:",o:["High","Low","It doesn't depend on soil N"],c:1,
+  e:"Low. BNF is carbon-expensive, so when soil N is plentiful legumes down-regulate fixation and just take up soil N instead."},
+ {q:"CEC generally increases with all EXCEPT:",o:["Increasing clay content","Increasing organic matter","Increasing sand content","Increasing pH"],c:2,
+  e:"Sand has little surface charge, so more sand LOWERS CEC. Clay, organic matter, and higher pH all raise it."}
+];
+function shuf(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var qwrap=document.getElementById('quiz'),qscoreEl=document.getElementById('qscore'),qDone=0,qCorrect=0,qTotal=QUIZ.length;
+function renderQuiz(){
+  qwrap.innerHTML='';qDone=0;qCorrect=0;qscoreEl.textContent='0 / '+qTotal;
+  QUIZ.forEach(function(item){
+    var opts=item.o.map(function(t,i){return {t:t,correct:i===item.c}}); opts=shuf(opts);
+    var d=document.createElement('div');d.className='q'+(item.flag?' flagged':'');
+    var h='<div class="qh">'+item.q+(item.flag?'<span class="missed">'+item.flag+'</span>':'')+'</div>';
+    d.innerHTML=h;
+    opts.forEach(function(op){
+      var b=document.createElement('button');b.className='opt';b.textContent=op.t;
+      b.onclick=function(){
+        if(d.dataset.done)return;d.dataset.done='1';
+        Array.prototype.forEach.call(d.querySelectorAll('.opt'),function(x){x.disabled=true;});
+        if(op.correct){b.classList.add('correct');qCorrect++;}
+        else{b.classList.add('wrong');Array.prototype.forEach.call(d.querySelectorAll('.opt'),function(x){if(x.textContent===item.o[item.c])x.classList.add('correct');});}
+        d.querySelector('.qexp').classList.add('show');
+        qDone++;qscoreEl.textContent=qCorrect+' / '+qDone;
+      };
+      d.appendChild(b);
+    });
+    var ex=document.createElement('div');ex.className='qexp';ex.innerHTML='<b>'+(item.o[item.c])+'.</b> '+item.e;d.appendChild(ex);
+    qwrap.appendChild(d);
+  });
+}
+document.getElementById('qfresh').onclick=renderQuiz;
+renderQuiz();
+
+/* ---------- tabs ---------- */
+document.getElementById('tabs').addEventListener('click',function(e){
+  var b=e.target.closest('.tab'); if(!b)return;
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('on',t===b)});
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on')});
+  document.getElementById('v-'+b.dataset.v).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+</script>
+</body>
+</html>
