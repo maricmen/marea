@@ -174,6 +174,7 @@ svg{display:block}
   <div class="tabs">
     <button class="tab on" data-v="overview">Big picture</button>
     <button class="tab" data-v="guide">Field guide</button>
+    <button class="tab" data-v="lectures">Lectures</button>
     <button class="tab" data-v="flash">Flashcards</button>
     <button class="tab" data-v="quiz">Quiz</button>
     <button class="tab" data-v="connect">Connect</button>
@@ -232,6 +233,8 @@ svg{display:block}
 
   <div class="view" id="v-guide"></div>
 
+  <div class="view" id="v-lectures"></div>
+
   <div class="view" id="v-flash">
     <div class="deckwrap">
       <div class="flash" id="flash"><div class="flinner">
@@ -274,7 +277,10 @@ var THEMES = [
  {n:2, title:"Reading agriculture as an ecosystem", lec:"Lecture 1.2"},
  {n:3, title:"Following the carbon and the energy", lec:"Lectures 1.3–1.4"},
  {n:4, title:"The energy bill of a farm", lec:"Lectures 1.5–1.6"},
- {n:5, title:"Agriculture and the changing climate", lec:"Lectures 1.7–1.8"}
+ {n:5, title:"Agriculture and the changing climate", lec:"Lectures 1.7–1.8"},
+ {n:6, title:"Light and temperature as inputs", lec:"Lectures 1.9–1.10"},
+ {n:7, title:"Nutrients in agriculture", lec:"Lectures 1.11–1.13"},
+ {n:8, title:"Wind and fire", lec:"Lectures 1.14–1.15"}
 ];
 var C = [
  {t:1,lec:"1.1",title:"Conventional agriculture",
@@ -374,7 +380,73 @@ var C = [
   q:`On a farm, what's a carbon sink and what's a source?`, a:`Sink: growing vegetation. Sources: idle/plowed fields, livestock, and fossil-fuel inputs.`},
  {t:5,lec:"1.8",title:"Biogas",
   idea:`Instead of venting methane, capture it. Anaerobic digestion of manure and organic waste yields biogas (mostly methane) that can be burned for energy — turning a pollutant into a fuel.`,
-  q:`What is biogas and why does it help?`, a:`Methane captured from manure/organic waste via anaerobic digestion, burned for energy instead of vented.`}
+  q:`What is biogas and why does it help?`, a:`Methane captured from manure/organic waste via anaerobic digestion, burned for energy instead of vented.`},
+{t:6,lec:"1.9",title:"What incoming sunlight does",
+  idea:`Solar radiation is reflected by the atmosphere, absorbed by the atmosphere, or re-radiated from the land surface. It is never "adsorbed" by land, which is a different word meaning molecules sticking to a surface. UV, infrared and visible light all act on the agroecosystem.`,
+  q:`Which of those four options is the trick answer, and why?`, a:`"Adsorbed by the land surface." Radiation is ABSORBED. Adsorption is molecules adhering to a surface, a different process.`},
+ {t:6,lec:"1.9",title:"Light saturation point",
+  idea:`More light is not endlessly better. Above the saturation point, light levels become damaging to the plant.`,
+  q:`Is light above the saturation point good or harmful?`, a:`Harmful. Past saturation, extra light damages the plant.`},
+ {t:6,lec:"1.9",title:"Photoperiodism",
+  idea:`Plants respond to the length of UNINTERRUPTED DARKNESS in a 24-hour period, not to the light. It drives flowering, germination, pigmentation and leaf drop.`,
+  q:`Photoperiodism is a response to what exactly, and what does it affect?`, a:`To the length of uninterrupted darkness. It affects flowering, germination, pigmentation and leaf drop. The common exam trap is claiming it does NOT affect pigmentation.`},
+ {t:6,lec:"1.9",title:"Day-neutral vs short-day",
+  idea:`Roses, tomatoes and tropical foliage plants are day-neutral. Soybean is a short-day plant.`,
+  q:`Which of roses, tomatoes, tropical foliage and soybean is NOT day-neutral?`, a:`Soybean. It is a short-day plant.`},
+ {t:6,lec:"1.9",title:"C3 vs C4",
+  idea:`C3 plants fix carbon with RuBisCO. C4 plants use PEP carboxylase plus Kranz leaf anatomy, which makes them more water-efficient in hot, bright conditions. Sugarcane is C4. Peanut, soybean and rice are C3. Most grasses are C4.`,
+  q:`Which enzyme and anatomy separate C4 from C3?`, a:`C4 uses PEP carboxylase and Kranz anatomy. C3 relies on RuBisCO.`},
+ {t:6,lec:"1.9",title:"Managing light on purpose",
+  idea:`Intercropping C3 and C4 plants together, such as corn with beans or squash, is the textbook example of strategic light management. Monoculture is not.`,
+  q:`What counts as strategic light management?`, a:`Intercropping C3 and C4 plants, because they use light differently and do not compete for the same optimum.`},
+ {t:6,lec:"1.10",title:"Cold as a signal",
+  idea:`Cold temperatures can initiate dormancy. Temperature is not only a stressor, it is information the plant acts on.`,
+  q:`What can cold temperature initiate?`, a:`Dormancy.`},
+ {t:6,lec:"1.10",title:"Heat units",
+  idea:`Heat units, also called growing degree days, ARE useful for working out how long a cultivar needs to reach maturity in a given place. Watch the double negative in exam wording.`,
+  q:`Are heat units useful for predicting time to maturity?`, a:`Yes. The exam phrases it as "heat units are NOT useful", which is False.`},
+ {t:6,lec:"1.10",title:"Chilling hours and low-chill breeding",
+  idea:`Some crops need a set number of chilling hours. UF, UGA and USDA bred low-chill PEACH varieties so a high-chilling-requirement crop could grow in warm subtropical Florida.`,
+  q:`Which high-chill crop was bred to succeed in warm subtropical conditions?`, a:`Peaches. UF low-chill peach varieties.`},
+ {t:6,lec:"1.10",title:"Physiological vs structural adaptation",
+  idea:`A cultivar bred for high heat and high light may adapt physiologically by using the C4 pathway. Thicker stems and silver pubescence are STRUCTURAL adaptations, not physiological.`,
+  q:`Which adaptation to heat and light is physiological rather than structural?`, a:`The C4 photosynthetic pathway. Thicker stems and pubescence are structural.`},
+ {t:7,lec:"1.11",title:"Where nitrogen lives",
+  idea:`The largest natural reservoir of nitrogen is the ATMOSPHERE, roughly 78% of air as N2. Plants cannot use it in that form.`,
+  q:`Largest natural nitrogen reservoir?`, a:`The atmosphere, about 78% N2.`},
+ {t:7,lec:"1.11",title:"The form plants can actually use",
+  idea:`Nutrients must be in INORGANIC (mineral) form to be taken up. Nitrate is the form of nitrogen most readily taken up, and inorganic nitrogen is exactly what leaches, nitrate especially, because it is a mobile anion.`,
+  q:`Organic or inorganic form for uptake, and which N form leaches?`, a:`Inorganic. Nitrate is both the most readily taken up and the most leachable.`},
+ {t:7,lec:"1.11",title:"The path of nitrogen",
+  idea:`Mineralization, then nitrification, then plant uptake, then immobilization. Organic N becomes ammonium, ammonium becomes nitrate, the plant takes it, microbes lock some back up.`,
+  q:`Give the correct order of nitrogen through the ag system.`, a:`Mineralization, nitrification, plant uptake, immobilization.`},
+ {t:7,lec:"1.12",title:"Fixing nitrogen",
+  idea:`Lightning fixes nitrogen. In symbiotic biological fixation the plant supplies the bacteria with SUGARS and the bacteria supply fixed nitrogen back. Soybean is the classic example, a legume partnered with rhizobia.`,
+  q:`In symbiotic N fixation, what does the plant give the bacteria?`, a:`Sugars, meaning carbohydrates and carbon. The bacteria return fixed nitrogen.`},
+ {t:7,lec:"1.13",title:"Why phosphorus behaves differently",
+  idea:`The phosphorus cycle has NO meaningful atmospheric connection. It is sedimentary, unlike carbon and nitrogen. P also reacts with soil to form insoluble compounds, with iron and aluminium in acid soils and calcium in alkaline ones, so it is often present but unavailable.`,
+  q:`What makes the P cycle unlike the N and C cycles?`, a:`It is sedimentary with no atmospheric phase, and phosphorus readily fixes into insoluble compounds in soil.`},
+ {t:7,lec:"1.13",title:"Macro vs micro",
+  idea:`Nitrogen, phosphorus and potassium are macronutrients. Manganese is a micronutrient. Micronutrients are freed for uptake by mineralization of organic matter.`,
+  q:`Of phosphorus, nitrogen, manganese and potassium, which is a micronutrient?`, a:`Manganese.`},
+ {t:8,lec:"1.14",title:"Lodging",
+  idea:`Lodging is the permanent flattening of stems by wind and rain. You reduce it with short-stature cultivars, by mounding soil around the plant base, and with permanent windbreaks. Minimal tillage is a soil conservation practice and does NOT address lodging.`,
+  q:`Name three ways to minimise lodging, and the one that is not a lodging control.`, a:`Short cultivars, mounding soil at the base, permanent windbreaks. Minimal tillage is the odd one out.`},
+ {t:8,lec:"1.14",title:"Wind and the leaf surface",
+  idea:`A photosynthesising leaf draws down CO2 in the still boundary layer at its surface. Atmospheric mixing sweeps that depleted air away, so wind can INCREASE the CO2 available at the leaf.`,
+  q:`How does atmospheric mixing help photosynthesis?`, a:`It replenishes CO2 in the boundary layer at the leaf surface, which the leaf has depleted.`},
+ {t:8,lec:"1.14",title:"What windbreaks actually do",
+  idea:`Windbreaks decrease erosion by slowing wind at ground level. They also DECREASE transpiration rather than increasing it, and they do not drive leaching.`,
+  q:`What is the main documented benefit of a windbreak, and which distractors run backwards?`, a:`Decreased erosion. Transpiration goes DOWN not up, and leaching is not a windbreak effect.`},
+ {t:8,lec:"1.15",title:"Fire as a land-clearing tool",
+  idea:`Swidden agriculture, also called shifting cultivation or slash and burn, uses fire to clear land and leaves a flush of ash nutrients. In the wet tropics the consequence is INCREASED LEACHING, because rain drives those soluble ash nutrients past the root zone. Burning off organic matter also lowers the soil's moisture holding capacity.`,
+  q:`Why does burning to clear land in the wet tropics backfire?`, a:`Increased leaching. Soluble ash nutrients sit on bare soil and heavy rain washes them below the root zone, so fertility fades within a few seasons.`},
+ {t:8,lec:"1.15",title:"How fire kills soil life",
+  idea:`Ash is alkaline, so a burn pushes soil pH up sharply. Soil organisms are adapted to a narrow pH band, so the chemical shift kills them on top of the direct heat.`,
+  q:`By what chemical route does fire kill below-ground organisms?`, a:`By raising soil pH. Ash is alkaline and the swing is lethal to soil biota.`},
+ {t:8,lec:"1.15",title:"Fire regimes shape the ecosystem",
+  idea:`Florida's longleaf pine systems are maintained by frequent LOW INTENSITY SURFACE fires, which clear the understory while mature pines survive behind thick bark. Serotinous cones, which are resin-sealed and open only under intense heat, belong instead to systems shaped by rare CATASTROPHIC CROWN fires. The regime selects the adaptation.`,
+  q:`Which fire regime maintains Florida ecosystems, and which selects for serotinous cones?`, a:`Low intensity surface fires maintain Florida's pine systems. Serotinous cones belong to catastrophic crown fire regimes.`}
 ];
 
 /* ---------- diagrams (inline SVG) ---------- */
@@ -448,6 +520,51 @@ var LS='ecoALS3153_v1';
 var state=JSON.parse(localStorage.getItem(LS)||'{}');
 function save(){localStorage.setItem(LS,JSON.stringify(state));}
 C.forEach(function(c,i){c.id='c'+i;});
+
+
+/* ---------- lecture-by-lecture summary ---------- */
+var LECTITLES={
+ "1.1":"Tenets of Modern Agriculture","1.2":"Ecology, Natural and Managed Systems",
+ "1.3":"Carbon and Energy in Ecosystems","1.4":"Energy and Trophic Pyramids",
+ "1.5":"Energy Inputs in Agriculture","1.6":"Energy Input Efficiencies",
+ "1.7":"Altering the Carbon Cycle, Part 1","1.8":"Altering the Carbon Cycle, Part 2",
+ "1.9":"Light","1.10":"Temperature",
+ "1.11":"Nutrients in Ag, Nitrogen Part 1","1.12":"Nutrients in Ag, Nitrogen Part 2",
+ "1.13":"Nutrients in Ag, Phosphorus and Potassium",
+ "1.14":"Wind","1.15":"Fire"
+};
+var LECWEEK={"1.1":2,"1.2":2,"1.3":2,"1.4":2,"1.5":2,"1.6":2,"1.7":2,"1.8":2,
+ "1.9":3,"1.10":3,"1.11":3,"1.12":3,"1.13":3,"1.14":4,"1.15":4};
+function renderLectures(){
+ var host=document.getElementById('v-lectures'); if(!host) return; host.innerHTML='';
+ var intro=document.createElement('div'); intro.className='oneliner';
+ intro.style.marginBottom='14px';
+ intro.textContent='Every Module 1 lecture, with the facts most likely to be asked. Exam 01 covers all readings and all presentations in Module 1.';
+ host.appendChild(intro);
+ var order=Object.keys(LECTITLES);
+ var lastWeek=null;
+ order.forEach(function(L){
+   var cards=C.filter(function(c){return c.lec===L;});
+   if(!cards.length) return;
+   var wk=LECWEEK[L];
+   if(wk!==lastWeek){
+     var wh=document.createElement('div'); wh.className='themehead';
+     wh.innerHTML='<span class="n">W'+wk+'</span><h2>Week '+wk+'</h2>';
+     wh.style.marginTop='22px'; host.appendChild(wh); lastWeek=wk;
+   }
+   var sec=document.createElement('div'); sec.className='theme';
+   var head=document.createElement('div'); head.className='themehead';
+   head.innerHTML='<span class="n">'+L+'</span><h2>'+LECTITLES[L]+'</h2>';
+   sec.appendChild(head);
+   var grid=document.createElement('div'); grid.className='cards';
+   cards.forEach(function(c){
+     var card=document.createElement('div'); card.className='card';
+     card.innerHTML='<h3>'+c.title+'</h3><p>'+c.idea+'</p>';
+     grid.appendChild(card);
+   });
+   sec.appendChild(grid); host.appendChild(sec);
+ });
+}
 
 /* ---------- render guide ---------- */
 function renderGuide(){
@@ -875,7 +992,7 @@ document.querySelectorAll('.tab').forEach(function(t){
  });
 });
 
-renderGuide(); updateProg(); shuffleCards(); renderQuiz(); renderConnect(); renderCover();
+renderGuide(); renderLectures(); updateProg(); shuffleCards(); renderQuiz(); renderConnect(); renderCover();
 </script>
 </body>
 </html>
