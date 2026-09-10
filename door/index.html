@@ -1,0 +1,352 @@
+<title>Girona VIP Door</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,500&display=swap">
+<style>
+  :root{
+    --ink:#14181a;
+    --ground:#f4f2ed;
+    --surface:#ffffff;
+    --surface-2:#eae7df;
+    --line:#d5d0c5;
+    --muted:#6d6a62;
+    --accent:#a8631c;
+    --accent-soft:#f0dcc4;
+    --in:#2f6b46;
+    --in-soft:#dcebe0;
+    --focus:#a8631c;
+    --shadow:0 1px 2px rgba(20,24,26,.10);
+    --row-h:60px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ink:#ece8e0;
+      --ground:#121415;
+      --surface:#1b1e20;
+      --surface-2:#252a2c;
+      --line:#333a3d;
+      --muted:#95908a;
+      --accent:#e0a05a;
+      --accent-soft:#3a2c1c;
+      --in:#7cc79a;
+      --in-soft:#1e3128;
+      --focus:#e0a05a;
+      --shadow:0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#ece8e0;
+    --ground:#121415;
+    --surface:#1b1e20;
+    --surface-2:#252a2c;
+    --line:#333a3d;
+    --muted:#95908a;
+    --accent:#e0a05a;
+    --accent-soft:#3a2c1c;
+    --in:#7cc79a;
+    --in-soft:#1e3128;
+    --focus:#e0a05a;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:600px;margin:0 auto;padding:0 0 120px}
+
+  /* ---- sticky control deck ---- */
+  .deck{
+    position:sticky;top:0;z-index:20;
+    background:var(--ground);
+    border-bottom:1px solid var(--line);
+    padding:14px 16px 0;
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .titlerow{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+  h1{
+    font-family:Newsreader,Georgia,"Times New Roman",serif;
+    font-weight:500;font-size:22px;margin:0;letter-spacing:.01em;
+  }
+  .tally{
+    font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:15px;font-weight:600;color:var(--accent);
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+  }
+  .tally .of{color:var(--muted);font-weight:500}
+
+  .searchrow{display:flex;gap:8px}
+  input[type="search"]{
+    flex:1;min-width:0;
+    font:500 17px/1 "IBM Plex Sans",sans-serif;
+    color:var(--ink);background:var(--surface);
+    border:1px solid var(--line);border-radius:10px;
+    padding:13px 14px;appearance:none;
+  }
+  input[type="search"]::placeholder{color:var(--muted)}
+  .ghost{
+    font:600 14px/1 "IBM Plex Sans",sans-serif;
+    color:var(--muted);background:var(--surface);
+    border:1px solid var(--line);border-radius:10px;
+    padding:0 14px;cursor:pointer;white-space:nowrap;
+  }
+  .ghost[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+
+  /* ---- A-Z strip ---- */
+  .alpha{
+    display:flex;gap:4px;overflow-x:auto;
+    padding:2px 0 12px;margin:0 -16px;padding-left:16px;padding-right:16px;
+    scrollbar-width:none;
+  }
+  .alpha::-webkit-scrollbar{display:none}
+  .alpha button{
+    flex:0 0 auto;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:15px;font-weight:600;
+    min-width:38px;height:38px;
+    border-radius:9px;border:1px solid var(--line);
+    background:var(--surface);color:var(--ink);
+    cursor:pointer;padding:0;
+  }
+  .alpha button[disabled]{color:var(--muted);opacity:.35;cursor:default}
+  .alpha button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--ground)}
+
+  /* ---- list ---- */
+  ul{list-style:none;margin:0;padding:12px 16px;display:flex;flex-direction:column;gap:6px}
+  li button{
+    width:100%;min-height:var(--row-h);
+    display:flex;align-items:center;gap:14px;
+    text-align:left;cursor:pointer;
+    background:var(--surface);color:var(--ink);
+    border:1px solid var(--line);border-radius:12px;
+    padding:10px 14px;box-shadow:var(--shadow);
+    font:500 18px/1.25 "IBM Plex Sans",sans-serif;
+  }
+  li button .mark{
+    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+    border:2px solid var(--line);
+    display:grid;place-items:center;
+    font-size:15px;color:transparent;
+  }
+  li button .nm{flex:1;min-width:0;overflow-wrap:anywhere}
+  li[data-in="1"] button{background:var(--in-soft);border-color:var(--in)}
+  li[data-in="1"] .nm{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+  li[data-in="1"] .mark{background:var(--in);border-color:var(--in);color:var(--ground)}
+  li.flash button{animation:pop .28s ease}
+  @keyframes pop{50%{transform:scale(.975)}}
+  @media (prefers-reduced-motion:reduce){li.flash button{animation:none}}
+
+  .empty{padding:34px 16px;color:var(--muted);text-align:center;font-size:15px}
+
+  /* ---- bottom bar ---- */
+  .bar{
+    position:fixed;left:0;right:0;bottom:0;z-index:30;
+    background:var(--ground);border-top:1px solid var(--line);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    display:flex;gap:8px;justify-content:center;
+  }
+  .bar .ghost{height:44px;flex:1;max-width:190px;display:grid;place-items:center}
+  .bar .ghost[disabled]{opacity:.4;cursor:default}
+
+  /* ---- list editor ---- */
+  details{margin:22px 16px 0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+  summary{
+    cursor:pointer;padding:14px 16px;
+    font:600 14px/1 "IBM Plex Sans",sans-serif;color:var(--accent);
+    letter-spacing:.04em;text-transform:uppercase;
+  }
+  .edit{padding:0 16px 16px;display:flex;flex-direction:column;gap:10px}
+  .hint{font-size:13px;line-height:1.5;color:var(--muted);margin:0}
+  textarea{
+    width:100%;min-height:180px;resize:vertical;
+    font:400 15px/1.5 "IBM Plex Mono",ui-monospace,monospace;
+    color:var(--ink);background:var(--ground);
+    border:1px solid var(--line);border-radius:10px;padding:12px;
+  }
+  .save{
+    font:600 15px/1 "IBM Plex Sans",sans-serif;
+    background:var(--accent);color:var(--ground);
+    border:none;border-radius:10px;padding:14px;cursor:pointer;
+  }
+  .note{margin:16px;font-size:12.5px;line-height:1.55;color:var(--muted)}
+  :focus-visible{outline:2.5px solid var(--focus);outline-offset:2px}
+</style>
+
+<div class="wrap">
+  <div class="deck">
+    <div class="titlerow">
+      <h1>Door list</h1>
+      <div class="tally"><span id="cIn">0</span><span class="of"> / <span id="cAll">0</span> in</span></div>
+    </div>
+    <div class="searchrow">
+      <input type="search" id="q" placeholder="Type any part of a name" autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="ghost" id="hide" aria-pressed="false">Hide&nbsp;done</button>
+    </div>
+    <div class="alpha" id="alpha"></div>
+  </div>
+
+  <ul id="list"></ul>
+  <p class="empty" id="empty" hidden></p>
+
+  <details id="ed">
+    <summary>Guest list</summary>
+    <div class="edit">
+      <p class="hint">One name per line. Paste over everything below, then save. Your ticks are kept for names that stay on the list.</p>
+      <textarea id="ta" spellcheck="false" aria-label="Guest list, one name per line"></textarea>
+      <button class="save" id="saveBtn">Save list</button>
+    </div>
+  </details>
+
+  <p class="note">Saved on this phone only, and it keeps working with no signal once the page has loaded. Letters index the first name.</p>
+</div>
+
+<div class="bar">
+  <button class="ghost" id="undo" disabled>Undo</button>
+  <button class="ghost" id="reset">Reset ticks</button>
+</div>
+
+<script>
+(function(){
+  var K={n:'waf_door_names',c:'waf_door_checked',h:'waf_door_hide',seeded:'waf_door_seeded'};
+  var SEED=["Benki Piyãko","Jeff Liefer","Leopardo Yawa Bane","Maira Smith","Manuela Mischke-Reeds","Máximo Pérez Mozombite","Ninawa Huni Kuin","Nixiwaka Yawanawá","Pedro Caetano Goncalves Lacerda","Sandor Iron Rope","Ysso Truka"];
+
+  function load(k,f){ try{ var v=localStorage.getItem(k); return v===null?f:JSON.parse(v); }catch(e){ return f; } }
+  function save(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+
+  var names=load(K.n,null), seeded=load(K.seeded,false);
+  if(!names||!names.length){ names=SEED.slice(); seeded=true; save(K.seeded,true); }
+  var checked=load(K.c,[]); if(!Array.isArray(checked)) checked=[];
+  var inSet=new Set(checked);
+  var hideDone=load(K.h,false);
+  var letter=null, query='', undoStack=[];
+
+  var $=function(id){return document.getElementById(id);};
+  var listEl=$('list'), alphaEl=$('alpha'), emptyEl=$('empty'), qEl=$('q'),
+      hideEl=$('hide'), undoEl=$('undo'), taEl=$('ta'), edEl=$('ed');
+
+  function norm(s){
+    try{ return s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase(); }
+    catch(e){ return s.toLowerCase(); }
+  }
+  function initial(s){
+    var m=norm(s).match(/[a-z0-9]/);
+    return m?m[0].toUpperCase():'#';
+  }
+
+  function visible(){
+    var q=norm(query.trim());
+    return names.filter(function(n){
+      if(hideDone && inSet.has(n)) return false;
+      if(q){ return norm(n).indexOf(q)>-1; }
+      if(letter){ return initial(n)===letter; }
+      return true;
+    });
+  }
+
+  function renderAlpha(){
+    var counts={};
+    names.forEach(function(n){ var i=initial(n); counts[i]=(counts[i]||0)+1; });
+    var letters='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    if(counts['#']) letters.push('#');
+    var html='<button type="button" data-l="" '+(letter?'':'aria-pressed="true"')+'>All</button>';
+    letters.forEach(function(L){
+      var has=!!counts[L];
+      html+='<button type="button" data-l="'+L+'"'+(has?'':' disabled')+
+            (letter===L?' aria-pressed="true"':'')+'>'+L+'</button>';
+    });
+    alphaEl.innerHTML=html;
+  }
+
+  function render(){
+    var vis=visible();
+    listEl.innerHTML=vis.map(function(n,i){
+      var on=inSet.has(n);
+      return '<li data-in="'+(on?1:0)+'" data-i="'+i+'">'+
+             '<button type="button" aria-pressed="'+on+'">'+
+             '<span class="mark" aria-hidden="true">&#10003;</span>'+
+             '<span class="nm"></span></button></li>';
+    }).join('');
+    var lis=listEl.children;
+    for(var i=0;i<lis.length;i++){ lis[i].querySelector('.nm').textContent=vis[i]; }
+
+    if(!vis.length){
+      emptyEl.hidden=false;
+      emptyEl.textContent = names.length
+        ? (hideDone ? 'Everyone here is already in. Turn off Hide done to see them.' : 'No name matches that.')
+        : 'No list yet. Open Guest list below and paste one in.';
+    } else { emptyEl.hidden=true; }
+
+    $('cIn').textContent=names.filter(function(n){return inSet.has(n);}).length;
+    $('cAll').textContent=names.length;
+    undoEl.disabled=!undoStack.length;
+    renderAlpha();
+  }
+
+  function toggle(name,li){
+    if(inSet.has(name)) inSet.delete(name); else inSet.add(name);
+    undoStack.push(name); if(undoStack.length>40) undoStack.shift();
+    save(K.c,Array.from(inSet));
+    li.setAttribute('data-in', inSet.has(name)?'1':'0');
+    li.querySelector('button').setAttribute('aria-pressed', String(inSet.has(name)));
+    li.classList.add('flash');
+    setTimeout(function(){ li.classList.remove('flash'); if(hideDone) render(); else {
+      $('cIn').textContent=names.filter(function(n){return inSet.has(n);}).length;
+      undoEl.disabled=!undoStack.length;
+    } },200);
+  }
+
+  listEl.addEventListener('click',function(e){
+    var li=e.target.closest('li'); if(!li) return;
+    toggle(li.querySelector('.nm').textContent,li);
+  });
+
+  alphaEl.addEventListener('click',function(e){
+    var b=e.target.closest('button[data-l]'); if(!b||b.disabled) return;
+    letter=b.getAttribute('data-l')||null;
+    query=''; qEl.value='';
+    render();
+  });
+
+  qEl.addEventListener('input',function(){ query=qEl.value; if(query) letter=null; render(); });
+
+  hideEl.addEventListener('click',function(){
+    hideDone=!hideDone; save(K.h,hideDone);
+    hideEl.setAttribute('aria-pressed',String(hideDone));
+    render();
+  });
+
+  undoEl.addEventListener('click',function(){
+    var n=undoStack.pop(); if(!n) return;
+    if(inSet.has(n)) inSet.delete(n); else inSet.add(n);
+    save(K.c,Array.from(inSet)); render();
+  });
+
+  $('reset').addEventListener('click',function(){
+    if(!inSet.size) return;
+    if(!confirm('Clear every tick? The names stay.')) return;
+    inSet.clear(); undoStack=[]; save(K.c,[]); render();
+  });
+
+  $('saveBtn').addEventListener('click',function(){
+    var seen={}, out=[];
+    taEl.value.split('\n').forEach(function(l){
+      var t=l.replace(/^\s*[-*•\d.)\s]+/,'').trim();
+      if(t && !seen[t.toLowerCase()]){ seen[t.toLowerCase()]=1; out.push(t); }
+    });
+    names=out; save(K.n,names); save(K.seeded,false); seeded=false;
+    Array.from(inSet).forEach(function(n){ if(names.indexOf(n)<0) inSet.delete(n); });
+    save(K.c,Array.from(inSet));
+    letter=null; query=''; qEl.value=''; undoStack=[];
+    edEl.open=false; render();
+  });
+
+  taEl.value=names.join('\n');
+  hideEl.setAttribute('aria-pressed',String(hideDone));
+  if(seeded){
+    edEl.open=true;
+    edEl.querySelector('.hint').textContent='These are forum speakers, standing in until you paste the real list. One name per line, paste over everything below, then save.';
+  }
+  render();
+})();
+</script>
