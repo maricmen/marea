@@ -230,6 +230,8 @@ input[type=range]{width:100%;accent-color:var(--clay);height:26px}
 @media(max-width:520px){.ctile{font-size:12.5px;padding:10px 11px}.conncol#connL .ctile{font-size:13.5px}.hgroup h1{font-size:26px}}
 
 .foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic}
+
+.storybar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px}.storybtn{font:600 13px/1 var(--sans);letter-spacing:.3px;padding:9px 14px;border-radius:999px;border:1.5px solid var(--clay);background:var(--card);color:var(--clay-d);cursor:pointer}.storybtn[aria-pressed="true"]{background:var(--clay);color:#fff}.storyhint{font:italic 13px/1.3 var(--serif);color:var(--ink3)}.storywrap{display:none;margin:8px 0 6px;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}.storywrap svg{display:block;width:100%;height:auto}#v-overview.story .storywrap{display:block}#v-overview.story .diagramwrap{display:none}
 </style>
 <noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
 </head>
@@ -268,6 +270,7 @@ input[type=range]{width:100%;accent-color:var(--clay);height:26px}
   <!-- ============ BIG PICTURE ============ -->
   <div class="view on" id="v-overview">
     <div class="oneliner">Two elements, two stories. <b>Nitrogen</b> is run by biology: microbes shuffle it between four pools, and the forms plants like best (nitrate) are the forms that leave fastest. <b>Phosphorus</b> is run by chemistry: it is an anion that sticks to minerals, so the fight is not about losing it but about prying it loose. Every card in this guide is a piece of one of those two stories.</div>
+    <div class="storybar"><button class="storybtn" id="storybtn" type="button" aria-pressed="false">Story view: off</button><span class="storyhint">the same two cycles, read the way the forum reads wisdom</span></div>
 
     <h2 class="sec">The nitrogen story, as a picture</h2>
     <div class="diagramwrap">
@@ -325,6 +328,135 @@ input[type=range]{width:100%;accent-color:var(--clay);height:26px}
         <text class="plabel" data-k="harvest" x="392" y="436" fill="#8c4a2b">harvest</text>
       </svg>
     </div>
+    <div class="storywrap"><svg class="wsvg" viewBox="0 0 1000 1250" role="img">
+<defs>
+  <marker id="ws-m-gain-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#5f7d3a"/></marker>
+  <marker id="ws-m-amber-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#b8862a"/></marker>
+  <marker id="ws-m-loss-n" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#b0463b"/></marker>
+  <filter id="ws-soft-n" x="-5%" y="-5%" width="110%" height="120%">
+    <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#3c2c18" flood-opacity="0.13"/>
+  </filter>
+</defs>
+<style>
+  .wsvg .ws-t{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; fill:#2c2417; }
+  .wsvg .ws-term{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:600; letter-spacing:0.4px; }
+  .wsvg .ws-wis{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:15px; fill:#6c5d45; }
+  .wsvg .ws-bt{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:19px; font-weight:700; fill:#2c2417; }
+  .wsvg .ws-bs{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13.5px; fill:#6c5d45; }
+  .wsvg .ws-bw{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:14.5px; fill:#6c5d45; }
+  .wsvg .ws-band{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; fill:#93856a; }
+  .wsvg .ws-h1{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-size:34px; fill:#2c2417; }
+  .wsvg .ws-h2{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-size:22px; fill:#2c2417; }
+  .wsvg .ws-h2i{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:22px; fill:#6c5d45; }
+  .wsvg .ws-note{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:14px; fill:#93856a; }
+  .wsvg .ws-foot{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; fill:#6c5d45; }
+</style>
+<rect x="0" y="0" width="1000" height="1250" fill="#f2eadb"/><g transform="translate(0,0)">
+<text x="500" y="46" text-anchor="middle" class="ws-h2">Nitrogen: <tspan class="ws-h2i">a sky element on a fast loop. The work is holding it.</tspan></text>
+<g transform="translate(0,70)">
+<rect x="0" y="0" width="1000" height="330" fill="#e4edf1"/>
+<rect x="0" y="330" width="1000" height="850" fill="#efe4d0"/>
+<line x1="0" y1="330" x2="1000" y2="330" stroke="#8c4a2b" stroke-width="2"/>
+<g stroke="#6d7b41" stroke-width="2" stroke-linecap="round">
+<line x1="0" y1="330" x2="4" y2="316"/>
+<line x1="26" y1="330" x2="30" y2="316"/>
+<line x1="52" y1="330" x2="56" y2="316"/>
+<line x1="78" y1="330" x2="82" y2="316"/>
+<line x1="104" y1="330" x2="108" y2="316"/>
+<line x1="130" y1="330" x2="134" y2="316"/>
+<line x1="156" y1="330" x2="160" y2="316"/>
+<line x1="182" y1="330" x2="186" y2="316"/>
+<line x1="208" y1="330" x2="212" y2="316"/>
+<line x1="234" y1="330" x2="238" y2="316"/>
+<line x1="260" y1="330" x2="264" y2="316"/>
+<line x1="286" y1="330" x2="290" y2="316"/>
+<line x1="312" y1="330" x2="316" y2="316"/>
+<line x1="650" y1="330" x2="654" y2="316"/>
+<line x1="676" y1="330" x2="680" y2="316"/>
+<line x1="702" y1="330" x2="706" y2="316"/>
+<line x1="728" y1="330" x2="732" y2="316"/>
+<line x1="754" y1="330" x2="758" y2="316"/>
+<line x1="780" y1="330" x2="784" y2="316"/>
+<line x1="806" y1="330" x2="810" y2="316"/>
+<line x1="832" y1="330" x2="836" y2="316"/>
+<line x1="858" y1="330" x2="862" y2="316"/>
+<line x1="884" y1="330" x2="888" y2="316"/>
+<line x1="910" y1="330" x2="914" y2="316"/>
+<line x1="936" y1="330" x2="940" y2="316"/>
+<line x1="962" y1="330" x2="966" y2="316"/>
+<line x1="988" y1="330" x2="992" y2="316"/>
+</g>
+<text x="26" y="40" class="ws-band">SKY</text>
+<text x="26" y="364" class="ws-band">SOIL</text>
+<text x="974" y="1160" text-anchor="end" class="ws-note">a fast loop: days to seasons</text>
+<rect x="340.0" y="62.0" width="320" height="96" rx="14" fill="#f3f7f8" stroke="#4d7a8c" stroke-width="1.5" filter="url(#ws-soft-n)"/>
+<text x="500" y="95.0" text-anchor="middle" class="ws-bt">N₂ in the air</text>
+<text x="500" y="116.0" text-anchor="middle" class="ws-bs">two atoms, a triple bond</text>
+<text x="500" y="137.0" text-anchor="middle" class="ws-bw">the truth that is everywhere, usable by no one</text>
+<rect x="360.0" y="282.0" width="280" height="96" rx="14" fill="#f4f6ec" stroke="#6d7b41" stroke-width="1.5" filter="url(#ws-soft-n)"/>
+<text x="500" y="315.0" text-anchor="middle" class="ws-bt">Plant N</text>
+<text x="500" y="336.0" text-anchor="middle" class="ws-bs">protein, chlorophyll, DNA</text>
+<text x="500" y="357.0" text-anchor="middle" class="ws-bw">truth becomes a form</text>
+<rect x="345.0" y="712.0" width="250" height="96" rx="14" fill="#fbf6ea" stroke="#c69537" stroke-width="1.5" filter="url(#ws-soft-n)"/>
+<text x="470" y="745.0" text-anchor="middle" class="ws-bt">NH₄⁺  ammonium</text>
+<text x="470" y="766.0" text-anchor="middle" class="ws-bs">clings to the clay</text>
+<text x="470" y="787.0" text-anchor="middle" class="ws-bw">held: it does not wander</text>
+<rect x="665.0" y="712.0" width="250" height="96" rx="14" fill="#fbf6ea" stroke="#c69537" stroke-width="1.5" filter="url(#ws-soft-n)"/>
+<text x="790" y="745.0" text-anchor="middle" class="ws-bt">NO₃⁻  nitrate</text>
+<text x="790" y="766.0" text-anchor="middle" class="ws-bs">moves with the water</text>
+<text x="790" y="787.0" text-anchor="middle" class="ws-bw">free: quick to reach, quick to lose</text>
+<rect x="100.0" y="945.0" width="300" height="110" rx="14" fill="#efe6d4" stroke="#b0623b" stroke-width="1.5" filter="url(#ws-soft-n)"/>
+<text x="250" y="985.0" text-anchor="middle" class="ws-bt">Organic N</text>
+<text x="250" y="1006.0" text-anchor="middle" class="ws-bs">living things and the dead</text>
+<text x="250" y="1027.0" text-anchor="middle" class="ws-bw">the store: most of the soil's N</text>
+<rect x="665.0" y="1055.0" width="250" height="70" rx="14" fill="#eef2f4" stroke="#365a69" stroke-width="1.5" filter="url(#ws-soft-n)"/>
+<text x="790" y="1085.5" text-anchor="middle" class="ws-bt">Groundwater</text>
+<text x="790" y="1106.5" text-anchor="middle" class="ws-bw">real, but out of reach</text>
+<text x="250" y="1085" text-anchor="middle" class="ws-note">C:N above about 25:1, the soil takes;</text>
+<text x="250" y="1104" text-anchor="middle" class="ws-note">below it, the soil gives</text>
+<path d="M 500 158 L 500 280" fill="none" stroke="#5f7d3a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-gain-n)"/>
+<text x="482" y="195" text-anchor="end" class="ws-term" fill="#5f7d3a">BIOLOGICAL FIXATION</text>
+<text x="482" y="215" text-anchor="end" class="ws-wis">in the root nodule:</text>
+<text x="482" y="235" text-anchor="end" class="ws-wis">enters through the</text>
+<text x="482" y="255" text-anchor="end" class="ws-wis">relationship,</text>
+<text x="482" y="275" text-anchor="end" class="ws-wis">sugar for ammonium</text>
+<path d="M 340 130 Q 40 430 410 712" fill="none" stroke="#5f7d3a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-gain-n)"/>
+<text x="280" y="470" text-anchor="start" class="ws-term" fill="#5f7d3a">HABER-BOSCH FERTILIZER</text>
+<text x="280" y="490" text-anchor="start" class="ws-wis">the industrial door:</text>
+<text x="280" y="510" text-anchor="start" class="ws-wis">no relationship, and it leaks</text>
+<path d="M 640 158 Q 700 440 730 712" fill="none" stroke="#5f7d3a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-gain-n)"/>
+<text x="705" y="400" text-anchor="start" class="ws-term" fill="#5f7d3a">LIGHTNING</text>
+<text x="705" y="420" text-anchor="start" class="ws-wis">the rare, violent</text>
+<text x="705" y="440" text-anchor="start" class="ws-wis">revelation</text>
+<path d="M 500 712 L 490 378" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-n)"/>
+<path d="M 780 712 L 560 378" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-n)"/>
+<text x="592" y="575" text-anchor="middle" class="ws-term" fill="#b8862a">PLANT UPTAKE</text>
+<text x="592" y="595" text-anchor="middle" class="ws-wis">truth takes a form</text>
+<path d="M 230 945 Q 300 860 400 808" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-n)"/>
+<text x="290" y="828" text-anchor="end" class="ws-term" fill="#b8862a">MINERALIZATION</text>
+<text x="290" y="848" text-anchor="end" class="ws-wis">the dead release:</text>
+<text x="290" y="868" text-anchor="end" class="ws-wis">elders into teaching</text>
+<path d="M 540 808 Q 560 930 400 990" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-n)"/>
+<text x="560" y="890" text-anchor="start" class="ws-term" fill="#b8862a">IMMOBILIZATION</text>
+<text x="560" y="910" text-anchor="start" class="ws-wis">the living absorb first</text>
+<path d="M 596 760 L 664 760" fill="none" stroke="#b8862a" stroke-width="3.6" stroke-linecap="round" marker-end="url(#ws-m-amber-n)"/>
+<text x="600" y="676" text-anchor="middle" class="ws-term" fill="#b8862a">NITRIFICATION</text>
+<text x="600" y="696" text-anchor="middle" class="ws-wis">held to free: the mixed blessing</text>
+<path d="M 880 712 C 930 450 960 200 665 110" fill="none" stroke="#b0463b" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-loss-n)"/>
+<text x="905" y="490" text-anchor="end" class="ws-term" fill="#b0463b">DENITRIFICATION</text>
+<text x="905" y="510" text-anchor="end" class="ws-wis">waterlogged, no oxygen:</text>
+<text x="905" y="530" text-anchor="end" class="ws-wis">back to the common pool</text>
+<path d="M 345 745 C 200 700 120 400 150 150" fill="none" stroke="#b0463b" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-loss-n)"/>
+<text x="40" y="78" text-anchor="start" class="ws-term" fill="#b0463b">NH₃ VOLATILIZATION</text>
+<text x="40" y="98" text-anchor="start" class="ws-wis">announced too loudly at a hot,</text>
+<text x="40" y="118" text-anchor="start" class="ws-wis">alkaline surface: it evaporates</text>
+<path d="M 790 808 L 790 1053" fill="none" stroke="#b0463b" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-loss-n)"/>
+<text x="775" y="950" text-anchor="end" class="ws-term" fill="#b0463b">NITRATE LEACHING</text>
+<text x="775" y="970" text-anchor="end" class="ws-wis">carried down with the water</text>
+</g></g></svg></div>
     <div class="legend">
       <span><i style="background:#5f7d3a"></i> gain (new N in)</span>
       <span><i style="background:#8a7a55"></i> internal shuffle (nothing lost)</span>
@@ -399,6 +531,112 @@ input[type=range]{width:100%;accent-color:var(--clay);height:26px}
         <text class="plabel" data-k="pharvest" x="392" y="444" fill="#8c4a2b">harvest</text>
       </svg>
     </div>
+    <div class="storywrap"><svg class="wsvg" viewBox="0 0 1000 1190" role="img">
+<defs>
+  <marker id="ws-m-gain-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#5f7d3a"/></marker>
+  <marker id="ws-m-amber-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#b8862a"/></marker>
+  <marker id="ws-m-loss-p" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="#b0463b"/></marker>
+  <filter id="ws-soft-p" x="-5%" y="-5%" width="110%" height="120%">
+    <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#3c2c18" flood-opacity="0.13"/>
+  </filter>
+</defs>
+<style>
+  .wsvg .ws-t{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; fill:#2c2417; }
+  .wsvg .ws-term{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14.5px; font-weight:600; letter-spacing:0.4px; }
+  .wsvg .ws-wis{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:15px; fill:#6c5d45; }
+  .wsvg .ws-bt{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:19px; font-weight:700; fill:#2c2417; }
+  .wsvg .ws-bs{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13.5px; fill:#6c5d45; }
+  .wsvg .ws-bw{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:14.5px; fill:#6c5d45; }
+  .wsvg .ws-band{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; fill:#93856a; }
+  .wsvg .ws-h1{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-size:34px; fill:#2c2417; }
+  .wsvg .ws-h2{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-size:22px; fill:#2c2417; }
+  .wsvg .ws-h2i{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:22px; fill:#6c5d45; }
+  .wsvg .ws-note{ font-family:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif; font-style:italic; font-size:14px; fill:#93856a; }
+  .wsvg .ws-foot{ font-family:'Avenir Next','Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; fill:#6c5d45; }
+</style>
+<rect x="0" y="0" width="1000" height="1190" fill="#f2eadb"/><g transform="translate(0,0)">
+<text x="500" y="46" text-anchor="middle" class="ws-h2">Phosphorus: <tspan class="ws-h2i">a rock element on a slow descent. The work is lifting it.</tspan></text>
+<g transform="translate(0,70)">
+<rect x="0" y="0" width="1000" height="200" fill="#e2dbd0"/>
+<rect x="0" y="200" width="1000" height="720" fill="#efe4d0"/>
+<rect x="0" y="920" width="1000" height="200" fill="#dfe6ea"/>
+<line x1="0" y1="200" x2="1000" y2="200" stroke="#8c4a2b" stroke-width="2"/>
+<line x1="0" y1="920" x2="1000" y2="920" stroke="#365a69" stroke-width="2"/>
+<text x="26" y="40" class="ws-band">ROCK</text>
+<text x="26" y="234" class="ws-band">SOIL</text>
+<text x="26" y="954" class="ws-band">SEA</text>
+<text x="974" y="40" text-anchor="end" class="ws-note">no gas form: it never goes up on its own</text>
+<text x="974" y="1100" text-anchor="end" class="ws-note">a slow descent: millions of years</text>
+<rect x="330.0" y="52.0" width="340" height="96" rx="14" fill="#ece6dc" stroke="#573f2c" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="500" y="85.0" text-anchor="middle" class="ws-bt">Apatite in the rock</text>
+<text x="500" y="106.0" text-anchor="middle" class="ws-bs">the parent material</text>
+<text x="500" y="127.0" text-anchor="middle" class="ws-bw">wisdom from the ground, the ancestors, the bone</text>
+<rect x="360.0" y="252.0" width="280" height="96" rx="14" fill="#f4f6ec" stroke="#6d7b41" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="500" y="285.0" text-anchor="middle" class="ws-bt">Plant P</text>
+<text x="500" y="306.0" text-anchor="middle" class="ws-bs">energy (ATP), DNA, membranes</text>
+<text x="500" y="327.0" text-anchor="middle" class="ws-bw">the form it takes</text>
+<rect x="360.0" y="512.0" width="280" height="96" rx="14" fill="#fbf6ea" stroke="#c69537" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="500" y="545.0" text-anchor="middle" class="ws-bt">Soil solution P</text>
+<text x="500" y="566.0" text-anchor="middle" class="ws-bs">H₂PO₄⁻, HPO₄²⁻</text>
+<text x="500" y="587.0" text-anchor="middle" class="ws-bw">the little that is available right now</text>
+<rect x="55.0" y="512.0" width="250" height="96" rx="14" fill="#fbf6ea" stroke="#c69537" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="180" y="545.0" text-anchor="middle" class="ws-bt">Adsorbed P</text>
+<text x="180" y="566.0" text-anchor="middle" class="ws-bs">held on clay and oxide surfaces</text>
+<text x="180" y="587.0" text-anchor="middle" class="ws-bw">held, but it can come back</text>
+<rect x="670.0" y="505.0" width="300" height="110" rx="14" fill="#efe6d4" stroke="#b0623b" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="820" y="545.0" text-anchor="middle" class="ws-bt">Precipitated P</text>
+<text x="820" y="566.0" text-anchor="middle" class="ws-bs">with Fe and Al in acid soil, Ca in alkaline</text>
+<text x="820" y="587.0" text-anchor="middle" class="ws-bw">buried for ages</text>
+<rect x="110.0" y="752.0" width="280" height="96" rx="14" fill="#efe6d4" stroke="#b0623b" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="250" y="785.0" text-anchor="middle" class="ws-bt">Organic P</text>
+<text x="250" y="806.0" text-anchor="middle" class="ws-bs">living things and the dead</text>
+<text x="250" y="827.0" text-anchor="middle" class="ws-bw">the store</text>
+<rect x="625.0" y="752.0" width="270" height="96" rx="14" fill="#f4f6ec" stroke="#6d7b41" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="760" y="785.0" text-anchor="middle" class="ws-bt">Manure, bone, compost</text>
+<text x="760" y="806.0" text-anchor="middle" class="ws-bs">organic inputs</text>
+<text x="760" y="827.0" text-anchor="middle" class="ws-bw">life lifting it back up</text>
+<rect x="310.0" y="980.0" width="380" height="80" rx="14" fill="#e9eef1" stroke="#365a69" stroke-width="1.5" filter="url(#ws-soft-p)"/>
+<text x="500" y="1015.5" text-anchor="middle" class="ws-bt">Sediment and the sea</text>
+<text x="500" y="1036.5" text-anchor="middle" class="ws-bw">down and out, for millions of years</text>
+<path d="M 620 148 Q 720 330 600 512" fill="none" stroke="#5f7d3a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-gain-p)"/>
+<text x="700" y="250" text-anchor="start" class="ws-term" fill="#5f7d3a">WEATHERING</text>
+<text x="700" y="270" text-anchor="start" class="ws-wis">the rock gives, slowly</text>
+<path d="M 540 512 L 540 348" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-p)"/>
+<text x="520" y="415" text-anchor="end" class="ws-term" fill="#b8862a">PLANT UPTAKE</text>
+<text x="520" y="435" text-anchor="end" class="ws-wis">truth takes a form</text>
+<path d="M 120 512 Q 200 380 420 348" fill="none" stroke="#5f7d3a" stroke-width="3.2" stroke-linecap="round" stroke-dasharray="7 7" marker-end="url(#ws-m-gain-p)"/>
+<text x="40" y="290" text-anchor="start" class="ws-term" fill="#5f7d3a">AMF, MYCORRHIZAL TRANSFER</text>
+<text x="40" y="310" text-anchor="start" class="ws-wis">the network that carries ground</text>
+<text x="40" y="330" text-anchor="start" class="ws-wis">wisdom to roots that cannot dig</text>
+<path d="M 360 545 L 306 545" fill="none" stroke="#b8862a" stroke-width="2.8" stroke-linecap="round" marker-end="url(#ws-m-amber-p)"/>
+<path d="M 306 575 L 360 575" fill="none" stroke="#b8862a" stroke-width="2.8" stroke-linecap="round" marker-end="url(#ws-m-amber-p)"/>
+<text x="333" y="490" text-anchor="middle" class="ws-term" fill="#b8862a">ADSORPTION ⇄ DESORPTION</text>
+<text x="180" y="640" text-anchor="middle" class="ws-wis">held on a surface: it can come back</text>
+<path d="M 640 545 L 694 545" fill="none" stroke="#b0463b" stroke-width="2.8" stroke-linecap="round" marker-end="url(#ws-m-loss-p)"/>
+<path d="M 694 575 L 640 575" fill="none" stroke="#b8862a" stroke-width="2.8" stroke-linecap="round" marker-end="url(#ws-m-amber-p)"/>
+<text x="645" y="490" text-anchor="start" class="ws-term" fill="#b0463b">PRECIPITATION ⇄ DISSOLUTION</text>
+<text x="940" y="648" text-anchor="end" class="ws-wis">buried: gone for ages,</text>
+<text x="940" y="668" text-anchor="end" class="ws-wis">unless the pH lets go</text>
+<path d="M 200 752 Q 240 640 440 608" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-p)"/>
+<text x="60" y="690" text-anchor="start" class="ws-term" fill="#b8862a">MINERALIZATION</text>
+<text x="60" y="710" text-anchor="start" class="ws-wis">the dead give</text>
+<path d="M 520 608 Q 520 700 360 752" fill="none" stroke="#b8862a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-amber-p)"/>
+<text x="560" y="700" text-anchor="start" class="ws-term" fill="#b8862a">IMMOBILIZATION</text>
+<text x="560" y="720" text-anchor="start" class="ws-wis">the living take first</text>
+<path d="M 760 752 Q 760 660 600 610" fill="none" stroke="#5f7d3a" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-gain-p)"/>
+<text x="772" y="692" text-anchor="start" class="ws-term" fill="#5f7d3a">ORGANIC INPUTS</text>
+<text x="772" y="712" text-anchor="start" class="ws-wis">the staircase up:</text>
+<text x="772" y="732" text-anchor="start" class="ws-wis">only life lifts it</text>
+<path d="M 150 848 Q 130 950 320 1000" fill="none" stroke="#b0463b" stroke-width="3.2" stroke-linecap="round" marker-end="url(#ws-m-loss-p)"/>
+<text x="195" y="878" text-anchor="start" class="ws-term" fill="#b0463b">EROSION AND RUNOFF</text>
+<text x="195" y="898" text-anchor="start" class="ws-wis">down and out, with the soil itself</text>
+<path d="M 955 615 L 955 905" fill="none" stroke="#b0463b" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3 8" marker-end="url(#ws-m-loss-p)"/>
+<text x="935" y="872" text-anchor="end" class="ws-term" fill="#b0463b">OVER GEOLOGIC TIME</text>
+<text x="935" y="892" text-anchor="end" class="ws-wis">the buried rock returns to the sea</text>
+</g></g></svg></div>
     <div class="legend">
       <span><i style="background:#5f7d3a"></i> gain (P in)</span>
       <span><i style="background:#8a7a55"></i> internal shuffle (P still there, just locked)</span>
@@ -1354,6 +1592,9 @@ var LS='nutSWS4116_v2';
 var _mem={};
 function _lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _mem)?_mem[k]:null;}}
 function _lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
+
+/* story view toggle (wisdom-cycle drawings) */
+(function(){try{var ov=document.getElementById("v-overview"),b=document.getElementById("storybtn");if(!ov||!b)return;function set(on){ov.classList.toggle("story",!!on);b.setAttribute("aria-pressed",on?"true":"false");b.textContent="Story view: "+(on?"on":"off");_lsSet("nut_story",on?"1":"0");}var q=/[?&]story=1/.test(location.search);set(q||_lsGet("nut_story")==="1");b.addEventListener("click",function(){set(!ov.classList.contains("story"));});}catch(e){}})();
 var state={};
 try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
 function save(){try{_lsSet(LS,JSON.stringify(state));}catch(e){}}
