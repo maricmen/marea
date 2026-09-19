@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ecology Field Guide II, Module 2 (ALS 3153)</title>
+<style>
+:root{
+  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea; --card2:#f5eeddff;
+  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
+  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
+  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#7c95a3; --sky-d:#4a6b78;
+  --line:#d9ccb0; --line2:#c7b797;
+  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #e4e9e6 0%, transparent 60%),
+    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+  color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding:0 16px 60px; min-height:100vh;
+}
+.wrap{max-width:940px;margin:0 auto}
+.top{padding:26px 4px 6px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.crest{width:52px;height:52px;flex:none}
+.hgroup h1{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0;letter-spacing:.2px;color:var(--soil)}
+.hgroup .sub{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.09em;margin-top:6px}
+.hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:64ch}
+.prog{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progbar{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
+.progfill{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--moss));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.progtxt{font-size:13px;color:var(--ink2)}
+.progtxt b{color:var(--soil);font-size:15px}
+.tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 18px;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--line2)}
+.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+.view{display:none;animation:fade .25s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* big picture */
+.bigpic{margin-top:22px}
+.oneliner{font-family:var(--serif);font-size:18px;line-height:1.42;color:var(--soil);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sky-d);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:0 4px 18px}
+.mapwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 8px;margin:0 4px 8px;overflow-x:auto}
+.mapwrap svg{max-width:440px;margin:0 auto}
+.mapcap{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink3);margin:0 10px 22px;text-align:center;line-height:1.4}
+.bigtext p{font-size:14.5px;color:var(--ink2);line-height:1.6;margin:0 4px 13px;max-width:66ch}
+.bigtext b{color:var(--soil);font-family:var(--serif)}
+/* week strip */
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 4px 20px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer;transition:.15s}
+.wk:hover{border-color:var(--line2)}
+.wk.now{border-color:var(--sky-d);box-shadow:0 0 0 2px rgba(74,107,120,.18),var(--shadow)}
+.wk h3{font-family:var(--serif);font-size:17px;margin:0;color:var(--soil)}
+.wk .wlecs{font-size:11.5px;color:var(--ink3)}
+.wk .badge{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px}
+.wk .due{font-size:12px;color:var(--ink2);line-height:1.3}
+.wk .due b{color:var(--clay-d)}
+.ring{width:64px;height:64px}
+.ring .bg{fill:none;stroke:var(--paper2);stroke-width:7}
+.ring .fg{fill:none;stroke:var(--moss);stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .5s}
+.ring text{font-size:15px;font-family:var(--serif);fill:var(--soil);font-weight:700}
+@media(max-width:560px){.weeks{grid-template-columns:1fr 1fr 1fr;gap:8px}.wk{padding:10px 6px 10px}.wk h3{font-size:14px}.wk .due{font-size:11px}.ring{width:52px;height:52px}.wk .badge{font-size:10px;padding:2px 7px}}
+/* lectures */
+.wkhead{display:flex;align-items:baseline;gap:10px;margin:26px 4px 12px}
+.wkhead .n{font-family:var(--serif);font-size:13px;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px;flex:none;font-weight:700}
+.wkhead h2{font-family:var(--serif);font-size:20px;margin:0;color:var(--soil)}
+.wkhead .wdue{font-size:12.5px;color:var(--ink3);margin-left:auto}
+details.lec{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;overflow:hidden}
+details.lec>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:12px}
+details.lec>summary::-webkit-details-marker{display:none}
+details.lec>summary .num{font-family:var(--serif);font-size:13px;color:#fff;background:var(--clay);border-radius:8px;padding:3px 8px;flex:none;font-weight:700}
+details.lec>summary .ttl{font-family:var(--serif);font-size:17px;color:var(--ink);line-height:1.2;flex:1}
+details.lec>summary .meta{font-size:11.5px;color:var(--ink3);white-space:nowrap}
+details.lec>summary .chev{width:18px;height:18px;flex:none;transition:transform .2s;color:var(--ink3)}
+details.lec[open]>summary .chev{transform:rotate(90deg)}
+details.lec>summary .done{width:22px;height:22px;flex:none;border-radius:6px;border:1.5px solid var(--line2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;background:var(--paper)}
+details.lec.studied>summary .done{background:var(--moss);border-color:var(--moss)}
+details.lec.studied>summary .ttl{color:var(--moss-d)}
+.lbody{padding:2px 16px 16px;border-top:1px dashed var(--line2)}
+.gist{font-family:var(--serif);font-size:16px;line-height:1.45;color:var(--soil);margin:14px 0 12px}
+.sec{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--clay-d);font-weight:700;margin:16px 0 8px}
+.line{margin:0;padding-left:18px;color:var(--ink2);font-size:14px;line-height:1.5}
+.line li{margin-bottom:5px}
+.ask{margin:0;padding-left:18px;color:var(--ink2);font-size:13.5px;line-height:1.45}
+.ask li{margin-bottom:4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 10px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sky);opacity:.55}
+.card.m1::before{background:var(--ink3);opacity:.4}
+.card.m2::before{background:var(--wheat)}
+.card.m3::before{background:var(--moss)}
+.card h3{font-family:var(--serif);font-size:16px;margin:0 0 6px;color:var(--ink);line-height:1.2}
+.card p{margin:0 0 8px;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.card .fact{font-size:12.5px;color:var(--soil);background:#efe6d1;border-radius:9px;padding:6px 9px;margin:0 0 10px;line-height:1.4}
+.card .fact b{color:var(--clay-d)}
+.mastery{display:flex;gap:6px;border-top:1px dashed var(--line2);padding-top:10px;margin-top:2px}
+.mbtn{flex:1;font:inherit;font-size:11px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink3);border-radius:9px;padding:6px 4px;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1}
+.mbtn .ic{font-size:14px}
+.mbtn:hover{border-color:var(--line2)}
+.mbtn.on1{background:#efe7d8;color:var(--ink2);border-color:var(--line2)}
+.mbtn.on2{background:#f3e7c6;color:#8a6a1e;border-color:#dcc487}
+.mbtn.on3{background:#e2e7cf;color:var(--moss-d);border-color:#b6c188}
+.studybtn{font:inherit;font-weight:600;font-size:13.5px;border:1px solid var(--moss);background:var(--moss);color:#f6f2e2;border-radius:99px;padding:10px 18px;cursor:pointer;margin-top:16px}
+.studybtn.off{background:var(--card);color:var(--moss-d)}
+/* mini quiz + quiz */
+.quiz{margin-top:8px;display:flex;flex-direction:column;gap:12px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.q .qh{font-family:var(--serif);font-size:15.5px;color:var(--ink);margin:0 0 10px;line-height:1.35}
+.q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700;margin-bottom:6px}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
+.opt:hover{border-color:var(--line2)}
+.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt:disabled{cursor:default}
+.qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
+.qexp.show{display:block}
+.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;margin:18px 4px 6px;flex-wrap:wrap;align-items:center}
+.filters .fl{font-size:12px;color:var(--ink3);margin-right:4px}
+.fbtn{font:inherit;font-weight:600;font-size:12.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:6px 14px;cursor:pointer}
+.fbtn.on{background:var(--sky-d);color:#fff;border-color:var(--sky-d)}
+/* flashcards */
+.deckwrap{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.flash{width:100%;max-width:460px;height:290px;perspective:1400px;cursor:pointer}
+.flinner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flash.flip .flinner{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:28px 26px;text-align:center}
+.ffront{background:var(--card)}
+.fback{background:linear-gradient(180deg,#e6ebe6,#dfe6dd);transform:rotateY(180deg)}
+.fface .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin-bottom:14px}
+.fface .qq{font-family:var(--serif);font-size:20px;color:var(--soil);line-height:1.3}
+.fface .aa{font-size:15px;color:var(--ink);line-height:1.55}
+.fhint{font-size:12px;color:var(--ink3);position:absolute;bottom:14px;left:0;right:0;text-align:center}
+.deckctl{display:flex;align-items:center;gap:12px}
+.dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 20px;cursor:pointer}
+.dbtn:hover{border-color:var(--line2)}
+.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.dcount{font-size:13px;color:var(--ink2);min-width:70px;text-align:center}
+/* connect */
+.connintro{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:14.5px;margin:22px 4px 14px;max-width:64ch}
+.connboard{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.conncol{display:flex;flex-direction:column;gap:10px}
+.ctile{font:inherit;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px;cursor:pointer;color:var(--ink);font-size:13.5px;line-height:1.35;transition:transform .12s,border-color .12s,background .12s;position:relative}
+.conncol#connL .ctile{font-family:var(--serif);font-size:15px;color:var(--soil)}
+.ctile:hover{border-color:var(--line2)}
+.ctile.sel{border-color:var(--clay);background:#f3e4d8;box-shadow:0 0 0 2px rgba(176,98,59,.18),var(--shadow)}
+.ctile.matched{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);cursor:default;box-shadow:none}
+.ctile.matched::after{content:"✦";position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--moss);font-size:13px}
+.conncol#connL .ctile.matched{color:var(--moss-d)}
+.ctile.miss{animation:shake .34s;border-color:var(--clay-d);background:#f0dcd2}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.connfoot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px}
+.conndone{text-align:center;font-family:var(--serif);font-size:17px;color:var(--moss-d);margin-top:14px}
+@media(max-width:520px){.ctile{font-size:12.5px;padding:10px 11px}.conncol#connL .ctile{font-size:13.5px}}
+.placeholder{margin:26px 4px;background:var(--card);border:1px dashed var(--line2);border-radius:16px;padding:26px 20px;text-align:center;font-family:var(--serif);font-style:italic;color:var(--ink3);font-size:16px}
+.foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic}
+svg{display:block}
+</style>
+<noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
+      <rect x="2" y="34" width="48" height="14" rx="3" fill="#6b4a31"/>
+      <rect x="2" y="40" width="48" height="8" rx="3" fill="#573f2c"/>
+      <path d="M8 30 C14 24 20 24 26 30 C32 36 38 36 44 30" stroke="#4a6b78" stroke-width="2.6" fill="none"/>
+      <path d="M8 22 C14 16 20 16 26 22 C32 28 38 28 44 22" stroke="#7c95a3" stroke-width="2.2" fill="none"/>
+      <path d="M26 6 C21 12 20 16 26 18 C32 16 31 12 26 6 Z" fill="#4a6b78"/>
+    </svg>
+    <div class="hgroup">
+      <h1>Ecology Field Guide II</h1>
+      <div class="sub">ALS 3153 · Module 2 · Water and Soil in Agroecosystems</div>
+    </div>
+  </div>
+  <p class="hnote">Module 2, one lecture at a time. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your thirteen lecture transcripts (Canvas skips 02-09).</p>
+
+  <div class="prog">
+    <div class="progbar"><div class="progfill" id="pf"></div></div>
+    <div class="progtxt"><b id="pstud">0</b> of <span id="ptot">13</span> lectures studied · <span id="psolid">0</span> concepts solid</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-v="overview">Big picture</button>
+    <button class="tab" data-v="lectures">Lectures</button>
+    <button class="tab" data-v="flash">Flashcards</button>
+    <button class="tab" data-v="quiz">Quiz</button>
+    <button class="tab" data-v="connect">Connect</button>
+    <button class="tab" data-v="exam">Exam 02</button>
+  </div>
+
+  <div class="view on" id="v-overview">
+    <div class="bigpic">
+      <div class="oneliner">Module 2 in one breath: a farm lives on water it does not control and soil it did not make. Water arrives as rain or is pulled from rivers and aquifers, leaves as runoff, percolation and evapotranspiration, and every shortcut we take to keep it coming (overdrafting, diverting, irrigating dry land) comes back as subsidence, salt, dead zones or desert. The soil is the medium that decides how much of that water and how many of those nutrients the plant ever gets.</div>
+      <div class="weeks" id="weeks"></div>
+      <div class="mapwrap">
+        <svg viewBox="0 0 400 560" width="100%" role="img" aria-label="How the Module 2 concepts connect">
+          <defs>
+            <marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#573f2c"/></marker>
+            <marker id="arc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#b0623b"/></marker>
+          </defs>
+          <rect x="90" y="8" width="220" height="52" rx="12" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
+          <text x="200" y="29" text-anchor="middle" font-size="14" font-weight="700" fill="#4a6b78" font-family="var(--serif)">Water comes in</text>
+          <text x="200" y="47" text-anchor="middle" font-size="10.5" fill="#6c5d45">rain (convective, orographic, cyclonic), rivers, aquifers</text>
+          <path d="M200 60 L200 86" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <text x="208" y="78" font-size="9.5" fill="#93856a" font-style="italic">2.1 to 2.3</text>
+          <rect x="90" y="88" width="220" height="52" rx="12" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
+          <text x="200" y="109" text-anchor="middle" font-size="14" font-weight="700" fill="#4d5a2a" font-family="var(--serif)">The crop uses it, and loses most</text>
+          <text x="200" y="127" text-anchor="middle" font-size="10.5" fill="#6c5d45">runoff, percolation, evapotranspiration (90% through the plant)</text>
+          <path d="M160 140 C130 166 118 176 106 196" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <path d="M240 140 C270 166 282 176 294 196" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <rect x="20" y="198" width="160" height="56" rx="12" fill="#efe6d4" stroke="#8a6a3a" stroke-width="1.6"/>
+          <text x="100" y="219" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6b4a2a" font-family="var(--serif)">Irrigate</text>
+          <text x="100" y="235" text-anchor="middle" font-size="10" fill="#6c5d45">furrow, pivot, drip</text>
+          <text x="100" y="247" text-anchor="middle" font-size="10" fill="#6c5d45">20% of cropland, 40% of food</text>
+          <rect x="220" y="198" width="160" height="56" rx="12" fill="#f3e7c6" stroke="#c69537" stroke-width="1.6"/>
+          <text x="300" y="219" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8a6a1e" font-family="var(--serif)">Or farm dry</text>
+          <text x="300" y="235" text-anchor="middle" font-size="10" fill="#6c5d45">under 20 in of rain, no irrigation</text>
+          <text x="300" y="247" text-anchor="middle" font-size="10" fill="#6c5d45">fallow, stubble, weeds, erosion</text>
+          <path d="M100 254 L100 286" stroke="#b0623b" stroke-width="1.8" fill="none" marker-end="url(#arc)"/>
+          <path d="M300 254 L300 286" stroke="#b0623b" stroke-width="1.8" fill="none" marker-end="url(#arc)"/>
+          <rect x="20" y="288" width="160" height="70" rx="12" fill="#f0dcd2" stroke="#b0623b" stroke-width="1.6"/>
+          <text x="100" y="309" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8c4a2b" font-family="var(--serif)">Quantity bites back</text>
+          <text x="100" y="325" text-anchor="middle" font-size="10" fill="#6c5d45">overdraft: subsidence,</text>
+          <text x="100" y="337" text-anchor="middle" font-size="10" fill="#6c5d45">saltwater intrusion,</text>
+          <text x="100" y="349" text-anchor="middle" font-size="10" fill="#6c5d45">the Colorado never reaches the sea</text>
+          <rect x="220" y="288" width="160" height="70" rx="12" fill="#f0dcd2" stroke="#b0623b" stroke-width="1.6"/>
+          <text x="300" y="309" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8c4a2b" font-family="var(--serif)">Quality bites back</text>
+          <text x="300" y="325" text-anchor="middle" font-size="10" fill="#6c5d45">salinization of the soil,</text>
+          <text x="300" y="337" text-anchor="middle" font-size="10" fill="#6c5d45">eutrophication downstream,</text>
+          <text x="300" y="349" text-anchor="middle" font-size="10" fill="#6c5d45">desertification of the land</text>
+          <path d="M100 358 C100 384 160 396 186 404" stroke="#573f2c" stroke-width="1.6" fill="none" opacity=".6"/>
+          <path d="M300 358 C300 384 240 396 214 404" stroke="#573f2c" stroke-width="1.6" fill="none" opacity=".6"/>
+          <path d="M200 404 L200 418" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <text x="208" y="416" font-size="9.5" fill="#93856a" font-style="italic">2.6 to 2.10</text>
+          <rect x="60" y="420" width="280" height="66" rx="14" fill="#6b4a31"/>
+          <text x="200" y="443" text-anchor="middle" font-size="13.5" font-weight="700" fill="#f4ecdd" font-family="var(--serif)">The soil decides what the plant gets</text>
+          <text x="200" y="461" text-anchor="middle" font-size="10.5" fill="#efe0cf">horizons and orders · decomposition and C:N</text>
+          <text x="200" y="475" text-anchor="middle" font-size="10.5" fill="#efe0cf">texture, pores, field capacity · pH and cation exchange</text>
+          <path d="M340 453 C392 400 392 120 312 34" stroke="#b0623b" stroke-width="1.8" fill="none" stroke-dasharray="5 4" marker-end="url(#arc)"/>
+          <text x="384" y="250" font-size="9.5" fill="#b0623b" font-style="italic" text-anchor="middle" transform="rotate(90 384 250)">soil sets infiltration, holding, leaching</text>
+          <rect x="90" y="504" width="220" height="44" rx="12" fill="#6d7b41"/>
+          <text x="200" y="523" text-anchor="middle" font-size="12.5" font-weight="700" fill="#f4ecdd" font-family="var(--serif)">The way out</text>
+          <text x="200" y="539" text-anchor="middle" font-size="10.5" fill="#eef0e2">schedule, drip, drain, stubble, stop the inputs, feed the soil</text>
+        </svg>
+      </div>
+      <div class="mapcap">Read it top to bottom. The dashed line on the right is the loop back: the soil's texture, pores and chemistry set how much of the incoming water infiltrates, how much is held, and how much leaches away with the nutrients.</div>
+      <div class="bigtext">
+        <p><b>Start with the plant.</b> Water is the other half of climate, after temperature. The plant needs it for photosynthesis, respiration and nutrient transport, and it tolerates a wide band of soil water (the broad, flat-topped curve) but suffers at both ends: waterlogging starves the roots of oxygen, drought closes the stomata and shuts down carbon intake. Water is renewable, the same amount as 100 million years ago, but only 3% sits where we can use it, and agriculture takes almost half of what the US uses and 70% worldwide, mostly without giving it back.</p>
+        <p><b>Then follow where it comes from.</b> Rain forms when air holds more vapor than its temperature allows. Florida gets its summer rain from convective storms, the Cascades and the Central Valley from orographic lift, the Gulf coast up to a fifth of some years' rain from cyclones. For a farmer the annual total matters less than the distribution, intensity and predictability. Where rain is short you irrigate (furrow, center pivot, drip, in rising order of efficiency and effort), or you farm dry on under 20 inches a year with fallow rotations and stubble.</p>
+        <p><b>Where it bites.</b> Overdrafting aquifers collapses their pores (subsidence) and pulls seawater into the freshwater lens; diverting rivers leaves the Colorado dead before the sea. Irrigating arid land without enough water to leach concentrates salts until sodium displaces calcium, the aggregates fall apart and the soil stops draining. Soluble fertilizer runs off (phosphorus) or leaches (nitrate) into water bodies and starts the eutrophication cycle that produces the Gulf dead zone. Push semi-arid land too hard with grazing, cropping and tree-cutting and it becomes desert; the Aral Sea is the extreme case.</p>
+        <p><b>So the module ends in the soil.</b> The profile (O, A, B, C, bedrock) and the twelve orders tell you what a soil can do. Decomposition turns organic matter into the inorganic forms plants can take up, at a pace set by the carbon-to-nitrogen ratio. Texture and structure set porosity, permeability and water holding capacity, and with them wilting point, field capacity and saturation. pH and cation exchange capacity decide whether the nutrients in that water are actually available. Every lecture below is one piece of this single story.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="v-lectures"></div>
+
+  <div class="view" id="v-flash">
+    <div class="filters" id="flashfilters"><span class="fl">Deck</span></div>
+    <div class="deckwrap">
+      <div class="flash" id="flash"><div class="flinner">
+        <div class="fface ffront"><div class="tag" id="fqtag"></div><div class="qq" id="fq"></div><div class="fhint">tap to flip</div></div>
+        <div class="fface fback"><div class="aa" id="fa"></div><div class="fhint">tap to flip back</div></div>
+      </div></div>
+      <div class="deckctl">
+        <button class="dbtn" id="fprev">‹ Back</button>
+        <span class="dcount" id="fcount"></span>
+        <button class="dbtn pri" id="fnext">Next ›</button>
+      </div>
+      <div class="progtxt" style="margin-top:2px">Shuffle a fresh pass anytime: <button class="dbtn" id="fshuf" style="padding:5px 12px;font-size:12px">shuffle</button></div>
+    </div>
+  </div>
+
+  <div class="view" id="v-quiz">
+    <div class="oneliner" style="margin:22px 4px 10px">A looping bank drawn from every lecture's mini quiz, ten at a time, answers shuffled, the mechanism under each answer. Quiz 05 covers Week 5, so that is the default draw. Weeks says the same banks come back on the exam, so take each Canvas quiz all three times.</div>
+    <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="view" id="v-connect">
+    <p class="connintro">Tap a term on the left, then the idea it belongs with on the right. Get it right and the pair wires together and locks in. Get it wrong and they flash and let go.</p>
+    <div class="connboard"><div class="conncol" id="connL"></div><div class="conncol" id="connR"></div></div>
+    <div class="connfoot"><span class="dcount" id="conncount"></span><button class="dbtn" id="connreset">New round</button></div>
+    <div class="conndone" id="conndone" hidden>All wired. Deal a new round?</div>
+  </div>
+
+  <div class="view" id="v-exam">
+    <div class="placeholder">Exam 02, October 7, closes Module 2. This tab grows once you hand me the practice questions.</div>
+  </div>
+
+  <div class="foot">Ecology Field Guide II · built from your Module 2 transcripts (2.1 to 2.14, no 2.9 in Canvas) · your marks stay on this device</div>
+</div>
+<script>
+/* ---------- Module 2 data: one entry per lecture, Canvas order ---------- */
+var WEEKS=[
+ {n:5,lecs:["2.1","2.2","2.3","2.4","2.5"],quiz:"Quiz 05",due:"Sun Sep 20, 11:59 pm ET",read:"Section 6, pp. 78 to 92",deck:"Water: Precipitation, Irrigation, Dryland"},
+ {n:6,lecs:["2.6","2.7","2.8","2.10"],quiz:"Quiz 06",due:"Sun Sep 27, 11:59 pm ET",read:"Section 8 (as posted)",deck:"Water: Quality, Quantity, Salinization, Conservation, Desertification"},
+ {n:7,lecs:["2.11","2.12","2.13","2.14"],quiz:"Quiz 07",due:"Sun Oct 4, 11:59 pm ET",read:"Section 8, pp. 107 to 114",deck:"Soil: Types, Classification, Decomposition, Environmental Factors"}
+];
+var L=[
+{id:"2.1",wk:5,title:"Water and Agriculture, Introduction",words:1962,
+ gist:"Water is the other half of climate after temperature, and the plant needs it for photosynthesis, respiration and nutrient transport. The plant's response to soil water is a broad, flat-topped curve, unlike the sharp nutrient curve, and both too much water (waterlogging, edema) and too little (matric effect, closed stomata) cost growth.",
+ line:["Water is polar: a positive hydrogen side and a negative oxygen side, so it pulls apart any charged compound such as a fertilizer salt, but not oils, fats or waxes.",
+  "Law of the minimum: growth is capped by whichever necessary element is most limiting, and in agriculture that is often water (the barrel image).",
+  "The soil water curve has three zones: A deficient, B optimal, C excess turning toxic. Its top is broad and flat; the nutrient curve is sharp and rounded. She says to know this for a test.",
+  "Too much water: pores fill, the soil goes anoxic, roots switch to anaerobic respiration and build up toxins, photosynthesis drops. Edema follows when uptake outruns transpiration.",
+  "Too little water: the matric effect (more force to pull water from drier soil) and closed stomata, which stops carbon dioxide intake, transpiration and nutrient movement all at once."],
+ cards:[
+  {t:"Why plants need water",i:"Photosynthesis, respiration and nutrient transport all run on water. It is the medium every nutrient travels in.",f:"Water dissolves charged compounds (salts, fertilizers) and <b>cannot</b> dissolve oils, fats or waxes.",q:"Which kinds of compounds can water not dissolve, and why?",a:"Nonpolar ones such as oils, fats and waxes, because they carry no charge for water's positive and negative sides to grab."},
+  {t:"Law of the minimum",i:"Growth of an individual, a population or the spread of a species is limited by the single necessary element that is scarcest in the environment.",f:"In agriculture the limiting element is <b>often water</b>. Picture the barrel with the shortest stave.",q:"State the law of the minimum in one sentence.",a:"Growth is limited by whichever necessary element is most limiting in the environment, often water in agriculture."},
+  {t:"The three-zone water curve",i:"X axis soil water content, Y axis growth rate. Zone A is deficient, zone B is the optimum, zone C is excess that becomes toxic.",f:"The curve is <b>broad with a flat top</b>: many soil water contents give optimal growth.",q:"What do zones A, B and C of the soil water curve mean?",a:"A: too little water for optimal growth. B: the optimal range. C: more water than needed, becoming toxic."},
+  {t:"Water curve vs nutrient curve",i:"The nutrient curve is much sharper with a rounded peak. The water curve is wide and flat on top. The plant tolerates a much wider range of water than of nutrients.",f:"She flags this comparison as <b>test material</b>: wide optimum for water, narrow optimum for nutrients.",q:"How does the shape of the water response curve differ from the nutrient curve, and what does that mean?",a:"Water: broad, flat-topped, so a wide range of soil water contents sustain optimal growth. Nutrients: sharp, rounded peak, so the optimum is narrow."},
+  {t:"Waterlogging",i:"Water fills the pore spaces between soil aggregates that should hold air. The root zone goes anoxic, the plant falls back on anaerobic respiration, toxins build up, photosynthesis drops.",f:"The problem is <b>oxygen</b>, not water: the pores that held air are full.",q:"Why does waterlogging hurt a plant that needs water?",a:"Because the water fills the soil pores that normally hold air; the roots lose oxygen, respire anaerobically, accumulate toxins, and photosynthesis falls."},
+  {t:"Edema",i:"Water taken up faster than transpiration can remove it. Blisters form on both leaf surfaces and degrade into brown, corky spots. A greenhouse and ornamental problem (geranium), occasionally in the field (cabbage).",f:"Controls: <b>reduce waterlogging</b>, manage humidity and air flow to raise transpiration, more fertilizer to thicken cell walls.",q:"What is edema, where is it most common, and how is it controlled?",a:"Uptake exceeding transpiration, mostly in greenhouses on ornamentals. Control it by reducing waterlogging, managing humidity and air flow, and fertilizing to thicken cell walls."},
+  {t:"Matric potential",i:"The force a plant must exert to pull water out of the soil. As the soil dries, water clings harder to the particles and the plant spends more energy to get it.",f:"Lower soil water means a <b>larger</b> matric effect.",q:"What happens to the matric effect as soil water content falls?",a:"It increases: the plant needs more force and energy to remove water from drier soil."},
+  {t:"Closed stomata cascade",i:"Under water stress the plant shuts its stomata. Those pores are where carbon dioxide enters and water leaves, so shutting them stops photosynthesis, transpiration and the flow of nutrients from roots to shoots.",f:"Three losses at once: <b>no CO2 in, no water out, no nutrients up.</b>",q:"Name the three consequences of a water-stressed plant closing its stomata.",a:"No carbon dioxide intake (less photosynthesis), no transpiration, and no nutrient movement from the roots to the upper plant."}
+ ],
+ ask:["Which statement about the water response curve is true (broad, flat optimum versus the sharp nutrient curve)?","Waterlogged soil becomes anoxic because water fills the pore spaces (true).","Edema occurs when water uptake exceeds transpiration and is most common in greenhouses.","Water cannot dissolve which of the following: oils, fats, waxes (nonpolar).","Define the law of the minimum.","As soil water content decreases, the matric effect increases (true)."],
+ quiz:[
+  {q:"Water can dissolve fertilizer salts because it is...",o:["a polar molecule with a positive and a negative side","a nonpolar molecule","an acid","a gas at room temperature"],c:0,e:"The hydrogen side carries a positive charge and the oxygen side a negative one, so the chloride is drawn to the hydrogen side and the sodium to the oxygen side, and the salt comes apart. Nonpolar oils, fats and waxes have no charge to grab, so they stay put."},
+  {q:"Compared with the plant's response to nutrients, its response to soil water...",o:["has a broader, flatter optimum range","has a narrower, sharper optimum","is identical in shape","has no optimum at all"],c:0,e:"The water curve is broad with a flat top: many soil water contents give optimal growth. The nutrient curve is sharp and rounded, so the optimum is narrow. Weeks says to know this difference for a test."},
+  {q:"Zone C of the soil water curve is where...",o:["water exceeds what is needed and becomes toxic","water is deficient","growth is optimal","the soil is at wilting point"],c:0,e:"A is deficient, B is the optimum, C is excess turning toxic. For a farmer the goal is B: optimal growth, minimal irrigation cost, no overwatering damage."},
+  {q:"Waterlogging harms plants mainly because...",o:["water fills the pore spaces, the soil goes anoxic, and anaerobic respiration builds toxins","the roots absorb too many nutrients","water dilutes the chlorophyll","the stomata are forced open"],c:0,e:"The pores between aggregates normally hold air. Fill them with water and the roots lose oxygen, switch to anaerobic respiration, accumulate toxins, and photosynthesis falls."},
+  {q:"Which of these is NOT a control for edema that Weeks lists?",o:["Spraying an anti-transpirant to seal the leaf","Reducing waterlogging in the soil","Controlling humidity and air flow","Applying more fertilizer to thicken cell walls"],c:0,e:"Edema is uptake outrunning transpiration, so every listed fix either cuts uptake (less waterlogging), raises transpiration (humidity and air flow) or toughens the tissue (fertilizer thickens cell walls). Sealing the leaf would make it worse."},
+  {q:"The matric potential is...",o:["the force a plant needs to remove water from the soil, which rises as the soil dries","the pressure of water inside the leaf","the rate of transpiration","the weight of water in a saturated soil"],c:0,e:"Water clings to soil particles. The drier the soil, the harder it clings and the more energy the plant spends pulling it into the roots."},
+  {q:"When a water-stressed plant closes its stomata, which of these does NOT happen?",o:["Carbon dioxide uptake increases","Photosynthesis decreases","Transpiration stops","Nutrients stop moving from roots to shoots"],c:0,e:"The stomata are the gas exchange openings. Closed, they block carbon dioxide coming in as surely as water going out, so photosynthesis, transpiration and nutrient transport all fall together."},
+  {q:"True or false: the law of the minimum says growth is set by the total of all resources available.",o:["False","True"],c:0,e:"It says the opposite: growth is capped by whichever necessary element is most limiting, however abundant the rest are. In agriculture that scarcest element is often water."}
+ ]},
+{id:"2.2",wk:5,title:"The Hydrologic Cycle",words:3404,
+ gist:"Water is renewable, the same amount as 100 million years ago, but only 3% sits in reservoirs we can use, and agriculture moves it into reservoirs we cannot reach. Know the reservoirs and fluxes, the farm's inputs (precipitation, surface water, groundwater) and losses (runoff, percolation, evaporation, transpiration), and what turns evapotranspiration up or down.",
+ line:["Water is not finite. The real issues are which reservoir it sits in, how its quality degrades with use, and how we alter the cycle.",
+  "Five reservoirs (atmosphere, groundwater, ocean, surface water, ice). Fluxes move water between them: evaporation, condensation, sublimation, transpiration, runoff, percolation.",
+  "Agriculture takes almost 50% of US water use and 70% globally, and mostly uses it up; power generation borrows water and returns it.",
+  "Farm inputs: precipitation, surface water, groundwater pumped from aquifers. Farm losses: runoff, percolation past the roots, evaporation from soil, transpiration from leaves.",
+  "Evapotranspiration goes up with solar radiation, temperature and wind, down with relative humidity and mulch; plant type, growth stage and soil type also matter.",
+  "Why worry: water cycles through the ocean over 10,000 to 20,000 years, and overdrafting collapses aquifer pores so recharge has nowhere to go."],
+ cards:[
+  {t:"Renewable, but only 3% usable",i:"We have the same amount of water on Earth as 100 million years ago. Using it moves it between reservoirs; it does not destroy it. The trouble is which reservoir it lands in.",f:"Only <b>3%</b> of Earth's water is in a reservoir we can use: surface water and groundwater.",q:"Is water a finite or renewable resource, and what share can we actually use?",a:"Renewable (same amount as 100 million years ago). Only 3% sits in usable reservoirs, surface water and groundwater."},
+  {t:"The five reservoirs",i:"Atmosphere, groundwater (aquifers), ocean, surface water (lakes, streams, rivers) and ice (glaciers, ice caps). A reservoir is where water is retained.",f:"We draw only on <b>surface water and groundwater</b>; ocean and ice are not in a usable form.",q:"List the reservoirs of the hydrologic cycle and the two we use.",a:"Atmosphere, groundwater, ocean, surface water, ice. Agriculture and drinking water come from surface water and groundwater."},
+  {t:"Fluxes",i:"A flux moves water from one reservoir to another: evaporation (any wet surface to vapor), condensation, sublimation (ice or snow straight to vapor), transpiration, runoff, percolation.",f:"Exam trap: <b>sublimation is a flux</b>, a glacier is a reservoir.",q:"Reservoir or flux: sublimation, glacier, runoff, atmosphere?",a:"Sublimation and runoff are fluxes. Glacier (ice) and atmosphere are reservoirs."},
+  {t:"Agriculture's share",i:"Almost half of US water use is agricultural, and that water is used up rather than reclaimed. Power generation is the other large user, but it cools with water and returns it.",f:"US: <b>almost 50%</b>. Global: <b>70%</b> of water use is agricultural.",q:"Why is agriculture's water use a bigger concern than power generation's?",a:"Ag uses almost 50% of US water (70% globally) and uses it up, moving it into reservoirs we cannot reach; power plants return their cooling water."},
+  {t:"Inputs and losses on the farm",i:"Inputs: precipitation, surface water, groundwater lifted by pumps and wells. Losses: runoff across the surface, percolation down past the roots, evaporation from the soil, transpiration from the plant.",f:"Percolated water is <b>unavailable to the plant</b>; it may reach groundwater or surface water later.",q:"Name the three agricultural water inputs and four losses.",a:"Inputs: precipitation, surface water, groundwater. Losses: runoff, percolation, evaporation, transpiration."},
+  {t:"Transpiration by the numbers",i:"Water leaves through the stomata as vapor. It is passive, driven by the gradient from wet plant to drier air, and it carries nutrients and keeps turgor.",f:"An acre of corn: <b>3,000 to 4,000 gallons a day</b>. <b>90%</b> of water moving through a plant is lost to transpiration. One oak: about 40,000 gallons a year.",q:"How much of the water that moves through a plant is lost to transpiration, and is the process active or passive?",a:"About 90%. It is passive, water moving from high concentration in the plant to low concentration in the air."},
+  {t:"Evapotranspiration",i:"Evaporation and transpiration are combined because it is hard to tell how much water left the soil and how much left the leaf. Four factors: soil moisture, plant type, stage of development, and the weather, which matters most.",f:"Plants that open stomata only at night transpire <b>less</b>.",q:"Why are evaporation and transpiration measured together, and which factor matters most?",a:"Because the two are hard to separate in the field. Weather and climate (humidity, solar radiation, wind) matter most."},
+  {t:"The ET dial",i:"Turn it up: more solar radiation, higher temperature, more wind. Turn it down: higher relative humidity, mulch or bedding cover. Soil type depends on water holding capacity.",f:"Relative humidity up means evapotranspiration <b>down</b>; wind up means ET <b>up</b>.",q:"How does each change affect evapotranspiration: more wind, more relative humidity, mulch, more solar radiation?",a:"Wind up: ET up. Relative humidity up: ET down. Mulch: evaporation down. Solar radiation up: ET up."},
+  {t:"Subsidence, first look",i:"An aquifer is not a pool but water-filled spaces in rock. Pump it too fast and the empty pores collapse, so even when recharge arrives there is no room; it runs off elsewhere.",f:"Ocean residence time: <b>10,000 to 20,000 years</b>. Once water leaves a usable reservoir it can be gone a long time.",q:"What happens to an aquifer that is overdrafted?",a:"Its pore spaces collapse, so it can no longer hold the recharge; the aquifer's physical ability to store water is degraded."}
+ ],
+ ask:["Is water a finite resource? (No, renewable; the reservoir is the issue.)","What share of Earth's water can we use? (3%)","Which is a flux and which a reservoir?","What share of US water goes to agriculture, and globally?","Which change decreases evapotranspiration: higher relative humidity, mulch.","What happens to water that percolates past the root zone?","Why does overdrafting permanently damage an aquifer?"],
+ quiz:[
+  {q:"True or false: water is a finite resource that is being used up.",o:["False, it is renewable; the same amount exists as 100 million years ago","True, each use destroys some water"],c:0,e:"Using water moves it between reservoirs; it does not remove it from the planet. The concern is where it ends up (ocean, ice, degraded quality), not the total."},
+  {q:"What share of the water on Earth is in a reservoir we can use?",o:["3%","30%","50%","97%"],c:0,e:"Only 3%, the surface water and groundwater. Ocean and ice hold the rest in forms we cannot readily use."},
+  {q:"Sublimation is...",o:["ice or snow passing directly into water vapor","rain forming from vapor","water soaking into soil","water flowing over the surface"],c:0,e:"It skips the liquid state entirely. It is a flux (a movement between reservoirs), not a reservoir."},
+  {q:"Which of these is NOT a reservoir in the hydrologic cycle?",o:["Runoff","Groundwater","The atmosphere","Ice caps and glaciers"],c:0,e:"Runoff is a flux, water moving across the surface into another reservoir. Reservoirs are where water is retained: atmosphere, groundwater, ocean, surface water, ice."},
+  {q:"Why is agricultural water use more of a concern than the water used for power generation?",o:["Agricultural water is mostly used up and not reclaimed; power plants return their cooling water","Agriculture uses more toxic water","Power plants use no water","Agricultural water evaporates less"],c:0,e:"Both are large shares of US use, but the power sector's cooling water can be cooled and returned. Irrigation water mostly moves into reservoirs we can no longer access."},
+  {q:"Globally, roughly what share of water use goes to agriculture?",o:["70%","50%","25%","10%"],c:0,e:"70% worldwide; in the US it is almost 50%."},
+  {q:"An increase in relative humidity will...",o:["decrease evapotranspiration","increase evapotranspiration","have no effect on evapotranspiration","increase evaporation but not transpiration"],c:0,e:"Transpiration runs on the gradient between wet leaf and drier air. Humid air flattens that gradient, so less water leaves. Solar radiation, temperature and wind do the opposite."},
+  {q:"An acre of corn can lose how much water a day to transpiration?",o:["3,000 to 4,000 gallons","30 to 40 gallons","300 to 400 gallons","40,000 gallons"],c:0,e:"3,000 to 4,000 gallons a day, and about 90% of the water that passes through a plant leaves this way. The 40,000 figure is an oak tree's annual transpiration."},
+  {q:"Overdrafting an aquifer causes its pore spaces to collapse, which means...",o:["it can no longer hold recharge even when water is available","it recharges faster","the water becomes fresher","it turns into surface water"],c:0,e:"The water was holding the rock's pores open. Take it out too fast and the pores close, so recharge that does arrive has nowhere to go and runs off elsewhere."}
+ ]},
+{id:"2.3",wk:5,title:"Precipitation and Agriculture",words:4367,
+ gist:"Rain begins when air holds more vapor than its temperature allows (relative humidity over 100%, the dew point). Three types feed agriculture: convective (Florida's summer storms), orographic (mountains, rain shadows, the Cascades and the Sierra feeding the Central Valley) and cyclonic (hurricanes, up to a fifth of some coastal years' rain). For a farmer the distribution, intensity, availability and predictability of rain matter more than the annual total, and the fixes for shortage and excess are irrigation backup, crop choice, drainage, raised beds and rice-fish polyculture.",
+ line:["Humidity is moisture held in air and depends on temperature; relative humidity is the ratio of actual vapor to what the air could hold at that temperature.",
+  "Above 100% relative humidity vapor condenses (the dew point): fog or mist near the ground, clouds aloft, and rain when droplets coalesce and gravity wins.",
+  "Convective rain: heated moist air rises, expands, cools and condenses. Orographic: air pushed up a mountain drops rain or snow on the windward side and leaves a rain shadow. Cyclonic: warm rising air, low pressure, Coriolis rotation, mostly near the equator.",
+  "Beyond the annual average: distribution and periodicity, intensity and duration (infiltration versus runoff and erosion), availability (is the soil already wet), predictability.",
+  "Rain-fed systems (Malaysian tea, dryland grain) depend on it directly; everywhere else rain matters because it recharges the aquifers and rivers that irrigation draws on.",
+  "Mitigation: backup irrigation and adapted cultivars for shortage; rice, tile drainage and raised beds for excess; rice-fish polyculture as the agroecological answer."],
+ cards:[
+  {t:"Relative humidity",i:"Air holds water as vapor or as droplets, and temperature decides how much vapor it can hold. Relative humidity is the ratio of the vapor actually present to the maximum at that temperature.",f:"Her example: 89 degrees and 60% RH means the air holds <b>60% of what it could</b> at 89 degrees.",q:"Define relative humidity.",a:"The ratio of the water vapor in the air to the amount the air could hold at that specific temperature."},
+  {t:"Dew point and how rain forms",i:"When relative humidity passes 100% the vapor condenses into droplets. At the surface that is fog or mist; higher up it is cloud. Droplets coalesce until gravity pulls them down as rain.",f:"Precipitation begins when relative humidity <b>exceeds 100%</b>.",q:"At what point does water vapor start to condense, and what is it called?",a:"When relative humidity exceeds 100%; the point of condensation is the dew point."},
+  {t:"Convective precipitation",i:"Moist air near the ground warms through the day, rises, expands, cools with altitude and condenses until it rains. Florida's daily 3 o'clock summer thunderstorms are this.",f:"A large part of <b>Florida's summer rain</b> is convective.",q:"What drives convective precipitation and where does it matter for agriculture?",a:"Solar heating lifts moist air, which cools and condenses as it rises. It supplies much of the summer rain in Florida and similar regions."},
+  {t:"Orographic precipitation",i:"Wind pushes moist air up a mountain; it cools and drops rain or snow on the way up, then dissipates on the far side, leaving a rain shadow.",f:"Cascades: apple and cherry orchards on the wet side. Sierra Nevada: snow that feeds <b>Central Valley irrigation</b>, plus morning fog and mist.",q:"How does orographic uplift support California's Central Valley?",a:"Pacific air rises up the Sierra Nevada and drops rain and snow at the top; that water feeds the rivers, canals and dams that irrigate the valley, which itself gets little rain."},
+  {t:"Cyclonic precipitation",i:"Warm moist air rises over warm ocean, creating low pressure that pulls in more air; the Coriolis force from Earth's rotation sets it spinning. Mostly near the equator, where the heat is.",f:"Oliver and Pratt, 1998 to 2009: tropical cyclones supply up to <b>12%</b> of rain as far as 300 km inland, and up to <b>20%</b> of some years' rain on the coast from Louisiana to North Carolina.",q:"What creates the rotation of a hurricane, and how much rain can cyclones contribute?",a:"The Coriolis force from Earth's rotation. Up to 12% of rainfall 300 km inland and up to 20% in some coastal years (Oliver and Pratt)."},
+  {t:"More than the annual total",i:"Distribution and periodicity (monsoon pulses in the Southwest), intensity and duration (does the soil infiltrate it or does it run off and erode), availability (already-wet soil cannot take more), and predictability year to year.",f:"Intensity matters because of the soil's <b>infiltration rate</b>: a burst that cannot soak in runs off and erodes.",q:"Which four properties of rainfall, beyond the yearly total, matter for planning agriculture?",a:"Distribution and periodicity, intensity and duration, availability, and predictability."},
+  {t:"Rain-fed agriculture",i:"Some systems run on rain alone: tea in wet tropical Malaysia (now hit by less predictable rain under climate change) and dryland grain in semi-arid regions like the Palouse and sub-Saharan Africa.",f:"Dryland areas receive about <b>9 to 15 inches</b> of rain a year and grow drought-resistant crops.",q:"Give two examples of rain-fed agriculture from the lecture.",a:"Tea in Malaysia (wet tropics, no irrigation) and dryland grain farming in semi-arid regions such as the Palouse in eastern Washington."},
+  {t:"Tile drainage",i:"Perforated pipes buried in ditches carry excess water out of waterlogged fields, a technique with roots around 300 BC. Less runoff and erosion, but the drained water carries soluble nutrients (nitrogen) and salts you then have to store.",f:"Trade: <b>less erosion</b>, but <b>nutrient and salt loss</b> into water that needs a home.",q:"What is the main benefit and the main cost of tile drainage?",a:"Benefit: less runoff and erosion because water infiltrates and is piped away. Cost: soluble nutrients like nitrogen and salts leave with the water, which then needs safe storage."},
+  {t:"Raised beds and rice-fish polyculture",i:"Raised beds keep roots above the flood line in river-side fields (Brazil, Asia). In the Pearl River Delta rice and fish share the paddy: fish manure fertilizes the rice and the fish eat the insects.",f:"Rice-fish gives <b>two harvests</b> with fewer inputs, a main tenet of agroecology.",q:"How does rice-fish polyculture reduce inputs?",a:"Fish manure fertilizes the rice and the fish eat aquatic insects, so the farmer needs less fertilizer and pest control and gets two harvests."}
+ ],
+ ask:["Precipitation begins when relative humidity exceeds what value?","Which type of precipitation dominates Florida summers? Which involves mountains?","What force gives tropical cyclones their rotation?","Up to what share of rainfall can tropical cyclones supply 300 km inland (Oliver and Pratt)?","Which is NOT a downside of tile drainage (it reduces runoff)?","How do raised beds prevent waterlogging?","What do the fish contribute in rice-fish polyculture?"],
+ quiz:[
+  {q:"Precipitation happens when the relative humidity of the air...",o:["exceeds 100%","drops below 50%","equals the temperature","reaches 0%"],c:0,e:"At that point the air holds more vapor than its temperature allows, so vapor condenses into droplets (the dew point). Near the ground that is fog; aloft it is cloud, then rain once droplets coalesce."},
+  {q:"Florida's daily summer thunderstorms are an example of...",o:["convective precipitation","orographic precipitation","cyclonic precipitation","sublimation"],c:0,e:"Solar heating lifts moist air off the Gulf and Atlantic, it expands and cools as it rises, condenses, and drops around 3 o'clock. No mountains and no rotation involved."},
+  {q:"A rain shadow is produced by...",o:["orographic uplift","convective uplift","a tropical cyclone","the Coriolis force"],c:0,e:"Air pushed up a mountain drops its moisture on the windward side and top; the clouds dissipate on the lee side, leaving it dry. The dry side of the Cascades (the Palouse) is the course example."},
+  {q:"The rotation of a hurricane comes from...",o:["the Coriolis force generated by Earth's rotation","orographic uplift","the tides","cold fronts"],c:0,e:"Warm moist air rises, low pressure pulls in more air, and the Earth's rotation twists that inflow into the cyclone's spin. It starts near the equator because that is where the heat is."},
+  {q:"Oliver and Pratt found that tropical cyclones can provide up to what share of rainfall even 300 km inland?",o:["12%","2%","50%","80%"],c:0,e:"Up to 12% inland, and up to 20% in some years along the coast from Louisiana to North Carolina. Once ashore the storms lose wind quickly and become large moving rain systems."},
+  {q:"Which of these is NOT a drawback of tile drainage?",o:["It increases surface runoff","Soluble nitrogen leaves with the drained water","Salts from fertilizer end up in the drained water","The nutrient-laden water needs somewhere safe to be stored"],c:0,e:"Tile drainage lets water infiltrate and pipes it away, so runoff and erosion go down. The costs are the soluble nutrients and salts carried out and the question of where that water goes."},
+  {q:"Raised beds protect crops from inundation by...",o:["keeping the roots above the level where water sits","removing water from the field through pipes","increasing evaporation","adding salt to the soil"],c:0,e:"Rather than removing the water, the bed lifts the root zone so water can reach the roots without them sitting in it. An old technique still used beside flood-prone rivers."},
+  {q:"In the Pearl River Delta rice-fish system, the fish...",o:["fertilize the rice with their manure and eat the insects","compete with the rice for nutrients","are harvested only once a decade","require synthetic fertilizer"],c:0,e:"The fish manure is a natural fertilizer and the fish eat aquatic insects, so the farmer uses fewer inputs and takes two harvests instead of one. Weeks presents it as agroecology done right: working with the wet site instead of against it."},
+  {q:"Besides the annual total, which rainfall property does Weeks say matters for planning agriculture?",o:["All of these: distribution, intensity, availability and predictability","Only the annual average","Only the color of the clouds","Only the number of rainy days"],c:0,e:"Distribution and periodicity (monsoon pulses), intensity and duration (infiltration versus runoff), availability (already-wet soil) and predictability all shape what a farm can plan on."}
+ ]},
+{id:"2.4",wk:5,title:"Irrigation in Agriculture",words:2372,
+ gist:"Irrigation water comes from surface water or from groundwater held in aquifers (any permeable, water-bearing rock). Three methods in rising order of water efficiency and effort: furrow (old, simple, no machinery, but soil disturbance, erosion and waste), center pivot sprinklers (efficient, little disturbance, freeze protection, but splashed disease) and drip (least water, but labor, clogging and harvest problems). Irrigated land is a small share of cropland but grows 40% of the food.",
+ line:["Sources: surface water (rivers, lakes, canals) or groundwater. An aquifer is any permeable rock that holds water below the surface.",
+  "Furrow: sloped ditches between beds. You need the soil's infiltration rate, stream size and run time, and the slope. Simple, effective, no machinery, but disturbs soil, invites erosion and runoff, wastes water without a catchment.",
+  "Center pivot sprinkler: a well in the middle, a wheeled pipe rotating around it (the circles from the air). More water-efficient than furrow, little soil disturbance, less runoff, but overhead water splashes pathogens leaf to leaf. Also used to shield buds and fruit from frost.",
+  "Drip (micro, trickle, subsurface): tubes to each plant, the most water-efficient method. Costs: laying out and pulling the lines, clogging, mechanical harvest. Best for permanent crops such as vineyards.",
+  "Only about 15% of US agricultural land and 20% of world cropland is irrigated, yet 40% of the food supply comes from it. Irrigation also makes a double crop possible."],
+ cards:[
+  {t:"Where irrigation water comes from",i:"Surface water reservoirs (rivers, lakes, canals) or groundwater. Groundwater means the water held in an aquifer.",f:"Aquifer: <b>any permeable rock that contains water</b> below the surface.",q:"Define an aquifer.",a:"Any permeable rock below the ground surface that holds water; pumping it up gives groundwater irrigation."},
+  {t:"Furrow irrigation",i:"Water runs down sloped ditches between raised beds. Doing it well means knowing the soil's infiltration rate, how long and how wide a stream to run so the whole root zone saturates, and the right slope.",f:"Pros: simple, effective, <b>no machinery</b> (fits subsistence farms). Cons: soil disturbance, erosion, runoff, wasted water without a catchment.",q:"Give two advantages and two disadvantages of furrow irrigation.",a:"Advantages: simple, effective, no machinery needed. Disadvantages: disturbs and loosens soil (erosion, runoff) and wastes water unless it is caught and reused."},
+  {t:"Center pivot sprinklers",i:"A well at the center of the field pumps groundwater into a long wheeled pipe that rotates around it, which is why irrigated fields look like circles from the air.",f:"More water-efficient than furrow, <b>little soil disturbance</b>, less runoff and erosion.",q:"Why do irrigated fields in the Plains appear as circles from the air?",a:"Center pivot sprinklers rotate a long pipe around a central well, watering a circular area."},
+  {t:"The sprinkler's disease problem",i:"Overhead water splashes onto leaves and can carry a fungus or other pathogen from one leaf to the next, especially in closely spaced crops.",f:"Disease needs <b>moisture to spread</b>; overhead watering supplies it.",q:"What is the main biological risk of overhead sprinkler irrigation?",a:"Spreading disease: splashing water moves fungi and other pathogens from leaf to leaf."},
+  {t:"Freeze protection with water",i:"Before a freeze, Florida growers sprinkle crops. As the water freezes it gives off heat and coats buds and fruit in a protective layer of ice. Not foolproof (blueberry buds and oranges can still be damaged), but better than crystals forming inside the fruit.",f:"Water <b>releases heat when it changes state</b> from liquid to solid.",q:"Why does sprinkling plants before a freeze protect them?",a:"Water gives off heat as it freezes, and the ice coat shields developing buds and fruit from a hard freeze that would crystallize the tissue."},
+  {t:"Drip irrigation",i:"Small tubes deliver water to individual plants, on the surface or below it (subsurface irrigation). Also called micro or trickle irrigation. Vineyards on the central California coast use it.",f:"The <b>most water-efficient</b> method; best for semi-permanent to permanent crops.",q:"Which irrigation method uses the least water, and what kind of crop suits it?",a:"Drip irrigation; semi-permanent to permanent crops such as vineyards."},
+  {t:"Why drip is not everywhere",i:"Every plant needs its own emitter, so laying out and collecting the lines each harvest is a lot of work. Minerals and particles clog the tiny tubes (a clogged line means an unwatered plant), and lines get in the way of mechanized harvest.",f:"The blockers are <b>time, expense, clogging</b> and harvest access.",q:"Name three reasons drip irrigation is not used on every farm.",a:"Labor and expense of laying and removing lines, clogging of the small tubes, and difficulty harvesting with machinery around the lines."},
+  {t:"The 15, 20, 40 numbers",i:"About 15% of US agricultural land is irrigated and about 20% of cropland worldwide. Yet 40% of the food supply comes from those irrigated areas, and some crops cannot be grown without irrigation. Irrigation can also fit in a second crop.",f:"Irrigated land: <b>20% of world cropland, 40% of the food</b>.",q:"What share of world cropland is irrigated, and what share of food does it produce?",a:"About 20% of cropland, producing about 40% of the food supply."}
+ ],
+ ask:["Define an aquifer.","Which irrigation method requires no machinery? Which is most water-efficient?","Why do fields look like circles from the air?","How can sprinklers protect crops from freezing?","What is the main disease risk of sprinklers?","Why is drip not more widely used?","Irrigated land is what share of world cropland, and produces what share of food?"],
+ quiz:[
+  {q:"An aquifer is...",o:["any permeable rock below the surface that holds water","a surface lake used for irrigation","a canal that carries irrigation water","a pump that lifts groundwater"],c:0,e:"Groundwater is the water held in the pores of permeable rock, not a pool in a cavern. Wells and pumps bring it up for irrigation."},
+  {q:"Which irrigation method can a subsistence farmer use with no machinery?",o:["Furrow irrigation","Center pivot sprinklers","Drip irrigation","Subsurface drip"],c:0,e:"Furrow is just sloped ditches between beds filled with water. It is old and simple, though doing it efficiently takes knowledge of infiltration rate, stream size, run time and slope."},
+  {q:"Why do irrigated fields in the western US look like circles from the air?",o:["Center pivot sprinklers rotate around a central well","Furrows are dug in circles","Drip lines are laid in rings","Crops grow better in circles"],c:0,e:"The well sits in the middle, and a long pipe on wheels sweeps around it. The corners of the square field are simply not watered."},
+  {q:"The main biological drawback of overhead sprinklers is...",o:["splashing water spreads pathogens from leaf to leaf","the water is too cold for the roots","sprinklers compact the soil","sprinklers cause salinization only"],c:0,e:"Disease needs moisture to spread. Water landing on one leaf and splashing to the next can carry a fungus with it, especially in dense plantings."},
+  {q:"Florida growers run sprinklers before a freeze because...",o:["water gives off heat as it freezes and the ice coat protects buds and fruit","cold water toughens the plant","wet leaves do not freeze","it washes frost off the leaves"],c:0,e:"A change of state from liquid to solid releases heat, and the ice layer buffers the tissue against the hard freeze. It is not foolproof: some blueberry buds and oranges still take damage."},
+  {q:"The most water-efficient irrigation method is...",o:["drip irrigation","furrow irrigation","center pivot sprinklers","flood irrigation"],c:0,e:"Drip delivers a measured amount to each plant, on the surface or below it. Its costs are labor, clogging and harvest access, which is why it is used mostly on permanent crops like vineyards."},
+  {q:"Drip irrigation is best suited to...",o:["semi-permanent to permanent crops such as vineyards","annual crops harvested every few months","dryland wheat","paddy rice"],c:0,e:"Laying and collecting a line for every plant each harvest is too much work for short-cycle crops, and the lines block mechanized harvest. On a vineyard the lines stay put."},
+  {q:"Irrigated land is about 20% of the world's cropland but produces roughly what share of the food supply?",o:["40%","20%","5%","90%"],c:0,e:"That mismatch is why irrigation matters so much: a small share of land, a large share of food, plus crops that cannot be grown at all without it and the chance of a second crop in a season."}
+ ]},
+{id:"2.5",wk:5,title:"Dryland Agriculture",words:2669,
+ gist:"Drylands are about 40% of the land surface (leaving out Greenland and Antarctica) and get under 20 inches, or 50 cm, of rain a year. Dryland agriculture farms them without irrigation, in semi-arid and dry subhumid zones only, growing cereals, grazing and drought-tolerant legumes. The Palouse shows the whole toolkit: winter wheat on winter rain, a fallow rotation to bank moisture, and a trade-off between tillage that kills weeds and stubble that keeps water.",
+ line:["Drylands: under 20 inches (50 cm) of rain, about 40% of the land surface. Great Plains, South America, the Sahel, the Mediterranean, Australia.",
+  "Dryland agriculture uses no irrigation, so it happens only in semi-arid and dry subhumid areas; arid land can be farmed only with irrigation. Variable rain and a short season restrict the crops.",
+  "Crops: grazing and cereals (wheat above all, barley, sorghum, millet, some corn), mixed farming, and drought-tolerant legumes such as peas and lentils in rotation.",
+  "The Palouse: former prairie with fertile grassland soil, very hilly, about 2 million acres with about 1 million in winter wheat; rain falls October to May; wheat planted in fall and harvested late summer, nearly a year in the ground.",
+  "Challenges: limited and variable rain, heavy wind and steep slopes that together drive erosion. Answers: crop choice, timing, and above all soil management for moisture, weeds and erosion.",
+  "Fallow rotation banks winter moisture in the soil and lets organic matter mineralize. Weeds must be controlled because they transpire the stored water: intensive tillage does it mechanically but raises evaporation and erosion; mulch or reduced tillage keeps 25 to 40% more moisture but needs herbicides."],
+ cards:[
+  {t:"What counts as dryland",i:"About 40% of the land surface once Greenland and Antarctica are excluded, all receiving less than 20 inches (50 cm) of precipitation a year: the Great Plains, parts of South America, the Sahel, the Mediterranean, Australia.",f:"Threshold: <b>under 20 inches / 50 cm</b> of rain a year.",q:"How much rain defines a dryland, and what share of the land surface is dryland?",a:"Less than 20 inches (50 cm) a year; about 40% of the land surface excluding Greenland and Antarctica."},
+  {t:"Dryland agriculture, defined",i:"Farming in drylands using only natural precipitation, no irrigation. That restricts it to semi-arid and dry subhumid zones; arid land is too dry and can be cropped only with irrigation.",f:"<b>Not in arid areas.</b> Semi-arid and dry subhumid only.",q:"In which climate zones is dryland agriculture practiced, and where is it not?",a:"Semi-arid and dry subhumid areas. Not arid areas, which need irrigation for any agriculture."},
+  {t:"Dryland crops",i:"Grazing and cereal grains: wheat is the big one in the US, plus barley, millet, sorghum and some corn. Mixed farming alternates wheat with other crops, including drought-tolerant legumes like peas and lentils.",f:"Millet and sorghum are <b>food staples abroad</b>; in the US millet is bird seed and sorghum an additive.",q:"Which crops dominate dryland agriculture?",a:"Cereals (wheat, barley, millet, sorghum, sometimes corn), grazing, and drought-tolerant legumes such as peas and lentils in rotation."},
+  {t:"The Palouse",i:"Eastern Washington, western Idaho, northwest Oregon: a former prairie with fertile soil built by grass roots, extremely hilly, about 2 million acres with about 1 million in wheat. Rain comes October to May.",f:"Winter wheat: planted in fall, overwinters, harvested late summer, <b>almost a year</b> from planting to harvest.",q:"Describe the Palouse wheat calendar and why it fits the climate.",a:"Winter wheat is planted in fall, overwinters, and is harvested at the end of summer, so it uses the October to May rain that supplies most of the area's 20 inches."},
+  {t:"Palouse challenges",i:"Precipitation is limited and varies year to year and month to month. Heavy winds and steep slopes combine to erode the fertile soil; the hills were harvested by horse or hand until self-leveling combines arrived in the 1930s and 40s.",f:"Wind plus slope equals <b>erosion</b>, the standing threat to a fertile soil.",q:"What two physical factors combine to make erosion the Palouse's main challenge?",a:"Heavy winds and the steep slopes of the land."},
+  {t:"Soil management priorities",i:"The most important thing in a dryland system: manage the soil to maximize moisture, minimize weeds and minimize erosion. Crop choice (drought-tolerant, timed to winter rain) comes first, then the soil.",f:"Weeds matter because they <b>transpire</b> the water you banked; over a season that adds up.",q:"Why are weeds such a serious problem in dryland farming?",a:"Every weed transpires soil water; cumulatively over a season that drains the moisture the crop depends on."},
+  {t:"Fallow rotation",i:"Leaving a field unplanted lets the soil absorb and hold the winter rain for the next crop and gives organic matter time to break down into available nutrients.",f:"Fallow <b>banks moisture</b> in the soil. Counterintuitive but it works because soil is a good water store.",q:"Why include a fallow rotation in dryland agriculture?",a:"To accumulate winter moisture in the soil for the next crop and to let organic matter decompose into available nutrients."},
+  {t:"Tillage versus stubble",i:"Intensive tillage controls weeds mechanically but bares the soil, raising evaporation, runoff and erosion. Mulching or reduced tillage leaves wheat stubble on the surface, holding moisture and soil, but the weeds then need herbicides.",f:"Stubble can trap <b>25 to 40% more moisture</b>; the price is herbicide cost in an already marginal system.",q:"State the trade-off between intensive tillage and reduced tillage in dryland farming.",a:"Tillage: mechanical weed control but more evaporation and erosion. Reduced tillage or mulch: 25 to 40% more moisture retained and less erosion, but weeds require herbicides, adding cost."}
+ ],
+ ask:["Drylands receive less than how much rain a year?","Dryland agriculture is practiced in which zones (not arid)?","Which crop is NOT a typical dryland crop?","Why must weeds be controlled in dryland systems?","What is the purpose of a fallow rotation?","How much more moisture can stubble mulch trap?","What is the cost of reduced tillage?"],
+ quiz:[
+  {q:"Drylands are defined as areas receiving less than...",o:["20 inches (50 cm) of precipitation a year","40 inches of precipitation a year","5 inches of precipitation a year","20 inches of precipitation a month"],c:0,e:"Under 20 inches, or 50 cm, a year, which covers about 40% of the land surface once Greenland and Antarctica are excluded."},
+  {q:"Dryland agriculture is practiced in...",o:["semi-arid and dry subhumid areas, without irrigation","arid areas, with heavy irrigation","wet tropical areas","any area with irrigation"],c:0,e:"It relies on natural rain alone, so arid land is out: there the water is too scarce and any farming needs irrigation."},
+  {q:"Which of these is NOT a typical dryland crop?",o:["Paddy rice","Winter wheat","Sorghum","Lentils"],c:0,e:"Dryland systems grow cereals (wheat, barley, millet, sorghum, some corn), graze livestock, and rotate drought-tolerant legumes like peas and lentils. Rice needs standing water."},
+  {q:"Weeds are a serious problem in dryland farming because they...",o:["transpire the soil moisture the crop depends on","attract more rain","fix too much nitrogen","shade the wheat"],c:0,e:"Each weed pumps water from soil to air through transpiration, and over a season that empties the moisture the fallow banked. That is why weed control is central, by tillage or by herbicide."},
+  {q:"The main purpose of a fallow rotation in dryland agriculture is to...",o:["accumulate soil moisture from winter rain and let organic matter break down","rest the farmer","allow weeds to grow as a cover","increase evaporation"],c:0,e:"Bare soil takes up and stores the winter rain for the next crop, and the fallow months give organic matter time to mineralize into available nutrients."},
+  {q:"Leaving wheat stubble as a mulch in a reduced-tillage system can trap how much more moisture?",o:["25 to 40%","2 to 4%","90 to 100%","none, it reduces moisture"],c:0,e:"The stubble layer blocks evaporation and holds the soil against wind and water. The catch is that weeds can no longer be tilled out, so herbicides are needed."},
+  {q:"The trade-off of intensive tillage in a dryland fallow is...",o:["mechanical weed control, but more evaporation and erosion","less erosion, but more weeds","more moisture, but higher herbicide cost","no trade-off at all"],c:0,e:"Turning the soil repeatedly kills weeds without chemicals, but a bare, loosened surface loses water to evaporation and soil to wind and runoff on those steep slopes."},
+  {q:"The main crop of the Palouse is...",o:["winter wheat","cotton","rice","citrus"],c:0,e:"About 1 million of its 2 million acres are wheat, mostly winter wheat planted in fall to use the October to May rainfall."}
+ ]},
+{id:"2.6",wk:6,title:"Water Issues: Quality and Quantity",words:4143,
+ gist:"Quality is about what comes in with irrigation (salts, contaminants) and what leaves in runoff and percolation (nutrients, toxins, sediment), including manure, pharmaceuticals and long-lived pesticides. Quantity is about using water faster than it is replaced: diverting rivers until the Colorado no longer reaches the sea, and overdrafting aquifers until the coast fills with salt water and the land subsides. Gleeson's groundwater footprint shows where use outruns the aquifer.",
+ line:["Quality, incoming: irrigation water can carry salts and contaminants. Quality, outgoing: runoff and percolating water carry nutrients, toxins and sediment, feeding hyper-eutrophication downstream.",
+  "Manure is a good fertilizer but raw manure carries pathogens and unprocessed pharmaceuticals from CAFOs; pesticides with residence times of 10 to 20 years are likely to reach water.",
+  "Quantity: overdrafting is writing checks the aquifer cannot cover. Surface diversion changes landscapes; the Colorado River is 90% diverted and has not reached the Sea of Cortez for 16 to 20 years.",
+  "Karl Flessa's pulse flow from Morelos Dam sent water down the historic channel to restore delta wetlands and the Pacific flyway stopover.",
+  "Groundwater recharge is slow and patchy (confining layers), so overdraft causes saltwater intrusion on coasts and subsidence when aquifer pores collapse; Florida adds natural karst sinkholes.",
+  "Gleeson's groundwater footprint: where use divided by aquifer area exceeds one (North Arabian, High Plains), use is unsustainable."],
+ cards:[
+  {t:"Quality in two directions",i:"Incoming water (irrigation) can bring salts and contaminants. Outgoing water, as surface runoff or as percolation to the aquifer, carries nutrients, toxins and sediment out of the farm.",f:"Nutrient-rich runoff drives <b>hyper-eutrophication</b>, agriculture's major impact on nearby ecosystems.",q:"What are the two sides of water quality in agriculture?",a:"The condition of incoming irrigation water (salts, contaminants) and the condition of outgoing runoff and percolation (nutrients, toxins, sediment)."},
+  {t:"Manure, storage and raw use",i:"Manure returned to fields is a good reuse of nutrients and organic matter, but CAFO manure must be stored so it does not pulse into waterways, and raw, unaged manure carries pathogenic bacteria and unprocessed pharmaceuticals.",f:"Raw manure: <b>pathogens plus antibiotics</b> that can reach food and water.",q:"Why is raw manure a water quality concern even though manure is a good fertilizer?",a:"Unaged manure still contains pathogenic bacteria and pharmaceuticals the animals did not process, which rain or over-irrigation can wash into waterways."},
+  {t:"Pesticide residence time",i:"All pesticides are eventually broken down by soil microbes, but the time it takes decides the risk. Days is fine; 10 to 20 years means the compound will likely travel to surface or groundwater.",f:"Residence time = time to break down from toxic into <b>non-toxic products</b>.",q:"What does residence time mean for a pesticide, and why does it matter?",a:"The time microbes need to break it into non-toxic products. Long residence (10 to 20 years) means it is likely to leave the field and reach water."},
+  {t:"Overdrafting",i:"Using water faster than it can be replenished, like writing checks beyond your balance. Applies to surface reservoirs and to groundwater, where it is invisible but severe.",f:"Overdraft can <b>permanently change</b> the reservoir, not just empty it.",q:"Define overdrafting.",a:"Withdrawing water faster than the reservoir can be recharged, so use outstrips supply."},
+  {t:"The Colorado River",i:"From Rocky Mountain National Park through seven states to the Sea of Cortez (Gulf of California), except that about 90% is diverted and it has not reached the sea for 16 to 20 years. The former delta wetlands and estuary are desert.",f:"<b>30 million people</b>, 7 states, ~<b>90% diverted</b>, 70% of that to irrigate about <b>3 million acres</b>.",q:"What has happened to the Colorado River delta and why?",a:"Diversions of about 90% of the river for agriculture and cities mean it no longer reaches the Sea of Cortez; the delta wetlands are now barren desert."},
+  {t:"The pulse flow",i:"Karl Flessa, a geologist at the University of Arizona, spent ten years arranging a release from Morelos Dam (the last dam, at the California, Arizona, Mexico border) so the river could follow its historic path to the sea and restore wetlands and estuary.",f:"Morelos Dam is the <b>last dam</b> on the Colorado; the pulse is to be repeated.",q:"What was the Colorado River pulse flow experiment?",a:"A planned release from Morelos Dam to let the river flow its historic course to the Sea of Cortez and restore delta wetlands, including migratory bird habitat on the Pacific flyway."},
+  {t:"Saltwater intrusion",i:"Pumping a coastal aquifer creates hydraulic pressure that lets seawater push into the freshwater lens, making the irrigation water brackish. Injecting fresh water in a well nearer the coast holds it back only partly and needs extra fresh water.",f:"California has intrusion up to <b>12 miles inland</b>.",q:"How does saltwater intrusion happen, and how is it mitigated?",a:"Pumping fresh groundwater near a coast creates pressure that draws seawater into the freshwater lens. Injecting fresh water in an outer well slows it but does not solve it."},
+  {t:"Subsidence",i:"Water holds the aquifer's pores open. Overdraft lets them collapse; pores may remain but no longer connect, or close entirely, so recharge is impossible. Recharge happens only where no confining rock covers the aquifer.",f:"California's land surface dropped visibly between <b>1925 and 1977</b>.",q:"What is subsidence and why does it limit recharge?",a:"The collapse of the permeable rock's pore spaces after the water holding them open is removed; collapsed or disconnected pores cannot take water back in."},
+  {t:"Florida's two kinds of subsidence",i:"Florida sits on karst: limestone that water dissolves, so sinkholes form naturally. Overdrafting adds a second cause, water removed and not replaced so the ground above collapses.",f:"Sinkhole = <b>natural karst</b>; overdraft subsidence = <b>human</b>.",q:"Why does Florida have two causes of subsidence?",a:"Natural dissolution of limestone (karst) makes sinkholes, and overdrafting the aquifer removes the water that supported the ground."},
+  {t:"Gleeson's groundwater footprint",i:"The footprint is the area needed to sustain current groundwater use for all uses, natural and agricultural. Divide it by the aquifer's real area: above one means overuse.",f:"Overused examples: <b>North Arabian</b> aquifer and the <b>High Plains</b> aquifer that powers Plains agriculture.",q:"What does a groundwater footprint to aquifer area ratio above one mean?",a:"Groundwater is being used unsustainably: the area needed to support the use exceeds the aquifer's actual area."}
+ ],
+ ask:["Define overdrafting.","What share of the Colorado River is diverted, and where should it end?","Where did the pulse flow experiment begin?","Explain saltwater intrusion.","What is subsidence?","What is the natural cause of Florida sinkholes?","What does a groundwater footprint ratio above one mean?","Why is raw manure a concern?"],
+ quiz:[
+  {q:"Overdrafting an aquifer means...",o:["using water faster than it can be recharged","pumping water only in winter","adding water to the aquifer","using surface water instead of groundwater"],c:0,e:"Her image is a checking account: writing checks beyond the balance. Beyond running dry, it can permanently damage the aquifer's structure."},
+  {q:"Roughly what share of the Colorado River is diverted before it reaches Mexico?",o:["90%","10%","50%","25%"],c:0,e:"About 90%, serving 30 million people across seven states, with 70% of that irrigating some 3 million acres. Mexico takes the last of it, and the river has not reached the Sea of Cortez in 16 to 20 years."},
+  {q:"The pulse flow experiment released water from...",o:["Morelos Dam, the last dam on the Colorado","Hoover Dam","Glen Canyon Dam","a dam in Rocky Mountain National Park"],c:0,e:"Morelos Dam sits at the California, Arizona and Mexico border. Karl Flessa's release let the river run its historic channel toward the sea to restore delta wetlands."},
+  {q:"Saltwater intrusion occurs when...",o:["pumping near a coast creates hydraulic pressure that pulls seawater into the freshwater lens","rain washes salt into the aquifer","farmers irrigate with seawater","the ocean level drops"],c:0,e:"The freshwater lens under a coast is pushed on by the sea. Draw it down and seawater moves in, making irrigation water brackish. In California this reaches up to 12 miles inland."},
+  {q:"Subsidence is...",o:["the collapse of an aquifer's pore spaces after the water holding them open is removed","the rise of the water table","the filling of an aquifer with salt","the erosion of topsoil by wind"],c:0,e:"Water was supporting the rock. Remove it and the pores close or disconnect, so the aquifer can no longer hold or take in water; the land surface above can drop."},
+  {q:"Sinkholes in Florida form naturally because...",o:["water dissolves the limestone (karst) beneath the surface","the sand is too loose","hurricanes flood the aquifer","overdrafting is banned"],c:0,e:"Florida's karst geology is porous limestone that water slowly dissolves; where enough rock has gone, the ground collapses. Overdrafting adds a second, human cause."},
+  {q:"In Gleeson's analysis, a groundwater footprint larger than the aquifer's area means...",o:["groundwater is being used unsustainably","the aquifer is recharging","the aquifer is unused","the footprint was measured wrong"],c:0,e:"The footprint is the area needed to sustain current use. A ratio above one, as for the North Arabian and High Plains aquifers, means use outruns what the aquifer can supply."},
+  {q:"Raw, unaged manure is a water quality concern because it may carry...",o:["pathogenic bacteria and unprocessed pharmaceuticals","too much organic matter","extra oxygen","only phosphorus"],c:0,e:"Aged manure is a fine fertilizer. Raw manure from CAFO animals treated with antibiotics can move pathogens and drugs into food and waterways with the next rain."},
+  {q:"Which pesticide is more likely to reach surface or groundwater?",o:["One with a residence time of 10 to 20 years","One that breaks down in a few days","One applied only once","One with no toxicity"],c:0,e:"Residence time is how long microbes need to turn the toxic product into non-toxic ones. A compound that lasts decades has far more chances to leave the field."}
+ ]},
+{id:"2.7",wk:6,title:"Salinization and Water Conservation",words:3705,
+ gist:"Salinization is the buildup of salts in soil from weathering, saline groundwater, granular fertilizer and saltwater intrusion, and it is worst in arid land where there is never enough water to leach the salts out. Sodium displaces calcium, aggregates disperse, drainage fails, and the cycle feeds itself until the land is abandoned (20% of arable land, 12 billion dollars a year). Remediate sodicity first (gypsum, drainage), then salinity; prevent it with good water, well-timed leaching and drainage; conserve with scheduling, precision agriculture, tailwater return, covered beds and cultivar choice.",
+ line:["A salt is a cation plus an anion with no net charge: sodium, potassium, calcium, magnesium with chloride, phosphate, sulfate, nitrate, nitrite, fluoride.",
+  "Sources: natural weathering (slow), salts in groundwater, granular synthetic fertilizer, saltwater intrusion. Groundwater salts and intrusion are made worse by irrigation.",
+  "Salinity is measured by electrical conductivity; crops vary in tolerance and options shrink as it rises. It is worst in arid regions because salts never leach, and furrow evaporation leaves a white crust.",
+  "Salinity (any salt), sodicity (sodium specifically), alkalinity (pH rises): a soil can be all three.",
+  "The cycle: sodium replaces calcium, calcium leaches, plants lose a nutrient and struggle osmotically, pH rises and locks up phosphorus, aggregates disperse, pores and permeability fall, drainage fails, salts stop leaching, sodium climbs.",
+  "Remediation: fix sodicity first with gypsum (calcium) and drainage, then flush salinity with clean water; expensive and the brine needs a home. Prevention: good water, timed leaching pulses, drainage.",
+  "Conservation: irrigation scheduling (blunted by water subsidies), precision agriculture with sensors and variable-rate application, tailwater return, raised beds under visqueen or mulch, cultivar choice; CSIRO's salt-tolerant wheat via traditional breeding, 25% more yield on saline soil."],
+ cards:[
+  {t:"What a salt is",i:"A compound of a cation and an anion that together carry no net charge. The cations that matter are sodium, potassium, calcium, magnesium; the anions chloride, phosphate, sulfate, nitrate, nitrite, fluoride.",f:"Salinity is measured in the soil by <b>electrical conductivity</b>.",q:"How is soil salinity measured?",a:"By electrical conductivity: the more salt, the higher the conductivity."},
+  {t:"Where the salt comes from",i:"Natural weathering of minerals (very slow), salts already in groundwater, synthetic fertilizer delivered as granular salts, and saltwater intrusion into coastal aquifers.",f:"Two sources are <b>made worse by irrigation</b>: saline groundwater and saltwater intrusion.",q:"Name the four sources of soil salts and the two that irrigation worsens.",a:"Weathering, salts in groundwater, fertilizer salts, saltwater intrusion. Irrigation worsens the groundwater and intrusion sources."},
+  {t:"Why arid land salinizes",i:"Elsewhere rain or heavy irrigation leaches salts down and away. In arid regions there is never enough water to leach, so every irrigation and every fertilizer application leaves its salt behind. Furrow irrigation evaporates and leaves a white crust on the furrow edges.",f:"The missing ingredient is <b>enough water to leach</b>.",q:"Why is salinization most severe in arid, irrigated regions?",a:"Because there is too little precipitation or irrigation to leach salts out, so the salts from groundwater and fertilizer accumulate in the soil."},
+  {t:"Salinity, sodicity, alkalinity",i:"Salinity is the total salt content of any kind. Sodicity is specifically sodium. Alkalinity is the pH rise that salts cause. A soil can be saline and alkaline, or saline, sodic and alkaline.",f:"<b>Sodic = sodium only</b>. This distinction decides the order of remediation.",q:"Distinguish salinity, sodicity and alkalinity.",a:"Salinity: any salts. Sodicity: sodium content specifically. Alkalinity: high pH caused by the salts."},
+  {t:"The cost",i:"Salinization is a leading cause of lost farmland, hand in hand with desertification. Land gets abandoned because remediation is so costly. Salt also corrodes farm infrastructure.",f:"<b>20%</b> of arable land affected (some say up to 50%), about <b>12 billion dollars a year</b>.",q:"How much arable land is affected by salinity and what does it cost?",a:"About 20% of arable land (up to 50% by some sources), costing agriculture around 12 billion dollars a year."},
+  {t:"The salinization cycle",i:"Excess sodium replaces calcium on the soil; the calcium leaches away. Plants lose a nutrient and cannot take up water well (osmoregulation); pH rises and locks up phosphorus and micronutrients; without calcium the aggregates disperse, pores collapse, permeability and drainage fall, salts can no longer leach, sodium rises further.",f:"The hinge is <b>sodium replacing calcium</b>, which both starves the plant and destroys structure.",q:"Walk through the salinization cycle.",a:"High sodium replaces calcium, calcium leaches, aggregates break down, pore space and permeability drop, drainage and leaching fail, so salts and sodium keep building up."},
+  {t:"Remediation, in order",i:"Sodicity first: a sodic soil will not drain, so salts cannot be flushed. Add large amounts of gypsum (calcium) and install drainage. Then salinity: lower the water table, flush with clean water. Expensive, and the concentrated brine has to go somewhere.",f:"Order: <b>sodicity, then salinity</b>. Tool: <b>gypsum</b>.",q:"Why must sodicity be remediated before salinity, and with what?",a:"Sodic soils have lost structure and drainage, so salts cannot be flushed until gypsum (calcium) restores aggregates and drainage is added; only then can clean water leach the remaining salts."},
+  {t:"Preventing salinization",i:"Use good quality irrigation water (a real barrier in developing countries without testing), irrigate at the right time and in big enough pulses to leach salts rather than constant small doses, and keep drainage adequate so the water table does not rise into the root zone.",f:"<b>Pulses that leach</b> beat frequent small waterings.",q:"Name three practices that prevent salinization.",a:"Good quality irrigation water, irrigation timed and sized to leach salts, and adequate drainage to keep the water table down."},
+  {t:"Conserving water",i:"Schedule irrigation (rarely done well because water subsidies hide the cost), precision agriculture with moisture and salinity sensors, soil maps, GIS layers and variable-rate application, tailwater return (clean and reuse water that already ran through the field), raised beds under visqueen or mulch, and cultivar choice.",f:"CSIRO's salt-tolerant wheat: a gene found by biotechnology, moved by <b>traditional breeding</b>, <b>not GM</b>, <b>25% more yield</b> on saline soils.",q:"What is precision agriculture, and how was the Australian salt-tolerant wheat made?",a:"Using sensors, soil maps and GIS to map field variability and apply water, fertilizer and pesticide at variable rates. The wheat gene was identified with molecular tools then bred in traditionally, so it is not genetically engineered; it yields 25% more on saline soil."}
+ ],
+ ask:["How is soil salinity measured?","Which sources of salt are worsened by irrigation?","Why is salinization worst in arid climates?","Distinguish sodicity from salinity.","What must be remediated first and with what amendment?","What share of arable land is affected by salinity?","Was the Australian salt-tolerant wheat genetically modified?","Why do water subsidies work against conservation?"],
+ quiz:[
+  {q:"Soil salinity is measured by...",o:["electrical conductivity","soil color","the number of macropores","the carbon to nitrogen ratio"],c:0,e:"Dissolved salts conduct electricity, so conductivity tracks salt content of every kind, not only sodium. As it rises, the crops you can grow profitably shrink."},
+  {q:"Salinization is worst in arid regions because...",o:["there is never enough water to leach the salts out of the soil","arid soils contain more clay","fertilizers are stronger there","plants transpire more salt"],c:0,e:"Irrigation water and granular fertilizer both deliver salt. With ample rain or irrigation the salt leaches down and away; in arid land it stays and accumulates, sometimes as a white crust on furrow edges."},
+  {q:"A sodic soil is one with...",o:["a high sodium content specifically","high levels of any salt","a low pH","a high organic matter content"],c:0,e:"Sodicity is sodium only. Salinity is all salts. Alkalinity is the pH rise the salts cause. A soil can be all three at once."},
+  {q:"In the salinization cycle, sodium replaces which element on the soil?",o:["Calcium","Nitrogen","Iron","Carbon"],c:0,e:"Calcium is both a plant nutrient and the glue of soil aggregates. When sodium displaces it and it leaches away, the plant is short a nutrient and the soil structure falls apart, so drainage and leaching fail and the salts build further."},
+  {q:"Which must be remediated FIRST in a saline, sodic soil?",o:["Sodicity, using gypsum and drainage","Salinity, by flushing with clean water","Alkalinity, by adding lime","Nothing; they are treated at once"],c:0,e:"A sodic soil has lost its aggregates and will not drain, so flushing cannot work. Gypsum supplies calcium to rebuild structure and drainage moves water through; then clean water can leach the remaining salts."},
+  {q:"What share of arable land does Weeks say is affected by salinity?",o:["About 20%, with some sources saying up to 50%","About 2%","About 75%","None, it is a historical problem"],c:0,e:"Around 20% (up to 50% by some sources), costing agriculture roughly 12 billion dollars a year, and much of it is abandoned because remediation is so expensive."},
+  {q:"The salt-tolerant wheat developed in Australia is...",o:["not genetically modified; the gene was found with molecular tools and bred in traditionally","a genetically engineered crop","a wild grass, not wheat","only useful in wet climates"],c:0,e:"CSIRO isolated the tolerance gene from an ancestral relative using biotechnology, then used traditional breeding to cross it into production wheat. On saline soils it yields about 25% more; on normal soil it performs like regular wheat."},
+  {q:"Which of these is NOT a water conservation practice from the lecture?",o:["Frequent small waterings to keep the surface moist","Tailwater return","Precision agriculture with variable-rate application","Raised beds under visqueen or mulch"],c:0,e:"Constant small doses build salt and waste water. The lecture favors scheduled irrigation, sensors and GIS-guided variable rates, reusing tailwater, covered beds that cut evaporation, and cultivar choice."}
+ ]},
+{id:"2.8",wk:6,title:"Desertification",words:2837,
+ gist:"Desertification turns semi-arid land into arid land, always through human mismanagement (overgrazing, overcultivation, deforestation) and worsened by drought and wind. Less vegetation means more erosion, a baked and sealed surface, more runoff and less infiltration, which deepens the drought. The Sahel shows it in firewood harvest, stubble grazing and shifting sand; the Aral Sea, drained to grow cotton, is the extreme case: 90% of its area gone, its fish extinct, its people sick.",
+ line:["Desertification: conversion of semi-arid land to arid, a consequence of anthropogenic mismanagement, exacerbated by drought and by wind erosion. Vulnerable areas include large parts of the US and Asia.",
+  "Three causes: overgrazing (a carrying capacity problem when a drought year follows a good year), overcultivation (skipping fallow under economic pressure), deforestation (windbreaks and soil anchors lost to firewood or land clearing).",
+  "The cycle: drought or mismanagement, less vegetation, more erosion, exposed soil bakes and seals, more evaporation and runoff, less infiltration and percolation, worse drought.",
+  "Effects: damaged hydrologic cycle, less soil moisture and groundwater recharge, surface water fouled with eroded soil. The Sahel (Darfur, Sudan): stunted firewood trees, cattle on sorghum stubble, sand burying date palms.",
+  "Remediation depends on how far it has gone; once soil structure and salinity are both ruined, the land is usually abandoned.",
+  "The Aral Sea: cotton replaced rain-fed grain from the 1950s, two feeder rivers were diverted, the lake lost 90% of its area, split by a salt field, all 24 native fish extinct locally, ports stranded, herbicide runoff and salt dust driving cancers, anemia and infant mortality."],
+ cards:[
+  {t:"Desertification, defined",i:"The conversion of semi-arid land into arid land, the very land dryland agriculture depends on. Always the result of human management choices; drought and wind make it worse but do not start it.",f:"<b>Always anthropogenic</b>, exacerbated by drought and wind.",q:"Define desertification and name what causes it.",a:"The conversion of semi-arid land to arid land, caused by human mismanagement and made worse by drought and wind erosion."},
+  {t:"Three causes",i:"Overgrazing: too many animals for the land to regenerate. Overcultivation: subsistence economics push farmers to skip the fallow the soil needs. Deforestation: trees cut for firewood or land clearing take their windbreak and root anchoring with them.",f:"Overgrazing, overcultivation, <b>deforestation</b>.",q:"What are the three human causes of desertification?",a:"Overgrazing, overcultivation (no fallow) and deforestation."},
+  {t:"Carrying capacity",i:"The number of animals a habitat can support. The trap is stocking heavily after a good rain year; when a drought year follows, the land cannot carry the same herd and the vegetation fails to recover.",f:"The damage comes when a <b>poor year follows a good year</b>.",q:"How does carrying capacity explain overgrazing in drylands?",a:"Herds sized for a wet year exceed what the land can support in the following dry year, so vegetation does not recover and the soil is exposed to erosion."},
+  {t:"The desertification cycle",i:"Drought or mismanagement leads to less vegetation, more erosion, loose topsoil carried away, exposed soil baking into a hard pan and sealing when rain comes, so more evaporation and runoff and less infiltration and percolation, which deepens the drought.",f:"Sealed soil means rain <b>runs off instead of soaking in</b>.",q:"Trace the desertification cycle from drought to worse drought.",a:"Less vegetation, more erosion, exposed soil bakes and seals, more evaporation and runoff, less infiltration and groundwater recharge, more drought."},
+  {t:"Effects on water",i:"Damaged soil takes in less water, so infiltration and percolation fall and runoff rises: less soil moisture, less groundwater recharge, and surface water fouled by the eroded sediment.",f:"Both <b>quantity</b> (recharge) and <b>quality</b> (sediment) of water suffer.",q:"How does desertification affect water supply?",a:"Less infiltration and percolation mean less groundwater recharge, while erosion carries soil into surface water and degrades its quality."},
+  {t:"The Sahel",i:"The semi-arid band between the Sahara and the wetter tropics, full of subsistence farming and losing land fast. In Darfur and Sudan: trees stunted by repeated firewood harvest, cattle grazing sorghum stubble (feeds the animals but churns the soil and removes organic matter), roadside firewood markets, sand drifting over date palms, baked impervious soil.",f:"Trees lost to <b>firewood</b> remove both the windbreak and the soil anchor.",q:"Give three Sahel examples of practices that drive desertification.",a:"Repeated firewood harvest stunting and killing trees, cattle grazing crop stubble, and removal of windbreaks leading to shifting sand over fields."},
+  {t:"Can it be reversed",i:"It depends on how far it has gone. Desertified soil has lost structure and holds less moisture, and often carries salinity too. When structure and salinity are both ruined, the land usually cannot be farmed again and is abandoned.",f:"Structure plus salinity damage usually means <b>abandonment</b>.",q:"When can desertified land not be recovered for agriculture?",a:"When both soil structure and salinity have been degraded; remediation is then too costly and the land is abandoned."},
+  {t:"The Aral Sea",i:"A landlocked lake between Kazakhstan and Uzbekistan in a semi-arid region once farmed for rain-fed grain. From the 1950s the two feeder rivers were diverted to irrigate cotton, white gold, which needs far more water and an herbicide defoliant for harvest.",f:"<b>66,000 km² in 1960 to 24,000 km² in 2000</b>: about <b>90% of its area</b> lost; now two small lakes divided by a salt field.",q:"What happened to the Aral Sea and why?",a:"Its feeder rivers were diverted from the 1950s to irrigate cotton, so it lost about 90% of its area (66,000 to 24,000 km² between 1960 and 2000) and split into two saline lakes."},
+  {t:"The Aral aftermath",i:"Concentrating the remaining water made it too saline for irrigation or anything else. All 24 native fish species are locally extinct, port cities sit beside stranded ships, and unregulated herbicide and pesticide runoff plus salt are linked to cancers, anemia and infant mortality.",f:"<b>24 native fish species</b> extinct locally.",q:"Name three consequences of the Aral Sea's collapse.",a:"Salinity too high to use, extinction of the 24 native fish species and collapse of the ports, and human health effects (cancers, anemia, infant mortality) from herbicide contamination."}
+ ],
+ ask:["Desertification converts which kind of land into which?","Is desertification natural or anthropogenic?","Name the three causes.","Explain carrying capacity and the good year then bad year trap.","Why do windbreak trees matter?","What crop replaced grain around the Aral Sea, and what did it need?","How much of the Aral Sea's area was lost?"],
+ quiz:[
+  {q:"Desertification is the conversion of...",o:["semi-arid land into arid land","arid land into semi-arid land","forest into grassland","wetland into cropland"],c:0,e:"It removes exactly the land that dryland agriculture depends on. Weeks stresses it is always a consequence of human management, with drought and wind making it worse."},
+  {q:"Which of these is NOT one of the three causes of desertification in the lecture?",o:["Excess irrigation with fresh water","Overgrazing","Overcultivation","Deforestation"],c:0,e:"The three are overgrazing (carrying capacity), overcultivation (no fallow) and deforestation (lost windbreaks and root anchoring). Irrigation issues belong to salinization, a related but separate problem."},
+  {q:"Overgrazing damage typically happens when...",o:["a poor rainfall year follows a good year in which herds were expanded","rain is constant every year","herds are kept very small","livestock are moved daily"],c:0,e:"Herds are sized for the wet year's carrying capacity. In the dry year that follows, the vegetation cannot support them and does not recover, leaving bare soil open to erosion."},
+  {q:"In the desertification cycle, exposed soil that bakes in the sun...",o:["seals when rain comes, so water runs off instead of infiltrating","absorbs more water than before","becomes richer in organic matter","recharges the aquifer faster"],c:0,e:"The hardened, sealed surface acts like dry mud: more evaporation, more runoff, less infiltration and percolation, and so an even drier soil and aquifer."},
+  {q:"Trees matter in dryland areas mainly because they...",o:["act as windbreaks and anchor the soil","shade out the crops","use less water than grass","attract rain"],c:0,e:"Cut for firewood or cleared for fields, they take the windbreak and the root anchoring with them; then wind erosion and shifting sand move in over the crops."},
+  {q:"The Aral Sea shrank because its feeder rivers were diverted to grow...",o:["cotton","wheat","rice","dates"],c:0,e:"From the 1950s to the 1990s the region switched from rain-fed grain to irrigated cotton, white gold, which needs far more water plus an herbicide defoliant for harvest. The lake lost about 90% of its area."},
+  {q:"Between 1960 and 2000 the Aral Sea's area fell from about 66,000 km² to about...",o:["24,000 km²","60,000 km²","6,000 km²","1,000 km²"],c:0,e:"Roughly 90% of the area and a large share of the volume were lost, and the remaining water became far more saline. Today it is two small lakes separated by a salt field."},
+  {q:"Desertified land usually cannot be farmed again when...",o:["both soil structure and salinity have been ruined","only the trees are gone","rainfall returns to normal","the herds are removed"],c:0,e:"Structure loss means the soil no longer holds moisture; add the salinity that often comes with it and remediation costs more than the land is worth, so it is abandoned."}
+ ]},
+{id:"2.10",wk:6,title:"Agriculture and Eutrophication",words:5461,
+ gist:"Cultural eutrophication is nutrient pollution on a human timescale, from synthetic fertilizer, CAFOs and household fertilizers, soaps and detergents. Soluble inorganic fertilizer moves: phosphorus mostly by runoff because it is immobilized in soil, nitrate by leaching into groundwater. A pulse of phosphorus, the limiting nutrient in lakes, drives plankton growth, die-off, oxygen-consuming decomposition and nutrient release in a cycle that builds dead zones like the Gulf of Mexico's. It is reversible if the inputs stop.",
+ line:["Cultural eutrophication is anthropogenic and happens over decades; natural eutrophication takes centuries to millennia. Florida lakes are naturally eutrophic, and agriculture accelerates them.",
+  "Sources: synthetic fertilizers, CAFOs, and household and commercial fertilizers, detergents and soaps (phosphates). Nutrient pollution is a non-target effect, concerning nitrogen and phosphorus.",
+  "Point sources can be traced to one spot (a CAFO outfall, a sewage pipe); non-point sources are diffuse, like fertilizer running off across a landscape.",
+  "Synthetic fertilizer is inorganic and soluble, so it moves easily; organic fertilizer stays immobilized until mineralized. Phosphorus leaves by runoff (it is fixed in soil fast); nitrate leaches into groundwater, worse with inorganic forms, sandy soils, shallow water tables, high doses and bad timing.",
+  "The Green Revolution: Norman Borlaug bred high-yield, disease-resistant rice and wheat by traditional breeding after the 1940s famines, but the varieties relied on irrigation, pesticides and synthetic fertilizer.",
+  "The cycle: nutrient pulse, phytoplankton and weed growth, more fish, die-offs, decomposition consuming oxygen and releasing nutrients, shading, more die-off. Below a thermocline the bottom goes anoxic and sessile life dies: the Gulf of Mexico dead zone, largest in the world, fed by the Mississippi draining 30 states.",
+  "Reversible when inputs stop (Tampa, the Black Sea after the Soviet collapse). Fixes: less fertilizer, better formulations and timing, residue and reduced tillage, BMPs, phosphate-free detergents, CAFO siting, algal turf scrubbers, feed efficiency (Dr. Cohn, University of Maryland)."],
+ cards:[
+  {t:"Cultural vs natural eutrophication",i:"Both add nutrients and sediment to a water body. Natural eutrophication comes from plant matter and die-offs over centuries or millennia. Cultural eutrophication is human-mediated, from fertilizer and animal waste, and plays out in decades.",f:"<b>All Florida lakes are naturally eutrophic</b>: shallow, productive, nutrient-rich. Agriculture speeds them up.",q:"What separates cultural from natural eutrophication?",a:"The source and the timescale: natural comes from natural organic inputs over centuries to millennia; cultural comes from human nutrient pollution over decades."},
+  {t:"Three sources",i:"Synthetic fertilizers, concentrated animal feeding operations, and the one people forget: household and commercial fertilizers, detergents and soaps, which carry phosphates for cleaning power.",f:"Nutrient pollution is a <b>non-target effect</b> of fertilizing crops.",q:"Name the three sources of cultural eutrophication.",a:"Synthetic fertilizers, CAFOs, and household or commercial fertilizers, detergents and soaps."},
+  {t:"Point vs non-point sources",i:"A point source can be traced to one spot: a CAFO's canal into a bay, a sewage pipe. A non-point source is diffuse, such as fertilizer running off many fields or lawns across a landscape.",f:"Agricultural runoff is the classic <b>non-point</b> source.",q:"Give an example of a point source and a non-point source of nutrient pollution.",a:"Point: a single CAFO outfall or sewage pipe. Non-point: fertilizer runoff across a landscape of fields or lawns."},
+  {t:"Why synthetic fertilizer moves",i:"Synthetic fertilizer is inorganic, already soluble and plant-ready, which is exactly why it runs off and leaches so easily. Organic fertilizers (compost, aged manure) hold nutrients immobilized in tissue until mineralized, so they leach less and are used in smaller amounts.",f:"<b>Soluble = mobile.</b> Inorganic nutrients move with water; organic ones wait.",q:"Why are synthetic fertilizers more of an eutrophication problem than organic ones?",a:"They are inorganic and soluble, so they move readily in runoff and leaching, whereas organic nutrients stay immobilized until mineralized."},
+  {t:"Phosphorus runs off, nitrogen leaches",i:"Phosphorus is immobilized almost immediately in soil, so it leaves mainly on the surface, in runoff and eroded soil. Nitrate stays soluble and leaches down into groundwater.",f:"<b>P: runoff. N: leaching.</b> Nitrates in water are toxic, especially for pregnant women and infants.",q:"Which nutrient leaves fields mainly by runoff and which by leaching, and why?",a:"Phosphorus by runoff, because it is immobilized in soil almost at once; nitrogen (nitrate) by leaching, because it stays soluble and moves down to groundwater."},
+  {t:"What increases nitrate leaching",i:"Inorganic (soluble) nitrogen, sandy or porous soil, a shallow soil above the water table, high application amounts, and application just before irrigation or heavy rain.",f:"Five factors: <b>form, soil texture, soil depth, amount, timing</b>.",q:"List the factors that increase nitrogen leaching.",a:"Inorganic form, sandy or porous soil, shallow depth to the water table, large amounts applied, and timing just before rain or irrigation."},
+  {t:"The Green Revolution",i:"After 1940s famines (about four million deaths in India) Norman Borlaug spent decades in Mexico, China and India breeding high-yield, disease-resistant rice and wheat by traditional breeding, for which he won the Nobel Peace Prize. The varieties depended on irrigation, pesticides and synthetic fertilizer, which is where today's problems began.",f:"Traditional breeding, <b>not genetic engineering</b>; reliance on <b>irrigation, pesticides, synthetic fertilizer</b>.",q:"What did the Green Revolution achieve and what did it lock in?",a:"Borlaug's traditionally bred high-yield, disease-resistant wheat and rice averted famine, but the varieties relied on irrigation, pesticides and synthetic fertilizer, spreading fertilizer use worldwide."},
+  {t:"The eutrophication cycle",i:"A pulse of phosphorus (the limiting nutrient in lakes) enriches the water; phytoplankton and aquatic weeds bloom; fish and grazers multiply; then die-offs; decomposition at the bottom consumes oxygen and releases the nutrients again; dense growth shades the depths and more dies.",f:"<b>Phosphorus is more limiting</b> than nitrogen in aquatic systems, especially lakes.",q:"Why does eutrophication become a self-sustaining cycle?",a:"Die-offs from the bloom are decomposed, which uses up oxygen and releases the nutrients back into the water, driving the next bloom while shading kills more."},
+  {t:"Dead zones and the thermocline",i:"In oceans and deep lakes the water does not mix through the thermocline. Surface waves oxygenate the top, but decomposition below uses up the oxygen and the bottom goes anoxic; mobile fish leave, sessile crabs, shellfish and worms die. The Gulf of Mexico dead zone is the largest in the world, fed by the Mississippi draining 30 states, and returns every spring and summer.",f:"Gulf dead zone: <b>over 50 miles by 50 miles</b>, likely larger, off Louisiana, Mississippi and Alabama.",q:"What is a dead zone and what role does the thermocline play?",a:"An anoxic bottom layer where decomposition has consumed the oxygen; the thermocline stops surface oxygen from mixing down, so sessile organisms die."},
+  {t:"Reversal and remedies",i:"Stop the nitrogen and phosphorus and the cycle breaks: Tampa is recovering, and the Black Sea improved when the Soviet collapse shut down fertilizer use. Remedies: lower rates, lower-nutrient formulations, timing around rain and irrigation, reduced tillage and crop residue, best management practices (few incentives or penalties), phosphate-free detergents, CAFO siting.",f:"The cycle is <b>reversible</b>: remove the inputs.",q:"Is eutrophication reversible, and what are the two examples?",a:"Yes, if nutrient inputs stop: the Tampa area and the Black Sea, which recovered after fertilizer use collapsed with the Soviet economy."},
+  {t:"Two research fixes",i:"Algal turf scrubbers run nutrient-laden water (dairy wash water) over algae mats that take up the nutrients; the algae then become fertilizer. Dr. Cohn at the University of Maryland models dairy feed so cows excrete less nitrogen.",f:"A 100-cow dairy's scrubber yields fertilizer for <b>15 acres of corn</b>; scrubbers also work on the Suwannee and in Ocala National Forest.",q:"How does an algal turf scrubber reduce nutrient pollution?",a:"Nutrient-rich water runs over algae on plastic mats; the algae absorb the nutrients and clean the water, and the harvested algae become fertilizer."}
+ ],
+ ask:["What distinguishes cultural from natural eutrophication?","Which nutrient moves mostly by runoff, which by leaching?","Point versus non-point source examples.","Why are synthetic fertilizers more mobile than organic?","Which nutrient is more limiting in lakes?","What did Borlaug's varieties rely on?","What creates the anoxic bottom in a dead zone?","Which factors increase nitrate leaching?"],
+ quiz:[
+  {q:"Cultural eutrophication differs from natural eutrophication in that it...",o:["is human-mediated and happens over decades rather than centuries","only occurs in the ocean","is caused by fish die-offs alone","cannot be reversed"],c:0,e:"Both add nutrients and sediment, but natural sources (decaying plant matter, die-offs) work over centuries to millennia. Human nutrient pollution from fertilizer and animal waste does it in decades, and it is reversible if the inputs stop."},
+  {q:"Which nutrient mainly leaves fields by surface runoff rather than by leaching?",o:["Phosphorus, because it is immobilized in soil almost immediately","Nitrogen, because it is insoluble","Potassium, because it is a gas","Carbon, because it binds to sand"],c:0,e:"Phosphorus is fixed in soil fast, so it travels attached to eroding surface soil. Nitrate stays soluble and leaches down into groundwater instead."},
+  {q:"A single CAFO's canal draining into a bay is an example of a...",o:["point source","non-point source","natural source","thermocline"],c:0,e:"A point source can be traced to one identifiable place. Fertilizer running off many fields or lawns across a landscape is diffuse and therefore non-point."},
+  {q:"Synthetic fertilizers cause more eutrophication than organic ones because they are...",o:["inorganic and soluble, so they move easily in runoff and leaching","used in smaller amounts","bound inside plant tissue","slow to release"],c:0,e:"Being plant-ready means being water-soluble, and soluble nutrients move wherever water goes. Organic nutrients in compost or aged manure stay immobilized until mineralized."},
+  {q:"In lakes, the more limiting nutrient for eutrophication is...",o:["phosphorus","nitrogen","carbon","oxygen"],c:0,e:"Phosphorus is scarce in lakes because it gets locked into bottom sediments, so an added pulse stimulates immediate plankton and weed growth. Nitrogen matters too, but phosphorus is the limiter."},
+  {q:"Norman Borlaug's Green Revolution crops were created by...",o:["traditional breeding for high yield and disease resistance","genetic engineering","irradiating seeds","crossing wheat with cotton"],c:0,e:"Traditional breeding in Mexico, China and India. The catch is that the new varieties depended on irrigation, pesticides and synthetic fertilizer, which spread those inputs across the developing world."},
+  {q:"Which of these does NOT increase nitrate leaching?",o:["Applying nitrogen in an organic, slow-release form","Sandy or porous soil","A shallow soil above the water table","Applying fertilizer just before heavy rain"],c:0,e:"Leaching rises with inorganic (soluble) forms, porous soils, shallow depth to groundwater, large amounts and bad timing. Organic nitrogen stays immobilized until mineralized, so it leaches less."},
+  {q:"The bottom of the Gulf of Mexico dead zone becomes anoxic because...",o:["decomposition consumes the oxygen and the thermocline stops surface oxygen from mixing down","the water is too cold for fish","the Mississippi carries no oxygen","sunlight cannot reach the surface"],c:0,e:"Dead plankton and animals sink and are decomposed by bacteria that use up the oxygen. Above the thermocline waves keep the water oxygenated, but that oxygen never reaches the bottom, so sessile crabs, shellfish and worms die."},
+  {q:"The Black Sea's recovery from eutrophication was caused by...",o:["the collapse of fertilizer use after the Soviet economic collapse","new dams on its rivers","warmer temperatures","a ban on fishing"],c:0,e:"Farms and industries shut down, fertilizer use fell, and the eutrophic conditions eased. It was not best practice but economics; it does show the cycle reverses once inputs stop, as in Tampa."},
+  {q:"An algal turf scrubber cleans farm water by...",o:["running it over algae mats that absorb the nutrients","adding chlorine","filtering it through sand","boiling off the nitrogen"],c:0,e:"The algae grow on the nutrients and the outflow is cleaner; the harvested algae then serve as fertilizer. A 100-cow dairy can supply fertilizer for about 15 acres of corn this way."}
+ ]},
+{id:"2.11",wk:7,title:"Soil Types and Classification",words:3428,
+ gist:"Soil is the most important component of growing plants: support, aeration, water, nutrient storage, habitat. It is mineral matter from weathered rock (residual or transported), organic matter (not yet plant-available) and inorganic matter (mineralized, available), plus air and water. The profile runs O, A, B, C, bedrock; twelve soil orders exist and ten are farmed, with histosols, mollisols and alfisols the best and Florida mostly on spodosols and sandy entisols.",
+ line:["Soil provides root support, aeration, water and nutrient storage and habitat; nutrients reach plants only dissolved in soil water.",
+  "Components: mineral matter from weathered bedrock (residual if formed in place, transported if carried in), organic matter with its carbon-hydrogen bonds (nutrients locked up), inorganic matter produced by mineralization (nutrients available), air and water.",
+  "Profile horizons: O (organic, litter and humus, biologically active), A (organic mixed with mineral, most roots), B (mineral soil, inorganic compounds, below most roots), C (unmodified parent material), bedrock.",
+  "Profiles are shaped by vegetation, climate and leaching, weathering and age, topography, and parent material. Soils are characterized by texture, structure, color, pH and cation exchange capacity.",
+  "The ideal agricultural soil: about 45% mineral, 5% organic, and half the volume pore space split evenly between air and water. Tillage homogenizes O and A into a plow layer up to 12 inches deep and can compact a hardpan beneath it.",
+  "Twelve orders, ten farmed. Best: histosol (peat, muck, over 20% organic matter, Lake Okeechobee), mollisol (grassland, Midwest), alfisol (hardwood forest). Poor: vertisol (expanding clay), oxisol (weathered tropical, iron and aluminum, natural hardpan, nutrients in the trees not the soil), aridisol (salts). Young: entisol, inceptisol. Florida: spodosol under pine flatwoods (iron-red layer), sandy entisols around Gainesville, rocky ones in Miami-Dade and Palm Beach."],
+ cards:[
+  {t:"What soil does for the plant",i:"Support for roots, aeration, water storage and supply, nutrient storage, and habitat for the organisms that convert nutrients into available forms.",f:"Water in the soil is the <b>only way</b> plants take up nutrients.",q:"List the roles soil plays for a crop.",a:"Root support, aeration, water holding and supply, nutrient storage, and habitat for the organisms that make nutrients available."},
+  {t:"Residual vs transported",i:"The mineral component comes from bedrock broken down by chemical and physical weathering. If it formed where the bedrock lies, the soil is residual (in situ); if erosion or runoff carried it in from elsewhere, it is transported.",f:"<b>Residual</b> = formed in place. <b>Transported</b> = carried in.",q:"What is the difference between a residual and a transported soil?",a:"Residual soil's mineral matter weathered from the bedrock beneath it; transported soil's mineral matter was carried in from another place."},
+  {t:"Organic vs inorganic matter",i:"Organic matter has carbon-hydrogen bonds: plant litter, dead organisms, humus, all full of nutrients plants cannot yet use. Inorganic matter is what mineralization produces once those bonds are broken: ammonium, nitrate and the like, which plants can take up.",f:"The organic fraction is where <b>decomposition</b> happens; the inorganic fraction is what the plant <b>eats</b>.",q:"Why can a plant not use the nutrients in fresh organic matter?",a:"They are locked in carbon-hydrogen bonded tissue; only after mineralization breaks those bonds are they inorganic, soluble and available."},
+  {t:"The five horizons",i:"O: organic surface, litter and humus, most decomposition and soil life. A: organic material mixed with mineral, where most roots live. B: entirely mineral soil and inorganic compounds, usually below crop roots. C: barely modified parent material. Then bedrock.",f:"Most crop roots stop in the <b>A horizon</b>.",q:"Describe the O, A, B and C horizons.",a:"O is organic litter and humus at the surface; A mixes organic and mineral matter and holds most roots; B is mineral soil with inorganic compounds below most roots; C is unmodified parent material above the bedrock."},
+  {t:"What shapes a profile",i:"Vegetation (pine forest, hardwood hammock, wetland), climate and how much leaching the rain drives, weathering and the soil's geological age, topography (transport), and parent material (limestone, granite).",f:"Soils are characterized by <b>texture, structure, color, pH, cation exchange capacity</b>.",q:"Name the factors that determine a soil profile and the five characteristics used to describe soil.",a:"Factors: vegetation, climate and leaching, weathering and age, topography, parent material. Characteristics: texture, structure, color, pH, cation exchange capacity."},
+  {t:"The ideal farm soil",i:"About 45% mineral, 5% organic, and roughly half pore space, ideally half of that air and half water. Deciduous forests and grasslands build thick organic A horizons; the Midwest's converted grasslands (mollisols) are prized for it.",f:"Deciduous forest A horizon: <b>15 to 20%, even 30%</b> organic matter.",q:"Give the composition of an ideal agricultural soil.",a:"Roughly 45% mineral, 5% organic, 50% pore space split evenly between air and water."},
+  {t:"Plow layer and hardpan",i:"Intensive tillage mixes the O and A horizons into one homogenized plow layer up to 12 inches deep. Years of machinery compact a hardpan beneath it that roots cannot punch through and that blocks drainage. Natural hardpans also form where leached minerals accumulate in the B horizon.",f:"Plow layer up to <b>12 inches</b>; hardpan from <b>compaction</b> (or naturally from leached minerals).",q:"What are the plow layer and the hardpan?",a:"The plow layer is the O and A horizons homogenized by tillage to about 12 inches; the hardpan is the compacted, cement-like layer beneath it that stops roots and drainage."},
+  {t:"Best and worst orders",i:"Twelve orders, ten used in agriculture. Best: histosol (organic peat or muck, over 20% organic matter, prone to flooding, Lake Okeechobee), mollisol (grassland roots, Midwest), alfisol (hardwood forests, Northeast). Poor: vertisol (expanding clay, hard to plow, poor drainage), oxisol (weathered tropical, iron and aluminum, natural hardpan), aridisol (dry, poorly drained, salts build up).",f:"Tropical forests look rich, but the biomass is <b>in the trees, not the soil</b>; oxisols are nutrient poor and roots stay shallow.",q:"Which three soil orders are best for agriculture and why are tropical oxisols poor?",a:"Histosol, mollisol, alfisol, all rich in organic matter. Oxisols are heavily weathered, nutrients leach to the B horizon, iron and aluminum accumulate, and the forest's nutrients live in the plants rather than the soil."},
+  {t:"Young orders and Florida's soils",i:"Entisols and inceptisols are geologically young with little profile development; entisols are deep, sandy, fast-draining and nutrient poor. Florida's most common order is the spodosol under pine flatwoods: shallow O horizon of pine needles and an iron-red layer between A and B. Gainesville sits on sandy entisols like beach sand; Miami-Dade and Palm Beach have rocky entisols.",f:"Florida's most common soil: <b>spodosol</b>. Gainesville: <b>sandy entisol</b>, needs lots of organic matter.",q:"What is Florida's most common soil order and how do you recognize it?",a:"Spodosol, under pine flatwoods, with a shallow organic horizon of pine needles and an iron-rich red layer between the A and B horizons."}
+ ],
+ ask:["Which horizon holds most organic matter and biological activity? Which holds most roots?","Residual versus transported soil.","Composition of an ideal agricultural soil (45, 5, 50).","Which three orders are best for agriculture?","Why are tropical soils nutrient poor?","Which order is most common in Florida and what layer marks it?","What causes a hardpan?"],
+ quiz:[
+  {q:"Most of the organic matter and biological activity in a soil profile is in the...",o:["O horizon","B horizon","C horizon","bedrock"],c:0,e:"The O horizon is the organic surface: litter, humus, the decomposers and their habitat. The A horizon below mixes organic with mineral matter and holds most roots; the B horizon is mineral soil."},
+  {q:"A residual soil is one whose mineral material...",o:["weathered in place from the bedrock beneath it","was carried in by erosion or runoff","came entirely from organic matter","was added as fertilizer"],c:0,e:"Residual means in situ. When the mineral component was transported from elsewhere by erosion, runoff or other processes, it is a transported soil."},
+  {q:"An ideal agricultural soil is roughly...",o:["45% mineral, 5% organic, 50% pore space half air and half water","90% mineral and 10% water","50% organic and 50% mineral","100% pore space"],c:0,e:"The pore space is the part people forget: half the volume, ideally split between air for the roots and water for nutrient uptake. Most soils need management to approach this."},
+  {q:"Which soil orders does Weeks rank best for agriculture?",o:["Histosol, mollisol, alfisol","Oxisol, vertisol, aridisol","Entisol, inceptisol, spodosol","Ultisol, oxisol, entisol"],c:0,e:"All three are rich in organic matter: histosols are peat and muck soils (over 20% organic, Lake Okeechobee), mollisols are grassland soils (the Midwest), alfisols formed under hardwood forest."},
+  {q:"Tropical oxisols are nutrient poor because...",o:["the nutrients live in the trees and plants, and the soil is heavily weathered and leached","they are too cold","they contain no iron","they are too young to have formed"],c:0,e:"Heavy weathering leaches nutrients down to the B horizon and leaves iron and aluminum, often as a natural hardpan. The forest's biomass holds the nutrients, so roots spread shallow to catch them as they fall."},
+  {q:"Florida's most common soil order is the...",o:["spodosol, under pine flatwoods, with an iron-red layer between A and B","mollisol, under prairie","histosol, everywhere","vertisol, in the panhandle"],c:0,e:"Pine flatwoods cover much of the state. Their spodosols have a shallow O horizon of pine needles and a distinctive iron-rich red layer. Around Gainesville the soil is a sandy entisol that needs heavy enrichment."},
+  {q:"A hardpan in an agricultural field is caused by...",o:["compaction from years of machinery below the plow layer","adding too much compost","earthworm activity","planting legumes"],c:0,e:"Tillage homogenizes the top 12 inches into a plow layer, and the machinery compacts a cement-like layer beneath it that stops roots and drainage. Natural hardpans form differently, from leached minerals accumulating in the B horizon."},
+  {q:"Entisols are...",o:["young, deep, sandy soils that drain fast and leach nutrients","old, heavily weathered tropical soils","expanding clay soils","organic peat soils"],c:0,e:"Geologically young with little profile development. Gainesville's beach-like sand is an entisol: water and nutrients move through it quickly, so gardens need lots of organic matter or fertilizer."}
+ ]},
+{id:"2.12",wk:7,title:"Decomposition",words:3037,
+ gist:"Decomposition breaks organic matter down so carbon and nutrients can be recycled, and only then can plants take the nutrients up. Fire does it abiotically and fast; bacteria, fungi and termites are the only organisms that break cellulose, while soil animals speed the process. The pace is set by warmth, diversity, aeration and above all the carbon-to-nitrogen ratio: high C:N material robs nitrogen from the soil before it gives any back, which is why composting in organic agriculture takes real knowledge.",
+ line:["Decomposition breaks organic matter into recyclable carbon, energy and nutrients; plants take up nutrients only after mineralization to inorganic forms.",
+  "Abiotic decomposition is fire (swidden, slash and burn, shifting cultivation): rapid, almost complete nutrient release, trace elements like boron and copper freed, nitrogen lost to volatilization, ash raises pH.",
+  "Biotic decomposition is by organisms. Only bacteria, fungi and termites (via protozoan gut symbionts) break down cellulose. Aerobic decomposition releases carbon dioxide and heat; anaerobic decomposition uses carbon dioxide as the acceptor and releases methane.",
+  "Sequence: litter (source identifiable), detritus (smaller, partly identifiable), humus (unidentifiable), mineralized inorganic compounds.",
+  "Soil animals fragment litter for microbial surface area, excrete nitrogen, stimulate and regulate the microbes as predators, and carry decomposers to new places.",
+  "Rates rise with warmth (so warm soils hold less organic matter), organism diversity, aeration (tillage speeds decomposition and burns organic matter) and fall as the C:N ratio rises. Wood is extremely high; animals, bacteria, sewage sludge and alfalfa hay are low.",
+  "High C:N causes nitrogen robbing: decomposers immobilize the nitrogen they free until the ratio falls. Adding synthetic nitrogen to fresh organic matter feeds the bacteria, not the crop. Organic agriculture, which bans synthetic fertilizer, depends on managing C:N in compost."],
+ cards:[
+  {t:"Why decompose",i:"Breaking down organic matter recycles carbon, energy and every nutrient it holds. It is essential in natural and managed systems alike, and it determines plant health because plants only take up mineralized, inorganic nutrients.",f:"No decomposition, <b>no available nutrients</b>.",q:"What is decomposition and why does plant productivity depend on it?",a:"The breakdown of organic matter that recycles carbon and nutrients; plants can only take up the inorganic forms that decomposition releases."},
+  {t:"Fire as abiotic decomposition",i:"Swidden, slash and burn and shifting cultivation all use fire. Nutrients are released rapidly and almost completely, trace elements like boron and copper become more available, nitrogen is mostly lost to volatilization, and the ash makes the soil more alkaline.",f:"Fire: <b>nitrogen volatilizes, ash raises pH</b>.",q:"What happens to nutrients and soil pH when land is cleared by fire?",a:"Nutrients release fast and nearly completely, trace elements become available, nitrogen is lost as gas, and the ash raises soil pH."},
+  {t:"Who breaks down cellulose",i:"Bacteria and fungi are the organisms most directly responsible for biotic decomposition because they alone can digest cellulose and tough plant fibers. Termites can too, through protozoan symbionts in their gut.",f:"Only <b>bacteria, fungi and termites</b> can fully mineralize plant matter.",q:"Which organisms can decompose cellulose?",a:"Bacteria and fungi, plus termites by way of the protozoan symbionts in their gut."},
+  {t:"Aerobic vs anaerobic",i:"With oxygen, decomposition yields carbon dioxide, heat, energy and organic or inorganic products. Without oxygen decomposers use another acceptor such as carbon dioxide, and the products include methane.",f:"Anaerobic decomposition releases <b>methane</b>.",q:"What distinguishes the products of aerobic and anaerobic decomposition?",a:"Aerobic: carbon dioxide, heat and organic or inorganic products. Anaerobic: methane and organic products, using carbon dioxide instead of oxygen as the acceptor."},
+  {t:"Litter to mineral",i:"Litter is organic matter you can still identify (leaves, twigs). Detritus is smaller but partly recognizable. Humus can no longer be traced to its source. Mineralization then turns it into inorganic compounds the plant can take up in water.",f:"<b>Litter, detritus, humus, mineralized.</b>",q:"Put the stages of biotic decomposition in order.",a:"Litter, detritus, humus, then fully mineralized inorganic compounds."},
+  {t:"Why soil animals matter",i:"They fragment litter into smaller pieces, which multiplies the surface area microbes can attack; their nitrogenous wastes feed microbial growth; as predators on bacteria and fungi they stimulate regrowth and regulate other animals; and they carry decomposers to new locations on their bodies.",f:"Animal-origin organic matter has a <b>low C:N</b> and decomposes easily.",q:"Name four ways soil animals accelerate decomposition.",a:"Fragmenting litter (more surface area), excreting nitrogen, preying on and thereby stimulating microbes while regulating populations, and transporting decomposers."},
+  {t:"What sets the rate",i:"Warmth (faster in warm climates, so they hold less organic matter), the number and diversity of soil organisms, aeration (aerobic decomposers need oxygen; tillage exposes up to 12 inches and speeds decomposition, which is why intensive tillage depletes organic matter), and the composition of the material, its C:N ratio.",f:"Tillage <b>speeds decomposition</b> and so <b>lowers</b> soil organic matter.",q:"Why does intensive tillage reduce soil organic matter?",a:"It aerates the soil deeply, which accelerates aerobic decomposition, so organic matter is broken down faster than it is replaced."},
+  {t:"The carbon to nitrogen ratio",i:"The mass of carbon relative to nitrogen in the material. Wood is extremely high; animal tissue, bacteria, sewage sludge and alfalfa hay are low. High C:N slows decomposition because only a few organisms can attack it and they compete for the scarce nitrogen.",f:"As C:N <b>falls</b>, decomposition <b>speeds up</b> and more organisms can join in.",q:"How does the carbon to nitrogen ratio affect decomposition?",a:"A high ratio slows it: nitrogen is scarce and the few decomposers that can handle the material keep it for themselves. A low ratio decomposes fast."},
+  {t:"Nitrogen robbing",i:"When organic matter is added, soil nitrogen first dips as the decomposers take what they free for their own growth, then returns to equilibrium, then rises as mineralization outpaces their need. High C:N material stretches that dip for a long time: the nitrogen is immobilized in the microbes. Adding synthetic nitrogen alongside fresh organic matter feeds the bacteria, not the crop.",f:"Wood chips plus fertilizer = the <b>bacteria eat the fertilizer</b>.",q:"What is nitrogen robbing and why is mixing compost with synthetic fertilizer risky?",a:"Decomposers immobilize soil nitrogen while breaking down high C:N material, leaving none for plants; synthetic nitrogen added at the same time is consumed by the bacteria to decompose the organic matter rather than reaching the crop."},
+  {t:"Composting and organic agriculture",i:"Composting is decomposing organic matter to recycle it as fertilizer. Organic agriculture bans synthetic fertilizer from the Haber-Bosch process, so it relies on compost, and the C:N ratio decides when those nutrients become available to plants.",f:"Compost is <b>not plant-available</b> until it is mineralized.",q:"Why does using compost well require knowledge of the C:N ratio?",a:"Compost must be decomposed and mineralized before plants can use it, and the C:N ratio determines how long that takes and when the nutrients arrive."}
+ ],
+ ask:["Which organisms can break down cellulose?","Which nutrient is lost by volatilization when land is burned, and what does ash do to pH?","Order: litter, detritus, humus, mineralized.","Which decomposition type releases methane?","Does tillage increase or decrease organic matter?","High versus low C:N materials (wood versus alfalfa hay).","Explain the nitrogen dip when organic matter is added.","Why not add synthetic nitrogen with fresh organic matter?"],
+ quiz:[
+  {q:"Which organisms are able to decompose cellulose?",o:["Bacteria, fungi, and termites via their gut symbionts","Earthworms and mites","All insects","Plant roots"],c:0,e:"Soil animals can shred plant litter, but only bacteria and fungi can chemically break cellulose down, and termites manage it thanks to protozoan symbionts in their gut. Everything else works on the pieces."},
+  {q:"When land is cleared by fire, nitrogen is mostly...",o:["lost to volatilization","concentrated in the ash","converted to nitrate in the soil","unchanged"],c:0,e:"Fire releases most nutrients rapidly and nearly completely, but nitrogen goes up as gas. The ash that remains raises soil pH toward alkaline."},
+  {q:"Which is the correct order of decomposition stages?",o:["Litter, detritus, humus, mineralized inorganic compounds","Humus, litter, detritus, minerals","Detritus, litter, humus, minerals","Minerals, humus, detritus, litter"],c:0,e:"Litter is still identifiable (leaves, twigs), detritus is smaller but partly recognizable, humus cannot be traced to its source, and mineralization finally produces the inorganic forms plants take up."},
+  {q:"Anaerobic decomposition differs from aerobic decomposition in that it releases...",o:["methane instead of carbon dioxide and heat","only oxygen","no products at all","pure nitrogen gas"],c:0,e:"Without oxygen, decomposers use another acceptor such as carbon dioxide, and the products include methane. Aerobic decomposition gives off carbon dioxide, heat and organic or inorganic products."},
+  {q:"Intensive tillage tends to...",o:["decrease soil organic matter by speeding up aerobic decomposition","increase organic matter by burying litter","stop decomposition entirely","have no effect on decomposition"],c:0,e:"Turning the top 12 inches exposes the soil to oxygen, and aerobic decomposers respond by breaking organic matter down faster than it is replaced."},
+  {q:"Which material has a HIGH carbon to nitrogen ratio and therefore decomposes slowly?",o:["Wood","Alfalfa hay","Sewage sludge","Animal tissue"],c:0,e:"Wood is overwhelmingly carbon with very little nitrogen, so only cellulose-digesting bacteria and fungi can work on it and they keep the scarce nitrogen for themselves. Animal tissue, bacteria, sewage sludge and alfalfa hay are low C:N and break down fast."},
+  {q:"Right after organic matter is added to soil, available nitrogen typically...",o:["dips, because the decomposers take the nitrogen they free for their own growth","rises immediately","stays exactly the same","turns into nitrogen gas"],c:0,e:"Bacteria need nitrogen to build biomass, so at first they immobilize what they release. Then the soil returns to its starting level and eventually gains nitrogen as mineralization outpaces their needs. High C:N material stretches that dip into nitrogen robbing."},
+  {q:"Adding synthetic nitrogen fertilizer together with fresh, high C:N organic matter is risky because...",o:["the bacteria use the fertilizer nitrogen to decompose the organic matter instead of it reaching the crop","the fertilizer kills the bacteria","the organic matter turns to ash","the soil becomes too acidic"],c:0,e:"You are feeding the decomposers. They take the fertilizer nitrogen to break down the wood chips or straw, and the plants see little of it until the C:N ratio has fallen."},
+  {q:"Organic agriculture depends on composting because...",o:["synthetic fertilizer made by the Haber-Bosch process is not allowed","compost releases nutrients instantly","compost has no carbon","it is cheaper than water"],c:0,e:"Organic rules require natural products, so nutrients come from decomposed organic matter. Compost is not plant-available until mineralized, which is why the C:N ratio matters so much for timing."}
+ ]},
+{id:"2.13",wk:7,title:"Soil Properties and Environmental Factors, Part 1",words:2138,
+ gist:"Structure (the number and size of aggregates) and texture (particle size, gravel down to clay) set the pore space that moves air and water. Porosity is pore volume and permeability is drainage, and they are not the same: sand has low porosity but high permeability, clay the reverse, and connectivity decides. Macropores between aggregates drain; micropores inside them hold water. From that come wilting point, field capacity (the sweet spot) and saturation.",
+ line:["Structure: the number and size of aggregates, clumps of particles that bind to each other. Texture: the size of the individual particles, from gravel (largest) to clay (smallest).",
+  "Average soil: 45% mineral, 5% organic, the rest pore space shared by air and water; texture and structure set that pore space.",
+  "Porosity is total pore volume; permeability is how water moves through. Sand: large particles, low porosity, high permeability. Clay: tiny particles, high porosity, low permeability. But compaction or hardpan can make even sand impermeable, because connected pores are what count.",
+  "Macropores between aggregates govern permeability and drainage. Micropores within aggregates govern water holding capacity: sand low, silt medium, clay high, organic matter high because clay and humus are charged and attract water.",
+  "More and larger macropores mean more water movement: more leaching of fertilizer, faster drying, quicker wilting.",
+  "Wilting point: water is present but bound to aggregates and unavailable. Field capacity: micropores full, macropores holding air, the sweet spot. Saturation: both full, a flooded soil."],
+ cards:[
+  {t:"Structure vs texture",i:"Structure is about aggregates: how many and how big are the clumps of soil particles that bind to each other. Texture is about individual particle size: gravel, sand, silt, clay from largest to smallest.",f:"Sand you can see grain by grain; clay particles are too <b>fine</b> to separate by eye.",q:"Define soil structure and soil texture.",a:"Structure: the number and size of soil aggregates. Texture: the size of the individual particles, from gravel down to clay."},
+  {t:"Porosity is not permeability",i:"Porosity is the total volume of pore space. Permeability is drainage, how water moves through. Sand's big particles leave big gaps but less total space (low porosity) that water flies through (high permeability). Clay's tiny particles add up to more space (high porosity) that water crawls through (low permeability).",f:"Sand: <b>low porosity, high permeability</b>. Clay: <b>high porosity, low permeability</b>.",q:"Contrast sand and clay in porosity and permeability.",a:"Sand has low porosity but high permeability; clay has high porosity but low permeability. Porosity is pore volume, permeability is drainage."},
+  {t:"Connectivity decides",i:"The sand versus clay example is not a law. What finally sets permeability is whether the pores connect. A compacted or hardpan sandy soil can have low permeability despite its big pores.",f:"Permeability depends on <b>connected</b> pore spaces.",q:"Why can a sandy soil sometimes have low permeability?",a:"Compaction or a hardpan can disconnect its pore spaces, and without connected pores water cannot drain regardless of particle size."},
+  {t:"Macropores",i:"The spaces between aggregates. Many macropores mean good drainage, which is why sandy soils drain fast. But more water movement also means more leaching of soluble fertilizer, faster drying and quicker wilting.",f:"Macropores govern <b>permeability</b>; more of them means more <b>leaching</b>.",q:"What do macropores control, and what is the downside of having many?",a:"Drainage and permeability. Too many mean nutrients leach quickly, the soil dries fast and plants wilt sooner."},
+  {t:"Micropores",i:"The tiny spaces within aggregates. They govern water holding capacity: sand has few (particles do not aggregate), silt is medium, clay has many. Organic matter also holds water well because, like clay, it is charged and attracts water.",f:"Water holding capacity: <b>sand low, silt medium, clay high, organic matter high</b>.",q:"What do micropores control, and which soils have the most?",a:"Water holding capacity. Clay and organic matter have the most micropores and hold the most water; sand has few and holds little."},
+  {t:"Wilting point",i:"The soil still contains water, but it is bound as a thin film around the aggregates and the plant cannot pull it free. Availability, not presence, is what counts.",f:"At wilting point water is <b>present but unavailable</b>.",q:"Does soil at the wilting point contain water?",a:"Yes, but it is bound to the aggregates too tightly for the plant to extract, so it is unavailable."},
+  {t:"Field capacity",i:"The micropores are full of water and the macropores still hold air. This is the sweet spot for plant growth: water available, roots aerated.",f:"Field capacity = <b>micropores full, macropores air</b>.",q:"Describe field capacity.",a:"The state where micropores are full of water and macropores contain air; the optimum for plant growth."},
+  {t:"Saturation",i:"Both micropores and macropores are full of water. The soil is flooded and the roots are back in the waterlogged, anoxic situation from lecture 2.1. Clay soils can hold far more water at field capacity than sand.",f:"Optimal growth sits <b>above wilting point, below field capacity</b>; above field capacity you are heading to flood.",q:"What is the saturation point?",a:"When both micropores and macropores are filled with water, effectively a flooded soil."}
+ ],
+ ask:["Define structure and texture.","Which is the largest particle and which the smallest?","Which soil has high porosity but low permeability?","What ultimately determines permeability?","Macropores govern what, micropores govern what?","Rank sand, silt, clay by water holding capacity.","Is there water in soil at the wilting point?","Field capacity: which pores are full?"],
+ quiz:[
+  {q:"Soil texture refers to...",o:["the size of the individual soil particles","the number and size of aggregates","the color of the soil","the pH of the soil"],c:0,e:"Texture is particle size, gravel down to clay. Structure is the aggregates, the clumps that bind to each other. Both set the pore space that moves air and water."},
+  {q:"A clay soil typically has...",o:["high porosity but low permeability","low porosity but high permeability","high porosity and high permeability","no pore space"],c:0,e:"Tiny particles leave countless tiny spaces that add up to a large pore volume, but water crawls through them. Sand is the mirror image: less total space, faster drainage. Weeks warns not to confuse the two terms."},
+  {q:"What ultimately determines a soil's permeability?",o:["Whether the pore spaces are connected","The color of the soil","The amount of nitrogen","The depth of the bedrock"],c:0,e:"Even a sandy soil drains poorly if compaction or a hardpan disconnects its pores. The sand versus clay pattern is a typical case, not a rule."},
+  {q:"Micropores, the spaces within aggregates, mainly determine...",o:["water holding capacity","drainage rate","soil color","soil pH"],c:0,e:"Micropores hold water against gravity, so more of them means more water stored for the plant. Macropores between aggregates do the draining."},
+  {q:"Which soil has the highest water holding capacity?",o:["Clay","Sand","Gravel","Silt"],c:0,e:"Clay particles adhere to each other and create many micropores; they are also charged and attract water. Sand has few micropores. Organic matter, also charged, holds water well too, which is one reason it improves soils."},
+  {q:"A soil with many large macropores will...",o:["leach nutrients quickly and dry out fast","hold water for a long time","stay saturated","never need irrigation"],c:0,e:"Water moves freely through macropores, carrying soluble fertilizer down past the roots, and the soil dries and plants wilt sooner. Sandy soils are the case in point."},
+  {q:"At the wilting point...",o:["water is present but bound to aggregates so the plant cannot take it up","the soil contains no water at all","both micropores and macropores are full","the plant has maximum growth"],c:0,e:"A thin film of water still coats the aggregates, but it is held too tightly for the roots to break loose. Availability is what matters, not presence."},
+  {q:"At field capacity...",o:["the micropores are full of water and the macropores hold air","all pores are full of water","all pores are full of air","the soil is at its wilting point"],c:0,e:"That combination gives the plant available water and aerated roots, the sweet spot for growth. Fill the macropores too and you are at saturation, a flooded soil."}
+ ]},
+{id:"2.14",wk:7,title:"Soil Properties and Environmental Factors, Part 2",words:2440,
+ gist:"Color reads organic matter: dark soils are rich, light soils are poor. pH below 7 is acidic, above 7 alkaline; wet climates leach bases and grow acidic through carbonic acid from rain and respiration and through ammonium oxidation, dry climates stay alkaline. The one thing to remember: pH acts on plants mostly indirectly, by changing nutrient availability, phosphorus locked at low pH, iron at high pH. Cation exchange capacity is the negatively charged clay and humus holding cations in the rhizosphere against leaching, and it is a good thing.",
+ line:["Color tracks organic matter: light sand, dark muck, silty clay loam in between. Dark means high organic matter.",
+  "Nutrients are taken up only in their charged, water-soluble form. pH 7 neutral, below 7 acidic (more hydrogen ions), above 7 alkaline or basic (more hydroxide).",
+  "Climate sets pH: low precipitation, alkaline soils; high precipitation, acidic soils, because rain leaches the bases.",
+  "Three acidifying processes: leaching of bases (rain plus carbon dioxide makes carbonic acid, which ionizes to hydrogen ions and bicarbonate; bicarbonate pulls calcium off the colloids and it leaches), organic decay and microbial respiration (same carbonic acid route), and ammonium oxidation to nitrate, which leaves hydrogen ions. Soils buffer this to different degrees.",
+  "pH has little direct effect on plant growth except at extremes (and it can impair symbioses like rhizobia). Its real effect is on nutrient availability: phosphorus becomes unavailable at low pH, iron at high pH, and extremes narrow availability for everything. Lime raises the pH of acidic soils; some crops like asparagus prefer alkaline soil.",
+  "Cation exchange capacity: clay and humus form negatively charged micelles that hold positively charged nutrient cations (potassium, calcium). More organic matter, more CEC; pH alters the charge. CEC is good: it keeps nutrients in the rhizosphere instead of letting them leach. Higher-charge cations (aluminum at the top, hydrogen at the bottom) bind more strongly and displace weaker ones."],
+ cards:[
+  {t:"Color reads organic matter",i:"Sand is light, muck soil from lake beds is almost black, silty clay loam sits between. Color is a direct clue to organic matter content.",f:"<b>Dark = high organic matter.</b> Light = low.",q:"What does soil color tell you?",a:"The organic matter content: dark soils are high in organic matter, light soils are low."},
+  {t:"pH basics",i:"7 is neutral. Below 7 the soil is acidic, with hydrogen ions outnumbering hydroxide ions; above 7 it is alkaline or basic, with hydroxide in the majority. Nutrients are taken up only as charged ions dissolved in water.",f:"Low pH = acidic = <b>more hydrogen ions</b>.",q:"What pH values are acidic, neutral and alkaline, and what ions define them?",a:"Below 7 acidic (more hydrogen ions), 7 neutral, above 7 alkaline or basic (more hydroxide ions)."},
+  {t:"Climate sets pH",i:"Soils under low precipitation tend to be alkaline; soils under high precipitation tend to be acidic, because rain leaches the bases out.",f:"<b>Wet = acidic, dry = alkaline.</b>",q:"How does precipitation affect soil pH?",a:"High precipitation leaches bases and makes soil acidic; low precipitation leaves soils alkaline."},
+  {t:"Why wet soils acidify",i:"Rain meets carbon dioxide (in the air and in the soil) and forms weak carbonic acid, which ionizes into a hydrogen ion and bicarbonate. The bicarbonate reacts with calcium, pulls it off the soil colloids, makes it soluble, and it leaches away, leaving the hydrogen ions behind.",f:"Bases (calcium) <b>leach out</b>, hydrogen ions <b>stay</b>: pH falls.",q:"Describe how leaching of bases acidifies a soil.",a:"Rain and carbon dioxide form carbonic acid; it ionizes to hydrogen ions and bicarbonate; bicarbonate strips calcium from the colloids into solution, calcium leaches, and the hydrogen ions remain."},
+  {t:"Two more acid sources",i:"Decomposers respiring in the soil release carbon dioxide that forms the same carbonic acid, and the mineralization step where ammonium is oxidized to nitrate leaves hydrogen ions behind. Soils buffer acidification to varying degrees depending on type.",f:"<b>Ammonium oxidation</b> (nitrification) acidifies soil.",q:"Besides leaching of bases, what two processes acidify soils?",a:"Organic decay and microbial respiration (carbon dioxide to carbonic acid) and the oxidation of ammonium to nitrate, which leaves hydrogen ions."},
+  {t:"The one thing to remember",i:"pH rarely burns a plant directly; that takes extreme values, though extremes can impair symbioses such as nitrogen-fixing rhizobia on legumes. The real effect of pH is on nutrient availability, because it changes the soil chemistry.",f:"pH's effect on plants is <b>indirect, through nutrient availability</b>. Weeks: if you remember only one thing.",q:"How does pH affect plant growth?",a:"Mostly indirectly: it changes nutrient availability in the soil. Direct damage happens only at extreme pH, which can also impair symbioses."},
+  {t:"Phosphorus low, iron high",i:"Phosphorus forms insoluble compounds and becomes unavailable in acidic soil; iron forms insoluble compounds and becomes unavailable in basic soil. On the availability chart, every nutrient's band narrows sharply at either extreme.",f:"<b>P locked at low pH, Fe locked at high pH.</b> Lime an acidic soil; asparagus likes alkaline.",q:"Which nutrient is unavailable at low pH, which at high pH, and what is the general pattern?",a:"Phosphorus at low pH, iron at high pH; at either extreme the availability of most nutrients narrows dramatically."},
+  {t:"Cation exchange capacity",i:"Clay and humus particles form micelles with a negative charge that attract and hold positively charged cations such as potassium and calcium. The number of those sites is the CEC. More organic matter means more CEC; pH alters the charge on the micelles.",f:"CEC rises with <b>organic matter</b>; it is the ability of clay and humus to bind nutrients.",q:"What is cation exchange capacity and what raises it?",a:"The capacity of negatively charged clay and humus micelles to hold nutrient cations; more organic matter raises it, and pH changes the charge."},
+  {t:"CEC is a good thing",i:"Bound cations stay in the rhizosphere instead of leaching (recall how calcium leaves once displaced). The plant can pull them off the micelles later as needed. Cations with higher charge, aluminum at the top down to hydrogen, bind more strongly and displace the weaker ones.",f:"CEC <b>stores nutrients</b> where roots can get them; higher-charge cations <b>displace</b> lower-charge ones.",q:"Why is cation exchange capacity beneficial, and which cations bind most strongly?",a:"It keeps nutrients like potassium and calcium in the root zone rather than letting them leach, releasing them to the plant over time. Higher-charge cations bind more strongly and displace weaker ones, with aluminum strongest and hydrogen weakest."}
+ ],
+ ask:["What does dark soil color indicate?","Which climate produces acidic soils and why?","Name the three acidifying processes.","Is pH's effect on plants direct or indirect?","Which nutrient is unavailable at low pH? At high pH?","Define cation exchange capacity.","Does more organic matter raise or lower CEC?","Which cations displace which on the micelles?"],
+ quiz:[
+  {q:"A very dark soil most likely has...",o:["a high organic matter content","a high sand content","a high pH","very little water"],c:0,e:"Color is the quick read on organic matter: muck soils from lake beds are nearly black, sand is pale, and loams sit between. Dark means rich."},
+  {q:"A soil with a pH of 5 is...",o:["acidic, with more hydrogen ions than hydroxide ions","alkaline, with more hydroxide ions","neutral","impossible in nature"],c:0,e:"Anything below 7 is acidic and increasingly so as the number falls; above 7 is alkaline or basic. The hydrogen ion count decides."},
+  {q:"Soils in regions of high precipitation tend to be...",o:["acidic, because rain leaches out the bases","alkaline, because rain adds bases","neutral, because rain is pure","salty, because rain concentrates salts"],c:0,e:"Rain plus carbon dioxide makes carbonic acid; its bicarbonate pulls calcium off the soil colloids and the calcium leaches away, leaving hydrogen ions behind. Dry regions keep their bases and stay alkaline."},
+  {q:"Which of these is NOT one of the acidifying processes Weeks describes?",o:["Adding lime to the soil","Leaching of bases by carbonic acid from rain","Carbon dioxide from organic decay and respiration forming carbonic acid","Oxidation of ammonium to nitrate"],c:0,e:"Lime does the opposite: it adds bases to raise the pH of an acidic soil. The three acidifiers all end with hydrogen ions left in the soil."},
+  {q:"The most important effect of soil pH on plant growth is...",o:["indirect, by changing nutrient availability","direct burning of the roots at any pH","changing the soil color","increasing transpiration"],c:0,e:"Weeks says this is the one thing to remember. Direct damage needs an extreme pH (which can also wreck symbioses like rhizobia); the ordinary effect is that pH changes the soil chemistry and so which nutrients are available."},
+  {q:"Phosphorus becomes unavailable to plants when the soil is...",o:["strongly acidic (low pH)","strongly alkaline (high pH)","neutral","rich in organic matter"],c:0,e:"Phosphorus forms insoluble compounds at low pH. Iron is the mirror case: it locks up at high pH. At either extreme the availability bands of most nutrients narrow."},
+  {q:"Cation exchange capacity is...",o:["the ability of negatively charged clay and humus to hold positively charged nutrients","the rate at which water drains through the soil","the amount of nitrogen gas in the soil","the number of macropores"],c:0,e:"Clay and humus form negatively charged micelles that grab cations like potassium and calcium and hold them in the root zone. More organic matter means more sites; pH changes the charge on them."},
+  {q:"Cation exchange capacity is beneficial because it...",o:["keeps nutrients in the rhizosphere instead of letting them leach, releasing them to the plant over time","permanently locks nutrients away from plants","makes the soil drain faster","lowers the organic matter"],c:0,e:"Without binding sites, calcium and potassium leach away with the water (the acidification story shows how). Bound to micelles they stay put until the plant pulls them off. Higher-charge cations, aluminum at the top, bind hardest and displace weaker ones like hydrogen."}
+ ]}
+];
+/* connect pairs drawn from Module 2 terms */
+var PAIRS=[
+ {l:"Law of the minimum",r:"Growth capped by the scarcest necessary element"},
+ {l:"Edema",r:"Water uptake outruns transpiration, blisters on leaves"},
+ {l:"Matric potential",r:"Force a plant needs to pull water from soil"},
+ {l:"Sublimation",r:"Ice straight to vapor, a flux not a reservoir"},
+ {l:"Evapotranspiration",r:"Evaporation and transpiration measured together"},
+ {l:"Dew point",r:"Relative humidity passes 100% and vapor condenses"},
+ {l:"Orographic uplift",r:"Mountains squeeze rain out, rain shadow behind"},
+ {l:"Coriolis force",r:"Gives a hurricane its rotation"},
+ {l:"Tile drainage",r:"Perforated pipes carry excess water out of the field"},
+ {l:"Center pivot",r:"The circles you see from the plane"},
+ {l:"Drip irrigation",r:"Least water, most labor, best on vineyards"},
+ {l:"Fallow rotation",r:"Bare soil banks winter rain for the next crop"},
+ {l:"The Palouse",r:"Hilly winter-wheat dryland in eastern Washington"},
+ {l:"Overdrafting",r:"Writing checks the aquifer cannot cover"},
+ {l:"Subsidence",r:"Aquifer pores collapse once the water is pumped out"},
+ {l:"Saltwater intrusion",r:"Sea water pushes into the coastal freshwater lens"},
+ {l:"Morelos Dam",r:"Where the Colorado pulse flow began"},
+ {l:"Sodicity",r:"Sodium specifically, fix it first with gypsum"},
+ {l:"Electrical conductivity",r:"How soil salinity is measured"},
+ {l:"Carrying capacity",r:"How many animals the land can support"},
+ {l:"Aral Sea",r:"Drained for cotton, lost 90% of its area"},
+ {l:"Non-point source",r:"Diffuse runoff no one spot can be blamed for"},
+ {l:"Thermocline",r:"Layer that keeps surface oxygen from the bottom"},
+ {l:"Norman Borlaug",r:"Green Revolution breeder, Nobel Peace Prize"},
+ {l:"Algal turf scrubber",r:"Algae mats that soak nutrients out of dairy water"},
+ {l:"O horizon",r:"Litter and humus, where decomposition happens"},
+ {l:"Histosol",r:"Muck and peat, over 20% organic matter"},
+ {l:"Spodosol",r:"Florida pine flatwoods, iron-red layer"},
+ {l:"Oxisol",r:"Weathered tropical soil, nutrients live in the trees"},
+ {l:"Nitrogen robbing",r:"Decomposers hoard N while eating high C:N matter"},
+ {l:"Termites",r:"Digest cellulose with gut protozoa"},
+ {l:"Macropores",r:"Between aggregates, they drain"},
+ {l:"Micropores",r:"Within aggregates, they hold water"},
+ {l:"Field capacity",r:"Micropores full, macropores air, the sweet spot"},
+ {l:"Wilting point",r:"Water present but bound too tightly to take"},
+ {l:"Cation exchange capacity",r:"Charged clay and humus holding K and Ca for the roots"},
+ {l:"Carbonic acid",r:"Rain plus CO2, the reason wet soils go acidic"},
+ {l:"Iron",r:"Locked up at high pH"},
+ {l:"Phosphorus",r:"Locked up at low pH, and runs off rather than leaches"}
+];
+</script>
+<script>
+/* ---------- state (localStorage with memory fallback; iOS file:// throws) ---------- */
+var LS='ecoALS3153_m2_v1';
+var _mem={};
+function _lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _mem)?_mem[k]:null;}}
+function _lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
+var state={};
+try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
+function save(){_lsSet(LS,JSON.stringify(state));}
+/* ids */
+L.forEach(function(lec,li){ lec.cards.forEach(function(c,ci){ c.id='c'+lec.id.replace('.','_')+'_'+ci; c.lec=lec.id; }); lec.quiz.forEach(function(q){ q.lec=lec.id; q.wk=lec.wk; }); });
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function byId(id){return document.getElementById(id);}
+
+/* ---------- tabs first, so the page always works ---------- */
+(function(){
+ var tabs=document.querySelectorAll('.tab');
+ tabs.forEach(function(t){
+   t.addEventListener('click',function(){
+     tabs.forEach(function(x){x.classList.remove('on');});
+     document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});
+     t.classList.add('on');
+     var v=byId('v-'+t.getAttribute('data-v')); if(v) v.classList.add('on');
+     window.scrollTo(0,0);
+   });
+ });
+})();
+function showTab(name){ var t=document.querySelector('.tab[data-v="'+name+'"]'); if(t) t.click(); }
+
+/* ---------- progress + week rings ---------- */
+function lecStudied(id){ return !!state['s_'+id]; }
+function weekPct(w){
+ var n=0,d=0;
+ w.lecs.forEach(function(id){ d++; if(lecStudied(id)) n++; });
+ return d?Math.round(100*n/d):0;
+}
+function updateProg(){
+ var stud=0; L.forEach(function(l){ if(lecStudied(l.id)) stud++; });
+ var solid=0; L.forEach(function(l){ l.cards.forEach(function(c){ if(state[c.id]===3) solid++; }); });
+ byId('pstud').textContent=stud; byId('ptot').textContent=L.length; byId('psolid').textContent=solid;
+ byId('pf').style.width=(100*stud/L.length)+'%';
+ renderWeeks();
+}
+function ringSvg(pct){
+ var r=26, c=2*Math.PI*r, dash=(pct/100)*c;
+ return '<svg class="ring" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="'+r+'"/><circle class="fg" cx="32" cy="32" r="'+r+'" stroke-dasharray="'+dash.toFixed(1)+' '+c.toFixed(1)+'"/><text x="32" y="37" text-anchor="middle">'+pct+'%</text></svg>';
+}
+function renderWeeks(){
+ var host=byId('weeks'); if(!host) return; host.innerHTML='';
+ WEEKS.forEach(function(w,i){
+   var pct=weekPct(w);
+   var d=document.createElement('div'); d.className='wk'+(i===0?' now':'');
+   d.innerHTML='<h3>Week '+w.n+'</h3><div class="wlecs">'+w.lecs[0]+' to '+w.lecs[w.lecs.length-1]+' · '+w.lecs.length+' lectures</div>'+ringSvg(pct)+'<span class="badge">'+w.quiz+'</span><div class="due">due <b>'+w.due+'</b></div>';
+   d.addEventListener('click',function(){ showTab('lectures'); var h=byId('wk-'+w.n); if(h) setTimeout(function(){ h.scrollIntoView({behavior:'smooth',block:'start'}); },60); });
+   host.appendChild(d);
+ });
+}
+
+/* ---------- lectures ---------- */
+function mastBtns(c){
+ var m=state[c.id]||0;
+ return '<div class="mastery">'+
+  '<button class="mbtn'+(m===1?' on1':'')+'" data-m="1"><span class="ic">•</span>shaky</button>'+
+  '<button class="mbtn'+(m===2?' on2':'')+'" data-m="2"><span class="ic">◐</span>getting it</button>'+
+  '<button class="mbtn'+(m===3?' on3':'')+'" data-m="3"><span class="ic">✦</span>solid</button></div>';
+}
+function renderLectures(){
+ var host=byId('v-lectures'); if(!host) return; host.innerHTML='';
+ var intro=document.createElement('div'); intro.className='oneliner'; intro.style.margin='22px 4px 6px';
+ intro.innerHTML='Thirteen lectures in Canvas order (Canvas has no 02-09), grouped by week. Each one: the gist, the professor\'s throughline, the concepts with a mastery mark, what the exam could ask, and a mini quiz. Mark a lecture studied when it sits right; the week rings and Quiz tab follow.';
+ host.appendChild(intro);
+ WEEKS.forEach(function(w){
+   var wh=document.createElement('div'); wh.className='wkhead'; wh.id='wk-'+w.n;
+   wh.innerHTML='<span class="n">Week '+w.n+'</span><h2>'+esc(w.deck)+'</h2><span class="wdue">'+w.quiz+' · '+w.due+'</span>';
+   host.appendChild(wh);
+   var rd=document.createElement('div'); rd.className='progtxt'; rd.style.margin='-6px 4px 12px'; rd.textContent='Read: '+w.read+'.'; host.appendChild(rd);
+   w.lecs.forEach(function(id){
+     var lec=L.filter(function(x){return x.id===id;})[0]; if(!lec) return;
+     var det=document.createElement('details'); det.className='lec'+(lecStudied(id)?' studied':''); det.id='lec-'+id.replace('.','_');
+     if(state['o_'+id]) det.open=true;
+     var mins=Math.round(lec.words/140);
+     var h='<summary><span class="num">'+lec.id+'</span><span class="ttl">'+esc(lec.title)+'</span><span class="meta">'+lec.words.toLocaleString()+' words · ~'+mins+' min</span><span class="done">'+(lecStudied(id)?'✓':'')+'</span><svg class="chev" viewBox="0 0 18 18"><path d="M6 3 L12 9 L6 15" stroke="currentColor" stroke-width="2" fill="none"/></svg></summary>';
+     h+='<div class="lbody">';
+     h+='<div class="gist">'+esc(lec.gist)+'</div>';
+     h+='<div class="sec">The professor\'s throughline</div><ol class="line">'+lec.line.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>';
+     h+='<div class="sec">Concepts</div><div class="cards" data-lec="'+lec.id+'"></div>';
+     h+='<div class="sec">Exam could ask</div><ul class="ask">'+lec.ask.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+     h+='<div class="sec">Mini quiz · '+lec.quiz.length+' questions</div><div class="quiz mini" data-lec="'+lec.id+'"></div>';
+     h+='<button class="studybtn'+(lecStudied(id)?'':' off')+'" data-lec="'+lec.id+'">'+(lecStudied(id)?'✓ Studied, tap to unmark':'Mark lecture studied')+'</button>';
+     h+='</div>';
+     det.innerHTML=h;
+     det.addEventListener('toggle',function(){ state['o_'+id]=det.open?1:0; save(); if(det.open && !det.dataset.filled){ det.dataset.filled='1'; fillCards(det,lec); fillMiniQuiz(det,lec); } });
+     det.querySelector('.studybtn').addEventListener('click',function(){ state['s_'+id]=lecStudied(id)?0:1; save(); renderLectures(); updateProg(); });
+     host.appendChild(det);
+     if(det.open){ det.dataset.filled='1'; fillCards(det,lec); fillMiniQuiz(det,lec); }
+   });
+ });
+}
+function fillCards(det,lec){
+ var grid=det.querySelector('.cards'); if(!grid) return; grid.innerHTML='';
+ lec.cards.forEach(function(c){
+   var m=state[c.id]||0;
+   var card=document.createElement('div'); card.className='card'+(m?' m'+m:'');
+   card.innerHTML='<h3>'+esc(c.t)+'</h3><p>'+esc(c.i)+'</p>'+(c.f?'<div class="fact">'+c.f+'</div>':'')+mastBtns(c);
+   card.querySelectorAll('.mbtn').forEach(function(b){
+     b.addEventListener('click',function(){
+       var v=+b.getAttribute('data-m'); state[c.id]=(state[c.id]===v?0:v); save();
+       card.className='card'+(state[c.id]?' m'+state[c.id]:'');
+       card.querySelectorAll('.mbtn').forEach(function(x){ x.className='mbtn'+(+x.getAttribute('data-m')===state[c.id]?' on'+state[c.id]:''); });
+       updateProg();
+     });
+   });
+   grid.appendChild(card);
+ });
+}
+function questionEl(item,n,showLec){
+ var order=shuffle(item.o.map(function(_,i){return i;}));
+ var correctPos=order.indexOf(item.c);
+ var q=document.createElement('div'); q.className='q';
+ var h=(showLec?'<div class="qlec">Lecture '+item.lec+'</div>':'')+'<div class="qh">'+n+'. '+esc(item.q)+'</div>';
+ order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[origI])+'</button>'; });
+ h+='<div class="qexp">'+esc(item.e)+'</div>';
+ q.innerHTML=h;
+ return {el:q,correctPos:correctPos};
+}
+function fillMiniQuiz(det,lec){
+ var host=det.querySelector('.quiz.mini'); if(!host) return; host.innerHTML='';
+ var right=0,answered=0;
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ var score=document.createElement('span'); score.className='quizscore'; score.textContent='Pick an answer to begin';
+ var again=document.createElement('button'); again.className='dbtn'; again.textContent='Reset';
+ again.addEventListener('click',function(){ fillMiniQuiz(det,lec); });
+ lec.quiz.forEach(function(item,i){
+   var r=questionEl(item,i+1,false), q=r.el;
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; q.dataset.done='1'; answered++;
+       var pick=+b.getAttribute('data-pos');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
+       if(pick!==r.correctPos) b.classList.add('wrong'); else right++;
+       q.querySelector('.qexp').classList.add('show');
+       score.textContent='Score '+right+' / '+answered+(answered===lec.quiz.length?' · done':'');
+     });
+   });
+   host.appendChild(q);
+ });
+ foot.appendChild(score); foot.appendChild(again); host.appendChild(foot);
+}
+
+/* ---------- flashcards ---------- */
+var deckFilter='all', deck=[], di=0;
+function buildDeck(){
+ deck=[];
+ L.forEach(function(lec){ if(deckFilter!=='all' && lec.wk!==+deckFilter) return; lec.cards.forEach(function(c){ deck.push({tag:'Lecture '+lec.id+' · '+lec.title,q:c.q,a:c.a}); }); });
+ deck=shuffle(deck); di=0; showCard();
+}
+function showCard(){
+ var f=byId('flash'); if(!f||!deck.length) return;
+ f.classList.remove('flip');
+ var c=deck[di];
+ byId('fqtag').textContent=c.tag; byId('fq').textContent=c.q; byId('fa').textContent=c.a;
+ byId('fcount').textContent=(di+1)+' / '+deck.length;
+}
+function renderFlashFilters(){
+ var host=byId('flashfilters'); if(!host) return;
+ var opts=[['all','All weeks'],['5','Week 5'],['6','Week 6'],['7','Week 7']];
+ opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(deckFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ deckFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); buildDeck(); }); host.appendChild(b); });
+}
+function initFlash(){
+ renderFlashFilters();
+ byId('flash').addEventListener('click',function(){ byId('flash').classList.toggle('flip'); });
+ byId('fnext').addEventListener('click',function(){ if(!deck.length) return; di=(di+1)%deck.length; showCard(); });
+ byId('fprev').addEventListener('click',function(){ if(!deck.length) return; di=(di-1+deck.length)%deck.length; showCard(); });
+ byId('fshuf').addEventListener('click',buildDeck);
+ buildDeck();
+}
+
+/* ---------- quiz bank ---------- */
+var quizFilter='5', QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
+function bank(){ var b=[]; L.forEach(function(lec){ if(quizFilter!=='all' && lec.wk!==+quizFilter) return; lec.quiz.forEach(function(q){ b.push(q); }); }); return b; }
+function renderQuizFilters(){
+ var host=byId('quizfilters'); if(!host) return;
+ var opts=[['5','Week 5 (Quiz 05)'],['6','Week 6'],['7','Week 7'],['all','All of Module 2']];
+ opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ quizFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); quizQueue=[]; quizRight=0; quizAnswered=0; renderQuiz(); }); host.appendChild(b); });
+}
+function updateQuizScore(){ var s=byId('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
+function renderQuiz(){
+ var host=byId('quiz'); if(!host) return; host.innerHTML='';
+ var B=bank(); if(!B.length) return;
+ var n=Math.min(QUIZ_BATCH,B.length);
+ if(quizQueue.length<n) quizQueue=shuffle(B.map(function(_,i){return i;}));
+ var batch=quizQueue.splice(0,n);
+ batch.forEach(function(idx,qi){
+   var item=B[idx]; var r=questionEl(item,qi+1,true), q=r.el;
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; q.dataset.done='1'; quizAnswered++;
+       var pick=+b.getAttribute('data-pos');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
+       if(pick!==r.correctPos) b.classList.add('wrong'); else quizRight++;
+       q.querySelector('.qexp').classList.add('show');
+       updateQuizScore();
+     });
+   });
+   host.appendChild(q);
+ });
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ foot.innerHTML='<span class="quizscore" id="qscore"></span><button class="dbtn" id="qnew">Fresh set &#8594;</button>';
+ host.appendChild(foot);
+ byId('qnew').addEventListener('click',function(){ window.scrollTo(0,byId('v-quiz').offsetTop-10); renderQuiz(); });
+ updateQuizScore();
+}
+
+/* ---------- connect ---------- */
+var CONN_N=7, selL=null, selR=null, matchedN=0, connPick=[];
+function renderConnect(){
+ matchedN=0; selL=null; selR=null;
+ byId('conndone').hidden=true;
+ connPick=shuffle(PAIRS.map(function(_,i){return i;})).slice(0,Math.min(CONN_N,PAIRS.length));
+ var Lc=byId('connL'), R=byId('connR'); Lc.innerHTML=''; R.innerHTML='';
+ shuffle(connPick).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].l; b.setAttribute('data-id',id); b.setAttribute('data-side','L'); Lc.appendChild(b); });
+ shuffle(connPick).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].r; b.setAttribute('data-id',id); b.setAttribute('data-side','R'); R.appendChild(b); });
+ updateConnCount();
+ [Lc,R].forEach(function(col){ col.querySelectorAll('.ctile').forEach(function(b){ b.addEventListener('click',function(){onConn(b);}); }); });
+}
+function onConn(b){
+ if(b.classList.contains('matched')||b.classList.contains('miss')) return;
+ var side=b.getAttribute('data-side');
+ if(side==='L'){ if(selL)selL.classList.remove('sel'); selL=(selL===b?null:b); }
+ else { if(selR)selR.classList.remove('sel'); selR=(selR===b?null:b); }
+ if(selL)selL.classList.add('sel'); if(selR)selR.classList.add('sel');
+ if(selL&&selR){
+   var a=selL, c=selR;
+   if(a.getAttribute('data-id')===c.getAttribute('data-id')){
+     a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('matched'); c.classList.add('matched');
+     selL=null; selR=null; matchedN++; updateConnCount();
+     if(matchedN===connPick.length) byId('conndone').hidden=false;
+   } else {
+     a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('miss'); c.classList.add('miss');
+     selL=null; selR=null;
+     setTimeout(function(){ a.classList.remove('miss'); c.classList.remove('miss'); }, 360);
+   }
+ }
+}
+function updateConnCount(){ byId('conncount').textContent=matchedN+' / '+connPick.length+' connected'; }
+function initConnect(){ byId('connreset').addEventListener('click',renderConnect); renderConnect(); }
+
+/* ---------- boot, every init guarded ---------- */
+['renderLectures','updateProg','initFlash','renderQuizFilters','renderQuiz','initConnect']
+  .forEach(function(fn){ try{ window[fn](); }catch(e){ if(window.console) console.error(fn,e); } });
+</script>
+</body>
+</html>
