@@ -111,7 +111,9 @@ details.lec.studied>summary .ttl{color:var(--moss-d)}
 .quiz{margin-top:8px;display:flex;flex-direction:column;gap:12px}
 .q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
 .q .qh{font-family:var(--serif);font-size:15.5px;color:var(--ink);margin:0 0 10px;line-height:1.35}
-.q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700;margin-bottom:6px}
+.q .qmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700}
+.q .qsrc{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#fff;background:var(--clay-d);border-radius:99px;padding:3px 9px;white-space:nowrap}
 .opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
 .opt:hover{border-color:var(--line2)}
 .opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
@@ -279,7 +281,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">A looping bank drawn from every lecture's mini quiz, ten at a time, answers shuffled, the mechanism under each answer. Quiz 05 covers Week 5, so that is the default draw. Weeks says the same banks come back on the exam, so take each Canvas quiz all three times.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all nineteen questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 on October 7, so they are the ones worth knowing cold. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -352,7 +354,7 @@ var L=[
   {t:"The ET dial",i:"Turn it up: more solar radiation, higher temperature, more wind. Turn it down: higher relative humidity, mulch or bedding cover. Soil type depends on water holding capacity.",f:"Relative humidity up means evapotranspiration <b>down</b>; wind up means ET <b>up</b>.",q:"How does each change affect evapotranspiration: more wind, more relative humidity, mulch, more solar radiation?",a:"Wind up: ET up. Relative humidity up: ET down. Mulch: evaporation down. Solar radiation up: ET up."},
   {t:"Subsidence, first look",i:"An aquifer is not a pool but water-filled spaces in rock. Pump it too fast and the empty pores collapse, so even when recharge arrives there is no room; it runs off elsewhere.",f:"Ocean residence time: <b>10,000 to 20,000 years</b>. Once water leaves a usable reservoir it can be gone a long time.",q:"What happens to an aquifer that is overdrafted?",a:"Its pore spaces collapse, so it can no longer hold the recharge; the aquifer's physical ability to store water is degraded."}
  ],
- ask:["Is water a finite resource? (No, renewable; the reservoir is the issue.)","What share of Earth's water can we use? (3%)","Which is a flux and which a reservoir?","What share of US water goes to agriculture, and globally?","Which change decreases evapotranspiration: higher relative humidity, mulch.","What happens to water that percolates past the root zone?","Why does overdrafting permanently damage an aquifer?"],
+ ask:["Is water a finite resource? (No, renewable; the reservoir is the issue.)","What share of Earth's water can we use? (3%)","Which is a flux and which a reservoir?","What share of US water goes to agriculture, and globally?","Which change decreases evapotranspiration: higher relative humidity, mulch.","What happens to water that percolates past the root zone?","Why does overdrafting permanently damage an aquifer?","Quiz 05: true or false, water is a nonpolar molecule (false, it is polar).","Quiz 05: does more wind raise or lower evapotranspiration?","Quiz 05: what does moisture on the leaf surface do to transpiration?"],
  quiz:[
   {q:"True or false: water is a finite resource that is being used up.",o:["False, it is renewable; the same amount exists as 100 million years ago","True, each use destroys some water"],c:0,e:"Using water moves it between reservoirs; it does not remove it from the planet. The concern is where it ends up (ocean, ice, degraded quality), not the total."},
   {q:"What share of the water on Earth is in a reservoir we can use?",o:["3%","30%","50%","97%"],c:0,e:"Only 3%, the surface water and groundwater. Ocean and ice hold the rest in forms we cannot readily use."},
@@ -383,7 +385,7 @@ var L=[
   {t:"Tile drainage",i:"Perforated pipes buried in ditches carry excess water out of waterlogged fields, a technique with roots around 300 BC. Less runoff and erosion, but the drained water carries soluble nutrients (nitrogen) and salts you then have to store.",f:"Trade: <b>less erosion</b>, but <b>nutrient and salt loss</b> into water that needs a home.",q:"What is the main benefit and the main cost of tile drainage?",a:"Benefit: less runoff and erosion because water infiltrates and is piped away. Cost: soluble nutrients like nitrogen and salts leave with the water, which then needs safe storage."},
   {t:"Raised beds and rice-fish polyculture",i:"Raised beds keep roots above the flood line in river-side fields (Brazil, Asia). In the Pearl River Delta rice and fish share the paddy: fish manure fertilizes the rice and the fish eat the insects.",f:"Rice-fish gives <b>two harvests</b> with fewer inputs, a main tenet of agroecology.",q:"How does rice-fish polyculture reduce inputs?",a:"Fish manure fertilizes the rice and the fish eat aquatic insects, so the farmer needs less fertilizer and pest control and gets two harvests."}
  ],
- ask:["Precipitation begins when relative humidity exceeds what value?","Which type of precipitation dominates Florida summers? Which involves mountains?","What force gives tropical cyclones their rotation?","Up to what share of rainfall can tropical cyclones supply 300 km inland (Oliver and Pratt)?","Which is NOT a downside of tile drainage (it reduces runoff)?","How do raised beds prevent waterlogging?","What do the fish contribute in rice-fish polyculture?"],
+ ask:["Precipitation begins when relative humidity exceeds what value?","Which type of precipitation dominates Florida summers? Which involves mountains?","What force gives tropical cyclones their rotation?","Up to what share of rainfall can tropical cyclones supply 300 km inland (Oliver and Pratt)?","Which is NOT a downside of tile drainage (it reduces runoff)?","How do raised beds prevent waterlogging?","What do the fish contribute in rice-fish polyculture?","Quiz 05: why do plants do poorly in waterlogged soil? (anoxia)","Quiz 05: which listed practice solves too much water, tile drainage or drip irrigation?"],
  quiz:[
   {q:"Precipitation happens when the relative humidity of the air...",o:["exceeds 100%","drops below 50%","equals the temperature","reaches 0%"],c:0,e:"At that point the air holds more vapor than its temperature allows, so vapor condenses into droplets (the dew point). Near the ground that is fog; aloft it is cloud, then rain once droplets coalesce."},
   {q:"Florida's daily summer thunderstorms are an example of...",o:["convective precipitation","orographic precipitation","cyclonic precipitation","sublimation"],c:0,e:"Solar heating lifts moist air off the Gulf and Atlantic, it expands and cools as it rises, condenses, and drops around 3 o'clock. No mountains and no rotation involved."},
@@ -412,7 +414,7 @@ var L=[
   {t:"Why drip is not everywhere",i:"Every plant needs its own emitter, so laying out and collecting the lines each harvest is a lot of work. Minerals and particles clog the tiny tubes (a clogged line means an unwatered plant), and lines get in the way of mechanized harvest.",f:"The blockers are <b>time, expense, clogging</b> and harvest access.",q:"Name three reasons drip irrigation is not used on every farm.",a:"Labor and expense of laying and removing lines, clogging of the small tubes, and difficulty harvesting with machinery around the lines."},
   {t:"The 15, 20, 40 numbers",i:"About 15% of US agricultural land is irrigated and about 20% of cropland worldwide. Yet 40% of the food supply comes from those irrigated areas, and some crops cannot be grown without irrigation. Irrigation can also fit in a second crop.",f:"Irrigated land: <b>20% of world cropland, 40% of the food</b>.",q:"What share of world cropland is irrigated, and what share of food does it produce?",a:"About 20% of cropland, producing about 40% of the food supply."}
  ],
- ask:["Define an aquifer.","Which irrigation method requires no machinery? Which is most water-efficient?","Why do fields look like circles from the air?","How can sprinklers protect crops from freezing?","What is the main disease risk of sprinklers?","Why is drip not more widely used?","Irrigated land is what share of world cropland, and produces what share of food?"],
+ ask:["Define an aquifer.","Which irrigation method requires no machinery? Which is most water-efficient?","Why do fields look like circles from the air?","How can sprinklers protect crops from freezing?","What is the main disease risk of sprinklers?","Why is drip not more widely used?","Irrigated land is what share of world cropland, and produces what share of food?","Quiz 05: which of these is NOT a source of irrigation water? (precipitation)","Quiz 05: which two reservoirs supply irrigation? (surface water and groundwater)"],
  quiz:[
   {q:"An aquifer is...",o:["any permeable rock below the surface that holds water","a surface lake used for irrigation","a canal that carries irrigation water","a pump that lifts groundwater"],c:0,e:"Groundwater is the water held in the pores of permeable rock, not a pool in a cavern. Wells and pumps bring it up for irrigation."},
   {q:"Which irrigation method can a subsistence farmer use with no machinery?",o:["Furrow irrigation","Center pivot sprinklers","Drip irrigation","Subsurface drip"],c:0,e:"Furrow is just sloped ditches between beds filled with water. It is old and simple, though doing it efficiently takes knowledge of infiltration rate, stream size, run time and slope."},
@@ -441,7 +443,7 @@ var L=[
   {t:"Fallow rotation",i:"Leaving a field unplanted lets the soil absorb and hold the winter rain for the next crop and gives organic matter time to break down into available nutrients.",f:"Fallow <b>banks moisture</b> in the soil. Counterintuitive but it works because soil is a good water store.",q:"Why include a fallow rotation in dryland agriculture?",a:"To accumulate winter moisture in the soil for the next crop and to let organic matter decompose into available nutrients."},
   {t:"Tillage versus stubble",i:"Intensive tillage controls weeds mechanically but bares the soil, raising evaporation, runoff and erosion. Mulching or reduced tillage leaves wheat stubble on the surface, holding moisture and soil, but the weeds then need herbicides.",f:"Stubble can trap <b>25 to 40% more moisture</b>; the price is herbicide cost in an already marginal system.",q:"State the trade-off between intensive tillage and reduced tillage in dryland farming.",a:"Tillage: mechanical weed control but more evaporation and erosion. Reduced tillage or mulch: 25 to 40% more moisture retained and less erosion, but weeds require herbicides, adding cost."}
  ],
- ask:["Drylands receive less than how much rain a year?","Dryland agriculture is practiced in which zones (not arid)?","Which crop is NOT a typical dryland crop?","Why must weeds be controlled in dryland systems?","What is the purpose of a fallow rotation?","How much more moisture can stubble mulch trap?","What is the cost of reduced tillage?"],
+ ask:["Drylands receive less than how much rain a year?","Dryland agriculture is practiced in which zones (not arid)?","Which crop is NOT a typical dryland crop?","Why must weeds be controlled in dryland systems?","What is the purpose of a fallow rotation?","How much more moisture can stubble mulch trap?","What is the cost of reduced tillage?","Quiz 05: what can intensive tillage do on the Palouse? (increase soil erosion)","Quiz 05: which legumes rotate with dryland wheat? (lentils and peas)","Quiz 05: which region is NOT a dryland agriculture region? (Malaysia)"],
  quiz:[
   {q:"Drylands are defined as areas receiving less than...",o:["20 inches (50 cm) of precipitation a year","40 inches of precipitation a year","5 inches of precipitation a year","20 inches of precipitation a month"],c:0,e:"Under 20 inches, or 50 cm, a year, which covers about 40% of the land surface once Greenland and Antarctica are excluded."},
   {q:"Dryland agriculture is practiced in...",o:["semi-arid and dry subhumid areas, without irrigation","arid areas, with heavy irrigation","wet tropical areas","any area with irrigation"],c:0,e:"It relies on natural rain alone, so arid land is out: there the water is too scarce and any farming needs irrigation."},
@@ -745,6 +747,48 @@ var PAIRS=[
  {l:"Iron",r:"Locked up at high pH"},
  {l:"Phosphorus",r:"Locked up at low pH, and runs off rather than leaches"}
 ];
+
+/* ---------- Mariel's real Quiz 05 question pool (relayed 2026-09-20, 19 unique items; Q20 repeats Q1) ---------- */
+var POOL5=[
+ {lec:"2.3",q:"One benefit of tile drainage is:",o:["Decreased runoff","Increased soil erosion","A higher water table","Increased soil salinity"],c:0,
+  e:"Perforated pipes sit below the root zone, so water infiltrates down to them instead of running across the surface. Less runoff also means less erosion."},
+ {lec:"2.5",q:"Intensive tillage on the Palouse can:",o:["Increase soil erosion","Increase soil organic matter","Remove the need for fallow","Raise the water table"],c:0,
+  e:"The Palouse is hilly and takes its precipitation in winter. Tilled slopes have nothing holding them, so the soil moves downhill with the water."},
+ {lec:"2.4",q:"Which of these is NOT a form of water used for irrigation?",o:["Precipitation","Surface water","Groundwater","Collected runoff"],c:0,
+  e:"Irrigation draws on surface water, groundwater and captured runoff. Precipitation falling straight onto the field is rainfed agriculture, which is the opposite of irrigating."},
+ {lec:"2.5",q:"True or false: dryland wheat production is often rotated with lentils or peas.",o:["True","False"],c:0,
+  e:"True. Lentils and peas are drought tolerant legumes, so they fit the same low rainfall and break the wheat cycle."},
+ {lec:"2.2",q:"Moisture sitting on the leaf surface:",o:["Decreases transpiration","Increases transpiration","Has no effect on transpiration","Forces the stomata open"],c:0,
+  e:"Transpiration is driven by the gradient between the wet leaf and drier air. Wet the leaf surface and the air right next to it is already saturated, so less water leaves."},
+ {lec:"2.5",q:"True or false: rainfed agriculture is practiced in the semi-arid Western US.",o:["True","False"],c:0,
+  e:"True. The semi-arid Western US is one of the classic dryland regions, along with the Sahel and the Mediterranean."},
+ {lec:"2.2",q:"True or false: water is a finite resource.",o:["False","True"],c:0,
+  e:"False. There is the same amount of water on Earth as 100 million years ago, so it is renewable. The problem is which reservoir it sits in: only about 3 percent is fresh water we can actually reach."},
+ {lec:"2.3",q:"The rotation of cyclonic precipitation is generated by:",o:["The Coriolis effect","Orographic lift","Convective heating","The jet stream"],c:0,
+  e:"The Coriolis effect, from the Earth's spin, sets the rotation. Convective and orographic precipitation are the other two types and neither of them rotates."},
+ {lec:"2.3",q:"Which of these is a solution for too much water?",o:["Tile drainage","Drip irrigation","Headwater collection","Center pivot irrigation"],c:0,
+  e:"Tile drainage carries the excess away below the root zone. Drip and center pivot are scarcity tools, for putting water on, not taking it off."},
+ {lec:"2.5",q:"True or false: dryland agriculture relies solely on precipitation.",o:["True","False"],c:0,
+  e:"True. Dryland farming means no irrigation at all, under roughly 20 inches of rain a year, which is why fallow, stubble mulch and weed control matter so much."},
+ {lec:"2.3",q:"Plants do poorly in waterlogged soil because of:",o:["Anoxia","Too much oxygen","Excess nitrogen","A high matric potential"],c:0,
+  e:"Water fills the pore spaces that normally hold air. The roots lose their oxygen, fall back on anaerobic respiration, and toxins build up."},
+ {lec:"2.4",q:"The reservoirs used for irrigation are:",o:["Surface water and groundwater","The atmosphere and ice","The ocean and ice","Soil water and the atmosphere"],c:0,
+  e:"Irrigation pulls from rivers, lakes and reservoirs (surface water) and from aquifers (groundwater). Those are the two reservoirs a farm can actually tap."},
+ {lec:"2.4",q:"True or false: sprinkler irrigation lets pathogens spread more easily.",o:["True","False"],c:0,
+  e:"True. Splashing water carries fungal spores from leaf to leaf and wets the foliage, which is exactly what foliar pathogens need. It is the main disease drawback of sprinklers."},
+ {lec:"2.2",q:"True or false: water is a nonpolar molecule.",o:["False","True"],c:0,
+  e:"False. Water is polar: the hydrogen side is positive and the oxygen side is negative, which is why it pulls salts apart and why it cannot dissolve nonpolar oils, fats and waxes."},
+ {lec:"2.5",q:"Dryland agriculture is associated with all of the following EXCEPT:",o:["Malaysia","The Western US","The Sahel","The Mediterranean"],c:0,
+  e:"Malaysia is tropical and wet, so nothing there is moisture limited. Dryland farming belongs to semi-arid zones: the Western US, the Sahel, the Mediterranean."},
+ {lec:"2.2",q:"More wind:",o:["Increases evapotranspiration","Decreases evapotranspiration","Has no effect on evapotranspiration","Closes the stomata"],c:0,
+  e:"Wind sweeps away the humid layer sitting on the leaf and soil surface, so the gradient stays steep and water keeps leaving. Higher humidity and mulch do the reverse."},
+ {lec:"2.4",q:"True or false: sprinklers are used in frost protection.",o:["True","False"],c:0,
+  e:"True. Running the sprinklers coats the fruit in ice, and freezing water releases heat, so the tissue underneath holds near 32 F instead of dropping further. Florida citrus growers do this."},
+ {lec:"2.3",q:"Precipitation over the Cascades and the Sierra Nevada is mainly:",o:["Orographic","Convective","Cyclonic","Frontal"],c:0,
+  e:"Air is forced up the mountain range, cools, and drops its moisture on the windward side. That is orographic precipitation, and it leaves a rain shadow behind the range."},
+ {lec:"2.2",q:"What share of US water use is devoted to agriculture?",o:["Almost 50 percent","About 10 percent","About 70 percent","About 90 percent"],c:0,
+  e:"Almost 50 percent in the US. The 70 percent figure is the global one, so read the question carefully before picking."}
+];
 </script>
 <script>
 /* ---------- state (localStorage with memory fallback; iOS file:// throws) ---------- */
@@ -757,6 +801,7 @@ try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
 function save(){_lsSet(LS,JSON.stringify(state));}
 /* ids */
 L.forEach(function(lec,li){ lec.cards.forEach(function(c,ci){ c.id='c'+lec.id.replace('.','_')+'_'+ci; c.lec=lec.id; }); lec.quiz.forEach(function(q){ q.lec=lec.id; q.wk=lec.wk; }); });
+POOL5.forEach(function(q){ q.wk=5; q.src='Quiz 05'; });
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function byId(id){return document.getElementById(id);}
@@ -866,7 +911,10 @@ function questionEl(item,n,showLec){
  var order=shuffle(item.o.map(function(_,i){return i;}));
  var correctPos=order.indexOf(item.c);
  var q=document.createElement('div'); q.className='q';
- var h=(showLec?'<div class="qlec">Lecture '+item.lec+'</div>':'')+'<div class="qh">'+n+'. '+esc(item.q)+'</div>';
+  var meta='';
+ if(showLec) meta+='<span class="qlec">Lecture '+esc(item.lec)+'</span>';
+ if(item.src) meta+='<span class="qsrc">'+esc(item.src)+' pool</span>';
+ var h=(meta?'<div class="qmeta">'+meta+'</div>':'')+'<div class="qh">'+n+'. '+esc(item.q)+'</div>';
  order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[origI])+'</button>'; });
  h+='<div class="qexp">'+esc(item.e)+'</div>';
  q.innerHTML=h;
@@ -925,11 +973,16 @@ function initFlash(){
 }
 
 /* ---------- quiz bank ---------- */
-var quizFilter='5', QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
-function bank(){ var b=[]; L.forEach(function(lec){ if(quizFilter!=='all' && lec.wk!==+quizFilter) return; lec.quiz.forEach(function(q){ b.push(q); }); }); return b; }
+var quizFilter='pool', QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
+function bank(){
+ if(quizFilter==='pool') return POOL5.slice();
+ var b=[]; L.forEach(function(lec){ if(quizFilter!=='all' && lec.wk!==+quizFilter) return; lec.quiz.forEach(function(q){ b.push(q); }); });
+ if(quizFilter==='all'||quizFilter==='5') b=POOL5.concat(b);
+ return b;
+}
 function renderQuizFilters(){
  var host=byId('quizfilters'); if(!host) return;
- var opts=[['5','Week 5 (Quiz 05)'],['6','Week 6'],['7','Week 7'],['all','All of Module 2']];
+ var opts=[['pool','Quiz 05 pool only (19)'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['all','All of Module 2']];
  opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ quizFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); quizQueue=[]; quizRight=0; quizAnswered=0; renderQuiz(); }); host.appendChild(b); });
 }
 function updateQuizScore(){ var s=byId('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
