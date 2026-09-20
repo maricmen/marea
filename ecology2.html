@@ -281,7 +281,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all nineteen questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 on October 7, so they are the ones worth knowing cold. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all twenty-seven questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 on October 7, so they are the ones worth knowing cold. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -354,7 +354,7 @@ var L=[
   {t:"The ET dial",i:"Turn it up: more solar radiation, higher temperature, more wind. Turn it down: higher relative humidity, mulch or bedding cover. Soil type depends on water holding capacity.",f:"Relative humidity up means evapotranspiration <b>down</b>; wind up means ET <b>up</b>.",q:"How does each change affect evapotranspiration: more wind, more relative humidity, mulch, more solar radiation?",a:"Wind up: ET up. Relative humidity up: ET down. Mulch: evaporation down. Solar radiation up: ET up."},
   {t:"Subsidence, first look",i:"An aquifer is not a pool but water-filled spaces in rock. Pump it too fast and the empty pores collapse, so even when recharge arrives there is no room; it runs off elsewhere.",f:"Ocean residence time: <b>10,000 to 20,000 years</b>. Once water leaves a usable reservoir it can be gone a long time.",q:"What happens to an aquifer that is overdrafted?",a:"Its pore spaces collapse, so it can no longer hold the recharge; the aquifer's physical ability to store water is degraded."}
  ],
- ask:["Is water a finite resource? (No, renewable; the reservoir is the issue.)","What share of Earth's water can we use? (3%)","Which is a flux and which a reservoir?","What share of US water goes to agriculture, and globally?","Which change decreases evapotranspiration: higher relative humidity, mulch.","What happens to water that percolates past the root zone?","Why does overdrafting permanently damage an aquifer?","Quiz 05: true or false, water is a nonpolar molecule (false, it is polar).","Quiz 05: does more wind raise or lower evapotranspiration?","Quiz 05: what does moisture on the leaf surface do to transpiration?"],
+ ask:["Is water a finite resource? (No, renewable; the reservoir is the issue.)","What share of Earth's water can we use? (3%)","Which is a flux and which a reservoir?","What share of US water goes to agriculture, and globally?","Which change decreases evapotranspiration: higher relative humidity, mulch.","What happens to water that percolates past the root zone?","Why does overdrafting permanently damage an aquifer?","Quiz 05: true or false, water is a nonpolar molecule (false, it is polar).","Quiz 05: does more wind raise or lower evapotranspiration?","Quiz 05: what does moisture on the leaf surface do to transpiration?","Quiz 05: transpired water leaves the plant through what? (the stomates)"],
  quiz:[
   {q:"True or false: water is a finite resource that is being used up.",o:["False, it is renewable; the same amount exists as 100 million years ago","True, each use destroys some water"],c:0,e:"Using water moves it between reservoirs; it does not remove it from the planet. The concern is where it ends up (ocean, ice, degraded quality), not the total."},
   {q:"What share of the water on Earth is in a reservoir we can use?",o:["3%","30%","50%","97%"],c:0,e:"Only 3%, the surface water and groundwater. Ocean and ice hold the rest in forms we cannot readily use."},
@@ -385,7 +385,7 @@ var L=[
   {t:"Tile drainage",i:"Perforated pipes buried in ditches carry excess water out of waterlogged fields, a technique with roots around 300 BC. Less runoff and erosion, but the drained water carries soluble nutrients (nitrogen) and salts you then have to store.",f:"Trade: <b>less erosion</b>, but <b>nutrient and salt loss</b> into water that needs a home.",q:"What is the main benefit and the main cost of tile drainage?",a:"Benefit: less runoff and erosion because water infiltrates and is piped away. Cost: soluble nutrients like nitrogen and salts leave with the water, which then needs safe storage."},
   {t:"Raised beds and rice-fish polyculture",i:"Raised beds keep roots above the flood line in river-side fields (Brazil, Asia). In the Pearl River Delta rice and fish share the paddy: fish manure fertilizes the rice and the fish eat the insects.",f:"Rice-fish gives <b>two harvests</b> with fewer inputs, a main tenet of agroecology.",q:"How does rice-fish polyculture reduce inputs?",a:"Fish manure fertilizes the rice and the fish eat aquatic insects, so the farmer needs less fertilizer and pest control and gets two harvests."}
  ],
- ask:["Precipitation begins when relative humidity exceeds what value?","Which type of precipitation dominates Florida summers? Which involves mountains?","What force gives tropical cyclones their rotation?","Up to what share of rainfall can tropical cyclones supply 300 km inland (Oliver and Pratt)?","Which is NOT a downside of tile drainage (it reduces runoff)?","How do raised beds prevent waterlogging?","What do the fish contribute in rice-fish polyculture?","Quiz 05: why do plants do poorly in waterlogged soil? (anoxia)","Quiz 05: which listed practice solves too much water, tile drainage or drip irrigation?"],
+ ask:["Precipitation begins when relative humidity exceeds what value?","Which type of precipitation dominates Florida summers? Which involves mountains?","What force gives tropical cyclones their rotation?","Up to what share of rainfall can tropical cyclones supply 300 km inland (Oliver and Pratt)?","Which is NOT a downside of tile drainage (it reduces runoff)?","How do raised beds prevent waterlogging?","What do the fish contribute in rice-fish polyculture?","Quiz 05: why do plants do poorly in waterlogged soil? (anoxia)","Quiz 05: which listed practice solves too much water, tile drainage or drip irrigation?","Quiz 05: name the three types of precipitation; dryland is not one of them."],
  quiz:[
   {q:"Precipitation happens when the relative humidity of the air...",o:["exceeds 100%","drops below 50%","equals the temperature","reaches 0%"],c:0,e:"At that point the air holds more vapor than its temperature allows, so vapor condenses into droplets (the dew point). Near the ground that is fog; aloft it is cloud, then rain once droplets coalesce."},
   {q:"Florida's daily summer thunderstorms are an example of...",o:["convective precipitation","orographic precipitation","cyclonic precipitation","sublimation"],c:0,e:"Solar heating lifts moist air off the Gulf and Atlantic, it expands and cools as it rises, condenses, and drops around 3 o'clock. No mountains and no rotation involved."},
@@ -787,7 +787,23 @@ var POOL5=[
  {lec:"2.3",q:"Precipitation over the Cascades and the Sierra Nevada is mainly:",o:["Orographic","Convective","Cyclonic","Frontal"],c:0,
   e:"Air is forced up the mountain range, cools, and drops its moisture on the windward side. That is orographic precipitation, and it leaves a rain shadow behind the range."},
  {lec:"2.2",q:"What share of US water use is devoted to agriculture?",o:["Almost 50 percent","About 10 percent","About 70 percent","About 90 percent"],c:0,
-  e:"Almost 50 percent in the US. The 70 percent figure is the global one, so read the question carefully before picking."}
+  e:"Almost 50 percent in the US. The 70 percent figure is the global one, so read the question carefully before picking."},
+ {lec:"2.2",q:"Transpired water is lost from the plant via the:",o:["Stomates","Roots","Xylem walls","Waxy cuticle"],c:0,
+  e:"Transpiration leaves through the stomates on the leaf, the same pores carbon dioxide enters by. That is why a plant closing its stomata stops water loss and carbon intake in the same move."},
+ {lec:"2.3",q:"Rice and fish farming in the Pearl River delta is an example of:",o:["Polyculture","Monoculture","Dryland agriculture","Tile drainage"],c:0,
+  e:"Polyculture: two crops in one flooded system, rice plus aquaculture. Instead of draining the excess water they farm it, and the fish eat pests and weeds and fertilize the paddy."},
+ {lec:"2.3",q:"Which of these is NOT a type of precipitation discussed in the lecture?",o:["Dryland","Convective","Orographic","Cyclonic"],c:0,
+  e:"The three types are convective (Florida summer storms), orographic (air lifted over a mountain range) and cyclonic (rotating, Coriolis driven). Dryland is a way of farming, not a way rain forms."},
+ {lec:"2.2",q:"Higher relative humidity:",o:["Decreases evapotranspiration","Increases evapotranspiration","Has no effect on evapotranspiration","Increases runoff"],c:0,
+  e:"Humid air is already close to holding all the vapor it can, so the gradient pulling water out of leaf and soil flattens. Wind and heat do the reverse."},
+ {lec:"2.3",q:"Raised beds are used to prevent:",o:["Waterlogging","Salinization","Wind erosion","Drought stress"],c:0,
+  e:"Lifting the bed puts the root zone above the inundated layer, so the roots keep their air pockets while the furrows between beds carry the standing water away."},
+ {lec:"2.3",q:"Tile drainage:",o:["Removes excess water from the field","Delivers water to the root zone","Is used mainly in arid regions","Raises the water table"],c:0,
+  e:"It is a too-much-water tool: perforated pipes below the root zone collect the excess and carry it off, which is why it belongs to wet regions and not to arid ones."},
+ {lec:"2.5",q:"Fallow rotations on the Palouse are important for:",o:["Conserving soil moisture","Controlling soil pH","Raising organic matter","Preventing frost damage"],c:0,
+  e:"A fallow year banks the season's rain in the soil so the next crop has two years of moisture to draw on. In a dryland system moisture, not fertility, is the limit."},
+ {lec:"2.2",q:"Desiccation hurts photosynthesis because:",o:["The stomates remain closed, so carbon dioxide cannot get in","Chlorophyll breaks down in dry air","The roots take up too many salts","The leaf reflects more light"],c:0,
+  e:"Under water stress the plant shuts its stomata to hold on to water. Closed, they also block the carbon dioxide photosynthesis runs on, and transpiration and nutrient movement stop with it."}
 ];
 </script>
 <script>
@@ -982,7 +998,7 @@ function bank(){
 }
 function renderQuizFilters(){
  var host=byId('quizfilters'); if(!host) return;
- var opts=[['pool','Quiz 05 pool only (19)'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['all','All of Module 2']];
+ var opts=[['pool','Quiz 05 pool only (27)'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['all','All of Module 2']];
  opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ quizFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); quizQueue=[]; quizRight=0; quizAnswered=0; renderQuiz(); }); host.appendChild(b); });
 }
 function updateQuizScore(){ var s=byId('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
