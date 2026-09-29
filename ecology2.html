@@ -162,6 +162,53 @@ details.lec.studied>summary .ttl{color:var(--moss-d)}
 @media(max-width:520px){.ctile{font-size:12.5px;padding:10px 11px}.conncol#connL .ctile{font-size:13.5px}}
 .placeholder{margin:26px 4px;background:var(--card);border:1px dashed var(--line2);border-radius:16px;padding:26px 20px;text-align:center;font-family:var(--serif);font-style:italic;color:var(--ink3);font-size:16px}
 .foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic}
+/* exam 2 additions */
+.wbw{margin:22px 4px 24px}
+.wbwhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.wbwhead h2{font-family:var(--serif);font-size:23px;margin:0;color:var(--soil)}
+.wbwsub{font-size:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:.07em}
+.wbwmap{font-size:13.5px;color:var(--ink2);margin:0 0 14px;max-width:72ch;line-height:1.5}
+.wbwmap b{color:var(--soil)}
+.wbwgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+@media(max-width:880px){.wbwgrid{grid-template-columns:minmax(0,1fr)}}
+.wcard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 16px 12px;min-width:0}
+.wtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.wtop .n{font-family:var(--serif);font-size:13px;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px;font-weight:700}
+.wdates{font-size:12px;color:var(--ink3)}
+.wsyl{font-family:var(--serif);font-size:16.5px;color:var(--soil);margin:8px 0 9px;line-height:1.3}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px}
+.chip{font:inherit;font-size:12px;background:var(--paper);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:4px 10px;cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--line2)}
+.chip b{color:var(--clay-d);margin-right:3px}
+.chip.extra{border-style:dashed;border-color:var(--line2)}
+.chip.maybe{background:#f3e7c6;border-color:#dcc487}
+.wmap{font-size:12.5px;color:var(--ink3);font-style:italic;margin:0 0 2px;line-height:1.45}
+.wbig{font-size:14px;color:var(--ink2);line-height:1.55;margin:0}
+.wcard .line{font-size:13.5px}
+.suphead{margin:24px 4px 12px;padding:10px 14px;border-left:4px solid var(--wheat);background:rgba(251,246,234,.7);border-radius:0 12px 12px 0}
+.suphead h3{font-family:var(--serif);font-size:17px;margin:0;color:var(--soil)}
+.suphead p{margin:3px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.4}
+.suphead.maybe{border-left-color:var(--clay)}
+.flagpill{display:inline-block;margin-top:4px;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487;border-radius:99px;padding:2px 8px}
+.cmp{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;padding:14px 16px}
+.cmp h3{font-family:var(--serif);font-size:18px;margin:0 0 6px;color:var(--soil)}
+.cmp .cmpintro{font-size:13.5px;color:var(--ink2);margin:0 0 8px;line-height:1.5}
+.cmprow{display:grid;grid-template-columns:132px minmax(0,1fr) minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px dashed var(--line2)}
+.cmphead{border-top:none;padding-bottom:2px}
+.cmphead div{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700}
+.cmpk{font-family:var(--serif);font-weight:700;color:var(--soil);font-size:14.5px;line-height:1.25}
+.cmpc{font-size:13px;color:var(--ink2);line-height:1.45}
+.cmpc .who{display:none}
+.cmptake{font-size:13px;color:var(--soil);background:#efe6d1;border-radius:10px;padding:9px 11px;margin-top:8px;line-height:1.45}
+@media(max-width:640px){.cmprow{grid-template-columns:minmax(0,1fr);gap:6px}.cmphead{display:none}.cmpc .who{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700;margin-bottom:1px}}
+.qsrc.m2{background:var(--moss-d)}
+.qexp.qnote{color:var(--clay-d);background:#f6e9df;border-top:none;border-left:3px solid var(--clay);border-radius:8px;padding:8px 10px}
+.examhub{margin:22px 4px}
+.examhub .plan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.examhub .plan li{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.examhub .plan .pt{flex:1;min-width:200px;font-size:14px;color:var(--ink2);line-height:1.45}
+.examhub .plan .pt b{font-family:var(--serif);color:var(--soil);font-size:15px}
+.examhub .facts{font-size:13.5px;color:var(--ink2);margin:0 0 16px;padding-left:18px;line-height:1.5}
 svg{display:block}
 </style>
 <noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
@@ -181,11 +228,11 @@ svg{display:block}
       <div class="sub">ALS 3153 · Module 2 · Water and Soil in Agroecosystems</div>
     </div>
   </div>
-  <p class="hnote">Module 2, one lecture at a time. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your thirteen lecture transcripts (Canvas skips 02-09).</p>
+  <p class="hnote">Module 2, one lecture at a time. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your thirteen lecture transcripts (Canvas skips 02-09). New for Exam 2: the week-by-week map just below, the two Green Revolution videos, the Howarth reading, your own Module 2 questions in the Quiz tab, and the soil organisms lectures, possibly on the exam.</p>
 
   <div class="prog">
     <div class="progbar"><div class="progfill" id="pf"></div></div>
-    <div class="progtxt"><b id="pstud">0</b> of <span id="ptot">13</span> lectures studied · <span id="psolid">0</span> concepts solid</div>
+    <div class="progtxt"><b id="pstud">0</b> of <span id="ptot">18</span> lectures, videos and readings studied · <span id="psolid">0</span> concepts solid</div>
   </div>
 
   <div class="tabs">
@@ -199,6 +246,7 @@ svg{display:block}
 
   <div class="view on" id="v-overview">
     <div class="bigpic">
+      <div class="wbw" id="wbw"></div>
       <div class="oneliner">Module 2 in one breath: a farm lives on water it does not control and soil it did not make. Water arrives as rain or is pulled from rivers and aquifers, leaves as runoff, percolation and evapotranspiration, and every shortcut we take to keep it coming (overdrafting, diverting, irrigating dry land) comes back as subsidence, salt, dead zones or desert. The soil is the medium that decides how much of that water and how many of those nutrients the plant ever gets.</div>
       <div class="weeks" id="weeks"></div>
       <div class="mapwrap">
@@ -281,7 +329,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all twenty-seven questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 on October 7, so they are the ones worth knowing cold. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all twenty-seven questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 (opens October 7), so they are the ones worth knowing cold. Your own twenty-seven Module 2 questions from Quiz 06 sit under the Your M2 questions pill, with your marked answers and a note wherever one deserves a second look. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -294,10 +342,10 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-exam">
-    <div class="placeholder">Exam 02, October 7, closes Module 2. This tab grows once you hand me the practice questions.</div>
+    <div class="examhub" id="examhub"><div class="placeholder">Exam 02 covers weeks 5 to 7. If this line stays, scripts are off: scroll the Big picture tab for the week-by-week map.</div></div>
   </div>
 
-  <div class="foot">Ecology Field Guide II · built from your Module 2 transcripts (2.1 to 2.14, no 2.9 in Canvas) · your marks stay on this device</div>
+  <div class="foot">Ecology Field Guide II · built from your Module 2 transcripts (2.1 to 2.14, no 2.9 in Canvas), the two week 6 videos, Howarth 2002 and lectures 3.6 and 3.7 · your marks stay on this device</div>
 </div>
 <script>
 /* ---------- Module 2 data: one entry per lecture, Canvas order ---------- */
@@ -807,6 +855,277 @@ var POOL5=[
 ];
 </script>
 <script>
+
+/* ---------- Exam 2 additions (built 2026-09-29): week by week, Green Revolution videos, Howarth 2002, soil organisms, her M2 questions ---------- */
+var EXAM2={opens:"Wed Oct 7",closes:"Sun Oct 11"};
+var WBW=[
+ {n:5,dates:"Sep 14 to 20",syl:"Water in ag · Dryland ag",
+  lecs:["2.1","2.2","2.3","2.4","2.5"],
+  map:"Syllabus week 5 is water in agriculture and dryland agriculture. Lectures 2.1 to 2.5 are exactly that, and your Quiz 05 pool draws only from them.",
+  big:"Water is renewable, but only 3% of it sits where a farm can reach it, and agriculture uses almost half of the US supply and 70% worldwide. The plant tolerates a wide band of soil water, and suffers at both ends: waterlogging takes the oxygen, drought closes the stomata. Water arrives as convective, orographic or cyclonic rain, or is pulled from rivers and aquifers, and leaves as runoff, percolation and evapotranspiration. Where rain falls short you either irrigate (furrow, center pivot, drip) or farm dry on under 20 inches a year by banking moisture with fallow, stubble and weed control.",
+  must:["The soil water response curve is broad and flat on top; the nutrient curve is sharp. Waterlogging hurts through anoxia, drought through closed stomata.",
+   "Reservoirs (atmosphere, groundwater, ocean, surface water, ice) versus fluxes (evaporation, sublimation, transpiration, runoff, percolation). Ag is almost 50% of US water use, 70% globally.",
+   "Evapotranspiration goes up with sun, heat and wind, down with humidity and mulch. About 90% of the water through a plant is transpired.",
+   "Three precipitation types: convective (Florida summers), orographic (mountains, rain shadow), cyclonic (Coriolis rotation).",
+   "Irrigation: furrow (no machinery), center pivot (circles, disease splash, frost protection), drip (least water, most labor). About 20% of cropland grows about 40% of food.",
+   "Dryland: under 20 in (50 cm), semi-arid and dry subhumid only, never arid. Palouse winter wheat, fallow banks moisture, stubble keeps 25 to 40% more water but needs herbicide."]},
+ {n:6,dates:"Sep 21 to 27",syl:"Fertilizer · Fertilizer in the environment · Perusall 3",
+  lecs:["2.6","2.7","2.8","2.10","S1","S2","P3"],
+  map:"Syllabus week 6 says fertilizer and fertilizer in the environment. In Canvas, week 6 also carried the water issues lectures 2.6, 2.7 and 2.8 (your Quiz 06 deck and all 27 of your M2 questions come from 2.6 to 2.10). Lecture 2.10 is the fertilizer-in-the-environment lecture. Module 2 has no separate fertilizer lecture (nitrogen, phosphorus and potassium were 1.11 to 1.13, on Exam 1), so the fertilizer story here is 2.10, the two Green Revolution videos and the Howarth reading.",
+  big:"Week 6 is the bill for pushing water and fertilizer too hard. Overdrafting drains aquifers until they subside and pull in seawater, and diversions leave the Colorado dry before the sea. Irrigating arid land without enough water to leach concentrates salt until sodium wrecks the soil, and overworking semi-arid land turns it to desert, with the Aral Sea as the extreme case. Soluble synthetic fertilizer, spread worldwide by the Green Revolution, runs off (phosphorus) or leaches (nitrate) and drives eutrophication and dead zones. The two videos argue over whether that revolution was a rescue or a myth, and Howarth shows the nutrient bill landing on the coast.",
+  must:["Overdrafting, subsidence, saltwater intrusion, the Colorado River pulse flow, Gleeson's groundwater footprint (ratio above one means unsustainable).",
+   "Salinization is worst in arid land (no leaching). Sodium replaces calcium and structure collapses. Fix sodicity first with gypsum and drainage, then flush salinity.",
+   "Desertification: semi-arid to arid, always human (overgrazing, overcultivation, deforestation). Sahel firewood. Aral Sea drained for cotton, about 90% of its area gone.",
+   "Synthetic fertilizer is inorganic and soluble. Phosphorus leaves by runoff, nitrate by leaching. Sources: synthetic fertilizer, CAFOs, household detergents and soaps.",
+   "Eutrophication cycle: nutrient pulse, high productivity, die-off, increased decomposition, low oxygen. Gulf dead zone below the thermocline. Reversible when inputs stop (Black Sea, Tampa).",
+   "Green Revolution: Borlaug's high-yield wheat against famine, versus Shiva's charge of 10 times the water, dams, tube wells, debt and chemicals. Howarth: nonpoint sources now dominate coastal nutrient pollution."]},
+ {n:7,dates:"Sep 28 to Oct 4",syl:"Soils/Decomposition · Soil organisms",
+  lecs:["2.11","2.12","2.13","2.14","3.6","3.7"],
+  map:"Syllabus week 7 is soils and decomposition plus soil organisms. Lectures 2.11 to 2.14 are the soils and decomposition part. Soil organisms are lectures 3.6 and 3.7, which Canvas files under Module 3, so they are marked possibly on Exam 2 until you confirm.",
+  big:"The module ends in the soil, the medium that decides how much of the water and nutrients from weeks 5 and 6 the plant ever gets. The profile (O, A, B, C) and the twelve orders tell you what a soil can do. Decomposition turns organic matter into the inorganic forms plants can take up, at a pace set by warmth, aeration, diversity and the carbon-to-nitrogen ratio. Texture and structure set pores, drainage and water holding; pH and cation exchange capacity set whether nutrients are available. The soil organisms are the workforce behind all of it.",
+  must:["Horizons O, A, B, C; ideal soil 45% mineral, 5% organic, 50% pores. Best orders histosol, mollisol, alfisol; Florida is mostly spodosol, Gainesville sandy entisol.",
+   "Decomposition: litter, detritus, humus, mineralized. High C:N (wood) is slow and robs nitrogen; tillage speeds decomposition and burns organic matter.",
+   "Porosity is not permeability. Macropores drain, micropores hold water. Wilting point, field capacity (micropores water, macropores air), saturation.",
+   "Wet climates acidify, dry ones stay alkaline. pH works mostly through nutrient availability (P locked at low pH, iron at high). CEC holds cations near roots.",
+   "Soil organisms (maybe): only bacteria, fungi, actinomycetes and termites break down plant fiber; bacterial N guilds (mineralizers, nitrifiers, denitrifiers); earthworms build structure.",
+   "Soil food webs (maybe): cyclical, most nutrients start as plant matter, heavy predator regulation, mostly generalist predators, which gives redundancy but makes biocontrol hard."]}
+];
+
+/* extra study units per week, rendered after the core lectures */
+WEEKS[1].sup=[
+ {head:"Supplemental videos: the Green Revolution",note:"Week 6 supplementals in Canvas. Watch both, then read the compare card.",ids:["S1","S2"],compare:true},
+ {head:"Perusall 3 reading",note:"Howarth, Sharpley and Walker 2002, Estuaries 25:656. Fertilizer in the environment, at coastal scale.",ids:["P3"]}
+];
+WEEKS[2].sup=[
+ {head:"Soil organisms",note:"Possibly on Exam 2 (syllabus week 7), confirm. Canvas files these under Module 3.",ids:["3.6","3.7"],maybe:true}
+];
+
+L.push(
+{id:"S2",wk:6,grp:"sup",label:"Video S2",title:"The Mythology of the Green Revolution (Vandana Shiva)",words:1286,
+ gist:"Vandana Shiva argues the Green Revolution's miracle seeds were really a miracle of water: about 10 times more water per unit of food than ecological farming. It came from dams like the Bhakra Dam that drowned whole towns, and from tube wells the World Bank pushed in place of open wells. The results she lists: 10% of Punjab waterlogged, aquifers mined, millets pushed out by thirsty sugarcane to repay loans, chemicals in the groundwater, and a farming culture that stopped caring. She calls it a mythology, not a science.",
+ line:["Her awareness of the link between agriculture and water began with her 1984 study of the Green Revolution. The miracle seeds and miracle chemicals, she says, were really more water: 10 times as much to produce the same food as ecological farming.",
+  "Surface water came from dams. Nehru called the Bhakra Dam a temple of modern India, but dams submerge land, and settlements (abadi in Urdu, around the ab, the water) drowned with them: Tehri, replaced by an artificial New Tehri, and the old town of Bilaspur, whose temples reappeared in a drought.",
+  "It is a mythology, not a science: all they did was put more water and more land under rice and wheat. Her calculations say organic farming would have given the same rice and wheat with that much land and irrigation.",
+  "Too much surface irrigation causes waterlogging: in southwest Punjab the water cannot drain, and about 10% of Punjab became a waterlogged desert.",
+  "Where dams did not reach, tube wells did. Water once sat at about 10 feet everywhere, lifted by Persian wheels and pedal-and-pail levers: protective irrigation in minor quantities. After the 1972 drought in Maharashtra the World Bank would only lend for deep, electric or diesel tube wells, not for deepening open wells, and pushed sugarcane (2,500 mm of water) over millets (250 mm) because cash crops repay loans.",
+  "Chemicals dissolve in all that water: groundwater and rivers full of chemicals, and a cancer train that leaves Punjab daily for a free hospital in Rajasthan, half its passengers cancer patients.",
+  "Culture: a farmer who lifts water with her own labor farms with care; tribal farmers in Maharashtra carry water a mile to each plant. The Green Revolution made farming careless, and where everything is a commodity nothing has value, down to the 30 million girls not allowed to be born in Green Revolution areas."],
+ cards:[
+  {t:"Ten times the water",i:"Shiva's core claim: the Green Revolution was sold as miracle seeds and miracle chemicals, but it was really the result of using more water, 10 times more to produce the same amount of food as ecological farming.",f:"Her claim: <b>10 times more water</b> for the same food.",q:"According to Vandana Shiva, what was really behind the Green Revolution's miracle?",a:"More water: she says it used about 10 times more water than ecological farming to produce the same amount of food."},
+  {t:"Dams, the temples of modern India",i:"Nehru inaugurated the Bhakra Dam as a temple of modern India. Shiva's answer: a dam submerges large tracts of land, and the people who settled around the water (abadi, from ab, water) are drowned with it. Tehri, her region's historic capital and trading center, is underwater, replaced by an artificial New Tehri; Bilaspur drowned behind the Bhakra.",f:"Dams destroyed settlements <b>in the name of irrigation</b> for the Green Revolution.",q:"What does Shiva say dams built for Green Revolution irrigation did to people?",a:"They submerged large tracts of land and drowned settlements and historic towns such as Tehri and Bilaspur."},
+  {t:"Mythology, not science",i:"She says the Green Revolution replaced an old sacred story (Bhagirath's penance) with a new mythology. All it did was put more land and more water under rice and wheat. Her calculations: organic farming would have produced the same rice and wheat with that land and irrigation.",f:"Her framing: <b>more land plus more water</b>, not better science.",q:"Why does Shiva call the Green Revolution a mythology?",a:"Because the gains came from putting more land and water under rice and wheat, not from miracle seeds; she argues organic farming with the same land and water would have matched it."},
+  {t:"Waterlogging in Punjab",i:"Intensified surface irrigation puts on more water than the land can absorb or drain. In the southwest of Punjab the water builds up, and too much water means you cannot grow crops.",f:"About <b>10% of Punjab</b> lost to a waterlogged desert.",q:"What happened to parts of Punjab under intensive Green Revolution irrigation?",a:"Waterlogging: more water was applied than could drain, and about 10% of Punjab became a waterlogged desert."},
+  {t:"Protective irrigation",i:"Before the Green Revolution, water sat at about 10 feet across northern India, from the Rajasthan desert to Punjab and Bihar. Persian wheels and pedal-operated pails lifted it into small channels: irrigation in minor quantities, not flooding fields.",f:"Old systems: <b>Persian wheels</b> and lever pails, water at <b>10 feet</b>.",q:"What does Shiva mean by protective irrigation?",a:"Small amounts of water lifted by renewable means (Persian wheels, pedal-and-pail levers) from shallow wells to support crops, instead of flooding fields."},
+  {t:"Tube wells and the World Bank",i:"After a 1972 drought in Maharashtra, she says, the World Bank refused money for deepening open wells that people could draw from by hand, and lent only for deep tube wells run on electricity or diesel. Year after year more villages became no-source villages as the aquifers were mined.",f:"Result: <b>no-source villages</b> and aquifers mined by energized tube wells.",q:"How did World Bank lending change irrigation in Maharashtra, according to Shiva?",a:"It funded only deep electric or diesel tube wells, not open-well deepening, which mined the aquifers and left more villages without a water source."},
+  {t:"Millets out, sugarcane in",i:"The same loans came with a crop shift: stop growing millets and grow sugarcane, a cash crop that generates money to repay loans. People eat the sorghum they grow; they sell sugarcane.",f:"Millets <b>250 mm</b> of water versus sugarcane <b>2,500 mm</b>: ten times as thirsty.",q:"Compare the water needs of millets and sugarcane in Shiva's example, and why the switch happened.",a:"Millets use about 250 mm, sugarcane about 2,500 mm. Sugarcane was pushed because as a cash crop it generates returns to repay loans."},
+  {t:"Chemicals in the water",i:"Excess water carries the agrochemicals with it: groundwater full of chemicals, rivers polluted. Her example is the cancer train that leaves Punjab every day for a charitable cancer hospital in Rajasthan, with half of its passengers cancer patients.",f:"The <b>cancer train</b>: 50% of passengers are cancer patients.",q:"What is the cancer train in Shiva's argument?",a:"A daily train from Punjab to a free cancer hospital in Rajasthan, half its passengers cancer victims, which she links to agrochemicals dissolved in water."},
+  {t:"Careless water, careless farming",i:"When a farmer lifts water with her own labor she cares for the water and the field: a conservation culture. Tribal farmers in Maharashtra carry water a mile and nourish each plant like a child. The Green Revolution made people careless with water, so farming became careless, and pesticides now take a toll on people.",f:"Her cultural point: labor for water builds <b>a conservation culture</b>.",q:"What cultural shift does Shiva blame on the Green Revolution?",a:"Abundant, subsidized water made farmers careless with water and with farming, replacing a culture of care and conservation."},
+  {t:"When everything is a commodity",i:"Her last and hardest claim: in Green Revolution areas she found advertisements for aborting female fetuses, and today 30 million girls have not been allowed to be born, most in areas where Green Revolution technology entered.",f:"<b>30 million</b> girls not born, per Shiva; her line: when everything is a commodity, nothing has value.",q:"What social impact does Shiva link to the Green Revolution at the end of the video?",a:"Female feticide: about 30 million girls not born, mostly in Green Revolution areas, because when everything is a commodity nothing, even life, has value."}
+ ],
+ ask:["How much more water does Shiva say the Green Revolution used than ecological farming? (10 times)","What did Nehru call the Bhakra Dam, and what did dams do to towns like Tehri?","What share of Punjab does she say became waterlogged? (about 10%)","What did the World Bank refuse to fund after the 1972 Maharashtra drought?","Millets versus sugarcane: how much water each?","Why does she call it a mythology rather than a science?"],
+ quiz:[
+  {q:"Vandana Shiva says the Green Revolution used how much more water than ecological farming to produce the same food?",o:["About 10 times more","About the same","About twice as much","About half as much"],c:0,e:"Her central claim is that the miracle was water: 10 times more to grow the same amount of food as ecological farming, supplied by dams and tube wells."},
+  {q:"In Shiva's account, the Bhakra Dam...",o:["was called a temple of modern India by Nehru, and drowned settlements such as Bilaspur","was built to supply drinking water only","was never finished","was funded to protect millet farmers"],c:0,e:"Nehru inaugurated it as a temple of modern India. Shiva's point is what dams submerge: land, villages and historic towns (Bilaspur behind the Bhakra; Tehri under another dam, rebuilt as New Tehri)."},
+  {q:"What does Shiva say happened to about 10% of Punjab?",o:["It became a waterlogged desert because the irrigation water could not drain","It became a salt flat from seawater","It was converted to organic farming","It was flooded by the Bhakra reservoir"],c:0,e:"Intensified surface irrigation put on more water than the land could absorb or drain, so water built up in the southwest of Punjab and crops could no longer grow."},
+  {q:"After the 1972 drought in Maharashtra, the World Bank (in Shiva's account) would only lend for...",o:["deep tube wells run on electricity or diesel","deepening open wells","Persian wheels","rainwater tanks"],c:0,e:"It refused money for deepening open wells people could draw from by hand and funded energized deep tube wells, which mined the aquifers and created more no-source villages."},
+  {q:"Shiva contrasts millets and sugarcane. Which pairing of water use is correct?",o:["Millets about 250 mm, sugarcane about 2,500 mm","Millets about 2,500 mm, sugarcane about 250 mm","Both about 250 mm","Both about 2,500 mm"],c:0,e:"Sugarcane needs ten times the water, but it is a cash crop that generates returns to repay loans; people eat the sorghum and millets they grow."},
+  {q:"Why does Shiva call the Green Revolution a mythology rather than a science?",o:["The gains came from more land and more water under rice and wheat, not from miracle seeds","It never raised yields at all","It was invented by journalists","It used no fertilizer"],c:0,e:"She argues that putting more land and irrigation under two crops explains the extra rice and wheat, and that her calculations show organic farming would have matched it with the same land and water."},
+  {q:"Which of these is NOT an impact Shiva attributes to the Green Revolution?",o:["Restored aquifers across northern India","Chemicals in groundwater and rivers","Drowned towns behind dams","A careless attitude to water and farming"],c:0,e:"She describes aquifers being mined by tube wells, not restored. The other three are all in her argument, along with the cancer train and female feticide."}
+ ]},
+{id:"P3",wk:6,grp:"P3",label:"Perusall 3",title:"Howarth, Sharpley and Walker 2002: Sources of Nutrient Pollution to Coastal Waters",words:12298,
+ gist:"Nutrient pollution is the largest pollution problem in US coastal rivers and bays: some 60% are moderately to severely degraded, and for most coastal systems nitrogen does more damage than phosphorus. Humans have doubled the global flux of nitrogen to the oceans and tripled phosphorus. Point sources such as sewage have been cleaned up, so nonpoint sources now dominate: for phosphorus, agriculture and eroding soil; for nitrogen, fertilizer leaching, animal wastes (volatilized ammonia and direct losses) and atmospheric deposition from burning fossil fuels.",
+ line:["60% of US coastal rivers and bays are moderately to severely degraded by nutrients. For most coastal systems, nitrogen additions cause more damage (compare 2.10: phosphorus is the limiter in lakes).",
+  "Globally, human activity has raised the flux to the oceans 2-fold for nitrogen and 3-fold for phosphorus. Nitrogen flux is up 4-fold in the Mississippi basin, 8-fold in the northeastern US, more than 10-fold into the North Sea.",
+  "Synthetic nitrogen fertilizer was invented early in the 20th century but only widely used from the 1950s; it is more than half of the human alteration of the nitrogen cycle. Use dipped when the Soviet Union collapsed, then grew again, and about half of all inorganic nitrogen fertilizer ever used was applied in the 15 years before the paper.",
+  "Sources shifted from point to nonpoint: sewage treatment improved (especially for phosphorus) while nonpoint sources grew (especially nitrogen). For phosphorus, agriculture dominates nonpoint fluxes; agriculture is also the main nitrogen source down the Mississippi, feeding the Gulf of Mexico hypoxic zone.",
+  "Phosphorus rides eroded soil: particle-bound phosphorus is 60 to 90% of what leaves cultivated land. Losses are under 5% of what a farmer applies, so they cost the farmer little, yet they drive eutrophication downstream. Most of it comes from small critical source areas during a few large storms. Exception: sandy or peaty soils, including Florida's, can leak dissolved phosphorus below ground.",
+  "Nitrogen: 45 to 75% of fertilizer nitrogen leaves in the harvest. Leaching is 10 to 40% on loam and clay but 25 to 80% on sand, about 20% overall in North America. Most crops feed animals; in barns 36% of excreted nitrogen volatilizes as ammonia, and keeping cows in meadows cuts that by more than half. Animal waste may be the largest single agricultural nitrogen source reaching the coast.",
+  "Atmospheric nitrogen from fossil-fuel combustion has been underestimated. Forests retain deposited nitrogen until they saturate: forest floors with C:N above 30:1 hold over 90%, below 25:1 less than half. About 20% of human-controlled nitrogen inputs reach the coast. Conclusion: nonpoint sources need regional, federal action, and the external cost of nutrients exported to estuaries remains unaddressed."],
+ cards:[
+  {t:"Nitrogen hurts the coast more",i:"Both nitrogen and phosphorus contribute, but for most coastal systems nitrogen additions cause more damage. That is the mirror of lecture 2.10, where phosphorus is the more limiting nutrient in lakes.",f:"Lakes: <b>phosphorus</b> limits. Most coastal waters: <b>nitrogen</b> does more damage.",q:"Which nutrient does Howarth say causes more damage in most coastal systems, and how does that differ from lakes?",a:"Nitrogen for most coastal systems; in lakes (lecture 2.10) phosphorus is the limiting nutrient."},
+  {t:"How much humans added",i:"Globally, human activity has increased the flux from land to oceans 2-fold for nitrogen and 3-fold for phosphorus. For nitrogen much of the rise came in the past 40 years and varies by region.",f:"Nitrogen flux: Mississippi <b>4x</b>, northeastern US <b>8x</b>, North Sea <b>over 10x</b>.",q:"By how much has human activity raised global nitrogen and phosphorus fluxes to the oceans?",a:"Nitrogen about 2-fold and phosphorus about 3-fold; regionally nitrogen is up 4-fold in the Mississippi, 8-fold in the northeastern US, over 10-fold for the North Sea."},
+  {t:"Nonpoint now dominates",i:"Sewage treatment plants are still the largest input for some estuaries, but nationally nonpoint sources now matter more, because point sources were cleaned up (especially phosphorus) while nonpoint loads grew (especially nitrogen). For phosphorus, agriculture dominates nonpoint fluxes.",f:"Agriculture is the major nitrogen source down the Mississippi, feeding the <b>Gulf of Mexico hypoxic zone</b>.",q:"Why do nonpoint sources now dominate nutrient pollution of US coasts?",a:"Point sources such as sewage were controlled better, especially for phosphorus, while nonpoint sources, especially nitrogen from agriculture and the atmosphere, kept growing."},
+  {t:"Phosphorus rides the soil",i:"Cultivation greatly increases erosion and with it particle-bound phosphorus. Converting eastern US forests to farms between 1700 and 1900 raised erosion 10-fold even without fertilizer. Most phosphorus comes from small critical source areas during a few large storms.",f:"Particle-bound phosphorus is <b>60 to 90%</b> of the phosphorus leaving cultivated land.",q:"How does most phosphorus leave cultivated land, according to Howarth?",a:"Attached to eroded soil in surface runoff: particulate phosphorus is 60 to 90% of the export, mostly from critical source areas during a few big storms."},
+  {t:"Why farmers do not feel it",i:"Phosphorus losses after application are usually less than 200 kg per square km and less than 5% of the fertilizer or manure applied, so they are not of economic importance to the farmer. Downstream they still drive eutrophication. This links to 2.10's point that BMPs carry few incentives or penalties.",f:"Losses under <b>5%</b> of applied phosphorus: small for the farm, large for the estuary (an <b>external cost</b>).",q:"Why are phosphorus losses from fields hard to motivate farmers to fix?",a:"They are usually under 5% of what was applied, so they cost the farmer little, while the damage is an external cost borne downstream."},
+  {t:"Where fertilizer nitrogen goes",i:"In the US, 45 to 75% of fertilizer nitrogen is removed in the harvest. The rest is stored in soil organic matter, volatilized, or leached. Leaching depends heavily on texture, echoing 2.10's list of factors.",f:"Leaching: <b>10 to 40%</b> on loam and clay, <b>25 to 80%</b> on sandy soils, about <b>20%</b> overall in North America.",q:"How does soil texture change fertilizer nitrogen leaching in Howarth's numbers?",a:"Loam and clay soils leach 10 to 40% of fertilizer nitrogen, sandy soils 25 to 80%; about 20% overall in North America."},
+  {t:"Animals and ammonia",i:"Most US crops feed animals, which turn only about 10% of feed nitrogen into growth and excrete the rest. In barns and sheds 36% of excreted nitrogen volatilizes as ammonia; about 14% of all fertilizer nitrogen ends up in the air this way. Nitrogen consumed by animals predicted river nitrogen better than fertilizer rates did.",f:"Keeping cows in <b>meadows instead of barns</b> cuts ammonia volatilization by more than <b>50%</b>.",q:"What does Howarth say about animal housing and nitrogen losses?",a:"In barns about 36% of excreted nitrogen volatilizes as ammonia; keeping cows in meadows cuts that by more than half. Animal wastes may be the largest single agricultural nitrogen source reaching coasts."},
+  {t:"Nitrogen from the sky",i:"Oxidized nitrogen (NOy) from fossil-fuel combustion deposits onto land and water and has been underestimated. Forests hold it until they saturate: forest floors with C:N above 30:1 retain over 90% of added nitrogen, below 25:1 less than half. Per unit added, NOy deposition predicted coastal nitrogen export better (r squared 0.81) than fertilizer (0.28).",f:"About <b>20%</b> of human-controlled nitrogen inputs reach the coast; the other 80% is denitrified or stored.",q:"How does the forest-floor C:N ratio predict nitrogen retention?",a:"Low-nitrogen forests (C:N above 30:1) retain over 90% of added nitrogen; nitrogen-rich ones (below 25:1) retain less than half. Ties to the C:N ratio in 2.12."}
+ ],
+ ask:["What share of US coastal rivers and bays are degraded by nutrients? (about 60%)","Which nutrient does more damage in most coastal systems? (nitrogen)","Global increase in N and P flux to the oceans (2-fold and 3-fold).","Why do nonpoint sources now dominate?","What share of phosphorus leaving cultivated land is particle-bound? (60 to 90%)","Why are phosphorus losses not an economic concern to farmers? (under 5% of applied)","Leaching on sandy versus loam and clay soils.","What does keeping cows in meadows do to ammonia losses?"],
+ quiz:[
+  {q:"Howarth and colleagues report that some 60% of US coastal rivers and bays are...",o:["moderately to severely degraded by nutrient pollution","free of nutrient pollution","degraded mainly by pesticides","degraded only near sewage outfalls"],c:0,e:"Nutrient pollution is the largest pollution problem in US coastal rivers and bays, and both nitrogen and phosphorus contribute."},
+  {q:"For most coastal systems, which nutrient does Howarth say causes more damage?",o:["Nitrogen","Phosphorus","Potassium","Carbon"],c:0,e:"Nitrogen, for most coastal waters. Contrast lecture 2.10, where phosphorus is the more limiting nutrient in lakes."},
+  {q:"Why do nonpoint sources now dominate US coastal nutrient pollution?",o:["Point sources were better treated while nonpoint loads, especially nitrogen, grew","Sewage plants were all closed","Fertilizer use stopped in 1970","Rivers no longer reach the coast"],c:0,e:"Improved control of point sources (particularly for phosphorus) and increases in nonpoint sources (particularly for nitrogen) over three decades shifted the balance. For phosphorus, agriculture dominates the nonpoint flux."},
+  {q:"Most phosphorus exported from cultivated land leaves...",o:["bound to eroded soil particles in surface runoff (60 to 90%)","as a gas","dissolved in deep groundwater everywhere","in the harvested crop only"],c:0,e:"Cultivation raises erosion, and particle-bound phosphorus makes up 60 to 90% of the export. Sandy or peaty soils, including in Florida, are the exception where dissolved phosphorus moves below ground."},
+  {q:"Keeping cows in meadows instead of barns...",o:["cuts ammonia volatilization by more than 50%","doubles nitrate leaching","has no effect on nitrogen losses","raises phosphorus runoff tenfold"],c:0,e:"In barns and sheds about 36% of excreted nitrogen volatilizes as ammonia. Housing matters because animals turn only about 10% of feed nitrogen into growth; the rest is excreted."}
+ ]},
+{id:"3.6",wk:7,grp:"soilorg",label:"Lecture 3.6",flag:"possibly on Exam 2, confirm",title:"Soil Organisms, Part 1",words:1992,
+ gist:"A survey of who lives in the soil, starting Module 3. A liter of soil holds vast numbers of bacteria, actinomycetes, fungal spores, algae and protozoans, thousands of nematodes, then fewer mites, insects and worms as size goes up. Only bacteria, fungi, actinomycetes and termites directly break down tough plant matter (cellulose, lignin); the other animals fragment material and mostly mineralize animal matter. Bacteria run the nitrogen conversions, fungi form mycorrhizae, earthworms build structure.",
+ line:["Decomposition review: litter, detritus (origin still recognizable), humus (homogenized), then complete mineralization or ammonification into inorganic compounds plants take up. Many soil organisms are still undescribed.",
+  "A liter of soil: huge numbers of bacteria, actinomycetes, fungal spores, algal cells and protozoans (single cells such as amoebas), around 10,000 nematodes, then mites and insects, enchytraeids and earthworms. The larger the organism, the fewer there are.",
+  "Direct decomposition of plant matter is done only by bacteria, fungi, actinomycetes and termites, which have the enzymes (or gut symbionts) for cellulose and lignin. Everything else mainly breaks down animal-based matter.",
+  "Three domains: eubacteria (true bacteria), eukaryotes (nucleus, membrane-bound organelles) and archaea (methanogens, halophiles of extreme environments).",
+  "Three bacterial nitrogen guilds: mineralizers turn organic matter into ammonium, nitrifiers turn ammonium into nitrate, denitrifiers turn nitrate into nitrogen gas that leaves the soil. Actinomycetes are filamentous bacteria that also decompose plant matter.",
+  "Fungi: huge diversity, most biomass underground as hyphae, enzymes for lignin. Mycorrhizae attach to roots: the plant gives sugar, the fungus gives phosphorus and other nutrients. Some fungi are pathogens (smuts, rusts).",
+  "Macroinvertebrates (visible): earthworms (castings rich in nitrogenous waste, they eat soil, build structure, raise microbial activity: earthworms usually mean healthy soil), termites (protozoan gut symbionts, key in the tropics), millipedes and isopods (the only terrestrial crustaceans in farm fields).",
+  "Microinvertebrates (microscope): mites (arachnids, every feeding role, about 200 species in the top 2 inches of one square foot of forest soil), collembola or springtails (fungivores with a spring-loaded abdominal appendage), enchytraeids (microscopic segmented worms that eat fungi), and nematodes (their own lecture)."],
+ cards:[
+  {t:"What is in a liter of soil",i:"Scoop a water bottle of soil and look under a microscope: an incredible number of bacteria, actinomycetes, fungal spores, algal cells and protozoans, about 10,000 nematodes, and then mites, insects, enchytraeids and earthworms.",f:"The <b>bigger</b> the organism, the <b>fewer</b> there are.",q:"Describe the pattern of organism numbers in a liter of soil.",a:"Microbes (bacteria, actinomycetes, fungal spores, algae, protozoans) are the most numerous, then about 10,000 nematodes, then fewer mites, insects and worms as size increases."},
+  {t:"The direct decomposers",i:"Only a few organisms can break down cellulose and lignin, the tough plant fibers: bacteria, fungi, actinomycetes, and termites through their gut protozoans. All other soil organisms mainly fragment material and mineralize animal-based organic matter.",f:"This lecture adds <b>actinomycetes</b> to the 2.12 list of bacteria, fungi and termites.",q:"Which organisms can directly decompose plant matter, and what do the rest do?",a:"Bacteria, fungi, actinomycetes and termites (via gut symbionts). The others break material into smaller pieces and mostly mineralize animal-based matter."},
+  {t:"Three domains of life",i:"Eubacteria are the true bacteria. Eukaryotes have a nucleus and membrane-bound organelles, and include single-celled and multicellular organisms. Archaea are odd bacteria-like organisms of extreme environments, such as methanogens and halophiles.",f:"Archaea: <b>methanogens and halophiles</b>, extreme environments.",q:"Name the three domains of life and one feature of each.",a:"Eubacteria (true bacteria), eukaryotes (nucleus and membrane-bound organelles), archaea (bacteria-like, extreme environments, e.g. methanogens, halophiles)."},
+  {t:"Bacterial nitrogen guilds",i:"Mineralizers take organic matter to ammonium. Nitrifying bacteria turn ammonium into nitrate. Denitrifying bacteria turn nitrate back into nitrogen gas, which is lost from the soil.",f:"<b>Organic N to ammonium to nitrate to N2 gas</b>: mineralizers, nitrifiers, denitrifiers.",q:"Name the three bacterial guilds in the soil nitrogen cycle and what each does.",a:"Mineralizers (organic matter to ammonium), nitrifiers (ammonium to nitrate), denitrifiers (nitrate to nitrogen gas, lost from the soil)."},
+  {t:"Actinomycetes",i:"A kind of bacteria named like a fungus (myces) because they grow as filaments rather than rods, visible on root surfaces. They are free-living and can mineralize plant matter directly.",f:"Bacteria that grow as <b>filaments</b>, and are <b>direct decomposers</b>.",q:"What are actinomycetes and why the fungus-like name?",a:"Filamentous, free-living bacteria that directly decompose plant matter; the name refers to their fungus-like filament growth form."},
+  {t:"Fungi and mycorrhizae",i:"Fungi are diverse and important in soil, from mushrooms to single cells, with most biomass underground as hyphae and enzymes that break down lignin. Mycorrhizae attach to the outside or inside of roots in a symbiosis. Other fungi cause disease, such as smuts and rusts.",f:"Mycorrhizae: the plant gives <b>sugar</b>, the fungus gives <b>phosphorus</b> and other nutrients.",q:"What is the trade in a mycorrhizal symbiosis?",a:"The plant provides sugar; the fungus provides phosphorus and other nutrients."},
+  {t:"Earthworms",i:"Earthworms eat soil, extracting the bacteria and fungi in it. Their castings, the small pellet-like clumps on the surface, are rich in nitrogenous waste. They change soil structure dramatically, which affects water movement, water holding and nutrient uptake, and they raise microbial activity.",f:"<b>Earthworms usually equal healthy soil.</b>",q:"How do earthworms improve soil?",a:"They eat soil and leave nutrient-rich castings, improve soil structure (water movement, holding capacity, nutrient uptake) and increase microbial activity."},
+  {t:"Termites, millipedes, isopods",i:"Termites are insects that break down plant matter using protozoan gut symbionts, especially important in the tropics. Millipedes and isopods feed on organic matter and shred it further for bacteria and fungi to mineralize.",f:"Isopods are about the <b>only crustaceans</b> in terrestrial agricultural environments.",q:"What role do termites, millipedes and isopods play in decomposition?",a:"Termites digest plant fiber via gut protozoans (key in the tropics); millipedes and isopods fragment organic matter for bacteria and fungi to mineralize."},
+  {t:"Mites, springtails, enchytraeids",i:"Mites are arachnids that fill every feeding role (fungivores, predators and more) and are critical to nutrient cycling by sheer number. Collembola (springtails) are fungivores with a spring-loaded abdominal appendage for escape. Enchytraeids are microscopic segmented worms related to earthworms that feed on fungi; little else is known about them.",f:"About <b>200 mite species</b> in the top 2 inches of one square foot of forest soil, many undescribed.",q:"Identify: arachnids in every feeding role; fungivores with a spring; microscopic relatives of earthworms.",a:"Mites; collembola (springtails); enchytraeids."}
+ ],
+ ask:["Which organisms can directly decompose cellulose and lignin?","What are the three bacterial nitrogen guilds?","What do mycorrhizae trade with the plant?","Why are actinomycetes named like fungi?","What are earthworm castings and why do earthworms mean healthy soil?","Which crustacean lives in farm soils? (isopods)","What are collembola? Enchytraeids?"],
+ quiz:[
+  {q:"Which group can directly decompose tough plant material such as cellulose and lignin?",o:["Bacteria, fungi, actinomycetes and termites","Earthworms, mites and millipedes","Nematodes and springtails","Isopods and enchytraeids"],c:0,e:"Only these have the enzymes, or in the termite's case protozoan gut symbionts, for plant fiber. The other soil animals fragment material and mostly mineralize animal-based matter."},
+  {q:"Denitrifying bacteria...",o:["convert nitrate into nitrogen gas that is lost from the soil","turn organic matter into ammonium","turn ammonium into nitrate","fix nitrogen into plant roots"],c:0,e:"Mineralizers make ammonium, nitrifiers turn ammonium into nitrate, and denitrifiers send nitrate back to the air as nitrogen gas."},
+  {q:"In a mycorrhizal symbiosis...",o:["the plant provides sugar and the fungus provides phosphorus and other nutrients","the fungus provides sugar to the plant","the fungus feeds on the root and harms it","the plant provides nitrogen gas"],c:0,e:"Mycorrhizae attach to the outside or inside of roots. The exchange is carbon from the plant for phosphorus and other nutrients from the fungus."},
+  {q:"Actinomycetes are...",o:["filamentous bacteria that directly decompose plant matter","a kind of mushroom","soil mites","parasitic nematodes"],c:0,e:"They are bacteria, but they grow as filaments rather than rods, which is why their name sounds like a fungus."},
+  {q:"Which statement about earthworms is true according to the lecture?",o:["They improve soil structure and increase microbial activity","They directly break down lignin with their own enzymes","They are the most numerous organisms in soil","They are crustaceans"],c:0,e:"Earthworms eat soil, leave nitrogen-rich castings, change structure (water movement, holding capacity, nutrient uptake) and raise microbial activity. Earthworms usually mean healthy soil."},
+  {q:"As you move from microbes to larger soil organisms, their numbers...",o:["decrease","increase","stay the same","double with each size class"],c:0,e:"Bacteria and other microbes are the most numerous, then about 10,000 nematodes per liter, then fewer mites, insects and worms."}
+ ]},
+{id:"3.7",wk:7,grp:"soilorg",label:"Lecture 3.7",flag:"possibly on Exam 2, confirm",title:"Soil Organisms, Part 2",words:2432,
+ gist:"What soil organisms do for fertility: they speed decomposition, build soil structure, free nutrients, enhance plant growth and control crop pests. Soil food webs differ from aboveground ones: they have many levels and arrows, they run in a cycle because everything returns to the decomposers, most of their nutrients start as plant matter, and they are heavily regulated by predators that are mostly generalists. That gives redundancy and keeps any one organism from exploding, but it makes soil biocontrol hard.",
+ line:["Decomposition speeds up with diverse fauna: bacteria coat organic matter, and predators grazing on them open new surface area for decomposition.",
+  "Structure: earthworm and termite tunnels, nests and middens raise porosity, which improves aeration, water holding capacity and drainage.",
+  "Nutrients: more oxygen and diverse fauna mean faster decomposition, freeing nutrients by mineralization from organic to inorganic forms.",
+  "Plant growth: bacteria in the rhizosphere (where roots meet soil) reduce pathogen load and raise yields; the mechanisms are still being studied.",
+  "Pest control by parasites: beneficial fungi feed on pathogenic fungi, nematode pests and eggs, and soil-dwelling beetle and lepidopteran larvae. The nematode-trapping fungus strangles nematodes with hyphal rings and is being developed as a biocontrol.",
+  "Pest control by predators: mites, predatory nematodes, soil insects, spiders and centipedes.",
+  "Soil food webs: many levels and interactions; activity concentrated around roots in the upper 12 to 18 inches; downward arrows make them cyclical; most nutrients originate from plant matter (living tissue eaten by root pests, or dead tissue); open to aboveground inputs; heavily regulated by predators of the bacteria and fungi.",
+  "Most soil predators are generalists because prey is hard to find in heterogeneous soil. Advantages: redundancy, no keystone species, no single organism becomes too abundant. Disadvantage: hard to use them as targeted biocontrol."],
+ cards:[
+  {t:"Grazers speed decomposition",i:"Bacteria coat the surface of organic matter. When a diverse community of predators grazes on those bacteria, it opens new surface area, and decomposition speeds up.",f:"Diverse fauna <b>speeds decomposition</b> by opening new surface.",q:"How does a diverse soil fauna speed up decomposition?",a:"Predators feeding on the bacteria coating organic matter open up new surface area for decomposition."},
+  {t:"Organisms build structure",i:"Earthworms and termites move through the soil, building nests, middens and tracks that increase porosity (the open space between aggregates and grains).",f:"More porosity means better <b>aeration, water holding capacity and drainage</b>.",q:"What three soil benefits come from the porosity that earthworms and termites create?",a:"More aeration, more water holding capacity and better drainage (water movement)."},
+  {t:"The rhizosphere",i:"The zone where roots meet the soil, where most activity happens. Certain bacteria living there reduce the plant's pathogen load and enhance yield. The exact mechanisms are still an open research area.",f:"Rhizosphere = <b>where roots meet the soil</b>.",q:"What is the rhizosphere and what do some of its bacteria do?",a:"The soil zone around roots; certain bacteria there reduce pathogen load and increase plant yield."},
+  {t:"Parasites of pests",i:"Many soil organisms attack crop pests: beneficial fungi feed on disease-causing fungi, on root-knot nematodes and their eggs, and on beetle and moth larvae feeding on roots. The nematode-trapping fungus uses hyphal rings to constrict nematodes.",f:"The nematode-trapping fungus is being developed as a <b>biocontrol</b>.",q:"Give an example of a soil organism that controls a crop pest as a parasite.",a:"The nematode-trapping fungus, whose hyphal rings strangle nematodes such as root-knot nematodes; it is being developed as a biocontrol."},
+  {t:"Predators of pests",i:"Besides parasites, the soil holds predators that eat organisms harming crops: mites, predatory nematodes, many soil insects, spiders, and larger arthropods such as centipedes.",f:"Soil predators: <b>mites, nematodes, insects, spiders, centipedes</b>.",q:"Name soil predators that help control crop pests.",a:"Mites, predatory nematodes, soil insects, spiders and centipedes."},
+  {t:"Food webs run in a cycle",i:"Aboveground food webs start with a plant and go up through herbivores and predators. Soil food webs have many levels and many arrows, including downward arrows: predators die and everything they eat returns as organic matter to decomposition.",f:"Soil food webs are <b>cyclical</b>, and the action sits in the upper <b>12 to 18 inches</b> around roots.",q:"How do soil food webs differ from aboveground food webs?",a:"They are more complex and cyclical, with downward arrows as predators and their prey return to the decomposers; aboveground webs run upward from plants without considering decomposition."},
+  {t:"Plants feed the soil web",i:"Most nutrients in the soil food web originate from plant matter, not from animals. Most plant biomass is not eaten by herbivores but rejoins the soil: as living tissue eaten by root pests (root-knot or soybean cyst nematodes) or as dead tissue that drops off.",f:"The soil web is <b>open</b>: it receives inputs from the aboveground web.",q:"Where do most nutrients in the soil food web come from?",a:"From plant organic matter, either living tissue eaten by root pests or dead tissue that falls to the soil."},
+  {t:"Generalist predators",i:"Most soil predators are generalists, eating whatever they meet, because prey is hard to find in heterogeneous soil. They heavily regulate the bacteria and fungi and so the rate of decomposition.",f:"Upside: <b>redundancy</b>, no keystone species, no outbreaks. Downside: <b>hard to use as biocontrol</b>.",q:"Why are generalist soil predators both good and bad for pest management?",a:"Good: losing one species does not collapse the web and no organism becomes too abundant. Bad: they will not focus on one pest, so they are hard to use as targeted biocontrol."}
+ ],
+ ask:["How do predators on bacteria speed decomposition?","What does increased porosity do for the soil?","Define the rhizosphere.","Give an example of a biocontrol organism in the soil (nematode-trapping fungus).","Name three ways soil food webs differ from aboveground webs.","Why are generalist predators good for soil stability but poor for biocontrol?"],
+ quiz:[
+  {q:"The rhizosphere is...",o:["the zone where plant roots meet the soil","the deepest soil horizon","the layer of leaf litter","the atmosphere above the crop"],c:0,e:"Most soil activity happens there. Some rhizosphere bacteria reduce pathogen load and increase yields, though the mechanisms are still being worked out."},
+  {q:"Earthworm and termite tunnels, nests and middens mainly...",o:["increase porosity, improving aeration, water holding and drainage","compact the soil","remove organic matter","lower microbial activity"],c:0,e:"More open space between aggregates lets oxygen in, holds more water and lets water move through."},
+  {q:"The nematode-trapping fungus is an example of...",o:["a parasite of a crop pest being developed as a biocontrol","a plant pathogen","a nitrogen-fixing symbiont","a generalist predator of mites"],c:0,e:"Its hyphal rings constrict nematodes such as root-knot nematodes moving through the soil."},
+  {q:"Which is NOT a feature of soil food webs described in the lecture?",o:["They are simple chains with a single keystone predator","They include downward arrows, making them cyclical","Most of their nutrients originate from plant matter","They are heavily regulated by predators"],c:0,e:"Soil webs are complex, with many levels and arrows, and their predators are mostly generalists, so there is redundancy rather than a keystone species."},
+  {q:"Most soil predators are generalists. A disadvantage of this for agriculture is that...",o:["they are hard to use as targeted biocontrol for one pest","they cause pest outbreaks","the food web collapses if one species is lost","they only eat plant roots"],c:0,e:"Because they eat anything they meet, they will not focus on one pest species. The upside is redundancy and no single organism becoming too abundant."},
+  {q:"Most of the activity in soil, including decomposition and biotic interactions, happens...",o:["around the roots in the upper 12 to 18 inches","below 6 feet","only on the soil surface","in the bedrock"],c:0,e:"Microbial biomass peaks near the roots, which is also where the food, oxygen and organic matter are."}
+ ]}
+);
+
+/* ---------- Mariel's own Module 2 questions (work/ag-ecology/module02-questions.md, three sets sent 2026-09-27) ----------
+   c = the answer she marked. A note is added where a marked answer deserves a second look; her answer is never changed. */
+var M2Q=[
+ {set:"Set 1 Q1 · Set 2 Q1",lec:"2.6",q:"Subsidence makes it difficult for groundwater to recharge an aquifer.",o:["True","False"],c:0,e:"True. Water holds the aquifer's pores open; overdraft lets them collapse or disconnect, so recharge has nowhere to go (2.2 and 2.6)."},
+ {set:"Set 1 Q2",lec:"2.6",q:"One of the most critical water quantity issues involves",o:["Overdrafting of groundwater reservoirs","Use of fallow rotations for water storage","All choices above","Water lost to infiltration"],c:0,e:"Quantity in 2.6 is use versus recharge. Overdrafting, taking water faster than the aquifer is recharged, is the central quantity problem. Fallow rotations store water (a good thing), and infiltration is not a loss."},
+ {set:"Set 1 Q3",lec:"2.6",q:"The quality of groundwater reservoirs are negatively impacted by",o:["Subsidence","Runoff","Erosion","Evaporation"],c:0,e:"Your marked answer is subsidence, the only option tied to aquifers themselves.",
+  note:"Check this one. In 2.6 Weeks treats subsidence as a quantity and storage problem: overdraft collapses the pores so the aquifer cannot hold recharge. The quality threat to groundwater she names is water percolating down carrying nutrients and toxins, plus saltwater intrusion from overdraft. Runoff, erosion and evaporation are surface processes, so subsidence may still be the intended key. If your graded attempt showed a different answer, trust the grade."},
+ {set:"Set 1 Q4",lec:"2.7",q:"Soil sodicity involves levels of",o:["Sodium","Oxygen","Nitrogen","Phosphorus"],c:0,e:"Sodicity is sodium specifically. Salinity is all salts, alkalinity is the pH rise they cause (2.7)."},
+ {set:"Set 1 Q5",lec:"2.14",q:"Alkaline soils have",o:["High pH","Neutral pH","All choices presented","Low pH"],c:0,e:"Above 7 is alkaline or basic, with hydroxide ions in the majority. Below 7 is acidic (2.14)."},
+ {set:"Set 1 Q6",lec:"2.8",q:"Desertification in the Aral Sea region was exacerbated by the switch to growing",o:["Cotton","Corn","Peaches","Wheat"],c:0,e:"From the 1950s the region switched from rain-fed grain to irrigated cotton, which needed immense withdrawals and an herbicide defoliant. The sea lost about 90% of its area (2.8)."},
+ {set:"Set 1 Q7",lec:"2.8",q:"Which of the following can exacerbate desertification?",o:["Overgrazing","Transpiration","Subsidence","Aquifer recharge"],c:0,e:"The three human causes are overgrazing, overcultivation and deforestation (2.8)."},
+ {set:"Set 1 Q8",lec:"2.10",q:"Synthetic fertilizers are",o:["Inorganic and soluble","Organic and insoluble","Organic and soluble","Inorganic and insoluble"],c:0,e:"Plant-ready means water-soluble, which is exactly why they run off and leach so easily. Organic fertilizers stay immobilized until mineralized (2.10)."},
+ {set:"Set 1 Q9 · Set 2 Q8 · Set 3 Q10",lec:"2.10",q:"Part of the cycle of eutrophication includes",o:["High productivity, increased decomposition, low oxygen","High productivity, decreased decomposition, low oxygen","Low productivity, decreased decomposition, low oxygen","High productivity, increased decomposition, high oxygen"],c:0,e:"A nutrient pulse drives a bloom (high productivity), the die-off feeds decomposers (increased decomposition), and they use up the oxygen (low oxygen). This one came up in all three of your sets."},
+ {set:"Set 1 Q10",lec:"2.10",q:"Household detergents and soaps have historically contributed to eutrophication.",o:["True","False"],c:0,e:"True. Weeks calls household and commercial fertilizers, detergents and soaps the source people forget: most detergents and soaps carried phosphates (2.10)."},
+ {set:"Set 2 Q2",lec:"2.6",q:"Sub-surface water moving through the landscape will have the biggest impact on the water quality of",o:["Aquifers","Oceans","Rivers"],c:0,e:"Outgoing water either runs off across the surface (to rivers and lakes) or percolates down into the aquifer. Subsurface flow is the groundwater route (2.6). Your set listed Oceans twice; the duplicate is dropped here."},
+ {set:"Set 2 Q3",lec:"2.6",q:"Groundwater footprint refers to",o:["Area required to sustain groundwater use","Area of groundwater recharge under surface water reservoirs","Area of aquifers in the U.S.","Area of land above an aquifer"],c:0,e:"Gleeson's footprint is the area needed to sustain current groundwater use. Divide it by the aquifer's area: above one means unsustainable, as for the High Plains and North Arabian aquifers (2.6)."},
+ {set:"Set 2 Q4",lec:"2.7",q:"Why is salinization of soil an issue in arid environments?",o:["Decreased leaching","Increased erosion","Increased leaching","Decreased evaporation"],c:0,e:"There is never enough rain or irrigation to leach the salts down and away, so every irrigation and fertilizer application leaves salt behind (2.7)."},
+ {set:"Set 2 Q5",lec:"2.14",q:"What is the most common way that soil pH affects plant growth in agriculture?",o:["Nutrient availability impacted by soil pH","Acid burn in soils with low pH","Soil bacteria are killed when pH neutral","Acid burn in alkaline soils"],c:0,e:"The one thing to remember from 2.14: pH rarely harms a plant directly; it acts by changing which nutrients are available."},
+ {set:"Set 2 Q6",lec:"2.8",q:"The desertification of the Aral Sea region can be attributed to",o:["Overdraft of surface water reservoirs","Rainfed agriculture","Overdraft of groundwater reservoirs","Dryland agriculture"],c:0,e:"The two feeder rivers and the sea itself, surface water, were drawn down for cotton irrigation. Before that the region grew rain-fed grain without irrigation (2.8)."},
+ {set:"Set 2 Q7",lec:"2.8",q:"In the Sahel region, one major contributor to desertification described in this course is",o:["Overharvest of firewood","Synthetic fertilizer use","Naturally saline groundwater","All choices presented"],c:0,e:"Repeated firewood harvest stunts and kills the trees that act as windbreaks and soil anchors, and sand then drifts over fields (2.8)."},
+ {set:"Set 2 Q9",lec:"2.10",q:"One way agriculture contributes to eutrophication is via",o:["CAFOs","Pesticide use","Saline groundwater","High pH soils"],c:0,e:"The main agricultural culprits are synthetic fertilizers and concentrated animal feeding operations, whose manure can pulse nutrients into waterways (2.10)."},
+ {set:"Set 2 Q10",lec:"2.10",q:"Nutrients lost to leaching are most likely to carry",o:["Nitrates to groundwater","Phosphates to lakes","Phosphates to groundwater","Nitrates to lakes"],c:0,e:"Nitrate stays soluble and leaches down to groundwater; phosphorus is immobilized in soil and leaves mostly by surface runoff (2.10)."},
+ {set:"Set 3 Q1",lec:"2.6",q:"In agriculture, the quantity of water being used is equal to the rate of recharge.",o:["False","True"],c:0,e:"False. The whole quantity problem in 2.6 is that use outstrips recharge (overdrafting)."},
+ {set:"Set 3 Q2",lec:"2.6",q:"Which of the following is an example of water diversion having dramatic impacts on natural ecosystems?",o:["Colorado River","Sahel","Mississippi River","The Black Sea"],c:0,e:"About 90% of the Colorado is diverted, and it has not reached the Sea of Cortez for 16 to 20 years; the delta wetlands became desert (2.6)."},
+ {set:"Set 3 Q3",lec:"2.6",q:"Saltwater intrusion",o:["Damages the freshwater lens","Enhances aquifer recharge","Decreases compaction","Changes the residence time of water in aquifer"],c:0,e:"Pumping a coastal aquifer lets seawater push into the freshwater lens, making irrigation water brackish (2.6)."},
+ {set:"Set 3 Q4",lec:"2.7",q:"One key aspect of conserving water is",o:["Cultivar choice","Tile drainage","Intensive tillage","Elimination of biotechnology in agriculture"],c:0,e:"2.7 lists irrigation scheduling, precision agriculture, tailwater return, covered beds and crop or cultivar choice, such as CSIRO's salt-tolerant wheat."},
+ {set:"Set 3 Q5",lec:"2.7",q:"An increase in pH makes phosphates and some micronutrients",o:["Less available","More available"],c:0,e:"In the salinization cycle (2.7), salts push pH up, and that rise locks up phosphorus and other micronutrients.",
+  note:"Your answer matches 2.7. Keep 2.14 in mind too: there Weeks says phosphorus becomes unavailable at LOW pH and iron at HIGH pH, and that availability narrows at both extremes. If a question asks about acidic soil, phosphorus is the one that locks up."},
+ {set:"Set 3 Q6",lec:"2.8",q:"The Aral Sea is located in a historically",o:["Semi-arid region","Tropical region","Coastal region","Polar region"],c:0,e:"A landlocked lake in a semi-arid region between Kazakhstan and Uzbekistan, once farmed for rain-fed grain (2.8)."},
+ {set:"Set 3 Q7",lec:"2.8",q:"Examples of desertification include",o:["Aral Sea","Southeastern U.S.","Mississippi River Valley","Sierra Nevada"],c:0,e:"The Aral Sea is the extreme case in 2.8, with the Sahel as the other worked example."},
+ {set:"Set 3 Q8",lec:"2.10",q:"Synthetic fertilizers are an example of what type of pollution",o:["Non-point source","Point source"],c:0,e:"Fertilizer running off many fields and lawns is diffuse: no single spot can be blamed. A CAFO outfall or a sewage pipe would be a point source (2.10)."},
+ {set:"Set 3 Q9",lec:"2.10",q:"Which type of fertilizer is more prone to leaching?",o:["Inorganic","Organic"],c:0,e:"Inorganic fertilizer is soluble and moves with water. Organic nutrients stay immobilized in tissue until mineralized (2.10)."}
+];
+M2Q.forEach(function(q){ q.wk=6; q.src='M2'; q.pill='Your M2 · '+q.set; });
+
+/* Borlaug vs Shiva compare rows, filled from the two video transcripts */
+var COMPARE=null;
+
+/* extra connect pairs */
+PAIRS.push(
+ {l:"Bhakra Dam",r:"Nehru's temple of modern India, which drowned towns"},
+ {l:"Tube wells",r:"Deep energized wells the World Bank funded instead of open wells"},
+ {l:"Millets vs sugarcane",r:"250 mm versus 2,500 mm of water"},
+ {l:"Critical source areas",r:"Small parts of a watershed that shed most phosphorus in big storms"},
+ {l:"Nitrogen saturation",r:"A forest that can no longer hold deposited nitrogen and starts exporting it"},
+ {l:"Actinomycetes",r:"Filamentous bacteria that decompose plant matter"},
+ {l:"Mycorrhizae",r:"Fungi trading phosphorus for the plant's sugar"},
+ {l:"Collembola",r:"Springtails, fungivores with a spring-loaded tail"},
+ {l:"Rhizosphere",r:"Where the roots meet the soil"},
+ {l:"Denitrifiers",r:"Bacteria that send nitrate back to the air as N2"}
+);
+
+L.push({id:"S1",wk:6,grp:"sup",label:"Video S1",title:"Norman Borlaug and the Green Revolution",words:1149,
+ gist:"A short tribute that tells the Green Revolution as Norman Borlaug's story. In Mexico he fought stem rust on exhausted soil by breeding resistant wheat, sped up with shuttle breeding (two generations a year, which also made the wheat day-length insensitive and widely adaptable). The new wheat loved fertilizer but lodged under its own grain, so his team bred in the semi-dwarf trait from Japan's Norin 10. Yields doubled twice, Mexico fed itself by 1956, India and Pakistan followed, USAID named it the Green Revolution, and Borlaug won the 1970 Nobel Peace Prize.",
+ line:["Borlaug, born 1914 in Cresco, Iowa, saw real hunger at 19 in Minneapolis (men begging, a riot over dumped milk) and concluded that extreme hunger grips the mind as well as the stomach.",
+  "Degree in forestry (1937), doctorate in plant pathology (1942), then Mexico: unchecked disease destroying the wheat, soil exhausted of nutrients, low yields, and farmers skeptical after earlier crop 'improvements' had done more harm than good.",
+  "The enemy was stem rust, a fungus that raises red, scab-like blisters on the stem and cripples or kills the plant. The breeder's task: find a resistant line, cross it with locally adapted susceptible varieties, select the resistant offspring. His team did it in three years.",
+  "Shuttle breeding: selecting twice a year, in the summer of the central highlands and the winter of the Sonoran Desert, cut the breeding time in half and made the lines insensitive to day length, so the wheat adapted to many regions.",
+  "The new wheats were also highly responsive to fertilizer. With ample fertilizer the heads grew fat, the tall stalks collapsed under the grain (lodging), and harvests suffered.",
+  "The fix was the semi-dwarf trait: shorter, stronger stalks. It came from Norin 10, bred in Japan after World War II and brought into US breeding by Orville Vogel at Washington State. Borlaug's group brought a Norin 10 line into Mexico in 1953. These semi-dwarfs became the miracle seeds.",
+  "Yields doubled first from disease resistance and again from dwarf wheat. Mexico was self-sufficient in wheat in 1956 and exporting by 1963. From 1965 to 1970 Pakistan went from 5 to 8 million tons and India from 12 to 20. USAID called it the Green Revolution; Borlaug won the Nobel Peace Prize in 1970."],
+ cards:[
+  {t:"Why hunger drove him",i:"At 19, visiting Minneapolis, Borlaug saw grown men begging and a riot break out when milk was dumped in the streets to protest low food prices. He became convinced that extreme hunger grips the mind, not just the stomach.",f:"Degrees: <b>forestry 1937</b>, doctorate in <b>plant pathology 1942</b>.",q:"What experience first showed Borlaug real hunger, and what did he conclude?",a:"A food riot in Minneapolis when he was 19; he concluded extreme hunger affects the mind as well as the stomach."},
+  {t:"What he found in Mexico",i:"Unchecked disease destroying the wheat, soil exhausted and depleted of nutrients, low yields, families going hungry, and farmers skeptical of experimental crops because earlier attempts had done more harm than good.",f:"The disease: <b>stem rust</b>, a fungus that forms red, scab-like blisters on the stem.",q:"What problems did Borlaug find in Mexican wheat farming?",a:"A stem rust epidemic destroying the crop, exhausted and nutrient-depleted soil, low yields, and farmers skeptical of new crops."},
+  {t:"Breeding for resistance",i:"The plant breeder's task: find a line resistant to the disease, cross it with locally adapted but susceptible varieties, and select the resistant offspring. Borlaug's team did it in only three years.",f:"Method: <b>resistant line x locally adapted line</b>, then select. Plant breeding, the same traditional breeding lecture 2.10 describes.",q:"Describe the breeding strategy Borlaug used against stem rust.",a:"Cross a disease-resistant line with locally adapted susceptible varieties and select the resistant offspring."},
+  {t:"Shuttle breeding",i:"Evaluating and selecting materials twice each year, in the summer sun of the central highlands and the winter sun of the Sonoran Desert, cut the projected breeding time in half.",f:"Side effect: the lines became <b>insensitive to day length</b>, so the wheat adapted to many regions.",q:"What is shuttle breeding and what two benefits did it bring?",a:"Growing and selecting two generations a year in two Mexican locations; it halved breeding time and produced day-length insensitive wheat adaptable to many regions."},
+  {t:"Fertilizer response and lodging",i:"Besides resisting disease, the new wheats were highly responsive to fertilizer. With ample fertilizer the heads grew fat with grain, but the tall stalks became top heavy and collapsed. Harvest got hard and yields suffered.",f:"<b>Lodging</b> = stalks collapsing under the weight of the grain.",q:"What is lodging and why did it appear in Borlaug's new wheat?",a:"The collapse of tall stalks under heavy grain; the fertilizer-responsive wheat grew heads too heavy for its stems."},
+  {t:"Semi-dwarf wheat",i:"Breeders solved lodging with the semi-dwarf trait: shorter, stronger stalks that hold up the grain. The first semi-dwarf, Norin 10, was bred in Japan after World War II and introduced to US breeding by Orville Vogel at Washington State University. Borlaug's group brought a Norin 10 cross into Mexico in 1953.",f:"These semi-dwarf varieties became known as the <b>miracle seeds</b>.",q:"Where did the semi-dwarf trait in Borlaug's wheat come from?",a:"From Norin 10, a Japanese variety bred after World War II, brought into US breeding by Orville Vogel at Washington State and into Mexico by Borlaug's group in 1953."},
+  {t:"Yields doubled twice",i:"Yields doubled first because of disease resistance, and again because of dwarf wheat. Mexico, which seemed hopeless 15 years earlier, became self-sufficient in wheat in 1956 and had grain to export by 1963.",f:"Mexico: self-sufficient <b>1956</b>, exporting <b>1963</b>.",q:"What two breeding advances each doubled Mexican wheat yields?",a:"Disease resistance (to stem rust) and the semi-dwarf trait that stopped lodging."},
+  {t:"India and Pakistan",i:"Borlaug took the program to India and Pakistan. Pakistan's wheat went from 5 million tons in 1965 to 8 million in 1970; India's from 12 million to 20 million over the same years.",f:"India <b>12 to 20</b> million tons, Pakistan <b>5 to 8</b> million tons, 1965 to 1970.",q:"How did wheat production change in India and Pakistan between 1965 and 1970?",a:"India from 12 to 20 million tons, Pakistan from 5 to 8 million tons."},
+  {t:"The name and the prize",i:"The US Agency for International Development labeled the dramatic rise in food production the Green Revolution. Borlaug received the Nobel Peace Prize in 1970; the committee chairman said that more than any other person of his age he helped provide bread for a hungry world.",f:"Named by <b>USAID</b>; <b>Nobel Peace Prize 1970</b>.",q:"Who named the Green Revolution, and what prize did Borlaug win and when?",a:"USAID coined the term; Borlaug won the Nobel Peace Prize in 1970."}
+ ],
+ ask:["What fungal disease was destroying Mexico's wheat? (stem rust)","What is shuttle breeding and why did it make the wheat widely adaptable?","What is lodging, and which trait fixed it?","Where did Norin 10 come from?","When did Mexico become self-sufficient in wheat? (1956)","Who coined the term Green Revolution? (USAID)","What does this video leave out that Shiva's puts in? (water, debt, chemicals, social costs)"],
+ quiz:[
+  {q:"When Borlaug arrived in Mexico, the wheat crop was being destroyed by...",o:["stem rust, a fungal disease","locusts","drought alone","salinization"],c:0,e:"Stem rust raises red, scab-like blisters on the stem that cripple or kill the plant. His first goal was rust-resistant wheat, on soil that was also exhausted of nutrients."},
+  {q:"Shuttle breeding cut breeding time in half by...",o:["selecting two generations a year, in the central highlands summer and the Sonoran Desert winter","using genetic engineering","growing wheat only in greenhouses","planting in the US and Mexico on the same day"],c:0,e:"Two selection cycles a year in two very different places halved the timeline, and as a bonus made the lines insensitive to day length, so they adapted to many regions."},
+  {q:"Because they were bred in two locations with different seasons, the new wheat lines were...",o:["insensitive to day length, so they adapted to many regions","only suited to deserts","unable to respond to fertilizer","susceptible to stem rust"],c:0,e:"Summer in the highlands and winter in the Sonoran Desert mean very different day lengths; lines that did well in both did not depend on day length."},
+  {q:"Lodging, the problem Borlaug's fertilizer-responsive wheat developed, is...",o:["tall stalks collapsing under the weight of the grain","roots rotting in waterlogged soil","grain sprouting on the plant","rust blisters on the stem"],c:0,e:"With ample fertilizer the heads grew fat with grain and the tall stalks fell over, making harvest hard and cutting yields."},
+  {q:"The semi-dwarf trait that solved lodging came originally from...",o:["Norin 10, bred in Japan after World War II","a wild Mexican grass","Borlaug's own mutation experiments","Indian rice"],c:0,e:"Orville Vogel at Washington State brought Norin 10 into US breeding, and Borlaug's group brought a Norin 10 cross into Mexico in 1953. The semi-dwarfs became the miracle seeds."},
+  {q:"Mexico became self-sufficient in wheat production in...",o:["1956","1937","1970","1985"],c:0,e:"By 1963 it had grain to export. Yields had doubled twice, first from disease resistance and then from semi-dwarf wheat."},
+  {q:"Between 1965 and 1970, India's wheat production rose from about...",o:["12 to 20 million tons","5 to 8 million tons","1 to 2 million tons","50 to 100 million tons"],c:0,e:"India went from 12 to 20 million tons; Pakistan, the other figure, went from 5 to 8 million tons over the same years."},
+  {q:"The term Green Revolution was coined by...",o:["the US Agency for International Development","Norman Borlaug","Vandana Shiva","the Nobel committee"],c:0,e:"USAID labeled the dramatic rise in food production the Green Revolution. Borlaug won the Nobel Peace Prize in 1970."}
+ ]});
+
+COMPARE={
+ intro:"The two week 6 videos tell the same revolution from opposite ends. The Borlaug video measures it in yield and famine avoided; Shiva measures the costs the yield figures leave out. Lecture 2.10 holds both at once: traditional breeding averted famine, and the new varieties relied on irrigation, pesticides and synthetic fertilizer. Everything below is from the two transcripts only; where a video says nothing on a topic, the card says so, because that silence is part of the contrast.",
+ rows:[
+  {k:"Yields and famine",b:"Yields doubled twice (rust resistance, then semi-dwarf wheat). Mexico self-sufficient in wheat in 1956, exporting in 1963; India 12 to 20 and Pakistan 5 to 8 million tons from 1965 to 1970. Credited with touching over a billion lives and giving bread to a hungry world.",s:"The extra rice and wheat came from putting more land and 10 times more water under two crops. She says organic farming with the same land and irrigation would have grown as much, and calls feeding India part of the mythology."},
+  {k:"Monoculture and crop choice",b:"The whole program is one crop, wheat, bred to be day-length insensitive so the same lines could spread across many regions and countries.",s:"More land went under rice and wheat. World Bank loans pushed sugarcane, a cash crop, in place of millets and sorghum that people grow to eat."},
+  {k:"Chemical dependence",b:"The new wheats were highly responsive to fertilizer and flourished with ample fertilizer; that response is what caused lodging. Pesticides are not mentioned.",s:"Miracle seeds came with miracle chemicals. The chemicals dissolve in the extra water: groundwater and rivers full of chemicals, pesticides taking a toll on people, the daily cancer train from Punjab."},
+  {k:"Water",b:"Not discussed. The video never mentions irrigation, dams or groundwater.",s:"The heart of her case: 10 times the water, from dams that drowned towns (Bhakra, Tehri, Bilaspur) and tube wells that mined aquifers; about 10% of Punjab waterlogged."},
+  {k:"Debt and money",b:"Not discussed.",s:"The World Bank lent only for deep energized tube wells, not open wells, and steered farmers to sugarcane because cash crops repay loans: living rivers do not generate returns, dams do."},
+  {k:"Biodiversity",b:"Not discussed. The breeding drew on diverse lines (a Japanese semi-dwarf, Norin 10), but the video is about one crop.",s:"She does not use the word, but her crop story is a narrowing: millets and sorghum (250 mm of water) pushed out for sugarcane (2,500 mm), and more land under just rice and wheat."},
+  {k:"Social impacts",b:"Hunger as a force on the mind and on families; Borlaug's compassion; farmers who could not feed their families now could. Nobel Peace Prize, 1970.",s:"Drowned settlements, no-source villages, cancer, the loss of a culture of care for water, and female feticide: 30 million girls not born, mostly in Green Revolution areas."}
+ ],
+ take:"For the exam: know Borlaug's mechanics (stem rust resistance, shuttle breeding, day-length insensitivity, fertilizer response, lodging, semi-dwarf Norin 10, 1956, USAID, Nobel 1970) and Shiva's four costs (water from dams and tube wells, waterlogging, debt-driven cash crops, chemicals in water). If a question asks what the Green Revolution varieties relied on, the lecture answer is irrigation, pesticides and synthetic fertilizer."
+};
+PAIRS.push(
+ {l:"Stem rust",r:"Fungus with red, scab-like stem blisters that Borlaug bred against"},
+ {l:"Shuttle breeding",r:"Two generations a year, highlands summer and Sonoran winter"},
+ {l:"Lodging",r:"Stalks collapsing under heavy, fertilized grain"},
+ {l:"Norin 10",r:"Japanese semi-dwarf behind the miracle seeds"},
+ {l:"USAID",r:"Coined the term Green Revolution"}
+);
+</script>
+<script>
 /* ---------- state (localStorage with memory fallback; iOS file:// throws) ---------- */
 var LS='ecoALS3153_m2_v1';
 var _mem={};
@@ -816,7 +1135,11 @@ var state={};
 try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
 function save(){_lsSet(LS,JSON.stringify(state));}
 /* ids */
-L.forEach(function(lec,li){ lec.cards.forEach(function(c,ci){ c.id='c'+lec.id.replace('.','_')+'_'+ci; c.lec=lec.id; }); lec.quiz.forEach(function(q){ q.lec=lec.id; q.wk=lec.wk; }); });
+L.forEach(function(lec,li){ lec.cards.forEach(function(c,ci){ c.id='c'+lec.id.replace('.','_')+'_'+ci; c.lec=lec.id; }); lec.quiz.forEach(function(q){ q.lec=lec.id; q.wk=lec.wk; q.grp=lec.grp; q.lab=lec.label||('Lecture '+lec.id); }); });
+function lecById(id){ for(var i=0;i<L.length;i++){ if(L[i].id===id) return L[i]; } return null; }
+function weekIds(w){ var a=w.lecs.slice(); (w.sup||[]).forEach(function(s){ a=a.concat(s.ids); }); return a; }
+if(typeof M2Q==='undefined'){ window.M2Q=[]; }
+if(typeof WBW==='undefined'){ window.WBW=[]; }
 POOL5.forEach(function(q){ q.wk=5; q.src='Quiz 05'; });
 function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -841,7 +1164,7 @@ function showTab(name){ var t=document.querySelector('.tab[data-v="'+name+'"]');
 function lecStudied(id){ return !!state['s_'+id]; }
 function weekPct(w){
  var n=0,d=0;
- w.lecs.forEach(function(id){ d++; if(lecStudied(id)) n++; });
+ weekIds(w).forEach(function(id){ if(!lecById(id)) return; d++; if(lecStudied(id)) n++; });
  return d?Math.round(100*n/d):0;
 }
 function updateProg(){
@@ -860,7 +1183,8 @@ function renderWeeks(){
  WEEKS.forEach(function(w,i){
    var pct=weekPct(w);
    var d=document.createElement('div'); d.className='wk'+(i===0?' now':'');
-   d.innerHTML='<h3>Week '+w.n+'</h3><div class="wlecs">'+w.lecs[0]+' to '+w.lecs[w.lecs.length-1]+' · '+w.lecs.length+' lectures</div>'+ringSvg(pct)+'<span class="badge">'+w.quiz+'</span><div class="due">due <b>'+w.due+'</b></div>';
+   var nx=weekIds(w).length-w.lecs.length;
+   d.innerHTML='<h3>Week '+w.n+'</h3><div class="wlecs">'+w.lecs[0]+' to '+w.lecs[w.lecs.length-1]+' · '+w.lecs.length+' lectures'+(nx?' + '+nx+' extra':'')+'</div>'+ringSvg(pct)+'<span class="badge">'+w.quiz+'</span><div class="due">due <b>'+w.due+'</b></div>';
    d.addEventListener('click',function(){ showTab('lectures'); var h=byId('wk-'+w.n); if(h) setTimeout(function(){ h.scrollIntoView({behavior:'smooth',block:'start'}); },60); });
    host.appendChild(d);
  });
@@ -877,19 +1201,28 @@ function mastBtns(c){
 function renderLectures(){
  var host=byId('v-lectures'); if(!host) return; host.innerHTML='';
  var intro=document.createElement('div'); intro.className='oneliner'; intro.style.margin='22px 4px 6px';
- intro.innerHTML='Thirteen lectures in Canvas order (Canvas has no 02-09), grouped by week. Each one: the gist, the professor\'s throughline, the concepts with a mastery mark, what the exam could ask, and a mini quiz. Mark a lecture studied when it sits right; the week rings and Quiz tab follow.';
+ intro.innerHTML='Thirteen lectures in Canvas order (Canvas has no 02-09), grouped by week, plus the two week 6 Green Revolution videos with a compare card, the Perusall 3 reading, and the two soil organisms lectures (possibly on Exam 2). Each one: the gist, the professor\'s throughline, the concepts with a mastery mark, what the exam could ask, and a mini quiz. Mark a lecture studied when it sits right; the week rings and Quiz tab follow.';
  host.appendChild(intro);
  WEEKS.forEach(function(w){
    var wh=document.createElement('div'); wh.className='wkhead'; wh.id='wk-'+w.n;
    wh.innerHTML='<span class="n">Week '+w.n+'</span><h2>'+esc(w.deck)+'</h2><span class="wdue">'+w.quiz+' · '+w.due+'</span>';
    host.appendChild(wh);
    var rd=document.createElement('div'); rd.className='progtxt'; rd.style.margin='-6px 4px 12px'; rd.textContent='Read: '+w.read+'.'; host.appendChild(rd);
-   w.lecs.forEach(function(id){
-     var lec=L.filter(function(x){return x.id===id;})[0]; if(!lec) return;
+   w.lecs.forEach(function(id){ lecDet(id,host); });
+   (w.sup||[]).forEach(function(s){
+     var sh=document.createElement('div'); sh.className='suphead'+(s.maybe?' maybe':'');
+     sh.innerHTML='<h3>'+esc(s.head)+'</h3>'+(s.note?'<p>'+esc(s.note)+'</p>':''); host.appendChild(sh);
+     if(s.compare){ try{ var cm=compareEl(); if(cm) host.appendChild(cm); }catch(e){ if(window.console) console.error('compare',e); } }
+     s.ids.forEach(function(id){ lecDet(id,host); });
+   });
+ });
+}
+function lecDet(id,host){
+     var lec=lecById(id); if(!lec) return;
      var det=document.createElement('details'); det.className='lec'+(lecStudied(id)?' studied':''); det.id='lec-'+id.replace('.','_');
      if(state['o_'+id]) det.open=true;
      var mins=Math.round(lec.words/140);
-     var h='<summary><span class="num">'+lec.id+'</span><span class="ttl">'+esc(lec.title)+'</span><span class="meta">'+lec.words.toLocaleString()+' words · ~'+mins+' min</span><span class="done">'+(lecStudied(id)?'✓':'')+'</span><svg class="chev" viewBox="0 0 18 18"><path d="M6 3 L12 9 L6 15" stroke="currentColor" stroke-width="2" fill="none"/></svg></summary>';
+     var h='<summary><span class="num">'+lec.id+'</span><span class="ttl">'+esc(lec.title)+(lec.flag?'<br><span class="flagpill">'+esc(lec.flag)+'</span>':'')+'</span><span class="meta">'+lec.words.toLocaleString()+' words · ~'+mins+' min</span><span class="done">'+(lecStudied(id)?'✓':'')+'</span><svg class="chev" viewBox="0 0 18 18"><path d="M6 3 L12 9 L6 15" stroke="currentColor" stroke-width="2" fill="none"/></svg></summary>';
      h+='<div class="lbody">';
      h+='<div class="gist">'+esc(lec.gist)+'</div>';
      h+='<div class="sec">The professor\'s throughline</div><ol class="line">'+lec.line.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>';
@@ -903,8 +1236,15 @@ function renderLectures(){
      det.querySelector('.studybtn').addEventListener('click',function(){ state['s_'+id]=lecStudied(id)?0:1; save(); renderLectures(); updateProg(); });
      host.appendChild(det);
      if(det.open){ det.dataset.filled='1'; fillCards(det,lec); fillMiniQuiz(det,lec); }
-   });
- });
+}
+function compareEl(){
+ if(typeof COMPARE==='undefined'||!COMPARE) return null;
+ var d=document.createElement('div'); d.className='cmp'; d.id='compare';
+ var h='<h3>Borlaug vs Shiva: one revolution, two ledgers</h3><p class="cmpintro">'+esc(COMPARE.intro)+'</p>';
+ h+='<div class="cmprow cmphead"><div></div><div>Borlaug video (S1)</div><div>Shiva video (S2)</div></div>';
+ COMPARE.rows.forEach(function(r){ h+='<div class="cmprow"><div class="cmpk">'+esc(r.k)+'</div><div class="cmpc"><span class="who">Borlaug video</span>'+esc(r.b)+'</div><div class="cmpc"><span class="who">Shiva video</span>'+esc(r.s)+'</div></div>'; });
+ h+='<div class="cmptake">'+esc(COMPARE.take)+'</div>';
+ d.innerHTML=h; return d;
 }
 function fillCards(det,lec){
  var grid=det.querySelector('.cards'); if(!grid) return; grid.innerHTML='';
@@ -928,11 +1268,12 @@ function questionEl(item,n,showLec){
  var correctPos=order.indexOf(item.c);
  var q=document.createElement('div'); q.className='q';
   var meta='';
- if(showLec) meta+='<span class="qlec">Lecture '+esc(item.lec)+'</span>';
- if(item.src) meta+='<span class="qsrc">'+esc(item.src)+' pool</span>';
+ if(showLec) meta+='<span class="qlec">'+esc(item.lab||('Lecture '+item.lec))+'</span>';
+ if(item.src) meta+='<span class="qsrc'+(item.src==='M2'?' m2':'')+'">'+esc(item.pill||(item.src+' pool'))+'</span>';
  var h=(meta?'<div class="qmeta">'+meta+'</div>':'')+'<div class="qh">'+n+'. '+esc(item.q)+'</div>';
  order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[origI])+'</button>'; });
  h+='<div class="qexp">'+esc(item.e)+'</div>';
+ if(item.note) h+='<div class="qexp qnote"><b>Note on your marked answer.</b> '+esc(item.note)+'</div>';
  q.innerHTML=h;
  return {el:q,correctPos:correctPos};
 }
@@ -951,7 +1292,7 @@ function fillMiniQuiz(det,lec){
        var pick=+b.getAttribute('data-pos');
        q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
        if(pick!==r.correctPos) b.classList.add('wrong'); else right++;
-       q.querySelector('.qexp').classList.add('show');
+       q.querySelectorAll('.qexp').forEach(function(x){ x.classList.add('show'); });
        score.textContent='Score '+right+' / '+answered+(answered===lec.quiz.length?' · done':'');
      });
    });
@@ -964,7 +1305,7 @@ function fillMiniQuiz(det,lec){
 var deckFilter='all', deck=[], di=0;
 function buildDeck(){
  deck=[];
- L.forEach(function(lec){ if(deckFilter!=='all' && lec.wk!==+deckFilter) return; lec.cards.forEach(function(c){ deck.push({tag:'Lecture '+lec.id+' · '+lec.title,q:c.q,a:c.a}); }); });
+ L.forEach(function(lec){ if(deckFilter!=='all'){ if(/^[0-9]+$/.test(deckFilter)){ if(lec.wk!==+deckFilter) return; } else if(lec.grp!==deckFilter) return; } lec.cards.forEach(function(c){ deck.push({tag:(lec.label||'Lecture '+lec.id)+' · '+lec.title,q:c.q,a:c.a}); }); });
  deck=shuffle(deck); di=0; showCard();
 }
 function showCard(){
@@ -976,7 +1317,7 @@ function showCard(){
 }
 function renderFlashFilters(){
  var host=byId('flashfilters'); if(!host) return;
- var opts=[['all','All weeks'],['5','Week 5'],['6','Week 6'],['7','Week 7']];
+ var opts=[['all','All weeks'],['5','Week 5'],['6','Week 6'],['7','Week 7'],['sup','Green Revolution videos'],['P3','Howarth 2002'],['soilorg','Soil organisms (maybe)']];
  opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(deckFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ deckFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); buildDeck(); }); host.appendChild(b); });
 }
 function initFlash(){
@@ -992,14 +1333,21 @@ function initFlash(){
 var quizFilter='pool', QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
 function bank(){
  if(quizFilter==='pool') return POOL5.slice();
- var b=[]; L.forEach(function(lec){ if(quizFilter!=='all' && lec.wk!==+quizFilter) return; lec.quiz.forEach(function(q){ b.push(q); }); });
+ if(quizFilter==='m2') return M2Q.slice();
+ var b=[]; L.forEach(function(lec){ if(quizFilter!=='all'){ if(/^[0-9]+$/.test(quizFilter)){ if(lec.wk!==+quizFilter) return; } else if(lec.grp!==quizFilter) return; } lec.quiz.forEach(function(q){ b.push(q); }); });
  if(quizFilter==='all'||quizFilter==='5') b=POOL5.concat(b);
+ if(quizFilter==='all'||quizFilter==='6') b=M2Q.concat(b);
  return b;
 }
 function renderQuizFilters(){
  var host=byId('quizfilters'); if(!host) return;
- var opts=[['pool','Quiz 05 pool only (27)'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['all','All of Module 2']];
- opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ quizFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); quizQueue=[]; quizRight=0; quizAnswered=0; renderQuiz(); }); host.appendChild(b); });
+ var opts=[['pool','Quiz 05 pool only ('+POOL5.length+')'],['m2','Your M2 questions ('+M2Q.length+')'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['sup','Green Revolution videos'],['P3','Howarth 2002'],['soilorg','Soil organisms (maybe)'],['all','All of Module 2']];
+ opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.setAttribute('data-f',o[0]); b.addEventListener('click',function(){ setQuizFilter(o[0]); }); host.appendChild(b); });
+}
+function setQuizFilter(f){
+ quizFilter=f; var host=byId('quizfilters');
+ if(host) host.querySelectorAll('.fbtn').forEach(function(x){ x.classList.toggle('on',x.getAttribute('data-f')===f); });
+ quizQueue=[]; quizRight=0; quizAnswered=0; renderQuiz();
 }
 function updateQuizScore(){ var s=byId('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
 function renderQuiz(){
@@ -1016,7 +1364,7 @@ function renderQuiz(){
        var pick=+b.getAttribute('data-pos');
        q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
        if(pick!==r.correctPos) b.classList.add('wrong'); else quizRight++;
-       q.querySelector('.qexp').classList.add('show');
+       q.querySelectorAll('.qexp').forEach(function(x){ x.classList.add('show'); });
        updateQuizScore();
      });
    });
@@ -1063,8 +1411,55 @@ function onConn(b){
 function updateConnCount(){ byId('conncount').textContent=matchedN+' / '+connPick.length+' connected'; }
 function initConnect(){ byId('connreset').addEventListener('click',renderConnect); renderConnect(); }
 
+
+/* ---------- exam 2: week by week + hub ---------- */
+var SHORT={"2.1":"Water intro","2.2":"Hydrologic cycle","2.3":"Precipitation","2.4":"Irrigation","2.5":"Dryland ag","2.6":"Water quality and quantity","2.7":"Salinization","2.8":"Desertification","2.10":"Eutrophication","S1":"Borlaug video","S2":"Shiva video","P3":"Howarth 2002","2.11":"Soil types","2.12":"Decomposition","2.13":"Soil properties 1","2.14":"Soil properties 2","3.6":"Soil organisms 1","3.7":"Soil organisms 2"};
+function goLec(id){
+ showTab('lectures');
+ var det=byId('lec-'+id.replace('.','_')); if(!det) return;
+ if(!det.open) det.open=true;
+ setTimeout(function(){ det.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+function renderWBW(){
+ var host=byId('wbw'); if(!host||!WBW.length) return;
+ var h='<div class="wbwhead"><h2>Exam 2, week by week</h2><span class="wbwsub">Weeks 5 to 7 · opens '+esc(EXAM2.opens)+' · closes '+esc(EXAM2.closes)+'</span></div>';
+ h+='<p class="wbwmap"><b>Mapping used:</b> week 5 = lectures 2.1 to 2.5; week 6 = 2.6, 2.7, 2.8 and 2.10, plus the two Green Revolution videos (S1, S2) and Howarth 2002 (Perusall 3); week 7 = 2.11 to 2.14, plus soil organisms 3.6 and 3.7, possibly on the exam. Tap any chip to open that lecture. Dashed chips are videos or readings, gold ones are the maybes.</p>';
+ h+='<div class="wbwgrid">';
+ WBW.forEach(function(w){
+   h+='<div class="wcard"><div class="wtop"><span class="n">Week '+w.n+'</span><span class="wdates">'+esc(w.dates)+'</span></div>';
+   h+='<div class="wsyl">'+esc(w.syl)+'</div>';
+   h+='<div class="chips">'+w.lecs.map(function(id){ var l=lecById(id); var cls='chip'+(l&&l.grp?' extra':'')+(l&&l.flag?' maybe':''); return '<button class="'+cls+'" data-go="'+esc(id)+'"><b>'+esc(id)+'</b>'+esc(SHORT[id]||(l?l.title:''))+'</button>'; }).join('')+'</div>';
+   h+='<p class="wmap">'+esc(w.map)+'</p>';
+   h+='<div class="sec">Big idea</div><p class="wbig">'+esc(w.big)+'</p>';
+   h+='<div class="sec">Must know</div><ul class="line">'+w.must.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ul></div>';
+ });
+ h+='</div>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ goLec(b.getAttribute('data-go')); }); });
+}
+function renderExam(){
+ var host=byId('examhub'); if(!host) return;
+ var h='<div class="oneliner" style="margin:0 0 14px">Exam 02 covers weeks 5 to 7. It opens '+esc(EXAM2.opens)+' and closes '+esc(EXAM2.closes)+'. One hour, closed book, proctored in Honorlock, not cumulative.</div>';
+ h+='<ul class="facts"><li>Per the syllabus the exams mix multiple choice, true/false and short essay questions, so practice explaining a mechanism in two or three sentences, not only recognizing it.</li><li>Soil organisms (3.6, 3.7) sit in syllabus week 7 but are filed under Module 3 in Canvas. Confirm with the course before spending real time on them.</li></ul>';
+ var plan=[
+  ['overview','Read the week-by-week map','Big idea and must-know points for weeks 5, 6 and 7, with the lecture mapping.','Open the map'],
+  ['m2','Drill your own M2 questions','All 27 from your three Quiz 06 sets, your marked answers kept, with notes on two.','Your M2 questions'],
+  ['pool','Run the Quiz 05 pool','The real week 5 questions, 27 as they came up.','Quiz 05 pool'],
+  ['S1','Green Revolution videos','Borlaug and Shiva, each with cards and a quiz, plus the compare card.','Open the videos'],
+  ['P3','Howarth 2002','The Perusall 3 reading on coastal nutrient pollution.','Open Howarth'],
+  ['3.6','Soil organisms, if confirmed','Lectures 3.6 and 3.7, marked possibly on the exam.','Open soil organisms']
+ ];
+ h+='<ol class="plan">'+plan.map(function(p,i){ return '<li><div class="pt"><b>'+(i+1)+'. '+esc(p[1])+'</b><br>'+esc(p[2])+'</div><button class="dbtn" data-act="'+p[0]+'">'+esc(p[3])+'</button></li>'; }).join('')+'</ol>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-act]').forEach(function(b){ b.addEventListener('click',function(){
+   var a=b.getAttribute('data-act');
+   if(a==='overview'){ showTab('overview'); var w=byId('wbw'); if(w) setTimeout(function(){ w.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+   else if(a==='m2'||a==='pool'){ showTab('quiz'); setQuizFilter(a); }
+   else goLec(a);
+ }); });
+}
 /* ---------- boot, every init guarded ---------- */
-['renderLectures','updateProg','initFlash','renderQuizFilters','renderQuiz','initConnect']
+['renderLectures','updateProg','initFlash','renderQuizFilters','renderQuiz','initConnect','renderWBW','renderExam']
   .forEach(function(fn){ try{ window[fn](); }catch(e){ if(window.console) console.error(fn,e); } });
 </script>
 </body>
