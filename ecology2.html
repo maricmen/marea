@@ -218,6 +218,18 @@ details.lec.studied>summary .ttl{color:var(--moss-d)}
 .examhub .plan .pt{flex:1;min-width:200px;font-size:14px;color:var(--ink2);line-height:1.45}
 .examhub .plan .pt b{font-family:var(--serif);color:var(--soil);font-size:15px}
 .examhub .facts{font-size:13.5px;color:var(--ink2);margin:0 0 16px;padding-left:18px;line-height:1.5}
+.qsrc.soil{background:var(--soil)}
+.fface .tag .qsrc.soil{background:var(--soil)}
+.soilgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0 0 14px}
+.soilgrid .wtop .n{background:var(--soil)}
+.soilgrid .sqs{margin-top:6px}
+.soilgrid .q{margin:10px 0 0}
+.soilfoot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.soilfoot .quizscore{flex:1;min-width:140px}
+.soilcav{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:8px}
+.soilcav li{font-size:13.5px;line-height:1.5;color:var(--clay-d);background:#f6e9df;border-left:3px solid var(--clay);border-radius:8px;padding:9px 12px}
+.soilself{font-size:13.5px;color:var(--ink2);line-height:1.5;margin:0;padding-left:18px}
+.soilself b{color:var(--soil)}
 svg{display:block}
 </style>
 <noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
@@ -338,7 +350,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all twenty-seven questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 (opens October 7), so they are the ones worth knowing cold. Your own twenty-seven Module 2 questions from Quiz 06 sit under the Your M2 questions pill, with your marked answers and a note wherever one deserves a second look. Last year's Exam 2 questions from six UF Quizlet sets sit under Quizlet sets, each answer checked against your lectures, with a note wherever the Quizlet key was wrong. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Your real Quiz 05 pool is loaded, all twenty-seven questions as they came up across your three attempts, each carrying a Quiz 05 pool pill so you can tell the professor's wording from my practice ones. Weeks reuses these same banks on Exam 02 (opens October 7), so they are the ones worth knowing cold. Your own twenty-seven Module 2 questions from Quiz 06 sit under the Your M2 questions pill, with your marked answers and a note wherever one deserves a second look. Last year's Exam 2 questions from six UF Quizlet sets sit under Quizlet sets, each answer checked against your lectures, with a note wherever the Quizlet key was wrong. Your three soils practice sets from October 1, all thirty with your verified answers, sit under Soils practice sets and fold into Week 7. The other filters draw from the wider Week 5 bank and the rest of Module 2, ten at a time, answers shuffled, the mechanism under each answer.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -1063,6 +1075,110 @@ var M2Q=[
  {set:"Set 3 Q9",lec:"2.10",q:"Which type of fertilizer is more prone to leaching?",o:["Inorganic","Organic"],c:0,e:"Inorganic fertilizer is soluble and moves with water. Organic nutrients stay immobilized in tissue until mineralized (2.10)."}
 ];
 M2Q.forEach(function(q){ q.wk=6; q.src='M2'; q.pill='Your M2 · '+q.set; });
+/* Soils practice sets from Oct 1 (her three sets, 30 questions, her marked answers verified) */
+var SOILG=[
+ {id:"g1",n:1,title:"Soil horizons and the profile",lecs:["2.11"],
+  know:["Profile = the whole vertical section from the surface down to parent material.",
+   "O horizon: organic layer on top, litter and decomposing organic matter, little mineral.",
+   "A horizon: topsoil, mineral soil mixed with organic matter, most roots. Grasslands (mollisols) have a very deep, dark A.",
+   "B horizon: mineral subsoil below most roots, where clay, iron and minerals washed down from above accumulate.",
+   "C horizon: unmodified, weathered parent material, least changed by soil formation."]},
+ {id:"g2",n:2,title:"Organic matter and decomposition",lecs:["2.12"],
+  know:["Biotic path: organic compounds > litter > detritus > humus > inorganic compounds. Ending in inorganic is mineralization, nutrients become plant-available.",
+   "Biotic decomposition runs on microbes, and warmer temperatures speed it up.",
+   "Abiotic decomposition needs no microbes. Fire is the classic case, as in swidden (slash-and-burn).",
+   "Low C:N: nitrogen is released, decomposition is fast. High C:N: slow, and bacteria immobilize soil nitrogen for their own cells."]},
+ {id:"g3",n:3,title:"Physical properties: texture, structure, pores, water",lecs:["2.13","2.11"],
+  know:["Texture = particle size (sand, silt, clay). Structure = how much the particles aggregate.",
+   "Macropores are the big spaces between aggregates. They drain water and let air in.",
+   "Micropores are the small spaces inside aggregates. They hold water against gravity, so they set water holding capacity.",
+   "Saturation: all pores full. Field capacity: macropores drained, micropores still full. Wilting point: the plant cannot pull the water out.",
+   "Sandy soils: large particles, low organic matter. Ideal farm soil: about 45% mineral, 5% organic, 25% water, 25% air."]},
+ {id:"g4",n:4,title:"Chemistry: pH, alkalinity, CEC, leaching",lecs:["2.14"],
+  know:["As pH falls the soil gets more acidic, so alkalinity falls too. They move together.",
+   "Rain lowers pH by leaching the bases (calcium, magnesium, potassium) out of the soil. Wet = acidic, dry = alkaline.",
+   "Cation exchange capacity (CEC) = the soil's ability to hold and release nutrient cations."]},
+ {id:"g5",n:5,title:"Soil orders and farm soils",lecs:["2.11"],
+  know:["Mollisols: deep, dark grassland soils, among the best orders for agriculture (with histosols and alfisols).",
+   "Hardpan in agriculture: a compacted layer under the plow layer, caused by intensive tillage (plowpan). It blocks roots and water."]}
+];
+var SOILSELF=[
+ ["Horizons","profile; O = litter; A = rich topsoil (grasslands, deep A); B = accumulation; C = parent material."],
+ ["Decomposition","litter > detritus > humus > inorganic; warmer = faster; low C:N releases N; high C:N slow and immobilizes N; swidden = abiotic fire."],
+ ["Physical","texture = particle size; structure = aggregation; macropores drain, micropores hold; field capacity = micropores full; sandy = large particles, low OM; ideal soil about 5% OM."],
+ ["Chemistry","pH down = alkalinity down; rain leaches bases (calcium); CEC = hold and release nutrients."],
+ ["Orders","Mollisol best for ag; hardpan = plowpan from tillage."]
+];
+var SOILQ=[
+ /* group 1: horizons */
+ {g:"g1",ps:"Set 1 Q1",lec:"2.11",q:"The layer marked by diagonal lines and marked by an arrow represents:",o:["B horizon","A horizon","C horizon","O horizon"],c:0,
+  e:"The B horizon is the mineral subsoil under the A, where clay, iron and minerals washed down from above build up. (Your copy listed only the answer, so the four horizons fill the choices here.)",
+  noteLabel:"Figure check.",note:"This answer rides on the diagram, which your copy did not include. On the exam, confirm the arrow points at the layer below the dark topsoil and above the parent material."},
+ {g:"g1",ps:"Set 1 Q2",lec:"2.11",q:"Grasslands are characterized by a very deep and rich A horizon.",o:["True","False"],c:0,
+  e:"True. A thick, dark topsoil full of root-built organic matter is the grassland (mollisol) signature."},
+ {g:"g1",ps:"Set 1 Q4",lec:"2.11",q:"Vertical section of soil from the surface to the parent material is the definition of:",o:["profile","horizon","high bulk density","cation exchange capacity"],c:0,
+  e:"The profile is the whole vertical section; a horizon is one layer inside it."},
+ {g:"g1",ps:"Set 2 Q1",lec:"2.11",q:"The uppermost layer marked by the arrow represents:",o:["O horizon","A horizon","B horizon","C horizon"],c:0,
+  e:"The uppermost layer is the organic O horizon, litter sitting on top of the mineral soil. (Your copy listed only the answer, so the four horizons fill the choices here.)"},
+ {g:"g1",ps:"Set 2 Q2",lec:"2.11",q:"Litter is part of the __________ fraction of the soil:",o:["organic","inorganic"],c:0,
+  e:"Litter is dead plant matter with its carbon bonds intact, so it belongs to the organic fraction."},
+ {g:"g1",ps:"Set 2 Q3",lec:"2.11",q:"The O horizon contains organic matter and:",o:["litter","bedrock","parent material","predominantly mineral soil"],c:0,
+  e:"The O horizon is litter plus decomposing organic matter; bedrock and parent material sit at the bottom of the profile."},
+ {g:"g1",ps:"Set 2 Q5",lec:"2.11",q:"Which horizon is composed of unmodified parent material?",o:["C horizon","O horizon","B horizon","A horizon"],c:0,
+  e:"The C horizon is weathered but unmodified parent material, the layer soil formation has changed least."},
+ {g:"g1",ps:"Set 3 Q1",lec:"2.11",q:"The mottled layer near the surface marked by the arrow represents:",o:["A Horizon","B Horizon","C Horizon","O Horizon"],c:0,
+  e:"Near the surface and mineral, below the O, is the A horizon, which is your marked answer.",
+  noteLabel:"Figure check.",note:"Mottling usually signals a water table that rises and falls, which is more typical of a deeper B layer. A is right because the question says near the surface, but check the arrow on the exam figure: if the mottled layer sits lower, the answer is B."},
+ /* group 2: decomposition */
+ {g:"g2",ps:"Set 1 Q5",lec:"2.12",q:"If the C:N ratio is low, bacteria immobilize all the available nitrogen.",o:["False","True"],c:0,
+  e:"False. Low C:N means there is nitrogen to spare, so it is released (mineralized), not tied up."},
+ {g:"g2",ps:"Set 1 Q6",lec:"2.12",q:"If the C:N ratio is high, decomposition proceeds:",o:["slowly","quickly"],c:0,
+  e:"High C:N leaves microbes short of nitrogen, so they work slowly and pull soil N into their own cells."},
+ {g:"g2",ps:"Set 2 Q4",lec:"2.12",q:"How will an increase in temperature impact the rate of biotic decomposition?",o:["increase","decrease"],c:0,
+  e:"Microbes are more active when it is warmer, so biotic decomposition speeds up. (Repeats as Set 3 Q2.)"},
+ {g:"g2",ps:"Set 2 Q6",lec:"2.12",q:"Which depicts the correct sequence of events in biotic decomposition?",o:["organic compounds > litter > detritus > humus > inorganic compounds","inorganic compounds > litter > detritus > humus > organic compounds","organic compounds > humus > detritus > litter > inorganic compounds","inorganic compounds > litter > humus > detritus > inorganic compounds"],c:0,
+  e:"Decomposition starts from organic matter and ends in mineralized, inorganic nutrients; the other orders run backwards or scramble the middle."},
+ {g:"g2",ps:"Set 3 Q2",lec:"2.12",q:"How will an increase in temperature impact the rate of biotic decomposition?",o:["increase","decrease"],c:0,
+  e:"Same as Set 2 Q4: warmer means more microbial activity, so faster decomposition."},
+ {g:"g2",ps:"Set 3 Q4",lec:"2.12",q:"Which type of agriculture involves extensive abiotic decomposition?",o:["swidden","dryland","rainfed","hydroponic"],c:0,
+  e:"Swidden (slash-and-burn) uses fire, which breaks organic matter down with no microbes, so it is abiotic."},
+ {g:"g2",ps:"Set 3 Q6",lec:"2.12",q:"Decomposition:",o:["all options presented are correct","recycles nutrients","requires microbes","releases energy"],c:0,
+  e:"Each option holds for decomposition as taught: it recycles nutrients, the biotic route runs on microbes, and breaking the bonds releases energy."},
+ /* group 3: physical */
+ {g:"g3",ps:"Set 1 Q3",lec:"2.11",q:"Ideal agricultural soil has 50% organic matter.",o:["False","True"],c:0,
+  e:"False. The ideal is about 5% organic matter, with 45% mineral and the other half pore space split between air and water."},
+ {g:"g3",ps:"Set 1 Q7",lec:"2.13",q:"Spaces between soil aggregates are called:",o:["macropores","micropores","lithosphere","regolith"],c:0,
+  e:"The large gaps between aggregates are macropores; micropores are the small spaces inside them."},
+ {g:"g3",ps:"Set 1 Q8",lec:"2.13",q:"Micropores determine the water holding capacity of the soil.",o:["True","False"],c:0,
+  e:"True. Micropores hold water against gravity, so they set how much water the soil keeps."},
+ {g:"g3",ps:"Set 2 Q7",lec:"2.13",q:"Soil structure refers to:",o:["amount of aggregation","pH","particle size","all options presented"],c:0,
+  e:"Structure is how particles clump into aggregates; particle size is texture."},
+ {g:"g3",ps:"Set 2 Q10",lec:"2.13",q:"Soil texture refers to:",o:["particle size","all options presented","pH","amount of aggregation"],c:0,
+  e:"Texture is the mix of sand, silt and clay particle sizes. (Repeats as Set 3 Q10.)"},
+ {g:"g3",ps:"Set 3 Q7",lec:"2.13",q:"Sandy soils are characterized by:",o:["large particle size, low organic matter","small particle size, high organic matter","small particle size, low organic matter","large particle size, high organic matter"],c:0,
+  e:"Sand grains are the largest particles, and fast-draining sandy soils hold little organic matter."},
+ {g:"g3",ps:"Set 3 Q8",lec:"2.13",q:"When the micropores are full of water, the soil is at the:",o:["field capacity","wilting point","saturation point","compensation point"],c:0,
+  e:"After free drainage the macropores empty and the micropores stay full: that is field capacity. Saturation is every pore full."},
+ {g:"g3",ps:"Set 3 Q9",lec:"2.13",q:"The amount of macropores does not impact drainage.",o:["False","True"],c:0,
+  e:"False. Macropores are the channels water drains through, so more macropores means better drainage."},
+ {g:"g3",ps:"Set 3 Q10",lec:"2.13",q:"Soil texture refers to:",o:["particle size","amount of aggregation","pH","all options presented"],c:0,
+  e:"Same as Set 2 Q10: texture is particle size, aggregation is structure."},
+ /* group 4: chemistry */
+ {g:"g4",ps:"Set 1 Q9",lec:"2.14",q:"As pH decreases, alkalinity increases.",o:["False","True"],c:0,
+  e:"False. Lower pH is more acidic, so alkalinity goes down with it. (Repeats as Set 2 Q9.)"},
+ {g:"g4",ps:"Set 1 Q10",lec:"2.14",q:"Rain influences pH by:",o:["leaching bases, loss of calcium","leaching acids, loss of phosphorus","leaching bases, loss of iron","leaching acids, loss of nitrogen"],c:0,
+  e:"Carbonic acid from rain pulls calcium and other bases off the soil and they leach away, leaving hydrogen ions, so pH drops."},
+ {g:"g4",ps:"Set 2 Q8",lec:"2.14",q:"Cation exchange capacity is the ability of:",o:["soil to hold and release nutrients","soil bacteria to denitrify","organic compounds to be mineralized","all options presented"],c:0,
+  e:"CEC is how many positively charged nutrients the soil can hold on its colloids and trade back to roots."},
+ {g:"g4",ps:"Set 2 Q9",lec:"2.14",q:"As pH decreases, alkalinity increases.",o:["False","True"],c:0,
+  e:"Same as Set 1 Q9: false, pH and alkalinity fall together."},
+ /* group 5: orders */
+ {g:"g5",ps:"Set 3 Q3",lec:"2.11",q:"Which of the following is one of the best soil orders for agricultural use?",o:["Mollisol","Vertisol","Spodosol","Oxisol"],c:0,
+  e:"Mollisols are deep, dark, fertile grassland soils. Vertisols shrink and swell, spodosols are acidic sands, oxisols are weathered tropical soils."},
+ {g:"g5",ps:"Set 3 Q5",lec:"2.11",q:"In agriculture, a hardpan:",o:["occurs as a result of intensive tillage","develops between B and C horizons","replaces O horizon at soil surface","increases drainage"],c:0,
+  e:"Repeated plowing at the same depth compacts the layer under the plow layer into a hardpan, which blocks roots and drainage."}
+];
+SOILQ.forEach(function(q){ q.wk=7; q.src='Soils'; q.pill='Soils · '+q.ps; });
 
 /* Borlaug vs Shiva compare rows, filled from the two video transcripts */
 var COMPARE=null;
@@ -1483,11 +1599,11 @@ function questionEl(item,n,showLec){
  var q=document.createElement('div'); q.className='q';
   var meta='';
  if(showLec) meta+='<span class="qlec">'+esc(item.lab||('Lecture '+item.lec))+'</span>';
- if(item.src) meta+='<span class="qsrc'+(item.src==='M2'?' m2':'')+(item.src==='Quizlet'?' qz':'')+'"'+(item.set?' title="'+esc(qzSetNames(item.set))+'"':'')+'>'+esc(item.pill||(item.src+' pool'))+'</span>';
+ if(item.src) meta+='<span class="qsrc'+(item.src==='M2'?' m2':'')+(item.src==='Quizlet'?' qz':'')+(item.src==='Soils'?' soil':'')+'"'+(item.set?' title="'+esc(qzSetNames(item.set))+'"':'')+'>'+esc(item.pill||(item.src+' pool'))+'</span>';
  var h=(meta?'<div class="qmeta">'+meta+'</div>':'')+'<div class="qh">'+n+'. '+esc(item.q)+'</div>';
  order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[origI])+'</button>'; });
  h+='<div class="qexp">'+esc(item.e)+'</div>';
- if(item.set) h+='<div class="qexp" style="font-size:11.5px;color:var(--ink3)">Quizlet set: '+esc(qzSetNames(item.set))+'</div>';
+ if(item.set&&item.src==='Quizlet') h+='<div class="qexp" style="font-size:11.5px;color:var(--ink3)">Quizlet set: '+esc(qzSetNames(item.set))+'</div>';
  if(item.note) h+='<div class="qexp qnote"><b>'+esc(item.noteLabel||'Note on your marked answer.')+'</b> '+esc(item.note)+'</div>';
  q.innerHTML=h;
  return {el:q,correctPos:correctPos};
@@ -1521,20 +1637,21 @@ var deckFilter='all', deck=[], di=0;
 function buildDeck(){
  deck=[];
  L.forEach(function(lec){ if(deckFilter!=='all'){ if(/^[0-9]+$/.test(deckFilter)){ if(lec.wk!==+deckFilter) return; } else if(lec.grp!==deckFilter) return; } lec.cards.forEach(function(c){ deck.push({tag:(lec.label||'Lecture '+lec.id)+' · '+lec.title,q:c.q,a:c.a}); }); });
- if(deckFilter==='qz') deck=[];
+ if(deckFilter==='qz'||deckFilter==='soil') deck=[];
  if(deckFilter==='all'||deckFilter==='qz'||/^[0-9]+$/.test(deckFilter)){ QZC.forEach(function(c){ var l=lecById(c.lec); if(/^[0-9]+$/.test(deckFilter) && (!l||l.wk!==+deckFilter)) return; deck.push({tag:'Lecture '+c.lec+(l?' · '+l.title:''),q:c.q,a:c.a,qz:1}); }); }
+ if(deckFilter==='all'||deckFilter==='soil'||deckFilter==='7'){ SOILQ.forEach(function(s){ deck.push({tag:s.ps+' · Lecture '+s.lec,q:s.q,a:s.o[s.c]+'. '+s.e,soil:1}); }); }
  deck=shuffle(deck); di=0; showCard();
 }
 function showCard(){
  var f=byId('flash'); if(!f||!deck.length) return;
  f.classList.remove('flip');
  var c=deck[di];
- byId('fqtag').innerHTML=esc(c.tag)+(c.qz?'<span class="qsrc">Quizlet</span>':''); byId('fq').textContent=c.q; byId('fa').textContent=c.a;
+ byId('fqtag').innerHTML=esc(c.tag)+(c.qz?'<span class="qsrc">Quizlet</span>':'')+(c.soil?'<span class="qsrc soil">Soils</span>':''); byId('fq').textContent=c.q; byId('fa').textContent=c.a;
  byId('fcount').textContent=(di+1)+' / '+deck.length;
 }
 function renderFlashFilters(){
  var host=byId('flashfilters'); if(!host) return;
- var opts=[['all','All weeks'],['5','Week 5'],['6','Week 6'],['7','Week 7'],['qz','Quizlet sets ('+QZC.length+')'],['sup','Green Revolution videos'],['P3','Howarth 2002'],['soilorg','Soil organisms (maybe)']];
+ var opts=[['all','All weeks'],['5','Week 5'],['6','Week 6'],['7','Week 7'],['qz','Quizlet sets ('+QZC.length+')'],['soil','Soils sets ('+SOILQ.length+')'],['sup','Green Revolution videos'],['P3','Howarth 2002'],['soilorg','Soil organisms (maybe)']];
  opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(deckFilter===o[0]?' on':''); b.textContent=o[1]; b.addEventListener('click',function(){ deckFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); buildDeck(); }); host.appendChild(b); });
 }
 function initFlash(){
@@ -1552,15 +1669,17 @@ function bank(){
  if(quizFilter==='pool') return POOL5.slice();
  if(quizFilter==='m2') return M2Q.slice();
  if(quizFilter==='qz') return QZQ.slice();
+ if(quizFilter==='soil') return SOILQ.slice();
  var b=[]; L.forEach(function(lec){ if(quizFilter!=='all'){ if(/^[0-9]+$/.test(quizFilter)){ if(lec.wk!==+quizFilter) return; } else if(lec.grp!==quizFilter) return; } lec.quiz.forEach(function(q){ b.push(q); }); });
  if(quizFilter==='all'||quizFilter==='5') b=POOL5.concat(b);
  if(quizFilter==='all'||quizFilter==='6') b=M2Q.concat(b);
+ if(quizFilter==='all'||quizFilter==='7') b=SOILQ.concat(b);
  if(quizFilter==='all') b=b.concat(QZQ); else if(/^[0-9]+$/.test(quizFilter)) b=b.concat(QZQ.filter(function(q){ return q.wk===+quizFilter; }));
  return b;
 }
 function renderQuizFilters(){
  var host=byId('quizfilters'); if(!host) return;
- var opts=[['pool','Quiz 05 pool only ('+POOL5.length+')'],['m2','Your M2 questions ('+M2Q.length+')'],['qz','Quizlet sets ('+QZQ.length+')'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['sup','Green Revolution videos'],['P3','Howarth 2002'],['soilorg','Soil organisms (maybe)'],['all','All of Module 2']];
+ var opts=[['pool','Quiz 05 pool only ('+POOL5.length+')'],['m2','Your M2 questions ('+M2Q.length+')'],['qz','Quizlet sets ('+QZQ.length+')'],['soil','Soils practice sets ('+SOILQ.length+')'],['5','All Week 5'],['6','Week 6'],['7','Week 7'],['sup','Green Revolution videos'],['P3','Howarth 2002'],['soilorg','Soil organisms (maybe)'],['all','All of Module 2']];
  opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.setAttribute('data-f',o[0]); b.addEventListener('click',function(){ setQuizFilter(o[0]); }); host.appendChild(b); });
 }
 function setQuizFilter(f){
@@ -1664,6 +1783,7 @@ function renderExam(){
   ['overview','Read the week-by-week map','Big idea and must-know points for weeks 5, 6 and 7, with the lecture mapping.','Open the map'],
   ['m2','Drill your own M2 questions','All 27 from your three Quiz 06 sets, your marked answers kept, with notes on two.','Your M2 questions'],
   ['pool','Run the Quiz 05 pool','The real week 5 questions, 27 as they came up.','Quiz 05 pool'],
+  ['soil','Drill your soils practice sets','All 30 from your three October 1 sets, grouped into five concepts, your answers verified, a one-line why under each, two figure checks.','Soils sets'],
   ['qz','Drill the Quizlet sets','Last year\'s Exam 2 questions from six UF Quizlet sets, '+QZQ.length+' quiz items and '+QZC.length+' flashcards, every answer checked against your transcripts.','Quizlet sets'],
   ['S1','Green Revolution videos','Borlaug and Shiva, each with cards and a quiz, plus the compare card.','Open the videos'],
   ['P3','Howarth 2002','The Perusall 3 reading on coastal nutrient pollution.','Open Howarth'],
@@ -1674,13 +1794,66 @@ function renderExam(){
   h+='<h3 class="qzh" id="qzsets">Quizlet sets for Exam 2</h3><p class="qzp">Six UF ALS 3153 sets from fall 2023, all by the same student and all in this professor\'s wording, listed closest match first. Their cards are in the Quizlet sets filter in Flashcards and Quiz, checked against your transcripts; where a Quizlet key disagrees with the lecture, the lecture wins and the quiz item says so. The sets open without an account, some study modes ask for a login.</p>';
   h+='<ul class="qzlist">'+QZSETS.map(function(s){ return '<li><a href="'+esc(s.url)+'" target="_blank" rel="noopener">'+esc(s.title)+'</a><div class="qzm">'+s.n+' cards · '+esc(s.by)+' · lectures '+esc(s.covers)+'</div>'+esc(s.fit)+'</li>'; }).join('')+'</ul>';
  }
+ h+='<div id="soilhub"></div>';
  host.innerHTML=h;
+ try{ renderSoils(byId('soilhub')); }catch(e){ if(window.console) console.error('renderSoils',e); }
  host.querySelectorAll('[data-act]').forEach(function(b){ b.addEventListener('click',function(){
    var a=b.getAttribute('data-act');
    if(a==='overview'){ showTab('overview'); var w=byId('wbw'); if(w) setTimeout(function(){ w.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+   else if(a==='soil'){ var s=byId('soils'); if(s) s.scrollIntoView({behavior:'smooth',block:'start'}); }
    else if(a==='m2'||a==='pool'||a==='qz'){ showTab('quiz'); setQuizFilter(a); }
    else goLec(a);
  }); });
+}
+function renderSoils(host){
+ if(!host||!SOILQ.length) return;
+ var h='<h3 class="qzh" id="soils">Soils (practice sets from Oct 1)</h3>';
+ h+='<p class="qzp">Your three soils sets, all '+SOILQ.length+' questions in their original wording, grouped into five concepts. Every answer you marked checked out. Learn the idea in each card, then tap an answer to see whether you hold it and the one-line why. Show answers opens a whole group for reading. Repeats across sets are kept so the count matches yours.</p>';
+ h+='<div class="sec">Two figure checks</div><ul class="soilcav">';
+ h+='<li><b>Set 1 Q1, B horizon.</b> The answer rides on the diagram, which your copy did not include. Confirm the arrow points at the layer below the dark topsoil and above the parent material.</li>';
+ h+='<li><b>Set 3 Q1, A horizon (mottled, near the surface).</b> Mottling usually means a water table that rises and falls, more typical of a deeper B layer. A fits because the question says near the surface; if the arrow on the exam figure points lower, the answer is B.</li></ul>';
+ h+='<div class="soilgrid">';
+ SOILG.forEach(function(g){
+   var qs=SOILQ.filter(function(q){ return q.g===g.id; });
+   h+='<div class="wcard" id="soil-'+g.id+'"><div class="wtop"><span class="n">Concept '+g.n+'</span><span class="wdates">'+qs.length+' questions</span></div>';
+   h+='<div class="wsyl">'+esc(g.title)+'</div>';
+   h+='<div class="chips">'+g.lecs.map(function(id){ return '<button class="chip" data-go="'+esc(id)+'"><b>'+esc(id)+'</b>'+esc(SHORT[id]||id)+'</button>'; }).join('')+'</div>';
+   h+='<div class="sec">Know this</div><ul class="line">'+g.know.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ul>';
+   h+='<div class="sec">Your practice questions</div><div class="quiz sqs" data-g="'+g.id+'"></div></div>';
+ });
+ h+='<div class="wcard"><div class="wtop"><span class="n">Self-test</span><span class="wdates">cover the cards, say it out loud</span></div><ul class="soilself">'+SOILSELF.map(function(r){ return '<li><b>'+esc(r[0])+':</b> '+esc(r[1])+'</li>'; }).join('')+'</ul>';
+ h+='<div class="soilfoot"><button class="dbtn" id="soilquiz">Drill all '+SOILQ.length+' shuffled in Quiz &#8594;</button></div></div>';
+ h+='</div>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ goLec(b.getAttribute('data-go')); }); });
+ var dq=byId('soilquiz'); if(dq) dq.addEventListener('click',function(){ showTab('quiz'); setQuizFilter('soil'); window.scrollTo(0,byId('v-quiz').offsetTop-10); });
+ host.querySelectorAll('.sqs').forEach(function(box){ fillSoilGroup(box); });
+}
+function fillSoilGroup(box){
+ var gid=box.getAttribute('data-g'); box.innerHTML='';
+ var qs=SOILQ.filter(function(q){ return q.g===gid; });
+ var right=0,answered=0,items=[];
+ var foot=document.createElement('div'); foot.className='soilfoot';
+ var score=document.createElement('span'); score.className='quizscore'; score.textContent='Pick an answer to begin';
+ var show=document.createElement('button'); show.className='dbtn'; show.textContent='Show answers';
+ var again=document.createElement('button'); again.className='dbtn'; again.textContent='Reset';
+ function reveal(q,r){ q.dataset.done='1'; q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); }); q.querySelectorAll('.qexp').forEach(function(x){ x.classList.add('show'); }); }
+ qs.forEach(function(item,i){
+   var r=questionEl(item,i+1,false), q=r.el; items.push([q,r]);
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; answered++;
+       var pick=+b.getAttribute('data-pos');
+       reveal(q,r);
+       if(pick!==r.correctPos) b.classList.add('wrong'); else right++;
+       score.textContent='Score '+right+' / '+answered+(answered===qs.length?' · done':'');
+     });
+   });
+   box.appendChild(q);
+ });
+ show.addEventListener('click',function(){ items.forEach(function(p){ if(!p[0].dataset.done) reveal(p[0],p[1]); }); });
+ again.addEventListener('click',function(){ fillSoilGroup(box); });
+ foot.appendChild(score); foot.appendChild(show); foot.appendChild(again); box.appendChild(foot);
 }
 /* ---------- boot, every init guarded ---------- */
 ['renderLectures','updateProg','initFlash','renderQuizFilters','renderQuiz','initConnect','renderWBW','renderExam']
