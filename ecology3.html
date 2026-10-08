@@ -267,7 +267,7 @@ svg{display:block}
       <div class="sub">ALS 3153 · Module 3 · Biotic Interactions in Agroecosystems</div>
     </div>
   </div>
-  <p class="hnote">Module 3, one lecture at a time, starting with Week 8 for Quiz 08 this Sunday. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your five Week 8 lecture transcripts (3.1 to 3.5). Weeks 9 to 11 are marked coming and fill in later, and your real Quiz 08 questions get their own slot in the Quiz tab once you share them.</p>
+  <p class="hnote">Module 3, one lecture at a time, starting with Week 8 for Quiz 08 this Sunday. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your five Week 8 lecture transcripts (3.1 to 3.5). Weeks 9 to 11 are marked coming and fill in later. Your 27 real Quiz 08 questions sit in their own Quiz 08 pool in the Quiz tab.</p>
 
   <div class="prog">
     <div class="progbar"><div class="progfill" id="pf"></div></div>
@@ -373,7 +373,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">Week 8 practice, ten at a time, answers shuffled, the mechanism under each answer. Every question is written from your 3.1 to 3.5 transcripts. The Quiz 08 pool filter is a reserved slot: once you share your real Quiz 08 questions, they land there with a Quiz 08 pool pill, so you can tell the professor's wording from these practice ones, and they fold into Week 8 too.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Week 8 practice, ten at a time, answers shuffled, the mechanism under each answer. The practice questions are written from your 3.1 to 3.5 transcripts. The Quiz 08 pool filter holds your 27 real Quiz 08 questions in the professor's wording, each with a Quiz 08 pool pill and a one-line why from the lecture, and they fold into Week 8 too.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -646,11 +646,65 @@ var PAIRS=[
  {l:"K strategist",r:"Persister: slow growth, long life"}
 ];
 
-/* ---------- Quiz 08 pool: EMPTY on purpose. Mariel will share her real Quiz 08 questions later.
-   Add items here in the same shape as ecology2's POOL5, e.g.
-   {lec:"3.2",q:"Question as worded in Canvas",o:["correct answer","distractor","distractor","distractor"],c:0,e:"why, from the transcript"}
+/* ---------- Quiz 08 pool: Mariel's real Quiz 08 questions (her msg 6752, 2026-10-08), 27 unique across 3 sets.
+   Options in Canvas order (the renderer shuffles them like every other question); answers checked against the 3.1 to 3.5 transcripts.
    They show up under the "Quiz 08 pool" filter in the Quiz tab and fold into Week 8. ---------- */
-var POOL8=[];
+var POOL8=[
+ {lec:"3.1",q:"Which of the following is an example of removal interference?",o:["competition", "all choices presented", "commensalism", "mutualism"],c:0,
+  e:"3.1: removal interference is competition, parasitism and herbivory. Commensalism (epiphytes) and mutualism are addition interferences, so 'all choices' fails."},
+ {lec:"3.2",q:"Plants that differ in their preferred form of inorganic nitrogen are exhibiting",o:["character release", "mutualism", "niche partitioning", "competition"],c:2,
+  e:"3.2: dividing up a limiting resource is niche partitioning; her research example is plants preferring ammonium versus nitrate."},
+ {lec:"3.1",q:"Rotational grazing is used to",o:["all options presented", "reduce weed pressure", "reduce compaction", "avoid overgrazing"],c:0,
+  e:"3.1 lists all three: moving livestock between small paddocks stops overgrazing, lusher cover keeps weeds out, and frequent moves mean less compaction and erosion."},
+ {lec:"3.3",q:"Allelopathy may involve",o:["leaching from leaves", "exuding from roots", "volatilization from leaves", "all options presented"],c:3,
+  e:"3.3: compounds leach from leaves in rain, volatilize from leaves, exude from living roots, and come out of decomposing residue."},
+ {lec:"3.3",q:"Compounds released by allelopathic plants may suppress the growth of other species.",o:["True", "False"],c:0,
+  e:"True. 3.3: the inhibitory side, phytotoxins that cut germination, growth and yield (lamb's quarters stunting beans, winter rye suppressing weeds)."},
+ {lec:"3.4",q:"Which is an example of primary succession?",o:["swidden agriculture", "timber harvest", "all options presented", "sand dune formation"],c:3,
+  e:"3.4: primary succession colonizes ground with no prior community (lava, glacial retreat, new dunes). Swidden and timber harvest are her secondary succession examples."},
+ {lec:"3.4",q:"Perennials in old field succession are considered",o:["all options presented", "r strategists", "bad competitors", "\"persister\" species"],c:3,
+  e:"3.4: the perennials arriving around year five are good competitors with multi-year lives, the persister (K) profile. Colonizers are the annuals."},
+ {lec:"3.4",q:"Which of the following occurs on pre-existing soil following a disturbance?",o:["primary succession", "secondary succession", "competitive exclusion", "all options presented"],c:1,
+  e:"3.4: secondary succession is recovery on pre-existing soil after disturbance, and it is the only kind agriculture deals with."},
+ {lec:"3.5",q:"In logistic growth models, when the population is small, the growth of populations may be exponential.",o:["True", "False"],c:0,
+  e:"True. 3.5: with P near zero the (K - P)/K term is about 1, so the logistic equation collapses to exponential growth, the J part of the curve."},
+ {lec:"3.5",q:"The limit of organisms the environment can support is called the",o:["exponential growth model", "carrying capacity", "fundamental niche", "potential niche"],c:1,
+  e:"3.5: carrying capacity (K) is the number of individuals a habitat can support."},
+ {lec:"3.3",q:"Compounds released by allelopathic plants may stimulate the growth of other species.",o:["True", "False"],c:0,
+  e:"True. 3.3: allelopathy can be stimulatory, e.g. corncockle's agrostemma raising wheat yield and alfalfa residue boosting tobacco, cucumber and lettuce."},
+ {lec:"3.2",q:"Competition for resources is one factor that might determine the size of the actual niche.",o:["True", "False"],c:0,
+  e:"True. 3.2: the actual (realized) niche is usually smaller than the potential niche because competitors limit where a species lives (Connell's barnacles)."},
+ {lec:"3.2",q:"For competition to occur, two species must occupy a similar niche.",o:["True", "False"],c:0,
+  e:"True. 3.2 opens with it: two species occupying a very similar niche will compete; too much overlap and one restricts the other."},
+ {lec:"3.1",q:"Which of the following interactions is a classic example of a mutualism?",o:["Vanilla orchids growing on palms", "Citrus greening", "Crops and weeds", "Rhizobia and legumes"],c:3,
+  e:"3.1: rhizobia give the legume nitrogen and get sugars back. Vanilla on a host tree is epiphytism (commensalism), crops and weeds is competition."},
+ {lec:"3.4",q:"Initial \"colonizers\" in old field succession have the following traits EXCEPT",o:["high growth rates", "tolerance of harsh environments", "animal-dispersed seeds", "lifecycle completed in single season"],c:2,
+  e:"3.4: colonizers grow fast, tolerate harsh bare ground, are annuals, and spread by wind or the seed bank. Animal dispersal is the persister trait."},
+ {lec:"3.4",q:"Conventional agricultural systems typically mimic late successional stages.",o:["True", "False"],c:1,
+  e:"False. 3.4: conventional agriculture holds fields at an early successional stage, restarting succession with every harvest and tillage."},
+ {lec:"3.4",q:"Climate is considered an ___ factor in mediating succession.",o:["allogenic", "autogenic"],c:0,
+  e:"3.4: allogenic factors come from outside the community: fire, climate, weather, grazing, human change."},
+ {lec:"3.5",q:"The logistic growth model assumes a constant carrying capacity.",o:["True", "False"],c:0,
+  e:"True. 3.5: logistic adds a constant environment, so a constant K, to the exponential assumptions, which she calls unrealistic."},
+ {lec:"3.5",q:"Which of the following is not an assumption of the exponential growth model?",o:["unlimited favorable environment", "constant carrying capacity", "constant birth and death rate", "closed population"],c:1,
+  e:"3.5: exponential growth assumes an unlimited environment, so there is no K at all. Constant carrying capacity is the extra logistic assumption."},
+ {lec:"3.2",q:"Spacing of individual plants in a monoculture is designed to minimize",o:["interspecific competition", "character release", "mutualism", "intraspecific competition"],c:3,
+  e:"3.2: planting density is set by intraspecific competition, crop against crop of the same species (corn against corn)."},
+ {lec:"3.3",q:"Rye is known to be allelopathic.",o:["True", "False"],c:0,
+  e:"True. 3.3: winter rye exudes weed-suppressing compounds from its roots, and its residue stays allelopathic after the plant dies."},
+ {lec:"3.2",q:"Competition between two species is called",o:["interspecific", "intraspecific competition"],c:0,
+  e:"3.2: inter = between species (corn and weeds); intra = within one species."},
+ {lec:"3.1",q:"Mycorrhizae are",o:["nematodes", "fungi", "bacteria", "arthropods"],c:1,
+  e:"3.1: mycorrhizae are soil fungi on plant roots; they supply phosphorus and get sugars in return."},
+ {lec:"3.4",q:"Wind dispersal is a characteristic of",o:["persisters", "colonizers"],c:1,
+  e:"3.4: colonizers recruit by wind-dispersed seed and from the seed bank; persisters lean on animal dispersal."},
+ {lec:"3.4",q:"The facilitation that occurs via early colonizers on lava flows is an example of an",o:["autogenic factor", "allogenic factor"],c:0,
+  e:"3.4: autogenic factors come from organisms inside the community. Facilitation by early colonizers (her example: dune plants adding organic matter) is autogenic."},
+ {lec:"3.5",q:"In the logistic growth model, population size does not stabilize around K.",o:["True", "False"],c:1,
+  e:"False. 3.5: as P nears K growth slows and the population stabilizes around carrying capacity (in nature it overshoots, then rides around K)."},
+ {lec:"3.5",q:"If modeling a population of bacteria for exponential growth, you could calculate \"r\" if you knew",o:["deaths, emigration", "immigration, emigration", "immigration, births", "births, deaths"],c:3,
+  e:"3.5: r, the intrinsic rate of increase, is births minus deaths."}
+];
 
 /* ---------- Module 3 week by week (Big picture). Weeks 9 to 11 are placeholders until built ---------- */
 var EXAM3={opens:"Mon Nov 2, 1:00 am ET",closes:"Wed Nov 4, 11:59 pm ET"};
@@ -1005,11 +1059,11 @@ function renderWBW(){
 function renderExam(){
  var host=byId('examhub'); if(!host) return;
  var h='<div class="oneliner" style="margin:0 0 14px">Exam 03 closes Module 3. It opens '+esc(EXAM3.opens)+' and closes '+esc(EXAM3.closes)+'. Canvas lists it in Week 11, so expect weeks 8 to 11. This tab fills in as the weeks are built; for now it points you at Week 8.</div>';
- h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) is ready now. Weeks 9, 10 and 11 are coming, each with its own quiz first (Oct 18, Oct 25, Nov 1).</li><li>Once you share your Quiz 08 questions they become the first real question pool here, the way Quiz 05 anchored Exam 02.</li></ul>';
+ h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) is ready now. Weeks 9, 10 and 11 are coming, each with its own quiz first (Oct 18, Oct 25, Nov 1).</li><li>Your 27 Quiz 08 questions are the first real question pool here, the way Quiz 05 anchored Exam 02.</li></ul>';
  var plan=[
   ['overview','Read the week-by-week map','The six Module 3 objectives, and Week 8\'s big idea and must-know points.','Open the map'],
-  ['8','Drill Week 8','All 40 Week 8 practice questions, ten at a time.','Week 8 quiz'],
-  ['pool8','Quiz 08 pool','Waiting for your real Quiz 08 questions.','Quiz 08 pool'],
+  ['8','Drill Week 8','All of Week 8: 40 practice questions plus your 27 Quiz 08 questions, ten at a time.','Week 8 quiz'],
+  ['pool8','Quiz 08 pool','Your 27 real Quiz 08 questions, answers checked against 3.1 to 3.5.','Quiz 08 pool'],
   ['3.1','Start with the lectures','Gist, throughline, cards and mini quiz for 3.1 to 3.5.','Open 3.1']
  ];
  h+='<ol class="plan">'+plan.map(function(p,i){ return '<li><div class="pt"><b>'+(i+1)+'. '+esc(p[1])+'</b><br>'+esc(p[2])+'</div><button class="dbtn" data-act="'+p[0]+'">'+esc(p[3])+'</button></li>'; }).join('')+'</ol>';
