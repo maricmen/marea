@@ -7,12 +7,12 @@
 <link rel="icon" href="data:,">
 <style>
 :root{
-  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea;
-  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
-  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
-  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#7c95a3; --sky-d:#4a6b78;
-  --line:#d9ccb0; --line2:#c7b797;
-  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --paper:#edf2f7; --paper2:#dfe7f0; --card:#f8fbfd;
+  --ink:#1b2240; --ink2:#4a5470; --ink3:#586179;
+  --soil:#26306b; --clay:#4a55a8; --clay-d:#3a4390; --neg:#a3402f;
+  --moss:#3f7d5c; --moss-d:#2b5c42; --wheat:#c69537; --sky:#6f9fc4; --sky-d:#2a6f8a;
+  --line:#d3dee9; --line2:#b5c5d6;
+  --shadow:0 1px 2px rgba(24,36,80,.06), 0 6px 18px rgba(24,36,80,.08);
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
@@ -20,8 +20,8 @@
 html,body{margin:0}
 body{
   background:
-    radial-gradient(1200px 500px at 80% -10%, #dfe8ea 0%, transparent 60%),
-    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+    radial-gradient(1200px 500px at 80% -10%, #d6e4f3 0%, transparent 60%),
+    linear-gradient(180deg,#eef3f9 0%, #e6eef6 100%);
   color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
   -webkit-font-smoothing:antialiased; padding:0 16px 60px; min-height:100vh;
 }
@@ -33,13 +33,13 @@ body{
 .hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:64ch}
 .prog{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .progbar{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
-.progfill{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--moss));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.progfill{height:100%;width:0;background:linear-gradient(90deg,#5aa0c8,#4a55a8);transition:width .5s cubic-bezier(.2,.8,.2,1)}
 .progtxt{font-size:13px;color:var(--ink2)}
 .progtxt b{color:var(--soil);font-size:15px}
 .tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
 .tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 16px;cursor:pointer;transition:.15s}
 .tab:hover{border-color:var(--line2)}
-.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+.tab.on{background:var(--soil);color:#eef1ff;border-color:var(--soil)}
 .tab.soon{border-style:dashed}
 .view{display:none;animation:fade .25s ease}
 .view.on{display:block}
@@ -60,11 +60,11 @@ body{
 .pill.me{color:#fff;background:var(--moss)}
 .pill.ab{color:#fff;background:var(--clay)}
 /* next-up card */
-.next{margin:0 4px 14px;background:var(--soil);color:#f4ecdd;border-radius:16px;box-shadow:var(--shadow);padding:14px 16px}
-.next .k{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#e4d3b8;font-weight:700}
+.next{margin:0 4px 14px;background:var(--soil);color:#eef3f9;border-radius:16px;box-shadow:var(--shadow);padding:14px 16px}
+.next .k{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#b9c3ec;font-weight:700}
 .next .t{font-family:var(--serif);font-size:18px;margin:4px 0 2px;line-height:1.25}
-.next .d{font-size:13px;color:#eadcc4}
-.next .more{font-size:12.5px;color:#e4d3b8;margin-top:8px;line-height:1.5}
+.next .d{font-size:13px;color:#d3daf3}
+.next .more{font-size:12.5px;color:#b9c3ec;margin-top:8px;line-height:1.5}
 .myrole{margin:0 4px 14px;background:var(--card);border:1px dashed var(--line2);border-radius:14px;padding:11px 14px;font-size:13.5px;color:var(--ink2)}
 .myrole b{color:var(--soil);font-family:var(--serif)}
 .myrole button{margin-left:6px}
@@ -92,7 +92,7 @@ details[open]>summary .chev{transform:rotate(90deg)}
 .checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
 .checks label{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer;line-height:1.4}
 .checks input{width:18px;height:18px;flex:none;margin:1px 0 0;accent-color:var(--moss)}
-.checks label.on{background:#e8ecd8;border-color:#b6c188;color:var(--moss-d)}
+.checks label.on{background:#dcebe2;border-color:#a7cbb5;color:var(--moss-d)}
 /* role cards */
 .camps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 4px 14px}
 .camp{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px;box-shadow:var(--shadow)}
@@ -105,8 +105,8 @@ table.mx{border-collapse:collapse;margin:0 auto;font-size:12px}
 table.mx th{font-weight:700;color:var(--ink2);padding:3px 2px;font-size:11px}
 table.mx th.r{text-align:right;padding-right:6px;white-space:nowrap}
 table.mx td{width:28px;height:28px;text-align:center;border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--ink3)}
-table.mx td.p{background:#e2e7cf;color:var(--moss-d)}
-table.mx td.m{background:#f0dcd2;color:var(--clay-d)}
+table.mx td.p{background:#dcebe2;color:var(--moss-d)}
+table.mx td.m{background:#f5dcd6;color:var(--neg)}
 table.mx td.s{background:var(--paper2)}
 table.mx tr.me th.r{color:var(--moss-d)}
 .mxcap{font-size:12.5px;color:var(--ink3);margin:6px 8px 18px;line-height:1.45;font-style:italic;text-align:center}
@@ -114,18 +114,18 @@ details.role{background:var(--card);border:1px solid var(--line);border-radius:1
 details.role>summary{list-style:none;cursor:pointer;padding:13px 14px;display:flex;align-items:center;gap:12px}
 details.role>summary::-webkit-details-marker{display:none}
 .rab{font-family:var(--sans);font-size:12px;color:#fff;background:var(--clay);border-radius:8px;padding:4px 7px;flex:none;font-weight:700;min-width:46px;text-align:center}
-.rab.store{background:#6b4a31}.rab.release{background:var(--sky-d)}.rab.swing{background:var(--wheat)}.rab.broker{background:var(--ink3)}
+.rab.store{background:#26306b}.rab.release{background:var(--sky-d)}.rab.swing{background:var(--wheat)}.rab.broker{background:var(--ink3)}
 .rttl{font-family:var(--serif);font-size:16.5px;line-height:1.2;flex:1;min-width:0}
 .rttl small{display:block;font-family:var(--sans);font-size:12px;color:var(--ink3);margin-top:2px}
-details.role.mine{border-color:var(--moss);box-shadow:0 0 0 2px rgba(109,123,65,.25),var(--shadow)}
+details.role.mine{border-color:var(--moss);box-shadow:0 0 0 2px rgba(63,125,92,.25),var(--shadow)}
 .rbody{padding:2px 16px 16px;border-top:1px dashed var(--line2)}
 .rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px}
 @media(max-width:640px){.rgrid{grid-template-columns:1fr}}
 .rbody p{font-size:14px;color:var(--ink2);margin:0;line-height:1.5}
-.ex{font-size:13px;color:var(--soil);background:#efe6d1;border-radius:10px;padding:9px 11px;line-height:1.5;margin-top:4px}
+.ex{font-size:13px;color:var(--soil);background:#e3ebf5;border-radius:10px;padding:9px 11px;line-height:1.5;margin-top:4px}
 .btn{font:inherit;font-weight:600;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:8px 16px;cursor:pointer}
 .btn:hover{border-color:var(--line2)}
-.btn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.btn.pri{background:var(--clay);border-color:var(--clay);color:#f4f6ff}
 /* generic cards */
 .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:0 4px 12px;align-items:start}
 .cardx{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 16px;min-width:0}
@@ -155,7 +155,7 @@ details.role.mine{border-color:var(--moss);box-shadow:0 0 0 2px rgba(109,123,65,
 .mini{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px}
 .mini .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .mini .ans{font-size:13px;color:var(--moss-d);margin-top:8px}
-code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:#efe6d1;border-radius:6px;padding:1px 5px;color:var(--soil);overflow-wrap:anywhere}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:#e3ebf5;border-radius:6px;padding:1px 5px;color:var(--soil);overflow-wrap:anywhere}
 .tmpl{background:var(--paper);border:1px dashed var(--line2);border-radius:12px;padding:10px 12px;font-size:13.5px;color:var(--ink2);line-height:1.55;margin-top:6px}
 .tmpl b{color:var(--soil)}
 /* placeholder */
@@ -174,12 +174,12 @@ code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 .q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700}
 .opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
 .opt:hover{border-color:var(--line2)}
-.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
-.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt.correct{background:#dcebe2;border-color:#a7cbb5;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f5dcd6;border-color:#dea79b;color:var(--neg)}
 .opt:disabled{cursor:default}
 .qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
 .qexp.show{display:block}
-.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizscore{background:var(--soil);color:#eef3f9;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
 .quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
 .deckwrap{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:16px}
 .flash{width:100%;max-width:460px;height:300px;perspective:1400px;cursor:pointer}
@@ -187,17 +187,97 @@ code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font
 .flash.flip .flinner{transform:rotateY(180deg)}
 .fface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:24px 22px;text-align:center;overflow:auto}
 .ffront{background:var(--card)}
-.fback{background:linear-gradient(180deg,#e3eaec,#dbe4e4);transform:rotateY(180deg)}
+.fback{background:linear-gradient(180deg,#e3ecf7,#d7e3f2);transform:rotateY(180deg)}
 .fface .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin-bottom:12px}
 .fface .qq{font-family:var(--serif);font-size:19px;color:var(--soil);line-height:1.3}
 .fface .aa{font-size:14.5px;color:var(--ink);line-height:1.55}
 .fface .ss{font-size:11.5px;color:var(--ink3);margin-top:10px;font-style:italic}
 .deckctl{display:flex;align-items:center;gap:12px}
 .dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 18px;cursor:pointer}
-.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.dbtn.pri{background:var(--clay);border-color:var(--clay);color:#f4f6ff}
 .dcount{font-size:13px;color:var(--ink2);min-width:64px;text-align:center}
 .foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic;line-height:1.5}
 svg{display:block}
+/* numbers tab: state colors are validated for CVD separation and kept apart from the UI blues */
+:root{--ga:#a8452c;--al:#b8862a;--fl:#8b4a8f;--q:#56698e;--ret:#3f7d5c;--neg:#a3402f}
+.ukey{margin:0 4px 10px;font-size:13px;color:var(--ink2);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;line-height:1.5}
+.ukey b{color:var(--soil)}
+.jump{display:flex;gap:6px;flex-wrap:wrap;margin:4px 4px 6px}
+.jump a{font-size:12px;font-weight:600;color:var(--clay-d);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 11px;text-decoration:none}
+.ten{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:0 4px 12px;align-items:start}
+.tn{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:11px 13px;min-width:0}
+.tn .num{font-size:11px;font-weight:700;color:var(--clay-d);letter-spacing:.05em}
+.tn .big{font-family:var(--serif);font-size:24px;line-height:1.15;color:var(--soil);margin:3px 0 2px;font-variant-numeric:tabular-nums}
+.tn .big small{font-size:13.5px;color:var(--ink2)}
+.tn p{font-size:13px;color:var(--ink2);margin:4px 0 0;line-height:1.45}
+.tn .s{font-size:11px;color:var(--ink3);font-style:italic;margin-top:6px;line-height:1.35}
+.pill.dsp{color:#7a2e20;background:#f6e1d9;border:1px solid #e2b3a3}
+.chart{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 16px;margin:0 4px 12px;min-width:0}
+.chart>.pill{margin-bottom:6px}
+.chart h3{font-family:var(--serif);font-size:17.5px;color:var(--soil);margin:0 0 3px;line-height:1.25}
+.chart .meta{font-size:12px;color:var(--ink3);margin:0 0 12px;line-height:1.4}
+.chart .meta b{color:var(--ink2)}
+.hb{position:relative;display:flex;flex-direction:column;gap:9px;margin-bottom:4px}
+.hb .lb{font-size:12.5px;color:var(--ink2);line-height:1.3;margin-bottom:3px;position:relative;z-index:2;display:inline-block;background:var(--card);padding-right:4px}
+.hb .tr{display:flex;align-items:center;gap:6px}
+.hb .fl{display:block;height:14px;border-radius:0 4px 4px 0;flex:none;min-width:2px}
+.hb .vl{font-size:13px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap;position:relative;z-index:2;background:var(--card);padding:0 3px 0 2px}
+.grl{position:absolute;top:0;bottom:0;border-left:1px solid var(--line);pointer-events:none;z-index:0}
+.hb .row{position:relative}
+.hb .fl{position:relative;z-index:1}
+.refl{position:absolute;top:0;bottom:0;border-left:2px dashed var(--ink);opacity:.55;pointer-events:none;z-index:1}
+.reflg{font-size:11.5px;color:var(--ink2);margin-top:8px;display:flex;gap:7px;align-items:flex-start;line-height:1.4}
+.reflg i{flex:none;width:0;height:14px;border-left:2px dashed var(--ink);opacity:.7;margin-top:1px}
+.lgax{position:relative;height:16px;margin-top:6px;border-top:1px solid var(--line)}
+.lgax span{position:absolute;top:2px;transform:translateX(-50%);font-size:10.5px;color:var(--ink3);white-space:nowrap}
+.lgax span:first-child{transform:none}
+.lgd{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--ink2);margin:0 0 10px}
+.lgd span{display:inline-flex;align-items:center;gap:6px}
+.lgd i{width:12px;height:12px;border-radius:3px;display:inline-block}
+.smg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 18px}
+@media(max-width:640px){.smg{grid-template-columns:1fr}}
+.smh{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin:10px 0 6px}
+.sm .smh{margin-top:0}
+.cap{font-size:12.5px;color:var(--ink2);margin:6px 0 4px}
+.cap b{color:var(--soil)}
+.lcw{max-width:560px;margin:0 auto 4px}
+.evts{font-size:13px;margin-top:8px}
+.dispute{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+@media(max-width:600px){.dispute{grid-template-columns:1fr}}
+.claim{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--q);border-radius:12px;padding:10px 12px;min-width:0}
+.claim .by{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink2);font-weight:700}
+.claim .cv{font-family:var(--serif);font-size:22px;color:var(--ink);margin:3px 0 2px;font-variant-numeric:tabular-nums}
+.claim p{font-size:13px;color:var(--ink2);margin:6px 0 0;line-height:1.45}
+.claim .line{font-size:13px;margin-top:6px}
+.claim .adopt{font-size:12.5px;color:var(--ink);margin-top:8px;padding-top:7px;border-top:1px dashed var(--line2);line-height:1.45}
+.mid{font-size:13px;color:var(--ink2);background:var(--paper);border:1px dashed var(--line2);border-radius:12px;padding:9px 12px;margin-top:10px;line-height:1.45}
+.mid b{color:var(--soil)}
+.wc{display:flex;flex-wrap:wrap;align-items:center;gap:5px;font-size:12px;color:var(--ink3);margin-top:10px}
+.wc.inl{display:inline-flex;margin-top:4px}
+.rlk{font:inherit;font-size:11.5px;font-weight:700;color:var(--clay-d);background:var(--card);border:1px solid var(--line2);border-radius:99px;padding:2px 9px;cursor:pointer}
+.rlk:hover{background:var(--paper2)}
+.watch{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;margin:0 4px 12px;align-items:start}
+.wv{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:13px 15px;min-width:0}
+.wh{display:flex;gap:10px;align-items:flex-start;margin-bottom:6px}
+.wn{flex:none;font-family:var(--serif);font-weight:700;font-size:13px;color:#fff;background:var(--sky-d);border-radius:8px;padding:2px 8px}
+.wv a,.cardx a,.srcl a{color:var(--clay-d);font-weight:600}
+.wh a{font-family:var(--serif);font-size:16px;line-height:1.25}
+.wm{font-size:12px;color:var(--ink3);margin-top:3px}
+.wv p{font-size:13px;color:var(--ink2);margin:6px 0 0;line-height:1.45}
+.wv p b{color:var(--soil)}
+.wv .wnote{font-size:12.5px;color:#7a5b16;background:#f6edd3;border-left:3px solid var(--wheat);border-radius:8px;padding:6px 9px}
+.srcl{font-size:13px}
+.srcl li{overflow-wrap:anywhere}
+details.srcs .phbody .sec:first-child{margin-top:12px}
+details.persp .rab{margin-right:-6px}
+details.persp .rab:last-of-type{margin-right:0}
+.ovl li{margin-bottom:10px}
+.cq{display:flex;flex-direction:column;gap:10px;margin:0 4px 12px}
+.cqi{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:11px 14px}
+.cqq{font-family:var(--serif);font-size:16px;color:var(--soil);margin-bottom:6px;line-height:1.3}
+.cqr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 16px;font-size:13px;color:var(--ink2);line-height:1.45}
+@media(max-width:600px){.cqr{grid-template-columns:1fr}}
+.cql{display:block;font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;font-weight:700;color:var(--clay-d);margin-bottom:2px}
 @media(max-width:420px){.hgroup h1{font-size:26px}.tab{padding:8px 13px;font-size:13px}.oneliner{font-size:16.5px}}
 </style>
 <noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
@@ -206,12 +286,12 @@ svg{display:block}
 <div class="wrap">
   <div class="top">
     <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
-      <rect x="2" y="2" width="48" height="48" rx="12" fill="#e4ecef"/>
-      <path d="M16 4 C14 14 20 18 18 26 C16 34 22 38 20 48" stroke="#4a6b78" stroke-width="3.2" fill="none" stroke-linecap="round"/>
-      <path d="M38 6 C40 16 34 22 30 30 C27 36 22 40 20 48" stroke="#6d7b41" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-      <rect x="11" y="12" width="12" height="4" rx="1.5" fill="#573f2c"/>
-      <rect x="13" y="28" width="12" height="4" rx="1.5" fill="#573f2c"/>
-      <circle cx="20" cy="46" r="3" fill="#b0623b"/>
+      <rect x="2" y="2" width="48" height="48" rx="12" fill="#dceaf5"/>
+      <path d="M16 4 C14 14 20 18 18 26 C16 34 22 38 20 48" stroke="#2a6f8a" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      <path d="M38 6 C40 16 34 22 30 30 C27 36 22 40 20 48" stroke="#3f7d5c" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <rect x="11" y="12" width="12" height="4" rx="1.5" fill="#26306b"/>
+      <rect x="13" y="28" width="12" height="4" rx="1.5" fill="#26306b"/>
+      <circle cx="20" cy="46" r="3" fill="#4a55a8"/>
     </svg>
     <div class="hgroup">
       <h1>ACF Negotiation Guide</h1>
@@ -231,7 +311,7 @@ svg{display:block}
     <button class="tab" data-v="basin">Basin</button>
     <button class="tab" data-v="sheet">Spreadsheet</button>
     <button class="tab" data-v="negotiate">Negotiate</button>
-    <button class="tab soon" data-v="numbers">Numbers</button>
+    <button class="tab" data-v="numbers">Numbers</button>
     <button class="tab" data-v="flash">Cards</button>
     <button class="tab" data-v="quiz">Quiz</button>
   </div>
@@ -266,16 +346,12 @@ svg{display:block}
     </div>
     <h2 class="h2">Who pulls with whom</h2>
     <div class="mxwrap"><table class="mx" id="mx"></table></div>
-    <p class="mxcap">Read across a row. <b style="color:#4d5a2a">+</b> usually pulls the same way, <b style="color:#8c4a2b">&#8722;</b> usually pulls against, blank depends on the deal. CE = US Army Corps of Engineers. My reading of the role descriptions and 12.1, not an official course table.</p>
+    <p class="mxcap">Read across a row. <b style="color:#2b5c42">+</b> usually pulls the same way, <b style="color:#a3402f">&#8722;</b> usually pulls against, blank depends on the deal. CE = US Army Corps of Engineers. My reading of the role descriptions and 12.1, not an official course table.</p>
     <h2 class="h2">The ten roles</h2>
     <p class="lede">Each card: who they are, what they want, what they fear, the cells and outputs they watch in the spreadsheet, likely allies and opponents, and a note from the Module 12 example strategy. Example strategies are past students' work: Kiker posted them "for inspiration only", so treat their numbers as claims to check, not facts.</p>
     <div id="rolelist"></div>
     <h2 class="h2">Conflict &amp; perspectives</h2>
-    <div id="perspectives" class="placeholder" data-status="placeholder">
-      <h3>Conflict &amp; perspectives</h3>
-      <span class="pill soon">coming next</span>
-      <p>A deeper look at how each side frames the water war, and where the real lines of conflict run. This section fills in later.</p>
-    </div>
+    <div id="perspectives"></div>
   </div>
 
   <!-- ================= BASIN ================= -->
@@ -283,53 +359,53 @@ svg{display:block}
     <div class="oneliner">The ACF is a big river that delivers its water at the wrong time. Most of it arrives in late winter and spring; farms, lawns, lakes and the bay all want it in summer. One lake, Lanier, holds about two thirds of all the storage, sits at the top of the basin, and refills slowly. That is why everyone fights over it (9.2, 9.3).</div>
     <div class="mapwrap">
       <svg viewBox="0 0 360 600" width="100%" role="img" aria-label="Schematic of the ACF river system from Lake Lanier and the Flint headwaters down to Apalachicola Bay">
-        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#4a6b78"/></marker>
-        <marker id="arg" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#6d7b41"/></marker></defs>
-        <text x="90" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#4a6b78" letter-spacing="1">CHATTAHOOCHEE</text>
-        <text x="272" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#4d5a2a" letter-spacing="1">FLINT</text>
-        <rect x="18" y="28" width="144" height="46" rx="10" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
-        <text x="90" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Lake Lanier</text>
-        <text x="90" y="64" text-anchor="middle" font-size="10" fill="#6c5d45">Buford Dam · 2/3 of storage</text>
-        <path d="M90 74 L90 92" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="18" y="94" width="144" height="46" rx="10" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
-        <text x="90" y="114" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Metro Atlanta</text>
-        <text x="90" y="130" text-anchor="middle" font-size="10" fill="#6c5d45">Peachtree Creek target</text>
-        <path d="M90 140 L90 158" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="18" y="160" width="144" height="46" rx="10" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
-        <text x="90" y="180" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">West Point Lake</text>
-        <text x="90" y="196" text-anchor="middle" font-size="10" fill="#6c5d45">GA / AL line</text>
-        <path d="M90 206 L90 224" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="18" y="226" width="144" height="46" rx="10" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
-        <text x="90" y="246" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Columbus, GA</text>
-        <text x="90" y="262" text-anchor="middle" font-size="10" fill="#6c5d45">head of navigation</text>
-        <path d="M90 272 L90 290" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="18" y="292" width="144" height="46" rx="10" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
-        <text x="90" y="312" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Walter F. George</text>
-        <text x="90" y="328" text-anchor="middle" font-size="10" fill="#6c5d45">Lake Eufaula</text>
-        <path d="M90 338 L90 356" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="18" y="358" width="144" height="40" rx="10" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
-        <text x="90" y="383" text-anchor="middle" font-size="11.5" fill="#2c2417">G. W. Andrews (small)</text>
-        <path d="M90 398 C90 420 140 432 160 440" stroke="#4a6b78" stroke-width="2" fill="none" marker-end="url(#ar)"/>
-        <rect x="198" y="28" width="144" height="46" rx="10" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
-        <text x="270" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Headwaters</text>
-        <text x="270" y="64" text-anchor="middle" font-size="10" fill="#6c5d45">south Atlanta, no big dams</text>
-        <path d="M270 74 L270 222" stroke="#6d7b41" stroke-width="2" marker-end="url(#arg)"/>
-        <text x="262" y="140" text-anchor="end" font-size="10" fill="#4d5a2a">free-flowing,</text>
-        <text x="262" y="153" text-anchor="end" font-size="10" fill="#4d5a2a">fed by groundwater</text>
-        <rect x="198" y="226" width="144" height="46" rx="10" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
-        <text x="270" y="246" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Albany, GA</text>
-        <text x="270" y="262" text-anchor="middle" font-size="10" fill="#6c5d45">irrigated farm country</text>
-        <path d="M270 272 C270 380 240 420 210 440" stroke="#6d7b41" stroke-width="2" fill="none" marker-end="url(#arg)"/>
-        <rect x="70" y="442" width="220" height="48" rx="12" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.8"/>
-        <text x="180" y="462" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Lake Seminole · Jim Woodruff Dam</text>
-        <text x="180" y="479" text-anchor="middle" font-size="10" fill="#6c5d45">rivers meet at the GA / FL line</text>
-        <path d="M180 490 L180 508" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="70" y="510" width="220" height="40" rx="12" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
-        <text x="180" y="527" text-anchor="middle" font-size="12" font-weight="700" fill="#2c2417">Apalachicola River (FL)</text>
-        <text x="180" y="542" text-anchor="middle" font-size="10" fill="#6c5d45">Chattahoochee, FL gauge: 5,000 cfs floor</text>
-        <path d="M180 550 L180 566" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
-        <rect x="70" y="568" width="220" height="28" rx="12" fill="#573f2c"/>
-        <text x="180" y="587" text-anchor="middle" font-size="12" font-weight="700" fill="#f4ecdd">Apalachicola Bay · oysters</text>
+        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2a6f8a"/></marker>
+        <marker id="arg" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#3f7d5c"/></marker></defs>
+        <text x="90" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#2a6f8a" letter-spacing="1">CHATTAHOOCHEE</text>
+        <text x="272" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#2b5c42" letter-spacing="1">FLINT</text>
+        <rect x="18" y="28" width="144" height="46" rx="10" fill="#dceaf5" stroke="#2a6f8a" stroke-width="1.6"/>
+        <text x="90" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Lake Lanier</text>
+        <text x="90" y="64" text-anchor="middle" font-size="10" fill="#4a5470">Buford Dam · 2/3 of storage</text>
+        <path d="M90 74 L90 92" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="94" width="144" height="46" rx="10" fill="#f8fbfd" stroke="#b5c5d6" stroke-width="1.4"/>
+        <text x="90" y="114" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Metro Atlanta</text>
+        <text x="90" y="130" text-anchor="middle" font-size="10" fill="#4a5470">Peachtree Creek target</text>
+        <path d="M90 140 L90 158" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="160" width="144" height="46" rx="10" fill="#dceaf5" stroke="#2a6f8a" stroke-width="1.6"/>
+        <text x="90" y="180" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">West Point Lake</text>
+        <text x="90" y="196" text-anchor="middle" font-size="10" fill="#4a5470">GA / AL line</text>
+        <path d="M90 206 L90 224" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="226" width="144" height="46" rx="10" fill="#f8fbfd" stroke="#b5c5d6" stroke-width="1.4"/>
+        <text x="90" y="246" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Columbus, GA</text>
+        <text x="90" y="262" text-anchor="middle" font-size="10" fill="#4a5470">head of navigation</text>
+        <path d="M90 272 L90 290" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="292" width="144" height="46" rx="10" fill="#dceaf5" stroke="#2a6f8a" stroke-width="1.6"/>
+        <text x="90" y="312" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Walter F. George</text>
+        <text x="90" y="328" text-anchor="middle" font-size="10" fill="#4a5470">Lake Eufaula</text>
+        <path d="M90 338 L90 356" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="358" width="144" height="40" rx="10" fill="#f8fbfd" stroke="#b5c5d6" stroke-width="1.4"/>
+        <text x="90" y="383" text-anchor="middle" font-size="11.5" fill="#1b2240">G. W. Andrews (small)</text>
+        <path d="M90 398 C90 420 140 432 160 440" stroke="#2a6f8a" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+        <rect x="198" y="28" width="144" height="46" rx="10" fill="#e1efe7" stroke="#3f7d5c" stroke-width="1.6"/>
+        <text x="270" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Headwaters</text>
+        <text x="270" y="64" text-anchor="middle" font-size="10" fill="#4a5470">south Atlanta, no big dams</text>
+        <path d="M270 74 L270 222" stroke="#3f7d5c" stroke-width="2" marker-end="url(#arg)"/>
+        <text x="262" y="140" text-anchor="end" font-size="10" fill="#2b5c42">free-flowing,</text>
+        <text x="262" y="153" text-anchor="end" font-size="10" fill="#2b5c42">fed by groundwater</text>
+        <rect x="198" y="226" width="144" height="46" rx="10" fill="#e1efe7" stroke="#3f7d5c" stroke-width="1.6"/>
+        <text x="270" y="246" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Albany, GA</text>
+        <text x="270" y="262" text-anchor="middle" font-size="10" fill="#4a5470">irrigated farm country</text>
+        <path d="M270 272 C270 380 240 420 210 440" stroke="#3f7d5c" stroke-width="2" fill="none" marker-end="url(#arg)"/>
+        <rect x="70" y="442" width="220" height="48" rx="12" fill="#dceaf5" stroke="#2a6f8a" stroke-width="1.8"/>
+        <text x="180" y="462" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1b2240">Lake Seminole · Jim Woodruff Dam</text>
+        <text x="180" y="479" text-anchor="middle" font-size="10" fill="#4a5470">rivers meet at the GA / FL line</text>
+        <path d="M180 490 L180 508" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="70" y="510" width="220" height="40" rx="12" fill="#f8fbfd" stroke="#b5c5d6" stroke-width="1.4"/>
+        <text x="180" y="527" text-anchor="middle" font-size="12" font-weight="700" fill="#1b2240">Apalachicola River (FL)</text>
+        <text x="180" y="542" text-anchor="middle" font-size="10" fill="#4a5470">Chattahoochee, FL gauge: 5,000 cfs floor</text>
+        <path d="M180 550 L180 566" stroke="#2a6f8a" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="70" y="568" width="220" height="28" rx="12" fill="#26306b"/>
+        <text x="180" y="587" text-anchor="middle" font-size="12" font-weight="700" fill="#eef3f9">Apalachicola Bay · oysters</text>
       </svg>
     </div>
     <p class="mapcap">A plain schematic, not to scale. Blue boxes are federal reservoirs. The class model controls Lanier and, combined into one, West Point and George. Sources: 9.1, 9.2, 9.3, 10.1, 10.3.</p>
@@ -380,11 +456,7 @@ svg{display:block}
 
   <!-- ================= NUMBERS ================= -->
   <div class="view" id="v-numbers">
-    <div id="numbers" class="placeholder" data-status="placeholder">
-      <h3>The conflict in numbers</h3>
-      <span class="pill soon">coming next</span>
-      <p>Flows, lake levels, demands and dollars from the scientific and agency sources, each one cited, so you can back your positions with objective criteria. This tab fills in once the source research is done.</p>
-    </div>
+    <div id="numbers"></div>
   </div>
 
   <!-- ================= FLASHCARDS ================= -->
@@ -406,7 +478,7 @@ svg{display:block}
     <div class="quiz" id="quiz"></div>
   </div>
 
-  <div class="foot">Built Oct 8, 2026 from lectures 8.1 to 12.2, the Canvas Module 9 to 12 pages, syllabus, assignments and announcements, the role descriptions, the ten example strategies, and the v5.1 spreadsheet and v4.1 contract files.<br>Dates in US Eastern. Saved checkboxes and your role stay on this device only.</div>
+  <div class="foot">Built Oct 8, 2026 from lectures 8.1 to 12.2, the Canvas Module 9 to 12 pages, syllabus, assignments and announcements, the role descriptions, the ten example strategies, and the v5.1 spreadsheet and v4.1 contract files. The Numbers tab and the perspectives section (Oct 8, 2026) add USGS, Corps, court, FWC and peer-reviewed sources, each cited on its chart.<br>Dates in US Eastern. Saved checkboxes and your role stay on this device only.</div>
 </div>
 
 <script>
@@ -748,9 +820,21 @@ var FLASH=[
  {tp:"neg",q:"The five bedrock concerns?",a:"Security, economic well-being, a sense of belonging, recognition, control over one's life.",s:"10.4, 12.1"},
  {tp:"neg",q:"Why never say \"all I need is 5,000 cfs\"?",a:"It is the minimum wage of flows, and you will be held to it. Know what you are for, not just your floor.",s:"12.1, 10.2"},
  {tp:"neg",q:"How often should you check in during Phase II?",a:"About every 24 to 36 hours; longer and your absence gets noticed.",s:"12.1"},
- {tp:"neg",q:"Term project weights?",a:"40% of the course. Phase I 35%, Phase II 35%, Phase III 30% of the project.",s:"Syllabus"}
+ {tp:"neg",q:"Term project weights?",a:"40% of the course. Phase I 35%, Phase II 35%, Phase III 30% of the project.",s:"Syllabus"},
+ {tp:"nums",q:"Which state withdraws the most ACF water?",a:"Georgia: 1,402 of 1,645 MGD in 2010 (85%). Alabama 169, Florida 75 MGD.",s:"USGS SIR 2016-5007, Table 3"},
+ {tp:"nums",q:"Atlanta vs. Flint farms: who keeps the water they withdraw?",a:"Atlanta withdrew 371 MGD (2009) and returned 79% as treated wastewater, less in summer. Flint farms withdrew 501 MGD (2010); irrigation is treated as 100% consumed.",s:"USACE FEIS 2016 Table 2.1-22 and p. 2-101; USGS 2016 p. 47"},
+ {tp:"nums",q:"How much did Georgia cut drought-summer flow into Florida? Give both answers.",a:"Florida's experts: about 4,000 cfs. Georgia: peak 1,884, never above 2,000 (adopted by Kelly 2019). Lancaster and the 2018 majority accepted Florida's only for argument's sake; the 2021 Court adopted no number.",s:"Kelly Report 2019, Rep. 26-29"},
+ {tp:"nums",q:"Georgia's consumption as a share of flow at the Florida line?",a:"2.4% in a normal year, 17.4% in dry summers, 35% in the worst droughts (2011-12). Same numbers, both sides' framing.",s:"Kelly Report 2019, Rep. 46-47"},
+ {tp:"nums",q:"What was the river's 2012 average at the state line?",a:"7,599 cfs, the lowest year since 1922, near 5,000 cfs from May to November. The long-term average is about 21,400 cfs.",s:"USGS gage 02358000"},
+ {tp:"nums",q:"How much of Lanier's storage did the Corps give Atlanta-area supply in 2017?",a:"23.65% (254,170 ac-ft), above the 22% a federal appeals court called a \"major operational change\" in 2008. The 11th Circuit (2011) said authorized supply does not count against 22%.",s:"USACE WSSA Table 17; ROD 2017; FEIS p. 3-8"},
+ {tp:"nums",q:"How big was the oyster collapse?",a:"Franklin County landings fell from 3,037,217 lb of meat (2012) to 18,595 lb (2019): down 99.4%. The bay closed 2020-2025 and reopened in 2026 on restored reefs.",s:"FWC trip tickets, export 2026-10-08"},
+ {tp:"nums",q:"What does 5,000 cfs mean for the floodplain?",a:"Only 260 of 82,200 acres (0.3%) stay connected to the river, vs. 78,000 acres (95%) at a typical spring high.",s:"Light, Darst and Grubbs 1998, USGS PP 1594"},
+ {tp:"nums",q:"Why did Florida lose in 2021?",a:"It did not prove Georgia caused the collapse: record harvests, only 180 acres reshelled in ten years vs. 200 a year recommended, and its own model showed under 1.5% more oysters from a cap.",s:"Florida v. Georgia, 592 U.S. 433, 440-441 (2021)"},
+ {tp:"nums",q:"What would a cap on Georgia cost? Three answers.",a:"Florida's expert: $35M a year for 2,000 cfs. Kelly: $55-104M per dry year for 474-801 cfs. Georgia's expert: $191M to over $2.1B.",s:"Florida v. Georgia (2018) slip op. 23, 36; Kelly Rep. 74-75"},
+ {tp:"nums",q:"1 cfs in MGD?",a:"1 cfs = 0.646 MGD; 1 MGD = 1.547 cfs. cfs is a flow rate (cubic feet per second); MGD is million gallons per day.",s:"USGS SIR 2016-5007 units"},
+ {tp:"nums",q:"Has the river lost summer flow since the dams?",a:"April-September flow fell from 21,579 cfs (1922-54) to 18,879 (1977-2003), about 12.5%, while summer rain fell about 6.5% and whole-year flow rose slightly. Leitman: part climate, part use; \"further work is needed.\"",s:"Leitman 2004, Tables 26-27"}
 ];
-var TOPICS=[["all","All"],["basin","Basin"],["sheet","Spreadsheet"],["roles","Roles"],["neg","Negotiation"]];
+var TOPICS=[["all","All"],["basin","Basin"],["sheet","Spreadsheet"],["roles","Roles"],["neg","Negotiation"],["nums","Numbers"]];
 var QUIZ=[
  {tp:"basin",q:"About how much of the ACF's reservoir storage is in Lake Lanier?",o:["About one third","About two thirds","About 90%","About 15%"],c:1,e:"Lanier holds 66.4% of storage in the course table; West Point 18.7%, George 14.9%, Seminole 2.2%.",s:"9.3, 10.1"},
  {tp:"basin",q:"In a 1-in-10-year drought, which river gives more water to the Apalachicola?",o:["The Chattahoochee, because of its dams","The Flint, because of its groundwater","They give the same","Neither; Florida springs make up the flow"],c:1,e:"Kiker's \"switch\": the Flint's groundwater contribution makes it the bigger source in drought.",s:"9.3"},
@@ -779,7 +863,16 @@ var QUIZ=[
  {tp:"neg",q:"Which is NOT one of Kiker's five bedrock concerns?",o:["Security","Recognition","Control over one's life","Winning the vote"],c:3,e:"The five: security, economic well-being, belonging, recognition, control over one's life.",s:"10.4, 12.1"},
  {tp:"neg",q:"In Phase II, how long can you go without checking the board before it is noticed?",o:["About 24 to 36 hours","About a week","Until the final vote","Two business weeks"],c:0,e:"\"If you're not looking... every 24 to 36 hours and responding, your absence starts to be noted.\"",s:"12.1"},
  {tp:"neg",q:"What must every negotiator do with every properly submitted contract?",o:["Approve it","Approve, reject, or amend it","Forward it to Kiker","Nothing unless it affects them"],c:1,e:"Amended contracts need a new vote from everyone. Missing votes count against you.",s:"Module 12 page, announcements"},
- {tp:"neg",q:"Term project weights?",o:["Phase I 50, II 30, III 20","Phase I 35, II 35, III 30","Phase I 30, II 50, III 20","Equal thirds"],c:1,e:"Of a term project worth 40% of the course.",s:"Syllabus"}
+ {tp:"neg",q:"Term project weights?",o:["Phase I 50, II 30, III 20","Phase I 35, II 35, III 30","Phase I 30, II 50, III 20","Equal thirds"],c:1,e:"Of a term project worth 40% of the course.",s:"Syllabus"},
+ {tp:"nums",q:"What share of the water withdrawn in the ACF basin in 2010 was Georgia's?",o:["About 50%","About 71%","About 85%","About 92%"],c:2,e:"1,402 of 1,645 MGD. 71% is Georgia's share of the land and 92% its share of the people.",s:"USGS SIR 2016-5007, Tables 2-3"},
+ {tp:"nums",q:"Which use is treated as 100% consumed in the Corps' accounting?",o:["Metro Atlanta public supply","Power plant cooling","Flint River crop irrigation","Pulp and paper mills"],c:2,e:"Atlanta returned 79% of its withdrawals in 2009; irrigation water does not come back.",s:"USACE FEIS 2016 p. 2-101"},
+ {tp:"nums",q:"By Georgia's own estimate, adopted by Kelly, Georgia's highest month of consumption was about...",o:["540 cfs","1,884 cfs","4,000 cfs","5,000 cfs"],c:1,e:"Florida's experts put drought-summer depletion near 4,000 cfs. The two estimates measure different things and are not averaged.",s:"Kelly Report 2019, Rep. 26-29"},
+ {tp:"nums",q:"Which ruling adopted Georgia's consumption numbers?",o:["Lancaster's 2017 report","The 2018 Supreme Court majority","Kelly's 2019 report","The 2021 Court adopted Florida's numbers"],c:2,e:"Lancaster and the 2018 majority accepted Florida's figures only for the sake of argument; the 2021 Court adopted no consumption number.",s:"Kelly Report 2019; 585 U.S. (2018)"},
+ {tp:"nums",q:"At 5,000 cfs, how much of the Apalachicola floodplain stays connected to the river?",o:["About 0.3%","About 10%","About half","About 95%"],c:0,e:"260 of 82,200 acres. At a typical spring high it is 78,000 acres (95%).",s:"Light, Darst and Grubbs 1998"},
+ {tp:"nums",q:"By Florida's own model, how much more oyster biomass would a cap on Georgia have produced in 2012?",o:["Under 1.5%","About 10%","About 35%","It would have prevented the collapse"],c:0,e:"A key reason the unanimous 2021 Court found causation not proven.",s:"592 U.S. 433, 441 (2021)"},
+ {tp:"nums",q:"What share of Lake Lanier's conservation storage did the Corps' 2017 decision give to water supply?",o:["11.7%","19.7%","23.65%","34%"],c:2,e:"254,170 ac-ft. 34% was Georgia's 2000 request; 22% is the line the D.C. Circuit called a major change in 2008.",s:"USACE WSSA Table 17; ROD 2017"},
+ {tp:"nums",q:"Which study found no statistical link between river discharge and oyster mortality or recruitment?",o:["Petes et al. 2012","Kimbro et al. 2017","Pine et al. 2015","NOAA's 2013 disaster determination"],c:2,e:"Petes found salinity above 25 ppt for 7 months at 5,000 cfs, Kimbro linked predators to salinity, and NOAA named dams and drought. The evidence points both ways.",s:"Pine et al. 2015, Ecology and Society 20(3):46"},
+ {tp:"nums",q:"Which year had the lowest average flow at the Florida line since records began?",o:["1987","2007","2011","2012"],c:3,e:"7,599 cfs in 2012. The single lowest day was Nov 15, 1987, at 3,900 cfs.",s:"USGS gage 02358000"}
 ];
 </script>
 <script>
@@ -1006,8 +1099,318 @@ function renderQuiz(){
 function updQ(){var s=byId('qscore');if(s)s.textContent=qAns?('Score '+qRight+' / '+qAns):'Pick an answer to begin';}
 function initQuiz(){filterBtns('quizfilters',quizFilter,function(f){quizFilter=f;qQueue=[];qRight=0;qAns=0;renderQuiz();});renderQuiz();}
 
+/* ===================== numbers tab ===================== */
+var CLR={ga:'var(--ga)',al:'var(--al)',fl:'var(--fl)',q:'var(--q)',ret:'var(--ret)'};
+function fmt(n,d){return Number(n).toLocaleString('en-US',{maximumFractionDigits:d==null?0:d,minimumFractionDigits:d||0});}
+function frac(o,v){if(o.log){var a=Math.log(o.log.min)/Math.LN10,b=Math.log(o.log.max)/Math.LN10;return Math.max(0,Math.min(1,(Math.log(v)/Math.LN10-a)/(b-a)));}return Math.max(0,Math.min(1,v/o.max));}
+function pos(f){return 'calc((100% - var(--vw)) * '+f.toFixed(4)+')';}
+function hbars(o){
+ var vw=(o.vw||84)+'px';
+ var h='<div class="hb" style="--vw:'+vw+'">';
+ o.rows.forEach(function(r){
+   var f=frac(o,r.v); var t=r.t||fmt(r.v);
+   h+='<div class="row" title="'+esc((r.tip||r.l).replace(/<[^>]+>/g,''))+': '+esc(t)+'"><div class="lb">'+r.l+'</div><div class="tr"><span class="fl" style="width:'+pos(f)+';background:'+(r.c||CLR.q)+(r.v===0?';min-width:0':'')+'"></span><span class="vl">'+t+'</span></div></div>';
+ });
+ if(o.log){o.log.ticks.forEach(function(t){h+='<div class="grl" style="left:'+pos(frac(o,t[0]))+'"></div>';});}
+ (o.ref||[]).forEach(function(r){h+='<div class="refl" style="left:'+pos(frac(o,r.v))+'"></div>';});
+ h+='</div>';
+ if(o.log){h+='<div class="lgax" style="--vw:'+vw+'">'+o.log.ticks.map(function(t){return '<span style="left:'+pos(frac(o,t[0]))+'">'+t[1]+'</span>';}).join('')+'</div>';}
+ (o.ref||[]).forEach(function(r){h+='<div class="reflg"><i></i>'+r.l+'</div>';});
+ return h;
+}
+function legend(items){return '<div class="lgd">'+items.map(function(x){return '<span><i style="background:'+x[0]+'"></i>'+x[1]+'</span>';}).join('')+'</div>';}
+function roleLine(ids){return '<div class="wc"><span>Which roles care:</span> '+ids.map(function(id){var r=roleById(id);return '<button class="rlk" data-role="'+id+'" title="Open the '+esc(r?r.name:id)+' role card">'+(id==='USACE'?'Corps':id)+'</button>';}).join('')+'</div>';}
+function chart(c){
+ return '<div class="chart'+(c.disputed?' disputed':'')+'" id="'+c.id+'">'+(c.disputed?'<span class="pill dsp">disputed</span>':'')+'<h3>'+c.q+'</h3><div class="meta">'+c.meta+'</div>'+c.body+(c.cav?'<div class="note"><b>Caveat.</b> '+c.cav+'</div>':'')+(c.roles?roleLine(c.roles):'')+'</div>';
+}
+function claims(cols){
+ return '<div class="dispute">'+cols.map(function(c){
+   return '<div class="claim" style="border-top-color:'+c.c+'"><div class="by">'+c.by+'</div>'+(c.val?'<div class="cv">'+c.val+'</div>':'')+(c.pts?'<ul class="line">'+c.pts.map(function(p){return '<li>'+p+'</li>';}).join('')+'</ul>':'')+(c.note?'<p>'+c.note+'</p>':'')+'<div class="adopt"><b>Rulings:</b> '+c.adopt+'</div></div>';
+ }).join('')+'</div>';
+}
+function lineChart(o){
+ var W=340,H=196,L=40,R=12,T=14,B=24;
+ function sx(x){return L+(x-o.x0)/(o.x1-o.x0)*(W-L-R);}
+ function sy(y){return T+(1-y/o.y1)*(H-T-B);}
+ var s='<svg viewBox="0 0 '+W+' '+H+'" width="100%" role="img" aria-label="'+esc(o.aria)+'">';
+ o.yt.forEach(function(t){var y=sy(t[0]);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'" style="stroke:var(--line);stroke-width:1"/><text x="'+(L-5)+'" y="'+(y+3.5)+'" text-anchor="end" style="fill:var(--ink3);font-size:10px">'+t[1]+'</text>';});
+ o.xt.forEach(function(t){s+='<text x="'+sx(t)+'" y="'+(H-7)+'" text-anchor="middle" style="fill:var(--ink3);font-size:10px">'+t+'</text>';});
+ if(o.ref){var ry=sy(o.ref.v);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+ry+'" y2="'+ry+'" style="stroke:var(--ink);stroke-width:1.2;stroke-dasharray:4 3;opacity:.75"/><text x="'+(L+4)+'" y="'+(ry-4)+'" text-anchor="start" style="fill:var(--ink2);font-size:9.5px">'+o.ref.l+'</text>';}
+ var d=o.pts.map(function(p,i){return (i?'L':'M')+sx(p[0]).toFixed(1)+' '+sy(p[1]).toFixed(1);}).join(' ');
+ s+='<path d="'+d+'" style="fill:none;stroke:var(--q);stroke-width:2;stroke-linejoin:round"/>';
+ (o.marks||[]).forEach(function(m){var x=sx(m.x),y=sy(m.y);s+='<circle cx="'+x+'" cy="'+y+'" r="4" style="fill:var(--q);stroke:var(--card);stroke-width:2"/><text x="'+(x+(m.dx||0))+'" y="'+(y+(m.dy||-8))+'" text-anchor="'+(m.a||'middle')+'" style="fill:var(--ink);font-size:10px;font-weight:700">'+m.l+'</text>';});
+ o.pts.forEach(function(p){s+='<circle cx="'+sx(p[0]).toFixed(1)+'" cy="'+sy(p[1]).toFixed(1)+'" r="5" style="fill:transparent"><title>'+p[0]+': '+fmt(p[1])+' '+o.unit+'</title></circle>';});
+ return '<div class="lcw">'+s+'</svg></div>';
+}
+
+var TEN=[
+ {b:'71% <small>of land</small><br>92% <small>of people</small>',p:'The basin is 20,227 sq mi: 71% in Georgia, 16% Florida, 13% Alabama. Of its 3.84 million people, 92% live in Georgia, nearly 75% in metro Atlanta.',s:'USGS SIR 2016-5007, Table 2; 2010'},
+ {b:'85%',p:'Georgia\'s share of the 1,645 MGD withdrawn in 2010: Georgia 1,402, Alabama 169, Florida 75 MGD.',s:'USGS SIR 2016-5007, Table 3'},
+ {b:'576 <small>vs</small> 568 <small>MGD</small>',p:'Farms vs. cities, by withdrawal (2010). Flint irrigation is treated as 100% consumed; metro Atlanta returned 79% of its 371 MGD (2009), less in summer.',s:'USGS 2016 p. 47; USACE FEIS 2016 p. 2-101, Table 2.1-22'},
+ {b:'1,884 <small>vs</small> ~4,000 <small>cfs</small>',d:1,p:'Georgia\'s peak consumption by Georgia\'s own count (adopted by Kelly) vs. Florida\'s experts\' estimate of lost flow in drought summers.',s:'Kelly Special Master Report 2019, Rep. 26-29'},
+ {b:'2.4% <small>to</small> 35%',p:'Georgia\'s consumption as a share of the flow reaching Florida: normal year vs. the worst droughts (17.4% in dry summers).',s:'Kelly Report 2019, Rep. 46-47'},
+ {b:'7,599 <small>cfs</small>',p:'The 2012 average at the state line, lowest since 1922 (long-term average 21,400). The Corps\' minimum release is 5,000 cfs, or 4,500 in drought.',s:'USGS gage 02358000; USACE ROD 2017 p. 2'},
+ {b:'23.65%',p:'Share of Lake Lanier\'s conservation storage the Corps gave Atlanta-area supply in 2017. A federal appeals court in 2008 called 22% a "major operational change."',s:'USACE WSSA 2016 Table 17; ROD 2017; FEIS p. 3-8'},
+ {b:'&#8722;99.4%',p:'Franklin County oyster landings, 2012 to 2019: 3,037,217 lb of meat down to 18,595 lb. The bay closed 2020-2025 and reopened in 2026 on restored reefs only.',s:'FWC trip tickets, export 2026-10-08'},
+ {b:'0.3%',p:'Share of the 82,200-acre floodplain connected to the river at 5,000 cfs (260 acres), vs. 95% at a typical spring high.',s:'Light, Darst and Grubbs 1998, USGS PP 1594'},
+ {b:'&lt;1.5%',p:'Extra oyster biomass from a cap on Georgia, by Florida\'s own model (2021 Court). Kelly priced feasible cuts at $55-104 million per dry year for 474-801 cfs.',s:'592 U.S. 433, 441 (2021); Kelly Rep. 74-75'}
+];
+
+var FLOWYEARS=[[1923,25603],[1924,20647],[1925,21852],[1926,23162],[1927,13529],[1928,27419],[1929,39580],[1930,22152],[1931,13996],[1932,19038],[1933,21295],[1934,15130],[1935,13237],[1936,30973],[1937,25995],[1938,17004],[1939,21062],[1940,18987],[1941,12417],[1942,22585],[1943,24062],[1944,26672],[1945,19122],[1946,28130],[1947,27197],[1948,36830],[1949,29250],[1950,15102],[1951,12949],[1952,19198],[1953,24706],[1954,14381],[1955,11223],[1956,13785],[1957,17540],[1958,20206],[1959,22373],[1960,23885],[1961,24644],[1962,21019],[1963,18108],[1964,40043],[1965,26412],[1966,27180],[1967,21891],[1968,15194],[1969,16553],[1970,19467],[1971,27912],[1972,21890],[1973,32262],[1974,23592],[1975,35344],[1976,26695],[1977,22232],[1978,23864],[1979,23971],[1980,23802],[1981,12082],[1982,22117],[1983,30286],[1984,26107],[1985,15114],[1986,13995],[1987,20593],[1988,13745],[1989,20416],[1990,23652],[1991,23616],[1992,22875],[1993,23114],[1994,31333],[1995,22283],[1996,21964],[1997,23566],[1998,31505],[1999,11233],[2000,9341],[2001,16058],[2002,10875],[2003,26597],[2004,17238],[2005,29240],[2006,13093],[2007,9722],[2008,14607],[2009,28628],[2010,22162],[2011,9796],[2012,7599],[2013,23433],[2014,22325],[2015,20242],[2016,20825],[2017,15683],[2018,22159],[2019,21848],[2020,31289],[2021,24197],[2022,18416],[2023,17563],[2024,23569],[2025,15987]];
+var OYSTERS=[[1986,472625],[1987,2781224],[1988,1267381],[1989,822332],[1990,1496427],[1991,1262399],[1992,1859805],[1993,2019899],[1994,1477994],[1995,1031043],[1996,978791],[1997,1417791],[1998,1382233],[1999,2120950],[2000,2327397],[2001,2333963],[2002,1725772],[2003,1450908],[2004,1504180],[2005,1261618],[2006,2127044],[2007,2701362],[2008,2262591],[2009,2695690],[2010,1947199],[2011,2812467],[2012,3037217],[2013,1065811],[2014,608538],[2015,518204],[2016,374051],[2017,268291],[2018,58324],[2019,18595],[2020,19280],[2021,11525],[2022,12111],[2023,18925],[2024,25088],[2025,67418],[2026,31337]];
+
+var WATCH=[
+ {t:'Chattahoochee: From Water War to Water Vision',by:'Rhett Turner (Red Sky Productions) with Jonathan Wickham (ZoeTV)',y:'2010',len:'56 min',u:'https://www.youtube.com/watch?v=aiCsePJnxCo',side:'The course film (lecture 9.1). All three states, most time on Atlanta: an Apalachicola oysterman, a Columbus Kodak worker, the Upper Chattahoochee Riverkeeper, utility voices, the Corps reservoirs.',rel:'Professional, Emmy-winning for audio. Funded by environmental foundations and leans conservation ("Atlanta must take the lead"). Made before the 2011 ruling, the oyster collapse and both Supreme Court decisions.',n:'This public copy is on a personal YouTube channel, not the producers\'; no official stream was found. The course copy is Module 9 Lecture 1 on UF Mediasite.'},
+ {t:'Who Owns Water',by:'David and Michael Hanson, co-directed by Andrew Kornylak (Upstream and Fourmile Media)',y:'2014',len:'50 min',u:'https://www.youtube.com/watch?v=lMzFyqIQEgk',side:'The whole basin at water level: two brothers paddle about 542 miles from the headwaters to the Gulf right after the oyster crash, interviewing people in all three states.',rel:'Independent, festival awards. A personal journey rather than investigative reporting; sympathizes with the river, leaves its title question open. Best film for the collapse era. Not watched through by our research, so its time on Flint agriculture is unconfirmed.',n:'Uploaded by Adventure Sports TV; paid copy on Vimeo On Demand (vimeo.com/ondemand/whoownswater).'},
+ {t:'Unfiltered: The Truth About Oysters',by:'Chucha Barber and Josh McLawhorn (Level Up Digital Media), WFSU and PBS',y:'2023, on PBS from 2025',len:'55 min',u:'https://www.pbs.org/video/unfiltered-the-truth-about-oysters-mlz1jw/',side:'Florida and Apalachicola Bay. Argues several causes: less freshwater flow, overharvest, development, predators. Covers restoration and aquaculture.',rel:'Professional, regional Emmy. Supporters include FSU, UF and Florida agencies; restoration advocacy that stays fairly balanced on causes. Few Georgia voices. Shows the same flow-vs-overharvest ambiguity the 2021 ruling turned on.',n:'Free on PBS until 1/15/2028.'},
+ {t:'Oyster Doctors (In the Grass, On the Reef)',by:'WFSU Public Media with FSU ecologists David Kimbro and Randall Hughes',y:'2014',len:'57 min',u:'https://www.pbs.org/video/-grass-reef-oyster-doctors/',side:'Apalachicola Bay science: how salinity shifts predators, the 2012-13 collapse, diver surveys.',rel:'Made by the researchers with NSF funding. Careful about uncertainty ("death by a thousand cuts"). Clearest on how low flow can become oyster loss; does not present Georgia\'s case.',n:''},
+ {t:'Stories from the Apalachicola: An Endangered River',by:'FSU College of Communication and Information students, presented by WFSU',y:'2018',len:'57 min',u:'https://www.pbs.org/video/stories-from-the-apalachicola-an-endangered-river-nornxg/',side:'Florida only: oystermen, tupelo beekeepers, legislators, biologists, the Riverkeeper.',rel:'Student work with public-media distribution. Good on the downstream human cost; almost no upstream perspective.',n:''},
+ {t:'Water War: Georgia vs. Florida vs. Alabama (forum recording)',by:'Civic League for Regional Atlanta, posted by the GBH Forum Network',y:'2008',len:'1 h 32 min',u:'https://www.youtube.com/watch?v=2uGiiLqx7Zc',side:'A panel with no narration: Atlanta Regional Commission, Lake Lanier Association, West Point Lake Coalition, Georgia\'s outside counsel, Apalachicola Riverkeeper.',rel:'Each side speaks for itself. No film gives Georgia, Lanier and the middle basin this much airtime. Recorded in the 2007-08 drought.',n:''}
+];
+var CLIPS=[
+ {t:'Farming Irrigation and the Flint River | Georgia\'s Water',by:'GPB Education',y:'2021',len:'6 min',u:'https://www.youtube.com/watch?v=IKnlpzzufIA',d:'A Macon County farmer and the Flint Riverkeeper. The only verified video centered on Flint agriculture.'},
+ {t:'Lake Lanier: The Truth Behind the Low Water',by:'U.S. Army Corps of Engineers, Mobile District',y:'2026',len:'4 min',u:'https://www.dvidshub.net/video/998454/lake-lanier-truth-behind-low-water',d:'The Corps\' own explanation of Lanier operations.'},
+ {t:'Georgia\'s Water Wars, Part 1: Surface Water',by:'Science for Georgia, lecture by John Clarke (retired USGS)',y:'2025',len:'1 h 39 min',u:'https://www.youtube.com/watch?v=ptm_06qXIw4',d:'The most current long-form source, covering the years after the Supreme Court. A lecture, not a film.'}
+];
+
+var SRC=[
+ ['Agencies and data',[
+  'Lawrence, S.J. 2016. Water Use in the Apalachicola-Chattahoochee-Flint River Basin, Alabama, Florida, and Georgia, 2010, and Water-Use Trends, 1985-2010. USGS Scientific Investigations Report 2016-5007. <a href="https://pubs.usgs.gov/sir/2016/5007/sir20165007.pdf" target="_blank" rel="noopener">pubs.usgs.gov</a>',
+  'U.S. Army Corps of Engineers 2016. Final Environmental Impact Statement, ACF Master Water Control Manual Update, Vol. 1 (Dec 2016). <a href="https://www.sam.usace.army.mil/Portals/46/docs/planning_environmental/acf/docs/01_ACF_FEIS_Dec%202016_Volume%201.pdf" target="_blank" rel="noopener">sam.usace.army.mil</a>',
+  'U.S. Army Corps of Engineers 2016. Water Supply Storage Assessment (FEIS Vol. 3, App. B, Nov 2016). <a href="https://www.sam.usace.army.mil/Portals/46/docs/planning_environmental/acf/docs/09_ACF_FEIS_Dec%202016_Volume%203.pdf" target="_blank" rel="noopener">sam.usace.army.mil</a>',
+  'U.S. Army Corps of Engineers 2017. Record of Decision, ACF Master Water Control Manual, March 30, 2017. <a href="https://www.sam.usace.army.mil/Portals/46/docs/planning_environmental/acf/docs/ACF%20ROD%20Signed%2030%20March%2017.pdf" target="_blank" rel="noopener">sam.usace.army.mil</a>',
+  'U.S. Geological Survey. National Water Information System, gage 02358000, Apalachicola River at Chattahoochee, FL, daily discharge 1922-2026. Retrieved 2026-10-08; annual means and day counts computed from it.',
+  'Light, H.M., Darst, M.R., and Grubbs, J.W. 1998. Aquatic Habitats in Relation to River Flow in the Apalachicola River Floodplain, Florida. USGS Professional Paper 1594.',
+  'Light, H.M., et al. 2006. USGS Scientific Investigations Report 2006-5173 (Apalachicola River channel and floodplain changes).',
+  'Torak, L.J., and Painter, J.A. 2006. USGS Scientific Investigations Report 2006-5070 (lower ACF groundwater and irrigation).',
+  'Florida Fish and Wildlife Conservation Commission. Commercial Fisheries Landings Summaries (trip tickets), oysters, Franklin County, 1986-2026. Exported 2026-10-08.',
+  'Radabaugh, K.R., et al. 2021. Oyster Integrated Mapping and Monitoring Program, Chapter 3: Apalachicola Bay. FWC Fish and Wildlife Research Institute Technical Report 22 v2. <a href="https://archive.myfwc.com/Archive/Research/Habitat/Coastal-Wetlands/OIMMP/oimmp-ch03-v2.pdf" target="_blank" rel="noopener">myfwc.com</a>',
+  'NOAA 2013. Fishery disaster determination for the Apalachicola Bay oyster fishery, Aug 12, 2013. <a href="https://media.fisheries.noaa.gov/dam-migration/59_fl_oyster_determination_noaa-sf.pdf" target="_blank" rel="noopener">fisheries.noaa.gov</a>',
+  'U.S. Fish and Wildlife Service 2016. Biological Opinion on the ACF Master Water Control Manual, Sept 14, 2016. <a href="https://downloads.regulations.gov/FWS-R4-ES-2024-0051-0002/attachment_8.pdf" target="_blank" rel="noopener">regulations.gov</a>',
+  'Corn, M.L., Alexander, K., and Buck, E.H. 2008. Apalachicola-Chattahoochee-Flint Drought: Species and Ecosystem Management. Congressional Research Service RL34440.'
+ ]],
+ ['Courts',[
+  'Florida v. Georgia, 592 U.S. 433 (2021). <a href="https://www.supremecourt.gov/opinions/20pdf/592us2r25_086c.pdf" target="_blank" rel="noopener">supremecourt.gov</a>',
+  'Florida v. Georgia, 585 U.S. ___, 138 S. Ct. 2502 (2018), majority and Thomas, J., dissenting. <a href="https://www.supremecourt.gov/opinions/17pdf/142%20orig_h3ci.pdf" target="_blank" rel="noopener">supremecourt.gov</a>',
+  'Report of the Special Master (Paul J. Kelly Jr.), Florida v. Georgia, No. 142 Orig., Dec. 11, 2019. <a href="https://www.supremecourt.gov/DocketPDF/22/22O142/125423/20191213102743287_142%20Original%20SM%20Report.pdf" target="_blank" rel="noopener">supremecourt.gov</a>',
+  'Report of the Special Master (Ralph Lancaster), Florida v. Georgia, No. 142 Orig., Feb. 14, 2017. <a href="https://www.supremecourt.gov/pdfs/SpecMastRpt/orig142/636.pdf" target="_blank" rel="noopener">supremecourt.gov</a>',
+  'In re Tri-State Water Rights Litigation, 639 F. Supp. 2d 1308 (M.D. Fla. 2009) (Magnuson, J.). <a href="https://www.courtlistener.com/opinion/1746374/in-re-tri-state-water-rights-litigation/" target="_blank" rel="noopener">courtlistener.com</a>',
+  'In re MDL-1824 Tri-State Water Rights Litigation, 644 F.3d 1160 (11th Cir. 2011). <a href="http://media.ca11.uscourts.gov/opinions/pub/files/200914657.pdf" target="_blank" rel="noopener">ca11.uscourts.gov</a>'
+ ]],
+ ['Research and course readings',[
+  'Leitman, S. 2004. Reservoir Management in the Apalachicola-Chattahoochee-Flint Basin. Damayan Water Project, for the Mid-Chattahoochee Group. (Course file, Module 10.)',
+  'Leitman, S. 2005. ACF Basin Tri-State Negotiations of a Water Allocation Formula. Chapter 6, pp. 74-88. (Course file, Module 9.)',
+  'Feldman, D.L. 2008. Barriers to Adaptive Management: Lessons from the ACF Compact. Society &amp; Natural Resources 21(6): 512-525. <a href="https://doi.org/10.1080/08941920801905344" target="_blank" rel="noopener">doi</a>',
+  'Havens, K., et al. 2013. Apalachicola Bay Oyster Situation Report. Florida Sea Grant TP-200. <a href="https://repository.library.noaa.gov/view/noaa/39884" target="_blank" rel="noopener">noaa.gov</a>',
+  'Petes, L.E., Brown, A.J., and Knight, C.R. 2012. Impacts of upstream drought and water withdrawals on the health and survival of downstream estuarine oyster populations. Ecology and Evolution 2(7): 1712-1724. <a href="https://doi.org/10.1002/ece3.291" target="_blank" rel="noopener">doi</a>',
+  'Kimbro, D.L., et al. 2017. Local and regional stressors interact to drive a salinization-induced outbreak of predators on oyster reefs. Ecosphere 8(11): e01992. <a href="https://doi.org/10.1002/ecs2.1992" target="_blank" rel="noopener">doi</a>',
+  'Pine, W.E., et al. 2015. The curious case of eastern oyster stock status in Apalachicola Bay, Florida. Ecology and Society 20(3): 46. <a href="https://doi.org/10.5751/ES-07827-200346" target="_blank" rel="noopener">doi</a>',
+  'Rugel, K., et al. 2012. Effects of irrigation withdrawals on streamflows in a karst environment: lower Flint River Basin, Georgia. Hydrological Processes 26(4): 523-534. <a href="https://doi.org/10.1002/hyp.8149" target="_blank" rel="noopener">doi</a>',
+  'McMahon, G.F. 2009. Models and Realities of Reservoir Operation. J. Water Resources Planning and Management 135(2): 57-59.',
+  'Bunn, S.E., and Arthington, A.H. 2002. Environmental Management 30(4): 492-507. Richter, B.D., et al. 2006. River Research and Applications 22: 297-318.',
+  'Kiker, G. AOM 4643 lectures 9.1-12.2, Module 9-12 lecture notes, role descriptions, and the ACF Negotiation Worksheet v5.1.'
+ ]]
+];
+
+function renderNumbers(){
+ var host=byId('numbers'); if(!host) return;
+ var h='';
+ h+='<div class="oneliner">The numbers behind the ACF fight. Every chart answers one question and carries its unit, year, source and caveat. Where the sides disagree, both numbers sit side by side with who claims them and which ruling adopted which. Nothing is averaged.</div>';
+ h+='<div class="ukey"><b>Unit key.</b> <b>cfs</b> = cubic feet per second, a flow rate. <b>MGD</b> = million gallons per day. <b>1 cfs = 0.646 MGD</b>; 1 MGD = 1.547 cfs. An acre-foot covers one acre one foot deep (about 326,000 gallons).</div>';
+ h+='<div class="note" style="margin:0 4px 12px"><b>Check before citing anything current.</b> Coverage of agreements after 2017 is incomplete: the 2021 Lake Lanier storage agreement and the Corps\' 2024-2025 updates were not read for this tab. Numbers whose source could not be read are left out.</div>';
+ h+='<div class="jump">'+[['n-ten','10 numbers'],['n-use','Who uses it'],['n-flow','River flow'],['n-dispute','Disputed'],['n-lanier','Lanier'],['n-oyster','Oysters'],['n-money','Money'],['n-more','By role'],['n-watch','Watch'],['n-src','Sources']].map(function(x){return '<a href="#'+x[0]+'" data-jump="'+x[0]+'">'+x[1]+'</a>';}).join('')+'</div>';
+
+ h+='<h2 class="h2" id="n-ten">The ACF in 10 numbers</h2><div class="ten">'+TEN.map(function(t,i){return '<div class="tn'+(t.d?' d':'')+'"><div class="num">'+(i+1)+(t.d?' <span class="pill dsp">disputed</span>':'')+'</div><div class="big">'+t.b+'</div><p>'+t.p+'</p><div class="s">'+t.s+'</div></div>';}).join('')+'</div>';
+
+ /* --- who uses the water --- */
+ h+='<h2 class="h2" id="n-use">Who uses the water</h2>';
+ h+=chart({id:'c-withdraw',q:'Who withdraws the most water?',meta:'MGD · 2010 · USGS SIR 2016-5007 (Lawrence 2016), Table 3',
+  body:hbars({max:1401.5,vw:104,rows:[{l:'Georgia',v:1401.5,t:'1,402 (85%)',c:CLR.ga},{l:'Alabama',v:169.3,t:'169 (10%)',c:CLR.al},{l:'Florida',v:74.7,t:'75 (4.5%)',c:CLR.fl}]}),
+  cav:'Withdrawals, not consumption. Much of Georgia\'s city water returns to the river as treated wastewater; most irrigation water does not (see "Withdrawing is not consuming" below). State totals are summed from the table\'s groundwater and surface-water columns.',roles:['GA','ATL','AL','FL']});
+ function share(title,rows){return '<div class="sm"><div class="smh">'+title+'</div>'+hbars({max:100,vw:52,rows:rows})+'</div>';}
+ h+=chart({id:'c-shares',q:'Does Georgia\'s share of the water match its share of land and people?',meta:'percent of the basin total · land: 2015 boundaries; people and water: 2010 · USGS SIR 2016-5007, Tables 2 and 3',
+  body:'<div class="smg">'+share('Land (20,227 sq mi)',[{l:'Georgia',v:71.0,t:'71%',c:CLR.ga},{l:'Florida',v:15.6,t:'16%',c:CLR.fl},{l:'Alabama',v:13.4,t:'13%',c:CLR.al}])+share('People (3.84 million)',[{l:'Georgia',v:91.8,t:'92%',c:CLR.ga},{l:'Alabama',v:5.9,t:'6%',c:CLR.al},{l:'Florida',v:2.3,t:'2%',c:CLR.fl}])+share('Water withdrawn (1,645 MGD)',[{l:'Georgia',v:85.2,t:'85%',c:CLR.ga},{l:'Alabama',v:10.3,t:'10%',c:CLR.al},{l:'Florida',v:4.5,t:'4.5%',c:CLR.fl}])+'</div>',
+  cav:'The Corps counts whole counties and gets 6.85 million people, 89% in Georgia, and a 19,573 sq mi basin; the course slides say about 3/4 Georgia, 1/8 each for Alabama and Florida. "Most of the basin is in Georgia, so most of the water is Georgia\'s" is a negotiating tenet, not law. Kiker: "three quarters of the land doesn\'t mean they get three quarters of the water."',roles:['GA','FL','AL']});
+ h+=chart({id:'c-sector',q:'What is the basin\'s water used for?',meta:'MGD withdrawn · 2010 · USGS SIR 2016-5007, Table 3 and pp. 44-47',
+  body:hbars({max:576.1,vw:48,rows:[{l:'Agriculture (mostly crop irrigation)',v:576.1},{l:'Public supply (cities and towns)',v:567.5},{l:'Power plant cooling',v:281.6},{l:'Industry (mostly pulp and paper)',v:163.6},{l:'Other (home wells, livestock, mining)',v:56.6}]}),
+  cav:'2010 was a dry year in the Flint, which pushed irrigation up. Farms and cities are near-equal by withdrawal, not by consumption (next chart). Power plant cooling fell about 80% after 2000.',roles:['AG','ATL','MID']});
+ h+=chart({id:'c-consume',q:'Withdrawing is not consuming: who keeps the water?',meta:'MGD · Atlanta 2009, Flint 2010 · USACE FEIS 2016 Vol. 1, Table 2.1-22 and p. 2-101; USGS SIR 2016-5007 p. 47',
+  body:legend([[CLR.q,'withdrawn'],[CLR.ret,'returned to the river']])+'<div class="smh">Metro Atlanta (Chattahoochee)</div>'+hbars({max:501,vw:64,rows:[{l:'Withdrawn',v:370.6,t:'371'},{l:'Returned as treated wastewater',v:292.2,t:'292',c:CLR.ret}]})+'<p class="cap">About <b>78 MGD</b> not returned (21%) on an annual average.</p><div class="smh">Flint River farms</div>'+hbars({max:501,vw:64,rows:[{l:'Withdrawn',v:501,t:'501'},{l:'Returned',v:0,t:'0',c:CLR.ret}]})+'<p class="cap">Irrigation is "considered to be 100 percent consumed."</p>',
+  cav:'Different years and measures. Atlanta\'s return rate is an annual average; in summer it returns less than it withdraws (Kiker 9.3), so the summer gap is bigger than 78 MGD. Flint irrigation is mostly groundwater pumping, which lowers river flow only in part and with a delay. About 56 MGD more leaves the ACF entirely through interbasin transfers (USGS p. 44).',roles:['ATL','AG','FL']});
+
+ /* --- river flow --- */
+ h+='<h2 class="h2" id="n-flow">The river at the Florida line</h2>';
+ h+=chart({id:'c-flow',q:'How low does the river get, next to the 5,000 cfs minimum?',meta:'cfs · 1922-2025 · USGS gage 02358000 (Apalachicola River at Chattahoochee, FL); minimum from USACE Record of Decision 2017 p. 2',
+  body:hbars({max:21383,vw:56,rows:[{l:'Long-term average (1929-2025)',v:21383},{l:'Median day',v:15600},{l:'2011 average (drought)',v:9796},{l:'2007 average (drought)',v:9722},{l:'2012 average, lowest year on record',v:7599},{l:'Lowest single day (Nov 15, 1987)',v:3900}],ref:[{v:5000,l:'dashed line: 5,000 cfs, the Corps\' minimum release at Jim Woodruff Dam (4,500 cfs in drought)'}]}),
+  cav:'Why 5,000? The Corps first set it for a power plant\'s water intake (Leitman 2004 p. 31); later it was tied to endangered mussels. Kiker calls it "life support," not a target. Is it a floor or a target? Lancaster (Rep. 54) called it a floor; Kelly (Rep. 58-59) found the Corps treats it as a target in drought. From May to November 2012 monthly averages sat at 5,212-5,525 cfs.',roles:['FL','ENV','USACE','NAV']});
+ h+=chart({id:'c-years',q:'How often do drought years come?',meta:'cfs, calendar-year average · 1923-2025 · USGS gage 02358000, computed from daily values (retrieved 2026-10-08)',
+  body:lineChart({pts:FLOWYEARS,x0:1923,x1:2025,y1:42000,unit:'cfs',aria:'Annual average flow of the Apalachicola River at Chattahoochee, Florida, 1923 to 2025',yt:[[0,'0'],[10000,'10k'],[20000,'20k'],[30000,'30k'],[40000,'40k']],xt:[1930,1950,1970,1990,2010],ref:{v:5000,l:'5,000 cfs minimum'},marks:[{x:2012,y:7599,l:'2012: 7,599',a:'end',dx:-6,dy:4}]}),
+  cav:'1923-1928 are USGS estimates and 2025 may be provisional. Lanier (1957) and West Point (1975) change low flows more than yearly averages. This chart alone cannot separate drought from human use.',roles:['FL','ENV','USACE']});
+ h+=chart({id:'c-days',q:'How unusual were the 2007-2012 droughts?',meta:'percent of days the river ran at or above 10,000 cfs · 1950-2012 · USGS gage 02358000, computed; matches Havens et al. 2013 (Florida Sea Grant TP-200)',
+  body:hbars({max:100,vw:48,rows:[{l:'1950-2000 average',v:81.6,t:'82%'},{l:'2007',v:32.1,t:'32%'},{l:'2011',v:29.9,t:'30%'},{l:'2012',v:18.3,t:'18%'}]}),
+  cav:'Descriptive only. It does not say how much of the low flow was drought, upstream use, or Corps storage.',roles:['FL','ENV']});
+ h+=chart({id:'c-flood',q:'What does 5,000 cfs mean for the floodplain?',meta:'acres of floodplain fish habitat connected to the river (of about 82,200) · field data 1992-1995 · Light, Darst and Grubbs 1998, USGS Professional Paper 1594, pp. 1-2',
+  body:hbars({max:78000,vw:84,rows:[{l:'86,200 cfs (typical spring high)',v:78000,t:'78,000 (95%)'},{l:'32,000 cfs',v:40700,t:'40,700'},{l:'16,400 cfs (median flow)',v:8300,t:'8,300 (10%)'},{l:'8,000 cfs',v:740,t:'740'},{l:'5,000 cfs (the minimum release)',v:260,t:'260 (0.3%)'}]}),
+  cav:'Channel deepening since the 1950s lowered the river by up to 4.8 ft, so the same flow now floods less floodplain (Light et al. 2006, USGS SIR 2006-5173). USGS calls that channel change "probably the most serious anthropogenic impact," which points at Corps and navigation history as well as at upstream use.',roles:['ENV','FL','NAV','USACE']});
+
+ /* --- disputed --- */
+ h+='<h2 class="h2" id="n-dispute">Georgia\'s consumption: the disputed numbers</h2><p class="lede">Each side has a sourced case. The two estimates below are shown next to each other, labeled by who claims them and which ruling adopted which. They are never averaged: they measure different things.</p>';
+ h+=chart({id:'c-deplete',disputed:1,q:'How much did Georgia cut the flow into Florida in drought summers?',meta:'cfs · drought years 2000-2012 · Kelly Report 2019, Rep. 26-29; Florida v. Georgia (2018), Thomas dissent, slip op. 9; Lancaster Report 2017, Rep. 15',
+  body:hbars({max:4000,vw:84,rows:[{l:'Florida\'s experts: average June-Sept, low-flow years',v:4000,t:'~4,000',c:CLR.fl},{l:'Georgia\'s estimate: highest month ever, all Georgia ACF use',v:1884,t:'1,884',c:CLR.ga}]})+
+   claims([{c:CLR.fl,by:'Claimed by Florida\'s experts (Hornberger)',val:'about 4,000 cfs',note:'Top-down: rainfall-runoff models of total lost flow. Range 3,000-4,000; model peak 5,500. Kelly found the models\' errors ran 2,000-6,000 cfs (Rep. 29).',adopt:'accepted only for the sake of argument by Lancaster (2017) and the 2018 Supreme Court majority. Not adopted by Kelly (2019).'},
+           {c:CLR.ga,by:'Claimed by Georgia\'s experts',val:'1,884 cfs at peak',note:'Bottom-up: a sum of metered and estimated uses. Never above 2,000 cfs, rarely above 1,400 (Thomas dissent, slip op. 9).',adopt:'adopted by Special Master Kelly (2019). The 2021 Supreme Court adopted no consumption number.'}]),
+  roles:['FL','GA','AG','ATL']});
+ h+=chart({id:'c-share',q:'Is Georgia\'s use small or large compared with the river?',meta:'Georgia\'s consumption as a percent of flow at the Florida line, using Georgia\'s estimates · dry years since 2000 · Kelly Report 2019, Rep. 46-47',
+  body:hbars({max:35,vw:48,rows:[{l:'Worst droughts, 2011-2012 (Flint alone 28%)',v:35.0,t:'35%',c:CLR.ga},{l:'Dry year, May-Sept (1,375 of 7,892 cfs)',v:17.4,t:'17.4%',c:CLR.ga},{l:'Dry year, annual (757 of 12,424 cfs)',v:6.1,t:'6.1%',c:CLR.ga},{l:'Normal year, annual (540 of 22,812 cfs)',v:2.4,t:'2.4%',c:CLR.ga}]}),
+  cav:'The same numbers serve both sides: "tiny" in a normal year (Georgia\'s framing) and over a third of the river in the worst droughts (Florida\'s framing). The 2018 dissent gives 4% and 8% for average and dry years, measured differently.',roles:['GA','FL','AG']});
+ h+=chart({id:'c-acres',disputed:1,q:'How many acres does Georgia irrigate?',meta:'irrigated acres, by who counted · 1970-2014 · Lancaster Report 2017, Rep. 32-33; Kelly Report 2019, Rep. 39-40; USGS SIR 2006-5070 p. 39; USGS SIR 2016-5007 Table 3',
+  body:legend([[CLR.fl,'Florida\'s count'],[CLR.ga,'Georgia\'s count'],[CLR.q,'USGS']])+hbars({max:825000,vw:76,rows:[{l:'1970, Florida\'s count',v:75000,t:'&lt;75,000',c:CLR.fl},{l:'2000, lower ACF (USGS)',v:745000,t:'745,000'},{l:'2010, whole basin (USGS)',v:736200,t:'736,200'},{l:'2014, Florida\'s count',v:825000,t:'&gt;825,000',c:CLR.fl},{l:'2014, Georgia\'s count',v:723127,t:'723,127',c:CLR.ga}]}),
+  cav:'Different boundaries and methods. Kelly adopted Georgia\'s 2014 count, of which 582,000 acres affect streamflow; Lancaster cited Florida\'s growth figures. In the 1999-2003 compact talks the sides argued the other way round: Florida assumed 621,000 acres and Georgia 921,000, because Georgia then wanted high demand in the model (Leitman 2004 p. 74).',roles:['AG','FL','GA']});
+ h+=chart({id:'c-dams',q:'Has the river lost summer flow since the dams, and is it the climate?',meta:'flow in cfs and rain in inches, shown separately · 1922-1954 vs. 1977-2003 · Leitman 2004, Tables 26 and 27, pp. 99-100',
+  body:'<div class="smh">Flow, April to September</div>'+hbars({max:23055,vw:96,rows:[{l:'1922-1954',v:21579,t:'21,579'},{l:'1977-2003',v:18879,t:'18,879 (&#8722;12.5%)'}]})+'<div class="smh">Flow, whole year</div>'+hbars({max:23055,vw:96,rows:[{l:'1922-1954',v:22026,t:'22,026'},{l:'1977-2003',v:23055,t:'23,055 (+4.7%)'}]})+'<div class="smh">Rain, April to September (inches)</div>'+hbars({max:23055/1000,vw:96,rows:[{l:'1922-1954',v:22.86,t:'22.86 in'},{l:'1977-2003',v:21.38,t:'21.38 in (&#8722;6.5%)'}]}),
+  cav:'Rain is on its own scale, not the flow axis. Leitman, a Florida-side negotiator, concludes part of the summer loss is less rain and part is consumption and reservoir evaporation, and that "further work is needed" to split them (p. 107). NOAA\'s 2013 declaration listed the cause type as drought.',roles:['FL','GA','AG','ENV']});
+
+ /* --- Lanier --- */
+ h+='<h2 class="h2" id="n-lanier">Lake Lanier and the reservoirs</h2>';
+ h+=chart({id:'c-storage',q:'Where is the stored water?',meta:'acre-feet of conservation storage · 2016 · USACE FEIS 2016 Vol. 1, Table ES-1',
+  body:hbars({max:1074645,vw:84,rows:[{l:'Lake Lanier (Buford Dam, GA, 1957)',v:1074645},{l:'West Point Lake (GA/AL line, 1975)',v:306131},{l:'Walter F. George / Lake Eufaula (1963)',v:232800},{l:'Andrews and Woodruff (run-of-river)',v:0,t:'0'}]}),
+  cav:'Lanier drains only 1,034 sq mi, about 5% of the basin (Lancaster says 7%), so it refills slowly (Leitman 2004 p. 7). The course table gives the same split in cfs-days: Lanier 66.4%.',roles:['LAN','ATL','MID','USACE']});
+ h+=chart({id:'c-lanier',disputed:1,q:'How much of Lake Lanier\'s storage goes to Atlanta-area water supply?',meta:'percent of Lanier\'s conservation storage (about 1,074,600 ac-ft) · 1989-2017 · USACE WSSA 2016 Table 17; ROD 2017 p. 19; Magnuson 2009; 11th Cir. 2011; FEIS p. 3-8',
+  body:hbars({max:34,vw:56,rows:[{l:'Georgia\'s 2000 request',v:34.0,t:'34%'},{l:'Corps 2017 reallocation (254,170 ac-ft)',v:23.65,t:'23.65%'},{l:'District court\'s 2006 figure (Magnuson; vacated)',v:21.5,t:'21.5%'},{l:'Corps 1989 draft reallocation',v:19.7,t:'19.7%'},{l:'Corps 2002 memo estimate',v:13.0,t:'13%'},{l:'Corps estimate, 2009-2010 withdrawals',v:11.7,t:'11.7%'}],ref:[{v:22,l:'dashed line: 22%, the share a federal appeals court (D.C. Cir., 2008) called a "major operational change" needing Congress'}]}),
+  cav:'Contested, not settled. The 11th Circuit held in 2011 that water supply is an authorized purpose of Lanier and that such supply does not count against the 22% line. "Above 22%" is Alabama\'s and Florida\'s argument. Documents use slightly different storage denominators.',roles:['ATL','GA','AL','FL','LAN']});
+ h+=chart({id:'c-atl',q:'How much does metro Atlanta take, and how much has Georgia asked for?',meta:'MGD, gross withdrawals from Lanier plus the river · 1975, 2007, 2050 · USACE ROD 2017 pp. 6, 12-13; FEIS 2016 ES-2; 11th Cir. 2011 slip p. 19',
+  body:hbars({max:705,vw:48,rows:[{l:'Georgia\'s request, 2000 and 2013 (297 + 408)',v:705},{l:'Allowed for 2050 by the Corps\' 2017 decision (242 + 379)',v:621},{l:'Actual 2007 (128 + 277)',v:405},{l:'Corps 1975 estimate of "incidental" supply',v:230}]}),
+  cav:'Gross withdrawals: much comes back as wastewater (Lanier users return 29%, river users 82%; FEIS ES-16, ES-20). Georgia cut its request to 597-621 MGD in 2015 after conservation gains.',roles:['ATL','GA','LAN','AL']});
+
+ /* --- oysters --- */
+ h+='<h2 class="h2" id="n-oyster">Oysters</h2>';
+ h+=chart({id:'c-oyster',q:'How big was the oyster collapse?',meta:'pounds of oyster meat landed, Franklin County, FL (Apalachicola Bay) · 1986-2026 · FWC commercial landings (trip tickets), export 2026-10-08',
+  body:lineChart({pts:OYSTERS,x0:1986,x1:2026,y1:3300000,unit:'lb',aria:'Oyster landings in Franklin County, Florida, 1986 to 2026',yt:[[0,'0'],[1000000,'1M lb'],[2000000,'2M lb'],[3000000,'3M lb']],xt:[1990,2000,2010,2020],marks:[{x:2012,y:3037217,l:'2012: 3.04M',a:'end',dx:-6,dy:4},{x:2019,y:18595,l:'2019: 18,595',a:'middle',dx:0,dy:-10}]})+
+   '<ul class="line evts"><li><b>Aug 2013:</b> NOAA declares a fishery disaster.</li><li><b>Aug 2020:</b> emergency closure; the bay stays closed 2021-2025.</li><li><b>Jan-Feb 2026:</b> reopened on restored reefs only. 2025 and 2026 figures are not final.</li></ul>',
+  cav:'Down 64.9% from 2012 to 2013 and 99.4% from 2012 to 2019. 2012 is the highest year since mandatory trip tickets began (1986), but the voluntary-era 1981 figure was 6.6 million lb (FWC OIMMP p. 7). The record 2011-2012 harvest is itself contested: Georgia and the 2021 Court read it as overharvest; Florida reads it as a drought-stressed bay being stripped. Franklin County includes some waters outside the bay.',roles:['FL','ENV','GA']});
+ h+=chart({id:'c-cause',disputed:1,q:'What caused the oyster collapse?',meta:'two readings, each with its evidence · 2007-2021 · sources named in each line',
+  body:claims([{c:CLR.fl,by:'Low river flow (Florida\'s reading)',pts:['With Woodruff Dam at the 5,000 cfs minimum (June-Dec 2007), salinity at the main bars stayed above 25 ppt for 7 months (Petes et al. 2012).','Oyster drills, which thrive in salty water, made up 92-100% of predation in experiments (Kimbro et al. 2017).','NOAA\'s 2013 disaster determination names drought, "reduced downstream river flow from man-made dams," and salinity-driven predators.'],adopt:'Lancaster (2017) found the salinity evidence more convincing than overharvest, but still recommended against Florida because a cap was not shown to deliver water when needed.'},
+                 {c:CLR.ga,by:'Harvest, lost shell and drought (Georgia\'s reading)',pts:['Record fishing in 2011-2012 (over 40,000 trips in 2012, Havens et al. 2013) and only 180 acres reshelled in ten years against 200 recommended per year (592 U.S. at 440).','Florida\'s own model: capping Georgia\'s use would have raised 2012 oyster biomass by under 1.5% (592 U.S. at 441).','A stock assessment found no statistical link between river flow and oyster deaths or recruitment (Pine et al. 2015).'],adopt:'Kelly (2019): low flow played "some role," but Florida\'s management "was a more significant cause." The unanimous 2021 Court found causation not proven, calling the science "a subject of ongoing scientific debate."'}])+
+   '<div class="mid"><b>In between:</b> the state\'s own synthesis (FWC OIMMP 2021) puts low flow first, "possibly worsened by shell removal by fishing," and admits there was no monitoring of predators and disease before the collapse, so the middle of the causal chain is unproven. None of the flow, salinity and oyster studies splits drought from Georgia\'s use from Corps operations.</div>',
+  roles:['FL','GA','ENV']});
+
+ /* --- money --- */
+ h+='<h2 class="h2" id="n-money">Money</h2>';
+ var LOGT=[[10,'$10M'],[100,'$100M'],[1000,'$1B'],[10000,'$10B']];
+ h+=chart({id:'c-cost',disputed:1,q:'Is a cap on Georgia cheap or ruinous?',meta:'million US dollars per year · <b>log scale: each gridline is 10 times the one before</b> · 2016 trial testimony · Florida v. Georgia (2018), majority slip op. 23 and Thomas dissent slip op. 9, 36; Kelly Report 2019, Rep. 66-75',
+  body:legend([[CLR.ga,'Georgia\'s expert'],[CLR.q,'Special Master'],[CLR.fl,'Florida\'s expert']])+hbars({log:{min:10,max:10000,ticks:LOGT},vw:84,rows:[{l:'Georgia\'s expert (Stavins), high end, cities and industry',v:2100,t:'&gt;$2.1B',c:CLR.ga},{l:'Georgia\'s expert (Stavins), low end',v:191,t:'$191M',c:CLR.ga},{l:'Special Master Kelly, high end: gains 801 cfs',v:103.6,t:'$104M'},{l:'Special Master Kelly, low end: gains 474 cfs',v:55.3,t:'$55M'},{l:'Florida\'s expert (Sunding): cut 2,000 cfs',v:35,t:'$35M',c:CLR.fl}]}),
+  cav:'Not the same remedy in each row: Florida priced a 2,000 cfs cut; Kelly found 2,000 cfs not feasible and priced 474-801 cfs per dry year. Stavins\' high end adds $335 million for farmers. The 2018 majority quoted Sunding\'s figure as "less than 0.2% of Georgia\'s annual budget."',roles:['GA','FL','AG','ATL']});
+ h+=chart({id:'c-econ',q:'How big is each economy that depends on this water?',meta:'million US dollars of revenue per year · <b>log scale</b> · about 2016 testimony; oysters before 2012 · Kelly Report 2019, Rep. 52, 79',
+  body:hbars({log:{min:1,max:10000,ticks:[[1,'$1M'],[10,'$10M'],[100,'$100M'],[1000,'$1B'],[10000,'$10B']]},vw:64,rows:[{l:'Flint River basin agriculture',v:4700,t:'$4.7B',c:CLR.ga},{l:'Apalachicola fishing industry',v:11.7,t:'$11.7M',c:CLR.fl},{l:'Apalachicola oysters, before the collapse',v:6.6,t:'$6.6M',c:CLR.fl}]}),
+  cav:'Revenue is not the whole value. Before 2012 the oyster fishery supported over 2,500 jobs (FWC OIMMP p. 3) in a county of about 20 people per square mile (CRS 2008). Georgia\'s part of the basin holds over 99% of its gross regional product (Kelly Rep. 46).',roles:['AG','FL','ENV']});
+
+ /* --- by role --- */
+ h+='<h2 class="h2" id="n-more">More numbers, by role</h2>';
+ h+=chart({id:'c-flint',q:'In drought, how much of Florida\'s water comes from the Flint?',meta:'percent of flow at the Chattahoochee, FL gage that comes from the Flint, 12-month average · 1939-2001 · Leitman 2004, Table 14, p. 72',
+  body:hbars({max:100,vw:48,rows:[{l:'At minimum flows',v:43.4,t:'43%'},{l:'At dry flows (exceeded 90% of the time)',v:38.7,t:'39%'},{l:'At median flow',v:38.0,t:'38%'}],ref:[{v:50,l:'dashed line: half of the flow'}]}),
+  cav:'The Flint\'s share rises at the lowest flows because springs and groundwater feed it (Kiker 9.3: "it actually gives more water in a drought"); in April it reaches 51%. Summer shares at low flow are lower (July 33-35%), which Leitman links to irrigation. The course\'s example ag strategy says the Flint releases "significantly less"; this table does not support that.',roles:['AG','MID','FL']});
+ h+=chart({id:'c-nav',q:'Is year-round barge navigation realistic?',meta:'percent of days the river supplied each navigation flow · 1939-2003 · Leitman 2004, pp. 114-119',
+  body:hbars({max:100,vw:48,rows:[{l:'9,300 cfs (1950s design flow)',v:88,t:'88%'},{l:'11,000 cfs (1986 plan, after dredging)',v:79,t:'79%'},{l:'13,000 cfs (Comprehensive Study)',v:66,t:'66%'},{l:'15,000 cfs (Corps estimate c. 2005)',v:56,t:'56%'}]}),
+  cav:'Under current operations the Corps projects a 9-ft channel just 2.7% of the time (FEIS 2016 ES-43). Navigation releases historically propped up low flows, adding about 2,086 cfs (19%) in May-July (Leitman 2004 p. 119), which is why navigation and Florida can be allies on releases while fighting over dredging.',roles:['NAV','FL','ENV','USACE']});
+ h+=chart({id:'c-gpcd',q:'Has Atlanta conserved?',meta:'gallons per person per day, Metro North Georgia Water Planning District · 2000-2009 · ARC 2011 in USACE FEIS 2016 pp. 2-104 to 2-105',
+  body:hbars({max:147,vw:40,rows:[{l:'2000',v:147},{l:'2003',v:127},{l:'2008',v:104},{l:'2009',v:102}]}),
+  cav:'Drought restrictions were in force 2007-2009. Other official figures use other definitions (the Corps\' WSSA gives 148 for 2011), so do not mix them in one line. Kelly: city and industry consumption in Georgia\'s ACF fell from 212.6 to 93.9 MGD, 2000-2013, while population grew from 3.3 to 4.9 million (Rep. 48).',roles:['ATL','GA','FL']});
+ h+='<p class="lede">Lake Lanier\'s recreation levels (1066, 1063, 1060 ft) are on the Basin tab and in the cards; the class model\'s default demands are on the Spreadsheet tab.</p>';
+
+ /* --- watch --- */
+ h+='<h2 class="h2" id="n-watch">Watch</h2><p class="lede">Ranked by how well each one shows the conflict from more than one side. Every link was checked on Oct 8, 2026. None covers the 2021 ruling or the 2017 Corps manual in depth, so pair them with the sources below.</p>';
+ h+='<div class="watch">'+WATCH.map(function(w,i){return '<div class="wv"><div class="wh"><span class="wn">'+(i+1)+'</span><div><a href="'+w.u+'" target="_blank" rel="noopener">'+esc(w.t)+'</a><div class="wm">'+esc(w.by)+' · '+esc(w.y)+' · '+esc(w.len)+'</div></div></div><p><b>Centers:</b> '+esc(w.side)+'</p><p><b>Reliability:</b> '+esc(w.rel)+'</p>'+(w.n?'<p class="wnote">'+esc(w.n)+'</p>':'')+'</div>';}).join('')+'</div>';
+ h+='<div class="cardx" style="margin:0 4px 12px"><h3>Short clips for the gaps</h3><ul class="line">'+CLIPS.map(function(c){return '<li><a href="'+c.u+'" target="_blank" rel="noopener">'+esc(c.t)+'</a> ('+esc(c.by)+', '+esc(c.y)+', '+esc(c.len)+'). '+esc(c.d)+'</li>';}).join('')+'</ul></div>';
+
+ /* --- sources --- */
+ h+='<h2 class="h2" id="n-src">Sources</h2>';
+ h+='<details class="ph srcs"><summary><span class="phmid"><span class="phttl">Full citations for every chart</span><span class="phwhen" style="display:block">Agencies and data, courts, research and course readings</span></span>'+CHEV+'</summary><div class="phbody">'+SRC.map(function(g){return '<div class="sec">'+g[0]+'</div><ul class="line srcl">'+g[1].map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}).join('')+'<p class="src">Left out: anything marked UNVERIFIED in the research notes (the $134 million bay output figure, the $5.5 billion Lanier economy, "0.6 gallon of flow lost per gallon pumped," a 2007 Lanier low of about 1,050 ft, "Lanier controls 9% of flow"). Coverage of the 2021 Lanier storage agreement and later Corps updates is incomplete.</p></div></details>';
+ host.innerHTML=h;
+}
+
+/* ===================== perspectives (roles tab) ===================== */
+var PERSP=[
+ {ids:['FL'],n:'State of Florida',
+  c:['Apalachicola Bay was one of the most productive estuaries in the country: about 90% of Florida\'s oysters and about 10% of the nation\'s (Lancaster Rep. 9).','The bay depends on the river\'s timing and variability, not just a minimum amount.','Summer flow into Florida averaged 21,579 cfs in 1922-54 and 18,879 cfs in 1977-2003 (Leitman 2004 Table 26). In 2012 the river reached 10,000 cfs on only 18% of days, against 82% in 1950-2000 (USGS).','With Woodruff Dam at the 5,000 cfs minimum from June to December 2007, salinity at the main oyster bars stayed above 25 ppt for seven months (Petes et al. 2012). Oyster drills thrive in salty water (Kimbro et al. 2017).','Georgia\'s irrigated acreage grew from under 75,000 acres (1970) to over 825,000 (2014) by Florida\'s count; a Special Master called Georgia\'s farm use "largely unrestrained" (Lancaster Rep. 32-33).','In the worst droughts Georgia\'s consumption equals 35% of the flow reaching Florida, using Georgia\'s own numbers (Kelly Rep. 46-47).','Over 2,500 jobs before 2012 (FWC OIMMP p. 3) in a county of about 20 people per square mile (CRS 2008).'],
+  k:['The unanimous 2021 Supreme Court found Florida had not shown Georgia caused the collapse: record harvests in 2011-2012, and only 180 acres reshelled in ten years against 200 recommended per year (592 U.S. at 440).','Florida\'s own model showed a cap would have raised 2012 oyster biomass by under 1.5%; even zero Georgia use would not drop salinity the 10+ ppt needed to curb predators (592 U.S. at 441).','A peer-reviewed stock assessment found no statistical link between river discharge and oyster mortality or recruitment (Pine et al. 2015).','In class: Kiker warns that a Florida negotiator who asks for "just 5,000" cfs gets a low grade (10.2, 12.1). Florida\'s earlier negotiators were faulted for invoking natural flow without turning it into concrete numbers (Leitman 2005 p. 85).'],
+  u:['Whether the collapse was mainly flow, mainly harvest and shell loss, or both. The state\'s own synthesis puts low flow first and harvest as a possible "worsened by," and admits there was no pre-collapse monitoring of predators and disease (FWC OIMMP p. 8).','How much of the low flow was drought, Georgia\'s consumption, Corps storage operations, or a deepened channel. USGS calls channel change "probably the most serious anthropogenic impact" on the floodplain (Light et al. 2006).']},
+ {ids:['GA','ATL'],n:'State of Georgia and metro Atlanta',pre:'Two roles in the class. They usually ally, but the state also has to protect farmers and Columbus.',
+  c:['About 92% of the basin\'s people live in Georgia, nearly 75% of them in metro Atlanta (USGS 2016). Georgia\'s portion has 129 times the gross regional product of Florida\'s (Kelly Rep. 46).','Atlanta sits near the headwaters; few large US cities rely on so small a river (Feldman 2008 p. 514).','The 11th Circuit held in 2011 that water supply was always an authorized purpose of Lake Lanier (644 F.3d 1160).','Atlanta has conserved: per-capita use fell from 147 to 102 gallons a day, 2000-2009 (FEIS p. 2-105); city and industry consumption fell from 212.6 to 93.9 MGD while population grew from 3.3 to 4.9 million (Kelly Rep. 48); returns rose from 56% to 79% of withdrawals (FEIS Table 2.1-22); Georgia cut its 2050 request from 705 to 621 MGD (ROD 2017).','Its consumption is 2.4% of state-line flow in a normal year (Kelly Rep. 46). A Florida-side analyst concedes Atlanta\'s use is "a small fraction" of low flow downstream (Leitman 2005 p. 77).'],
+  k:['The 2017 reallocation gives water supply 23.65% of Lanier\'s conservation storage (WSSA Table 17), above the 22% a federal appeals court in 2008 called a "major operational change" needing Congress (FEIS p. 3-8).','Atlanta\'s returns are an annual average. In summer it returns less than it withdraws, exactly when downstream needs water most (Kiker 9.3).','About 56 MGD leaves the ACF entirely through interbasin transfers (USGS 2016 p. 44).','During the Compact talks Georgia changed its demand data without review, and its final proposal amounted to no limits on consumption and fuller reservoirs, with downstream users getting "what is left" (Leitman 2005 pp. 84, 86-87).','Georgia did not pay for water supply when Buford Dam was built (Magnuson 2009 at *1321).'],
+  u:['Whether Lanier withdrawals meaningfully change flow at the Florida line. Lanier drains only about 5% of the basin but holds two-thirds of the storage.','Whether 23.65% violates the 22% benchmark. The 11th Circuit said authorized water supply does not count against it.']},
+ {ids:['AG'],n:'Georgia agriculture (Flint River)',
+  c:['Irrigated farming is the economic base of southwest Georgia: about $4.7 billion a year (Kelly Rep. 52).','Without irrigation, dry-year yields would be 51% lower for peanuts, 78% for cotton and 93% for corn (Kelly Rep. 52).','By 2015 about 90% of lower-Flint center pivots used the two most efficient sprinkler types, and a 2014 law requires 80% efficiency by 2020 (Kelly Rep. 50).','The Flint has no reservoirs and is spring-fed, so it carries a disproportionate share of Florida\'s flow in drought: 38% at median flow, about 43% at minimum flows (Leitman 2004 Table 14). In the class model "the Flint River is really bearing the brunt" (Kiker 11.1).','Farmers resent being the backstop when Lanier holds water back (Kiker 9.3). If asked to cut in droughts, they expect to be paid, as the Flint River Drought Protection Act provides.'],
+  k:['By withdrawal, Flint agriculture (501 MGD in 2010) is the largest single use in the basin (USGS 2016 p. 47), and irrigation is treated as 100% consumed (FEIS p. 2-101).','In Georgia\'s own table the Flint is over half of Georgia\'s dry-year use (425 of 757 cfs; Kelly Rep. 27). In July 2012 farm consumption reached 28% of state-line flow (Kelly Rep. 53).','On the tributaries, low flows fell to 51-61% of pre-irrigation levels and Spring Creek stopped flowing year-round (Rugel et al. 2012).','Georgia never used its drought auction in 2006-07 or 2011-12 (both Special Masters agree). Farm permits historically had no volume limits (Lancaster Rep. 33).'],
+  u:['How much pumping from the Floridan aquifer reduces river flow, and how fast.','How many acres are actually irrigated: 723,127 (Georgia, 2014) to over 825,000 (Florida, 2014). In the 1999-2003 talks the sides argued the reverse (Florida 621,000, Georgia 921,000; Leitman 2004 p. 74).','Whether paying farmers to cut would deliver water to Florida when needed. Kelly found a 1,000 cfs Flint increase would raise May-September state-line flow by only about 177 cfs on average under Corps rules (Rep. 57).']},
+ {ids:['AL'],n:'State of Alabama',
+  c:['Alabama is both upstream of Florida and downstream of Atlanta. It depends on the middle Chattahoochee for city water (Phenix City, Columbia), cooling water for Plant Farley (nuclear), and recreation on West Point Lake and Lake Eufaula.','It asked the Corps for fixed minimum flows of 2,000 cfs at Plant Farley and 1,350 cfs at Columbus (ROD p. 14).','It argues the Corps let Atlanta take Lanier storage without Congress\'s approval. Judge Magnuson agreed in 2009 before being reversed: "no portion of the project\'s costs was allocated to water supply" (Magnuson 2009 at *1321).'],
+  k:['The Corps says Alabama\'s requested flows "are in fact currently met" more than 94% of the time and will continue to be (ROD p. 14).','Most of Alabama lies in the neighboring ACT basin, and Alabama uses only about 10% of ACF withdrawals (USGS 2016).','Georgia reads Alabama\'s ACF stance partly as leverage over Atlanta\'s growth. The course role sheet says limiting Atlanta\'s supply "could prove to be beneficial for the economic development prospects of Alabama-based interests."'],
+  u:['How the ACT and ACF disputes trade off: if Atlanta can\'t get ACF water, it looks to Lake Allatoona in the ACT.','Developments after 2017 (the 2021 Lanier storage agreement, the Corps\' 2024-2025 "Stay Agreement" report) were not read. Check them before claiming where Alabama and Georgia stand today.']},
+ {ids:['USACE'],n:'U.S. Army Corps of Engineers',
+  c:['The Corps runs five dams for seven purposes: flood control, hydropower, navigation, recreation, water supply, water quality, and fish and wildlife. It cannot favor one state.','Its 2017 manual keeps a 5,000 cfs minimum at Woodruff Dam (4,500 only in drought), adds a basinwide drought plan, and accommodates Georgia\'s 2050 needs at a hydropower cost of only 0.5% (ROD pp. 2, 6).','It concluded the plan has "negligible" effects on the Apalachicola and the bay (FEIS).','The physics constrains everyone: the ACF is "an under-stored system" (Kiker 9.3), and Lanier refills slowly because it drains only about 1,034 sq mi.'],
+  k:['Florida, NMFS (which wanted 5,000 cfs "at all times") and EPA all objected (ROD pp. 11-13). The Corps\' own modeling allows flows below 5,000 cfs for up to 90 days over the 73-year record (ROD p. 12).','Kelly found the Corps treats 5,000 cfs as a target in drought, not a floor (Rep. 58-59). West Point and W.F. George were held above their rule curves more often after 1991, even in drought (Leitman 2004).','Channel dredging and the dams lowered the river by up to 4.8 ft, so the same flow floods less floodplain (Light et al. 2006). NOAA\'s 2013 declaration named "reduced downstream river flow from man-made dams."','McMahon (2009): the Corps\' models failed to predict the 2007 storage crash.'],
+  u:['What the Corps would actually release if Georgia\'s consumption fell, the hinge of the Supreme Court case. Lancaster: the Corps could offset the extra water. The 2018 majority: up to 2,000 cfs could pass through. Thomas and Kelly: only on 14-19 days in 2007 and none in 2012.']},
+ {ids:['ENV'],n:'Downstream environmental interests',
+  c:['Four federally listed species depend on Apalachicola flow: the Gulf sturgeon, the fat threeridge, the purple bankclimber and the Chipola slabshell (CRS 2008).','Ecologists say rivers need a flow regime (magnitude, timing, duration, frequency, rate of change), not one number (Bunn and Arthington 2002; Richter et al. 2006).','At 5,000 cfs only 260 acres (0.3%) of the 82,200-acre floodplain connects to the river; at a typical spring high, 78,000 acres (Light et al. 1998). 85% of Apalachicola fish species use the floodplain (Module 9 slides).','The sturgeon\'s spawning ledge now needs about 21,200 cfs to be fully usable, up from 10,500 cfs before the riverbed dropped (Leitman 2004 p. 56).','Mussels died when flows dropped in 2007 and 2011 (USFWS 2016 BiOp pp. 124-128); Spring Creek mussels fell over 50% after the 1998-2000 drought.'],
+  k:['Kelly found "a complete lack of evidence" that Georgia harmed the river ecosystem (Rep. 22-23).','The fat threeridge population is about 6-18.65 million and "appears stable and may be increasing" (USFWS 2016, quoted at 592 U.S. at 443); the same opinion found no jeopardy under the new manual.','Biologists decline to name a single required flow (CRS 2008 pp. 16-18), and upstream negotiators call "natural flow" undefined (Leitman 2005 p. 85).'],
+  u:['How much extinction risk is acceptable: a values choice, not a measurement (CRS 2008 p. 17).','How much floodplain loss comes from channel change versus less flow.']},
+ {ids:['LAN'],n:'Lake Lanier homeowners and businesses',
+  c:['Lanier is a major recreation economy and home to thousands of lakeside owners; Feldman cites a "$2 billion recreation industry" (p. 522).','Below 1,066 ft ramps and beaches start closing; below 1,063 marinas and businesses are hit hard; below 1,060 most docks are unusable (1989 plan levels; Leitman 2004 Table 8).','Lanier refills slowly, so a drawdown can take years to recover (Leitman 2004 p. 7; Kiker 10.1). Everyone should share the drought burden rather than "over-rely" on Lanier releases (role sheet).'],
+  k:['Lanier holds about two-thirds of the system\'s storage; Leitman finds political pressure from lakeside owners is one reason much of it is never used downstream (2004 pp. 12-13).','From 1976 to 2004 Lanier sat above the top of its rule curve over 30% of the time (Leitman 2004 p. 34).','The class example Atlanta strategy argues recreation should come "last in the line," since it is not an authorized priority over water supply.','Lanier\'s level also matters to Atlanta\'s supply, so "keep it full" is partly an Atlanta ally position, not purely recreational.'],
+  u:['How much extra water Lanier could release in normal years without raising the risk that it fails to refill after a drought (Leitman 2004 p. 133).']},
+ {ids:['NAV'],n:'Navigation (barge interests)',
+  c:['Navigation is an original authorized purpose of the federal dams: Congress authorized a 9 by 100 ft channel to Columbus and Bainbridge (Leitman 2004 p. 28).','Reliable channel time lets shippers sign contracts; the barge industry says it never got a fair chance because flows were unpredictable (class example strategy).','Navigation releases historically sent more water down in summer: about 2,086 cfs, or 19%, at low flows in May-July (Leitman 2004 p. 119).'],
+  k:['The flow needed after dredging is about 15,000 cfs, available only 56% of the time (Leitman 2004 pp. 116-119); the Corps projects a 9-ft channel just 2.7% of the time (FEIS ES-43).','Dredging damaged river habitat, and Florida has denied the dredging permit (role sheet).','The class example Atlanta strategy argues navigation could be dropped altogether.'],
+  u:['Whether a seasonal "navigation window" (in the 2017 manual) can be both useful and environmentally acceptable. The Corps\' 1990s windows were abandoned for environmental reasons (Leitman 2004 p. 29).']},
+ {ids:['MID'],n:'Middle Chattahoochee cities and power',pre:'Columbus, Phenix City, Georgia Power, Plant Farley.',
+  c:['The region straddles Alabama and Georgia and needs dependable city and industrial water, dilution of Atlanta\'s wastewater, flows for run-of-river dams and Plant Farley\'s cooling, and stable levels at West Point Lake and Lake Eufaula.','Its main grievance is "balancing." In model runs of Georgia\'s 1990s proposal, Lanier stayed in its top zone 88.6% of the time while West Point was there only 46.4% of Augusts (Module 10 notes). Since 1991, West Point has been the reservoir that fluctuates (Leitman 2004).','So it wants both less withdrawal from Lanier and more use of Lanier\'s storage for downstream flow (role sheet).'],
+  k:['West Point and W.F. George sit lower with bigger catchments and usually refill within a season (Leitman 2004 p. 7), so drawing them down carries less refill risk than drawing down Lanier.','The Corps says middle-reach flow targets are already met over 94% of the time (ROD p. 14).'],
+  u:['What a fair "balance" between reservoirs means: equal feet of drawdown, equal percent of storage, or equal time in each zone (Kiker 10.1)? There is no agreed metric; choosing one is a negotiation move.']}
+];
+var OVERLAP=[
+ ['More releases in dry summers','Florida, environmental groups, navigation, Flint agriculture and the middle Chattahoochee all gain. Navigation wants depth, Florida and ENV want flow, Flint farmers want the Chattahoochee to carry more of the burden, and the middle Chattahoochee wants Lanier, not West Point, to supply it. That is why navigation and Florida can ally on flow while fighting over dredging (Leitman 2004 p. 119).',['FL','ENV','NAV','AG','MID']],
+ ['Keep Lanier high','Atlanta, Georgia and the Lake Lanier Association: "often good pals" (Kiker 12.1).',['ATL','GA','LAN']],
+ ['Pay farmers to cut in droughts','Georgia, Florida and Flint agriculture. The class allows side payments (10.4); the real Flint River Drought Protection Act exists but went unused in 2011-12; Kelly priced such cuts at about $55-104 million per dry year for 474-801 cfs (Rep. 74-75).',['GA','FL','AG']],
+ ['Atlanta conservation and return flows','Atlanta, Florida and Alabama. Every MGD Atlanta returns or saves is water downstream, and Georgia already counts falling per-capita use as its strongest argument.',['ATL','FL','AL']],
+ ['Better data and verification','Everyone. Feldman (2008) and Leitman (2005) both trace the Compact\'s failure to distrust over data; both Special Masters fought over whose consumption numbers to believe.',['USACE','GA','FL','AL']],
+ ['Oyster restoration (shell, reefs)','Florida and Georgia. Restoration does not require settling who caused the collapse. FWC has invested over $38 million since 2019, and the bay reopened on restored reefs in 2026.',['FL','GA','ENV']]
+];
+var CONTESTED=[
+ ['Did Georgia\'s water use cause the oyster collapse?','Low flow raised salinity, which brought predators and killed oysters; upstream use deepened the drought (Lancaster Rep. 32; Petes 2012; Kimbro 2017; NOAA 2013).','Overharvest and lost shell were bigger; drought outweighed Georgia\'s use (Kelly Rep. 14; 592 U.S. at 440-443; Pine 2015).'],
+ ['How much does Georgia cut drought flow?','About 4,000 cfs in drought summers (Florida\'s experts).','Never over 2,000 cfs; peak 1,884 (Georgia, adopted by Kelly).'],
+ ['Drought or consumption?','1999-2002 had the biggest flow deficit but not the biggest rain deficit, so humans are part of the cause (Leitman 2004 p. 102).','Summer rain was also about 6.5% lower after 1977 (Leitman 2004 Table 27); NOAA called the disaster "Natural Cause (Drought)."'],
+ ['Atlanta or agriculture?','Agriculture: largest withdrawal, 100% consumed, peaks in summer (USGS 2016; FEIS p. 2-101).','Atlanta: holds Lanier storage, withdraws year-round, returns less in summer, 56 MGD leaves the basin (Kiker 9.3; USGS 2016).'],
+ ['Is 5,000 cfs a floor or a target?','A floor; the Corps can and did release more (Lancaster Rep. 54-55).','In drought the Corps targets it (Kelly Rep. 58-59).'],
+ ['Is the 23.65% Lanier reallocation legal?','Over the 22% the D.C. Circuit called a major change (Alabama, Florida).','Water supply is an authorized purpose and doesn\'t count against 22% (11th Cir. 2011; Corps).'],
+ ['Would a cap on Georgia help Florida?','Up to 2,000 cfs in normal operations, 500 in drought (2018 majority).','14-19 days in 2007, none in 2012; under 1.5% more oysters (Thomas; Kelly; 2021 Court).']
+];
+function roleBtns(ids){return ids.map(function(id){return '<button class="rlk" data-role="'+id+'">'+(id==='USACE'?'Corps':id)+'</button>';}).join('');}
+function renderPerspectives(){
+ var host=byId('perspectives'); if(!host) return;
+ var h='<p class="lede">Each party\'s case in its own strongest terms, then the strongest answer to it, then what is genuinely uncertain. No verdict: the courts gave one in 2021 (Florida lost on causation), but most of the science and the fairness questions are still open.</p>';
+ h+='<div class="note" style="margin:0 4px 14px"><b>One framing under everything.</b> The course film says the fight "has always been more of a struggle between Metro Atlanta and the rest of the basin than a contest between the states" (9.1). Leitman, who negotiated for Florida, agrees: the real split is upstream vs. downstream, and many Georgians sit downstream (2005 p. 75). Atlanta, Flint farmers, Lanier homeowners and Columbus all live in Georgia and often disagree.</div>';
+ PERSP.forEach(function(p,i){
+   h+='<details class="role persp" id="persp-'+i+'"><summary>'+p.ids.map(function(id){var r=roleById(id);return '<span class="rab '+(r?r.camp:'')+'">'+(id==='USACE'?'CE':id)+'</span>';}).join('')+'<span class="rttl">'+esc(p.n)+'<small>case · counterargument · open questions</small></span>'+CHEV+'</summary><div class="rbody">'+(p.pre?'<p style="margin-top:10px">'+esc(p.pre)+'</p>':'')+
+     '<div class="sec">Its case, in its own terms</div>'+listHtml(p.c.map(esc))+
+     '<div class="sec">The strongest counterargument</div>'+listHtml(p.k.map(esc))+
+     '<div class="sec">What is genuinely uncertain</div>'+listHtml(p.u.map(esc))+
+     '<div class="wc"><span>Role card:</span> '+roleBtns(p.ids)+'</div></div></details>';
+ });
+ h+='<h2 class="h2">Where interests overlap</h2><p class="lede">Not verdicts: places where two or more parties want the same thing for different reasons. Coalition material for Phase II.</p>';
+ h+='<div class="cardx" style="margin:0 4px 12px"><ol class="line ovl">'+OVERLAP.map(function(o){return '<li><b>'+esc(o[0])+'.</b> '+esc(o[1])+' <span class="wc inl">'+roleBtns(o[2])+'</span></li>';}).join('')+'</ol><div class="src">Source: PERSPECTIVES research notes, drawing on Leitman 2004 and 2005, Feldman 2008, the Kelly Report, FWC, and lectures 10.4 and 12.1.</div></div>';
+ h+='<h2 class="h2">The contested core</h2><p class="lede">Seven questions where each side has a sourced reading. Read both before you post.</p>';
+ h+='<div class="cq">'+CONTESTED.map(function(c){return '<div class="cqi"><div class="cqq">'+esc(c[0])+'</div><div class="cqr"><div><span class="cql">One reading</span>'+esc(c[1])+'</div><div><span class="cql">The other reading</span>'+esc(c[2])+'</div></div></div>';}).join('')+'</div>';
+ host.innerHTML=h;
+}
+document.addEventListener('click',function(e){
+ var b=e.target.closest?e.target.closest('.rlk'):null;
+ if(b){e.preventDefault();goRole(b.getAttribute('data-role'));return;}
+ var j=e.target.closest?e.target.closest('[data-jump]'):null;
+ if(j){e.preventDefault();var t=byId(j.getAttribute('data-jump'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}
+});
+
 /* ===================== boot, every init guarded ===================== */
-['renderPhases','updateProg','renderNext','renderMyRole','renderMatrix','renderRoles','renderBasin','renderSheet','renderNeg','initFlash','initQuiz']
+['renderPhases','updateProg','renderNext','renderMyRole','renderMatrix','renderRoles','renderPerspectives','renderBasin','renderSheet','renderNeg','renderNumbers','initFlash','initQuiz']
  .forEach(function(fn){try{window[fn]();}catch(e){if(window.console)console.error(fn,e);}});
 try{ if(state.tab && state.tab!=='phases' && document.querySelector('.tab[data-v="'+state.tab+'"]')) showTab(state.tab); }catch(e){}
 </script>
