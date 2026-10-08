@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ACF Negotiation Guide (AOM 4643)</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea;
+  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
+  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
+  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#7c95a3; --sky-d:#4a6b78;
+  --line:#d9ccb0; --line2:#c7b797;
+  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #dfe8ea 0%, transparent 60%),
+    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+  color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding:0 16px 60px; min-height:100vh;
+}
+.wrap{max-width:940px;margin:0 auto}
+.top{padding:26px 4px 6px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.crest{width:52px;height:52px;flex:none}
+.hgroup h1{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0;letter-spacing:.2px;color:var(--soil)}
+.hgroup .sub{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.09em;margin-top:6px}
+.hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:64ch}
+.prog{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progbar{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
+.progfill{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--moss));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.progtxt{font-size:13px;color:var(--ink2)}
+.progtxt b{color:var(--soil);font-size:15px}
+.tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 16px;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--line2)}
+.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+.tab.soon{border-style:dashed}
+.view{display:none;animation:fade .25s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.oneliner{font-family:var(--serif);font-size:17.5px;line-height:1.42;color:var(--soil);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sky-d);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:22px 4px 16px}
+.h2{font-family:var(--serif);font-size:21px;color:var(--soil);margin:26px 4px 6px}
+.lede{font-size:13.5px;color:var(--ink2);margin:0 4px 12px;max-width:72ch;line-height:1.5}
+.lede b{color:var(--soil)}
+.sec{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--clay-d);font-weight:700;margin:16px 0 8px}
+.line{margin:0;padding-left:18px;color:var(--ink2);font-size:14px;line-height:1.5}
+.line li{margin-bottom:6px}
+.line b{color:var(--soil)}
+.src{font-size:11.5px;color:var(--ink3);font-style:italic;margin-top:10px;line-height:1.4}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:99px;padding:2px 9px;vertical-align:2px;white-space:nowrap}
+.pill.est{color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487}
+.pill.soon{color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487}
+.pill.pts{color:#fff;background:var(--sky-d)}
+.pill.me{color:#fff;background:var(--moss)}
+.pill.ab{color:#fff;background:var(--clay)}
+/* next-up card */
+.next{margin:0 4px 14px;background:var(--soil);color:#f4ecdd;border-radius:16px;box-shadow:var(--shadow);padding:14px 16px}
+.next .k{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#e4d3b8;font-weight:700}
+.next .t{font-family:var(--serif);font-size:18px;margin:4px 0 2px;line-height:1.25}
+.next .d{font-size:13px;color:#eadcc4}
+.next .more{font-size:12.5px;color:#e4d3b8;margin-top:8px;line-height:1.5}
+.myrole{margin:0 4px 14px;background:var(--card);border:1px dashed var(--line2);border-radius:14px;padding:11px 14px;font-size:13.5px;color:var(--ink2)}
+.myrole b{color:var(--soil);font-family:var(--serif)}
+.myrole button{margin-left:6px}
+/* phase timeline */
+details.ph{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;overflow:hidden}
+details.ph>summary{list-style:none;cursor:pointer;padding:13px 14px;display:flex;align-items:center;gap:12px}
+details.ph>summary::-webkit-details-marker{display:none}
+.phn{font-family:var(--serif);font-size:13px;color:#fff;background:var(--sky-d);border-radius:8px;padding:3px 8px;flex:none;font-weight:700;min-width:30px;text-align:center}
+details.ph.big .phn{background:var(--clay)}
+.phmid{flex:1;min-width:0}
+.phttl{font-family:var(--serif);font-size:16.5px;color:var(--ink);line-height:1.2}
+.phwhen{font-size:12px;color:var(--ink3);margin-top:3px;line-height:1.35}
+.phcount{font-size:11.5px;color:var(--ink3);white-space:nowrap;text-align:right}
+.phcount .bar{width:46px;height:6px;border-radius:99px;background:var(--paper2);overflow:hidden;margin-top:4px;border:1px solid var(--line)}
+.phcount .bar i{display:block;height:100%;background:var(--moss)}
+details.ph.done .phttl{color:var(--moss-d)}
+details.ph.done .phn{background:var(--moss)}
+.chev{width:18px;height:18px;flex:none;transition:transform .2s;color:var(--ink3)}
+details[open]>summary .chev{transform:rotate(90deg)}
+.phbody{padding:2px 16px 16px;border-top:1px dashed var(--line2)}
+.phbody p{font-size:14px;color:var(--ink2);line-height:1.55;margin:10px 0 0}
+.phbody p b{color:var(--soil)}
+.note{font-size:13px;color:#7a5b16;background:#f6edd3;border-left:3px solid var(--wheat);border-radius:8px;padding:8px 11px;margin:10px 0 0;line-height:1.45}
+.warn li::marker{color:var(--clay)}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.checks label{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 11px;cursor:pointer;line-height:1.4}
+.checks input{width:18px;height:18px;flex:none;margin:1px 0 0;accent-color:var(--moss)}
+.checks label.on{background:#e8ecd8;border-color:#b6c188;color:var(--moss-d)}
+/* role cards */
+.camps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 4px 14px}
+.camp{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:11px 13px;box-shadow:var(--shadow)}
+.camp h3{font-family:var(--serif);font-size:15px;margin:0 0 4px;color:var(--soil)}
+.camp p{margin:0;font-size:12.5px;color:var(--ink2);line-height:1.45}
+.camp .abbr{font-weight:700;color:var(--clay-d)}
+@media(max-width:520px){.camps{grid-template-columns:1fr}}
+.mxwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:12px 10px;margin:0 4px 8px;overflow-x:auto}
+table.mx{border-collapse:collapse;margin:0 auto;font-size:12px}
+table.mx th{font-weight:700;color:var(--ink2);padding:3px 2px;font-size:11px}
+table.mx th.r{text-align:right;padding-right:6px;white-space:nowrap}
+table.mx td{width:28px;height:28px;text-align:center;border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--ink3)}
+table.mx td.p{background:#e2e7cf;color:var(--moss-d)}
+table.mx td.m{background:#f0dcd2;color:var(--clay-d)}
+table.mx td.s{background:var(--paper2)}
+table.mx tr.me th.r{color:var(--moss-d)}
+.mxcap{font-size:12.5px;color:var(--ink3);margin:6px 8px 18px;line-height:1.45;font-style:italic;text-align:center}
+details.role{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;overflow:hidden}
+details.role>summary{list-style:none;cursor:pointer;padding:13px 14px;display:flex;align-items:center;gap:12px}
+details.role>summary::-webkit-details-marker{display:none}
+.rab{font-family:var(--sans);font-size:12px;color:#fff;background:var(--clay);border-radius:8px;padding:4px 7px;flex:none;font-weight:700;min-width:46px;text-align:center}
+.rab.store{background:#6b4a31}.rab.release{background:var(--sky-d)}.rab.swing{background:var(--wheat)}.rab.broker{background:var(--ink3)}
+.rttl{font-family:var(--serif);font-size:16.5px;line-height:1.2;flex:1;min-width:0}
+.rttl small{display:block;font-family:var(--sans);font-size:12px;color:var(--ink3);margin-top:2px}
+details.role.mine{border-color:var(--moss);box-shadow:0 0 0 2px rgba(109,123,65,.25),var(--shadow)}
+.rbody{padding:2px 16px 16px;border-top:1px dashed var(--line2)}
+.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px}
+@media(max-width:640px){.rgrid{grid-template-columns:1fr}}
+.rbody p{font-size:14px;color:var(--ink2);margin:0;line-height:1.5}
+.ex{font-size:13px;color:var(--soil);background:#efe6d1;border-radius:10px;padding:9px 11px;line-height:1.5;margin-top:4px}
+.btn{font:inherit;font-weight:600;font-size:13px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:8px 16px;cursor:pointer}
+.btn:hover{border-color:var(--line2)}
+.btn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+/* generic cards */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:0 4px 12px;align-items:start}
+.cardx{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 16px;min-width:0}
+.cardx h3{font-family:var(--serif);font-size:17px;margin:0 0 6px;color:var(--soil);line-height:1.25}
+.cardx p{font-size:14px;color:var(--ink2);margin:0 0 8px;line-height:1.5}
+.cardx p b{color:var(--soil)}
+.cardx.wide{grid-column:1/-1}
+.mapwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 10px 8px;margin:0 4px 8px;overflow-x:auto}
+.mapwrap svg{max-width:420px;margin:0 auto;display:block}
+.mapcap{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink3);margin:0 10px 18px;text-align:center;line-height:1.4}
+.resv{display:flex;flex-direction:column;gap:8px}
+.resv .r{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.resv .r .n{font-family:var(--serif);font-weight:700;color:var(--soil);font-size:15px}
+.resv .r .m{font-size:12px;color:var(--ink3)}
+.resv .r p{font-size:13.5px;margin:4px 0 0}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line2);margin-left:8px}
+.tl li{position:relative;padding:0 0 12px 16px;font-size:14px;color:var(--ink2);line-height:1.5}
+.tl li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:99px;background:var(--sky-d);border:2px solid var(--card)}
+.tl li b{font-family:var(--serif);color:var(--soil)}
+.rows{display:flex;flex-direction:column}
+.rowx{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.7fr) minmax(0,1.4fr);gap:10px;padding:9px 0;border-top:1px dashed var(--line2);font-size:13.5px;color:var(--ink2);line-height:1.45}
+.rowx.hd{border-top:none;font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700;padding-bottom:2px}
+.rowx .k{font-family:var(--serif);font-weight:700;color:var(--soil)}
+.rowx .v{font-variant-numeric:tabular-nums;color:var(--ink)}
+.rowx .who{display:none}
+@media(max-width:600px){.rowx{grid-template-columns:minmax(0,1fr);gap:2px}.rowx.hd{display:none}.rowx .who{display:inline;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700;margin-right:6px}}
+.mini{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px}
+.mini .opts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.mini .ans{font-size:13px;color:var(--moss-d);margin-top:8px}
+code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12.5px;background:#efe6d1;border-radius:6px;padding:1px 5px;color:var(--soil);overflow-wrap:anywhere}
+.tmpl{background:var(--paper);border:1px dashed var(--line2);border-radius:12px;padding:10px 12px;font-size:13.5px;color:var(--ink2);line-height:1.55;margin-top:6px}
+.tmpl b{color:var(--soil)}
+/* placeholder */
+.placeholder{margin:22px 4px;background:var(--card);border:1px dashed var(--line2);border-radius:16px;padding:26px 20px;text-align:center;font-family:var(--serif);color:var(--ink3);font-size:16px;line-height:1.5}
+.placeholder h3{font-family:var(--serif);color:var(--soil);font-size:20px;margin:0 0 8px;font-style:normal}
+.placeholder p{font-style:italic;margin:6px 0 0}
+/* quiz + flashcards */
+.filters{display:flex;gap:8px;margin:18px 4px 6px;flex-wrap:wrap;align-items:center}
+.filters .fl{font-size:12px;color:var(--ink3);margin-right:4px}
+.fbtn{font:inherit;font-weight:600;font-size:12.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:6px 14px;cursor:pointer}
+.fbtn.on{background:var(--sky-d);color:#fff;border-color:var(--sky-d)}
+.quiz{margin:8px 4px 0;display:flex;flex-direction:column;gap:12px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--shadow)}
+.q .qh{font-family:var(--serif);font-size:15.5px;color:var(--ink);margin:0 0 10px;line-height:1.35}
+.q .qmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
+.opt:hover{border-color:var(--line2)}
+.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt:disabled{cursor:default}
+.qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
+.qexp.show{display:block}
+.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+.deckwrap{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.flash{width:100%;max-width:460px;height:300px;perspective:1400px;cursor:pointer}
+.flinner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flash.flip .flinner{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:24px 22px;text-align:center;overflow:auto}
+.ffront{background:var(--card)}
+.fback{background:linear-gradient(180deg,#e3eaec,#dbe4e4);transform:rotateY(180deg)}
+.fface .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin-bottom:12px}
+.fface .qq{font-family:var(--serif);font-size:19px;color:var(--soil);line-height:1.3}
+.fface .aa{font-size:14.5px;color:var(--ink);line-height:1.55}
+.fface .ss{font-size:11.5px;color:var(--ink3);margin-top:10px;font-style:italic}
+.deckctl{display:flex;align-items:center;gap:12px}
+.dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 18px;cursor:pointer}
+.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.dcount{font-size:13px;color:var(--ink2);min-width:64px;text-align:center}
+.foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic;line-height:1.5}
+svg{display:block}
+@media(max-width:420px){.hgroup h1{font-size:26px}.tab{padding:8px 13px;font-size:13px}.oneliner{font-size:16.5px}}
+</style>
+<noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
+      <rect x="2" y="2" width="48" height="48" rx="12" fill="#e4ecef"/>
+      <path d="M16 4 C14 14 20 18 18 26 C16 34 22 38 20 48" stroke="#4a6b78" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      <path d="M38 6 C40 16 34 22 30 30 C27 36 22 40 20 48" stroke="#6d7b41" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <rect x="11" y="12" width="12" height="4" rx="1.5" fill="#573f2c"/>
+      <rect x="13" y="28" width="12" height="4" rx="1.5" fill="#573f2c"/>
+      <circle cx="20" cy="46" r="3" fill="#b0623b"/>
+    </svg>
+    <div class="hgroup">
+      <h1>ACF Negotiation Guide</h1>
+      <div class="sub">AOM 4643 · Modules 9 to 12 · Class project, 40% of the course</div>
+    </div>
+  </div>
+  <p class="hnote">One place for the whole ACF project: what is due when, what each phase asks of you, who the ten stakeholders are, how the basin and the spreadsheet work, and Kiker's advice on negotiating. Every card names its lecture or Canvas file. Dates are US Eastern. Anything marked <span class="pill est">estimate</span> is inferred, mostly from last year's schedule.</p>
+
+  <div class="prog">
+    <div class="progbar"><div class="progfill" id="pf"></div></div>
+    <div class="progtxt"><b id="pdone">0</b> of <span id="ptot">0</span> checklist steps done · <span id="pnext"></span></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-v="phases">Phases</button>
+    <button class="tab" data-v="roles">Roles</button>
+    <button class="tab" data-v="basin">Basin</button>
+    <button class="tab" data-v="sheet">Spreadsheet</button>
+    <button class="tab" data-v="negotiate">Negotiate</button>
+    <button class="tab soon" data-v="numbers">Numbers</button>
+    <button class="tab" data-v="flash">Cards</button>
+    <button class="tab" data-v="quiz">Quiz</button>
+  </div>
+
+  <!-- ================= PHASES ================= -->
+  <div class="view on" id="v-phases">
+    <div class="oneliner">The ACF project in one breath: you get one stakeholder role, you learn the basin and the spreadsheet well enough to know a good deal from a bad one, you write a private strategy with a best deal and a least acceptable deal (Phase I), you negotiate flow contracts with nine other roles on a Canvas board for about two and a half weeks (Phase II), and you finish with a short survey and peer grades (Phase III). Kiker: "Everything in Phase I is to get you ready to do good in Phase II" (12.1).</div>
+    <div class="next" id="nextup"></div>
+    <div class="myrole" id="myrolebox"></div>
+    <h2 class="h2">The timeline</h2>
+    <p class="lede">Eight steps from now to December. Open a step for what to produce, how it is graded, how to do well, and the ways people lose points. Checkboxes are saved on this device.</p>
+    <div id="phaselist"></div>
+    <div class="cardx" style="margin:16px 4px 0">
+      <h3>How the grade adds up</h3>
+      <p><b>Term project = 40% of the course</b> (syllabus). Inside it: Phase I strategy, metrics and spreadsheet work 35%, Phase II negotiation 35% (peers 30%, quality of your flow negotiations 35%, Kiker 35%), Phase III survey 30%. The rest of the course: case studies 30%, quizzes 25%, graded discussions and surveys 5%.</p>
+      <p>Kiker's own framing: Phase I is "about 10% or so... a full letter grade" of the course, Phase II "about 1.5 letter grades", Phase III about a full letter grade and "a gift as long as you do it" (announcements Nov 2025, 12.1). Students who take the project seriously "make a B or much higher; those who blow this off struggle to pass" (announcement).</p>
+      <div class="src">Sources: AOM 4643 Fall 2026 syllabus; Module 12 page; 2025 announcements (dated Fall 2025, reposted in this course); lecture 12.1.</div>
+    </div>
+  </div>
+
+  <!-- ================= ROLES ================= -->
+  <div class="view" id="v-roles">
+    <div class="oneliner">Ten roles, and you play one. Kiker's most basic advice: read your own role, then read everyone else's, "because you do need to understand where they're coming from" (10.4). In any group of ten, "at least three or four people are sympathetic to your area. Find them and cut deals with them" (10.4).</div>
+    <div class="note" style="margin:0 4px 14px"><b>Ten roles, not eleven.</b> The spoken transcript of 10.4 reads like two roles at the end ("a regional association of smaller cities and power companies in the middle... a local Chattahoochee River Association"). Every written list (10.3 and 10.4 slides, Module 11 and 12 notes, Module 12 page) has one role there: <b>Middle Chattahoochee River Association (smaller cities and power companies), MID</b>. The role description PDF titles it "Middle Chattahoochee / Lower Flint Rivers", and 12.1 says "ten potential groups". So the "Chattahoochee River association" in 10.4 is MID, split by the auto-transcript.</div>
+    <h2 class="h2">The usual camps</h2>
+    <p class="lede">From 12.1, where Kiker sketches who tends to side with whom, plus the role descriptions. Camps shift deal by deal.</p>
+    <div class="camps">
+      <div class="camp"><h3>Keep water upstream</h3><p><span class="abbr">ATL, GA, LAN</span>. "City of Atlanta and Georgia and Lake Lanier are often good pals because they're all kind of working together" (12.1).</p></div>
+      <div class="camp"><h3>Send water downstream</h3><p><span class="abbr">FL, ENV, NAV</span>. "If you're Florida, the environment might actually be your big ally" (12.1). Navigation wants reservoir releases too (role description).</p></div>
+      <div class="camp"><h3>Can go both ways</h3><p><span class="abbr">AG, AL, MID</span>. "The agricultural guys, state of Alabama, middle Chattahoochee. They can go both ways" (12.1).</p></div>
+      <div class="camp"><h3>Broker</h3><p><span class="abbr">USACE</span>. Federal interest, "should not be advocating for any one state" (role description).</p></div>
+    </div>
+    <h2 class="h2">Who pulls with whom</h2>
+    <div class="mxwrap"><table class="mx" id="mx"></table></div>
+    <p class="mxcap">Read across a row. <b style="color:#4d5a2a">+</b> usually pulls the same way, <b style="color:#8c4a2b">&#8722;</b> usually pulls against, blank depends on the deal. CE = US Army Corps of Engineers. My reading of the role descriptions and 12.1, not an official course table.</p>
+    <h2 class="h2">The ten roles</h2>
+    <p class="lede">Each card: who they are, what they want, what they fear, the cells and outputs they watch in the spreadsheet, likely allies and opponents, and a note from the Module 12 example strategy. Example strategies are past students' work: Kiker posted them "for inspiration only", so treat their numbers as claims to check, not facts.</p>
+    <div id="rolelist"></div>
+    <h2 class="h2">Conflict &amp; perspectives</h2>
+    <div id="perspectives" class="placeholder" data-status="placeholder">
+      <h3>Conflict &amp; perspectives</h3>
+      <span class="pill soon">coming next</span>
+      <p>A deeper look at how each side frames the water war, and where the real lines of conflict run. This section fills in later.</p>
+    </div>
+  </div>
+
+  <!-- ================= BASIN ================= -->
+  <div class="view" id="v-basin">
+    <div class="oneliner">The ACF is a big river that delivers its water at the wrong time. Most of it arrives in late winter and spring; farms, lawns, lakes and the bay all want it in summer. One lake, Lanier, holds about two thirds of all the storage, sits at the top of the basin, and refills slowly. That is why everyone fights over it (9.2, 9.3).</div>
+    <div class="mapwrap">
+      <svg viewBox="0 0 360 600" width="100%" role="img" aria-label="Schematic of the ACF river system from Lake Lanier and the Flint headwaters down to Apalachicola Bay">
+        <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#4a6b78"/></marker>
+        <marker id="arg" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#6d7b41"/></marker></defs>
+        <text x="90" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#4a6b78" letter-spacing="1">CHATTAHOOCHEE</text>
+        <text x="272" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#4d5a2a" letter-spacing="1">FLINT</text>
+        <rect x="18" y="28" width="144" height="46" rx="10" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
+        <text x="90" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Lake Lanier</text>
+        <text x="90" y="64" text-anchor="middle" font-size="10" fill="#6c5d45">Buford Dam · 2/3 of storage</text>
+        <path d="M90 74 L90 92" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="94" width="144" height="46" rx="10" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
+        <text x="90" y="114" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Metro Atlanta</text>
+        <text x="90" y="130" text-anchor="middle" font-size="10" fill="#6c5d45">Peachtree Creek target</text>
+        <path d="M90 140 L90 158" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="160" width="144" height="46" rx="10" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
+        <text x="90" y="180" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">West Point Lake</text>
+        <text x="90" y="196" text-anchor="middle" font-size="10" fill="#6c5d45">GA / AL line</text>
+        <path d="M90 206 L90 224" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="226" width="144" height="46" rx="10" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
+        <text x="90" y="246" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Columbus, GA</text>
+        <text x="90" y="262" text-anchor="middle" font-size="10" fill="#6c5d45">head of navigation</text>
+        <path d="M90 272 L90 290" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="292" width="144" height="46" rx="10" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
+        <text x="90" y="312" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Walter F. George</text>
+        <text x="90" y="328" text-anchor="middle" font-size="10" fill="#6c5d45">Lake Eufaula</text>
+        <path d="M90 338 L90 356" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="18" y="358" width="144" height="40" rx="10" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
+        <text x="90" y="383" text-anchor="middle" font-size="11.5" fill="#2c2417">G. W. Andrews (small)</text>
+        <path d="M90 398 C90 420 140 432 160 440" stroke="#4a6b78" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+        <rect x="198" y="28" width="144" height="46" rx="10" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
+        <text x="270" y="48" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Headwaters</text>
+        <text x="270" y="64" text-anchor="middle" font-size="10" fill="#6c5d45">south Atlanta, no big dams</text>
+        <path d="M270 74 L270 222" stroke="#6d7b41" stroke-width="2" marker-end="url(#arg)"/>
+        <text x="262" y="140" text-anchor="end" font-size="10" fill="#4d5a2a">free-flowing,</text>
+        <text x="262" y="153" text-anchor="end" font-size="10" fill="#4d5a2a">fed by groundwater</text>
+        <rect x="198" y="226" width="144" height="46" rx="10" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
+        <text x="270" y="246" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Albany, GA</text>
+        <text x="270" y="262" text-anchor="middle" font-size="10" fill="#6c5d45">irrigated farm country</text>
+        <path d="M270 272 C270 380 240 420 210 440" stroke="#6d7b41" stroke-width="2" fill="none" marker-end="url(#arg)"/>
+        <rect x="70" y="442" width="220" height="48" rx="12" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.8"/>
+        <text x="180" y="462" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2c2417">Lake Seminole · Jim Woodruff Dam</text>
+        <text x="180" y="479" text-anchor="middle" font-size="10" fill="#6c5d45">rivers meet at the GA / FL line</text>
+        <path d="M180 490 L180 508" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="70" y="510" width="220" height="40" rx="12" fill="#fbf6ea" stroke="#c7b797" stroke-width="1.4"/>
+        <text x="180" y="527" text-anchor="middle" font-size="12" font-weight="700" fill="#2c2417">Apalachicola River (FL)</text>
+        <text x="180" y="542" text-anchor="middle" font-size="10" fill="#6c5d45">Chattahoochee, FL gauge: 5,000 cfs floor</text>
+        <path d="M180 550 L180 566" stroke="#4a6b78" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="70" y="568" width="220" height="28" rx="12" fill="#573f2c"/>
+        <text x="180" y="587" text-anchor="middle" font-size="12" font-weight="700" fill="#f4ecdd">Apalachicola Bay · oysters</text>
+      </svg>
+    </div>
+    <p class="mapcap">A plain schematic, not to scale. Blue boxes are federal reservoirs. The class model controls Lanier and, combined into one, West Point and George. Sources: 9.1, 9.2, 9.3, 10.1, 10.3.</p>
+    <div class="cgrid" id="basincards"></div>
+    <h2 class="h2">The water war, as Kiker tells it</h2>
+    <div class="cardx" style="margin:0 4px 12px"><ul class="tl" id="timeline"></ul>
+      <div class="src">Sources: 9.2 and Module 9 Part I lecture notes; 9.1 film for the 2007 drought scenes. The lectures stop around 2012 to 2015 ("I'm sure I'll have to update this as years go by", 9.2). Later court events are not in the course files.</div></div>
+    <h2 class="h2">Why the compact failed: Leitman's 17 lessons (10.2)</h2>
+    <p class="lede">Kiker teaches these from Steve Leitman, who worked inside the 1990s negotiations. Each one maps onto something you will do in Phase II.</p>
+    <div class="cardx" style="margin:0 4px 12px"><ol class="line" id="lessons"></ol>
+      <div class="src">Source: 10.2 transcript and "Module10 ACF Lessons Learnt from Failure Lecture Notes.pdf".</div></div>
+  </div>
+
+  <!-- ================= SPREADSHEET ================= -->
+  <div class="view" id="v-sheet">
+    <div class="oneliner">The spreadsheet is your negotiating instrument. Kiker: "If you can run this spreadsheet, you will do awesomely in the negotiation. I guarantee it" (12.1). You only ever change the green cells; everything else recalculates on its own (10.3).</div>
+    <div class="cgrid" id="sheetcards"></div>
+    <h2 class="h2">The ControlPanel, cell by cell</h2>
+    <p class="lede">Green inputs and their defaults in the <b>v5.1 file on Canvas</b> (ControlPanel sheet). Lecture screenshots show older versions with slightly different numbers. "Current" values are fixed for reference; the model runs on the <b>Future</b> column.</p>
+    <div class="cardx" style="margin:0 4px 12px"><div class="rows" id="cprows"></div>
+      <div class="src">Source: ACF_Negotiation_Worksheet_v_5_1_Release.xlsx, ControlPanel; 10.3; 11.1; 11.3.</div></div>
+    <h2 class="h2">Reading a reservoir schedule</h2>
+    <div class="cardx" style="margin:0 4px 12px">
+      <p>Think of each reservoir as a bank account (Kiker's "Negotiation Strategy Tip 1" announcement): when the account is full you spend freely; as it drops you cut back. For each month you set <b>where each zone starts</b> (a lake level in feet) and <b>how much to release</b> (cfs) while the lake sits in that zone.</p>
+      <p>Lanier zones in the model: <b>Normal</b> (top fixed at 1071 ft), <b>Transition</b>, <b>Drought</b>, and <b>Dead</b> (1035 ft, red, untouchable). West Point &amp; George: top 637 ft, dead zone 620 ft.</p>
+      <div class="mini"><b>Try it (10.3's quick quiz).</b> Kiker's example January to May schedule: Normal zone 1071 to 1065 releases 4,000 cfs, Transition 1065 to 1050 releases 2,000 cfs, Drought 1050 to 1035 releases 750 cfs. It is May and Lanier sits at 1060 ft. What is the release?
+        <div class="opts" id="zq"></div><div class="ans" id="zqa" hidden></div></div>
+      <div class="src">Sources: 10.1, 10.3 and its lecture notes; Oct 2025 announcement "You are welcome to change ALL green zones".</div>
+    </div>
+    <h2 class="h2">Metric recipes</h2>
+    <div class="cardx" style="margin:0 4px 12px">
+      <p><b>Count bad days.</b> In RawDataForNegotiations, next to a flow column, type <code>=IF(B5&lt;5000,1,0)</code>, copy it down all 3,650 rows, then <code>=SUM(...)</code> the column. That gives days in ten years under 5,000 cfs (11.1). Change the threshold for other roles: 6,000 for Florida, a navigation flow for NAV.</p>
+      <p><b>Compare rivers.</b> Insert a column dividing Chattahoochee flow by Flint flow, then take the <code>=AVERAGE</code>. It shows how much of the low-flow burden the Flint carries (11.2, the Flint ag argument).</p>
+      <p><b>Check a lake.</b> Use <code>=MIN</code> on a Lanier or West Point &amp; George level column, or count days under a recreation level such as 1066 ft for Lanier (10.1).</p>
+      <p>Columns in RawDataForNegotiations: <b>B, D, F</b> Florida flow (average, moderate, severe) with <b>C, E, G</b> marking days under 5,000; <b>H, I, J</b> Middle Chattahoochee flow; <b>K, L, M</b> Lake Lanier level; then one block per scenario (P to U, X to AC, AF to AK) with the Lanier release, Middle Chattahoochee, Flint and Florida flows and both lake levels. Row 3 holds minimums; row 3657 holds the day counts.</p>
+      <div class="src">Sources: 11.1, 11.2, 11.3; v5.1 file, RawDataForNegotiations.</div>
+    </div>
+  </div>
+
+  <!-- ================= NEGOTIATE ================= -->
+  <div class="view" id="v-negotiate">
+    <div class="oneliner">"We're not in a legal battle. You're not in a flame war on the internet" (10.4). Kiker borrows from <i>Getting to Yes</i> (Fisher and Ury): stay professional, know your numbers, find the three or four people who want what you want, and give people a way to save face. "You don't have to agree, but you do have to negotiate" (10.4).</div>
+    <div class="cgrid" id="negcards"></div>
+    <h2 class="h2">What to post</h2>
+    <p class="lede">Shapes, not scripts. Kiker showed real posts from past years in 12.1 and said: "Don't copy this. For goodness sakes, make your own up."</p>
+    <div class="cgrid" id="postcards"></div>
+  </div>
+
+  <!-- ================= NUMBERS ================= -->
+  <div class="view" id="v-numbers">
+    <div id="numbers" class="placeholder" data-status="placeholder">
+      <h3>The conflict in numbers</h3>
+      <span class="pill soon">coming next</span>
+      <p>Flows, lake levels, demands and dollars from the scientific and agency sources, each one cited, so you can back your positions with objective criteria. This tab fills in once the source research is done.</p>
+    </div>
+  </div>
+
+  <!-- ================= FLASHCARDS ================= -->
+  <div class="view" id="v-flash">
+    <div class="filters" id="flashfilters"><span class="fl">Deck:</span></div>
+    <div class="deckwrap">
+      <div class="flash" id="flash"><div class="flinner">
+        <div class="fface ffront"><div class="tag" id="fqtag"></div><div class="qq" id="fq"></div><div class="fhint" style="font-size:12px;color:var(--ink3);margin-top:16px">tap to flip</div></div>
+        <div class="fface fback"><div class="aa" id="fa"></div><div class="ss" id="fs"></div></div>
+      </div></div>
+      <div class="deckctl"><button class="dbtn" id="fprev">&#8592;</button><span class="dcount" id="fcount"></span><button class="dbtn" id="fnext">&#8594;</button></div>
+      <button class="dbtn pri" id="fshuf">Shuffle</button>
+    </div>
+  </div>
+
+  <!-- ================= QUIZ ================= -->
+  <div class="view" id="v-quiz">
+    <div class="filters" id="quizfilters"><span class="fl">Topic:</span></div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="foot">Built Oct 8, 2026 from lectures 8.1 to 12.2, the Canvas Module 9 to 12 pages, syllabus, assignments and announcements, the role descriptions, the ten example strategies, and the v5.1 spreadsheet and v4.1 contract files.<br>Dates in US Eastern. Saved checkboxes and your role stay on this device only.</div>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+var DEADLINES=[
+ {t:"Stakeholders discussion and spreadsheet quiz open",at:"2026-10-12T08:00:00-04:00",ph:"disc"},
+ {t:"Module 9 quiz",at:"2026-10-18T23:59:00-04:00",ph:"ssq"},
+ {t:"ACF Stakeholders discussion: who do you identify with?",at:"2026-10-19T23:59:00-04:00",ph:"disc"},
+ {t:"Intro to the ACF Flow Spreadsheet quiz",at:"2026-10-23T18:00:00-04:00",ph:"ssq"},
+ {t:"Module 10 quiz",at:"2026-10-25T23:59:00-04:00",ph:"ssq"},
+ {t:"Performance metrics assignment and Module 11 & 12 quiz",at:"2026-11-01T23:59:00-05:00",ph:"metrics"},
+ {t:"Phase I strategy and control panels",at:"2026-11-06T23:59:00-05:00",ph:"p1"},
+ {t:"Phase II opens: group boards go live",at:"2026-11-13T12:00:00-05:00",ph:"p2"},
+ {t:"Phase II ends (time is an estimate)",at:"2026-12-01T17:00:00-05:00",ph:"p2"},
+ {t:"Phase III survey and peer grades",at:"2026-12-02T23:59:00-05:00",ph:"p3"}
+];
+var PHASES=[
+ {id:"prep",n:"0",title:"Lectures and the spreadsheet",when:"Now. Modules 9 to 12 are open.",
+  produce:"Nothing graded yet, but this is where later grades get won: watch 9.1 to 12.1, get the model running, and read all ten role descriptions.",
+  weight:"Feeds everything after. \"The people who invest in knowing this spreadsheet win the negotiation\" (12.1).",
+  doit:["Download the spreadsheet with the small download tray icon next to the Canvas link, not the preview viewer. The viewer's download comes out corrupted (Kiker announcement, Oct 2025).",
+   "Open ControlPanel, change one green cell and watch the Lanier chart move (10.3, 11.1). You cannot break it; if you do, download a fresh copy (12.1).",
+   "Read your role and the other nine (10.4). The Roles tab has all ten.",
+   "Ask Kiker now. He holds Zoom sessions on Thursdays at 4:00 pm ET (Canvas inbox). Once Phase II starts he becomes Judge Kiker and only answers procedure questions (12.1)."],
+  lose:["Starting late: \"probably 10% of the class kind of goes, what's going on?\" every year (12.1)."],
+  checks:["Watched 9.1 to 9.3 (basin and history)","Watched 10.1 to 10.4 (reservoirs, lessons, model, roles)","Watched 11.1 to 11.3 (running the model, contracts, metrics)","Watched 12.1 (the class project)","Downloaded the v5.1 spreadsheet (download tray, not the viewer)","Downloaded the v4.1 Contract file","Read all ten role descriptions"],
+  src:"Module 9 to 12 pages; 12.1; announcements Oct 2025; ACF role-finding check, Oct 3."},
+ {id:"disc",n:"1",title:"ACF Stakeholders discussion",when:"Opens Mon Oct 12, 8:00 am · due Mon Oct 19, 11:59 pm ET · locks Fri Oct 23",pts:"10 pts",
+  produce:"A discussion post on \"ACF Stakeholders... Who do you identify with?\" Canvas shows no prompt text yet (pulled Oct 3), so read the full prompt when it opens on Monday.",
+  weight:"10 points. Graded discussions and surveys are 5% of the course together (syllabus).",
+  doit:["Name the stakeholder you actually feel closest to and what in the lectures pulled you there: the Apalachicola oystermen, the Flint growers, the Lake Lanier sailors, the Columbus plant (9.1).",
+   "It runs before roles are assigned, so it is a free look at how classmates see the basin. Note who leans where."],
+  lose:["Missing it. It locks Fri Oct 23."],
+  checks:["Read the prompt once it opens","Posted by Mon Oct 19, 11:59 pm ET","Replied to classmates if the prompt asks"],
+  src:"Canvas assignment \"Modules 8-12 Discussion: ACF Stakeholders... Who do you identify with?\"; syllabus."},
+ {id:"role",n:"2",title:"Role assignment",when:"Expected around Oct 16 to 20",est:true,
+  produce:"Nothing to submit. Undergrads (AOM 4643) get one role. Grad students (AOM 6736) write strategies for all ten roles and moderate the groups (syllabus, 12.2).",
+  weight:"Not graded itself.",
+  doit:["Last year Kiker posted \"Your Role is now set... so what is my motivation?\" on Thu Oct 16, 2025, and group numbers came in a \"Drumroll\" announcement. This year's stakeholder discussion runs Oct 12 to 19, so expect roles around Oct 16 to 20.",
+   "The seven group boards (ACF Group 1 to 7) open Fri Nov 13 at 12:00 pm ET and list each member's name and role.",
+   "When your role lands, tap \"This is my role\" on the Roles tab. The dashboard pins it here."],
+  lose:[],
+  checks:["Role announced (watch announcements and the Canvas inbox)","Marked my role on the Roles tab","Read my role's example strategy (Module 12)","Read up on my role beyond the course files"],
+  src:"ACF role-finding check (Oct 3: no role assigned yet); announcements Oct 2025; discussions list; syllabus."},
+ {id:"ssq",n:"3",title:"Intro to the ACF Flow Spreadsheet",when:"Opens Mon Oct 12, 8:00 am · due Fri Oct 23, 6:00 pm ET · locks Oct 30",pts:"30 pts",
+  produce:"A Canvas quiz. The Module 10 page describes it: enter the given control panel settings and find the maximum number of days, over ten years and across the three climate scenarios, that Florida flows fall under 5,000 cfs. The settings are in \"Module 10 Case Study Management Settings.pdf\", pages 1 to 7.",
+  note:"Canvas names it \"ACF Negotiation Prep: Introduction to the ACF Flow Spreadsheet\"; the Module 10 page calls it the Module 10 Case Study. As far as the files show, they are the same task (estimate).",
+  weight:"30 points. Case studies are 30% of the course together (syllabus).",
+  doit:["Kiker's own recipe (\"Simple Spreadsheet Assignment: Don't overthink it!\", Oct 2025): enter the green values he gives you, go to RawDataForNegotiations, read cells C3657, E3657 and G3657, and take the max.",
+   "Case studies allow several attempts with new numbers each time. More than four attempts needs an email to Kiker (syllabus).",
+   "Module 9 quiz (Sun Oct 18) and Module 10 quiz (Sun Oct 25), 40 points each, cover the same lectures."],
+  lose:["Typing into the Current column (fixed) instead of Future (green), or into the wrong month's cells."],
+  checks:["Entered the case-study settings into a fresh copy","Read C3657, E3657, G3657 and took the max","Submitted by Fri Oct 23, 6:00 pm ET","Module 9 quiz done (Sun Oct 18)","Module 10 quiz done (Sun Oct 25)"],
+  src:"Canvas assignment 7115087; Module 10 page; announcement Oct 2025; syllabus."},
+ {id:"metrics",n:"4",title:"Performance metrics assignment",when:"Due Sun Nov 1, 11:59 pm ET",pts:"80 pts",
+  produce:"A short report (1 to 2 pages, with references) naming at least two performance metrics for each of the ten roles, twenty in all, each with units. Then calculate two of them in the spreadsheet over at least two climate scenarios. Submit your metrics page or a screen grab, not the 18 MB file (Module 11 page, 11.3).",
+  weight:"80 points: metric definitions and clarity 55, spreadsheet calculations 25 (rubric). The syllabus counts \"performance metrics and spreadsheet calculations\" together with the Phase I strategy. Kiker: it \"counts double\" (Module 11 notes).",
+  doit:["A good metric has a clear definition and units: a flow over a time period, a lake level, a count of days (rubric). Shape: \"days in 10 years Florida flow is under 5,000 cfs, severe drought scenario\".",
+   "Build the two calculations in RawDataForNegotiations with IF and SUM (see the Spreadsheet tab, 11.1, 11.2).",
+   "Only two need calculating. \"Don't overcomplicate it\" (11.3).",
+   "The two metrics you write for your own role become your yardstick in Phase I and II."],
+  lose:["Vague metrics with no units: \"Please do not be vague on the metrics as this will lower your grade\" (Module 11 page).","Submitting the whole spreadsheet."],
+  checks:["Two metrics with units for each of the ten roles","Two metrics calculated over at least two scenarios","Screen grab of my metrics page","Submitted by Sun Nov 1, 11:59 pm ET","Module 11 & 12 quiz done (opens Fri Oct 30, due Sun Nov 1)"],
+  src:"Canvas assignment 7115103 and rubric; Module 11 page; 11.3; Module 11 notes; syllabus."},
+ {id:"p1",n:"I",big:true,title:"Phase I: your strategy",when:"Due Fri Nov 6, 11:59 pm ET · locks Nov 13",pts:"100 pts",
+  produce:"A 2 to 5 page strategy for your role (12.1): your overall approach, what flows you find acceptable and unacceptable, allies and opponents, arguments ready to post, references. Plus two control panels from the <b>Contract</b> file: your <b>best</b> deal and your <b>least acceptable</b> deal, with sentences on why each one works for your role. Upload Word or PDF plus the panels. Do not attach the full spreadsheet.",
+  weight:"35% of the term project (syllabus, Module 12 page; the Canvas assignment text says 34%). Kiker, Nov 2025: \"about 10% or so... a full letter grade\" of the course. Rubric: strategy text 70, control panels 25, references 5.",
+  doit:["Use every green cell: water withdrawals (the vertical green column) AND both reservoirs, levels AND releases, month by month, using the seasons. That is the 25-point rubric line.",
+   "Test all three climates. \"Bush league negotiators usually look at average climate and they never look at the stress periods\" (12.1).",
+   "Keep both deals technically feasible: no reservoir touching its dead zone, even for one day (12.1).",
+   "Least acceptable is the used-car price you would still pay, barely (assignment).",
+   "Keep it private. Kiker reads it, your group never does. Some students pre-write their introduction inside it and paste it in on day one (12.1).",
+   "Name allies and adversaries and why. The top rubric band asks for both, plus \"ready-made arguments\"."],
+  lose:["Default reservoir settings: \"the number one rookie mistake... they just lost a boatload of Phase I grade\" (12.1).",
+   "Filler like \"water is really, really important in the ACF\" (12.1).",
+   "Pasting two panels with no explanation, or leaving them out: \"a great way to lose 20 plus percent\" (12.1).",
+   "No references (5 points).",
+   "Changing only one or two numbers (12.1)."],
+  checks:["Strategy draft: who I represent, what we want, why","Acceptable and unacceptable flows named in numbers","Allies and opponents named, with reasons","Two or three arguments ready to post","BEST deal control panel (Contract file)","LEAST ACCEPTABLE control panel","Both panels change demands AND Lanier AND WP & George levels and releases","Ran both in all three climates: no dead-zone days","Sentences on why each deal is good","Reference list","Uploaded Word/PDF plus panels by Fri Nov 6, 11:59 pm ET"],
+  src:"Canvas assignment 7115106 and rubric; Module 12 page; syllabus; 12.1; announcement Nov 2025."},
+ {id:"p2",n:"II",big:true,title:"Phase II: the negotiation",when:"Fri Nov 13, 12:00 pm ET to Tue Dec 1 (closing time is an estimate)",
+  produce:"Your posts on your ACF group board: an introduction, discussion, flow contracts, and a vote on every properly submitted contract. A contract is the control panel of the Contract file (12.1, Module 12 page).",
+  weight:"35% of the term project: peers 30%, quality of your flow negotiations 35%, Kiker 35% (syllabus). His rubric: introduction 15, negotiation performance 85. Scoring 80 needs at least one new or amended contract; 85 means many, regularly, over the two weeks. Kiker 2025: Phase II is \"about 1.5 letter grades\".",
+  rules:["Every properly submitted contract gets approve, reject, or amend from everyone. An amended contract (1a, 1b...) needs a new vote from all (Module 12 page).",
+   "Last year's rule: vote within 2 business days. Missing votes count against your Phase II grade (announcements Nov 2025).",
+   "Technically infeasible means void with no vote: Lanier or West Point & George hits dead-zone storage for even one day, or any red cell changed (Judge Kiker announcement, Nov 2025).",
+   "Negotiate only in your own group. Other boards are open to read, not to post (12.1).",
+   "Talking offline is allowed, but only the board is graded (Module 12 page).",
+   "No lawsuits in this world (announcement).",
+   "Grad-student moderators number contracts and tally votes. Lecture 12.2 is for them; as an undergrad you can skip it."],
+  datesNote:"Last year: Thanksgiving pause Thu and Fri, last new contracts Sun 5:00 pm, votes closed Mon Dec 1 at 6:00 pm. For 2026 that suggests a pause Thu Nov 26 and Fri Nov 27 and last contracts around Sun Nov 29, 5:00 pm (estimates; watch the announcements).",
+  doit:["Introduce yourself in the first couple of days: your name, who you represent, a few goals. Not your strategy (12.1).",
+   "Check in every 24 to 36 hours. Five to ten minutes a day is often enough (12.1).",
+   "Paste every contract into your model before voting. You should know within seconds whether it works for you (12.1, 11.2).",
+   "Explain your votes. It helps the group move toward something you can accept (announcement).",
+   "Tell the group before you travel (12.1)."],
+  lose:["Going dark: \"usually five to 10% of the class literally disappear\" (12.1).",
+   "Missing votes (abstentions count against you).",
+   "Dumping your strategy: \"like playing poker with an open hand... you will get taken\" (Module 12 page).",
+   "\"All I need is 5,000 cfs\": the minimum wage trap (12.1, 10.2).",
+   "Agreeing to a bad deal. Your peers will not warn you (12.1)."],
+  checks:["Intro posted in the first days","Checked the board at least every 36 hours","Voted on every contract (approve, reject, or amend)","Proposed at least one new contract or amendment","Explained my votes","Told the group before any absence","All final votes in before the close"],
+  src:"Syllabus; Module 12 page; Canvas assignments 7115104 and 7115105; 12.1; announcements Nov 2025; discussion boards (open Nov 13, 12:00 pm)."},
+ {id:"p3",n:"III",big:true,title:"Phase III: survey and peer grades",when:"Opens Mon Nov 30, 8:00 am · due Wed Dec 2, 11:59 pm ET",pts:"100 pts",
+  produce:"A short follow-up questionnaire (some questions required, some optional, no wrong answers) and the peer grading sheet for the people in your own group. About 15 to 30 minutes (12.1, Module 12 page).",
+  weight:"30% of the term project (syllabus, 12.1). \"Basically one full letter grade\" (12.1).",
+  note:"Canvas also lists \"ACF Phase II Negotiation Grade from Your Peers\" as an upload due Thu Dec 3, 11:59 pm ET. Check which item takes the peer sheet. The syllabus says Phase III is due Dec 3, Canvas says Dec 2: go with Dec 2. The Module 12 page gives a 0 to 4 scale for peer ratings; 12.1 describes 1 to 5. Use whatever the sheet says.",
+  doit:["Do it the day it opens, while the negotiation is fresh."],
+  lose:["Forgetting it. People do, every year (12.1)."],
+  checks:["Questionnaire done","Peer grades for my group done","Submitted by Wed Dec 2, 11:59 pm ET"],
+  src:"Canvas assignments 7115107 and 7115105; Module 12 page; syllabus; 12.1."}
+];
+
+var ROLES=[
+ {id:"FL",camp:"release",name:"State of Florida",tag:"Governor's representative · the downstream state",
+  who:"Speaks for the governor and for diverse Florida interests: farmers, endangered species, and the Apalachicola seafood industry. Florida is fully downstream, holds little of the basin's land, and has set aside large areas for conservation (role description, 10.2).",
+  want:["Enough flow, at the right time and for long enough, to sustain Apalachicola Bay and its seafood industry.","Endangered species in the Apalachicola River protected.","All reservoirs used actively in dry years, and upstream users conserving more (role description)."],
+  fear:"Low flows in drought: salinity rises and oysters die. In the 9.1 film, someone on the bay says about 80% of its oyster beds died during almost seven months of flatline low flows in 2007. And the trap of settling for the 5,000 cfs minimum (10.2).",
+  model:"Jim Woodruff Dam Outflow target (default 5,000 cfs); the Outflow into Florida charts; Florida flow and the days-under-5,000 counts in RawDataForNegotiations; Lanier releases; everyone's drought conservation factors.",
+  allies:"Environmental interests, \"your big ally\" (12.1). Navigation on more releases. Sometimes Alabama, a co-litigant (role description).",
+  opp:"Metro Atlanta, Georgia and the Lake Lanier Association, who want water held upstream (12.1, 10.1).",
+  ex:"\"FL_Strategy 3\": hold 5,000 cfs in normal and drought years, target 6,500, accept 4,500 in severe drought as a possible concession; raise Lanier's minimum release to 300 to 500 cfs. Deal ideas: help fund Atlanta's efficiency programs and pay Flint growers to cut back in drought. Avoid polarizing words like \"upstream\" and \"historical flows\".",
+  src:"Role descriptions (Module 10); 9.1; 9.3; 10.2; 12.1; FL_Strategy 3.pdf."},
+ {id:"GA",camp:"store",name:"State of Georgia",tag:"Governor's representative · three quarters of the basin",
+  who:"Speaks for Georgia's governor. About three quarters of the basin lies in Georgia, but the state's own users split: Atlanta, Flint farmers and the middle Chattahoochee all want different things (9.2, 10.2).",
+  want:["Lake Lanier as the water supply for the Metro Atlanta economy, which it sees as the \"highest and best use\".","Georgia users not singled out for limits on growth.","As much water as possible at the least cost, and \"keep the Georgians together!\" (role description)."],
+  fear:"Losing Lanier access, as in the 2009 Magnuson ruling (later overturned). Georgia's own farmers and middle-basin towns breaking away; navigation openly wants Georgia to \"divide by interest\" (role descriptions).",
+  model:"Metro Atlanta future demand and conservation factors; Lanier zone levels and releases; also Flint agriculture and Columbus demands, since they are Georgians too.",
+  allies:"Metro Atlanta and the Lake Lanier Association, \"often good pals\" (12.1).",
+  opp:"Florida, environmental interests, Alabama, navigation. Inside-state tension with Flint agriculture and the middle Chattahoochee.",
+  ex:"\"State of GA Example strategy\": a statewide conservation plan, metering all permitted withdrawals, two 10 MGD grey-water plants, about 20% savings on 2009 demand within ten years; meanwhile ask for 4% yearly withdrawal increases, later rolled back toward 1990 volumes. Offers Alabama and Florida a \"buy-in market\" on growth.",
+  src:"Role descriptions; 9.2; 10.2; 12.1; State of GA Example strategy.pdf."},
+ {id:"AL",camp:"swing",name:"State of Alabama",tag:"Governor's representative · upstream of Florida, downstream of Atlanta",
+  who:"Speaks for Alabama's governor. The Chattahoochee forms much of the Alabama-Georgia border, and most of Alabama actually lies in a different basin, the Alabama-Coosa-Tallapoosa (ACT), which it shares with Georgia (10.2).",
+  want:["Water supply for towns and businesses on or near the Chattahoochee.","Water for future development, including irrigation for bioenergy crops in the middle Chattahoochee.","Protect its position in the ACT basin (role description, 10.2)."],
+  fear:"If Atlanta cannot get water from the ACF it may reach into the ACT. Alabama instigated the lawsuit behind the Magnuson ruling but must stay careful with Georgia (role description).",
+  model:"Columbus and rest-of-Chattahoochee demands; the Columbus minimum flow (1,350 cfs); West Point & George levels; Middle Chattahoochee flow.",
+  allies:"Middle Chattahoochee (overlapping region), navigation. Sometimes Florida and environmental interests.",
+  opp:"Metro Atlanta (limiting Atlanta's supply could help Alabama's development), but carefully.",
+  ex:"\"AL and Middle Chat Strategy\" (scanned PDF): wants a solid Corps rulebook that will not \"waffle\"; asks Florida \"What concessions are you making?\"; relies on West Point and Lake Eufaula pool levels for recreation and tourism; backs a reliable 9 x 100 ft navigation channel.",
+  src:"Role descriptions; 10.2; 12.1; AL and Middle Chat Strategy.pdf (OCR)."},
+ {id:"USACE",camp:"broker",name:"US Army Corps of Engineers",tag:"Federal agency · runs the storage reservoirs",
+  who:"The federal agency that operates the ACF's federal dams: Buford (Lake Lanier), West Point, Walter F. George, George W. Andrews and Jim Woodruff (9.3, 10.1). It has been in the middle since the first lawsuits.",
+  want:["Everyone agreeing on water allocations and reservoir use.","Enough water for all uses in the three states.","The best use of water in both high-flow and low-flow years (role description)."],
+  fear:"Pressure from all sides and more lawsuits. The ACF is one of many disputed basins, so a shared solution matters beyond this river. Changing a reservoir's operating rules can take an act of Congress (role description, 10.2).",
+  model:"Every reservoir cell: zone levels and releases for Lanier and for West Point & George; feasibility (no dead-zone days) in all three climates.",
+  allies:"Whoever moves the group toward a deal. Not supposed to advocate for any one state.",
+  opp:"Anyone pushing an extreme. The Alabama example accuses the Corps of \"catering\" to selective interests.",
+  ex:"\"USACE_ACFStrategy\": map every party's wants first, then build a \"great\" deal and a \"bare minimum\" deal; keep Lanier fairly high, give Atlanta a little room to grow, nudge Alabama toward the ACT, stay close to the Corps' 2017 Master Water Control Manual.",
+  src:"Role descriptions; 9.3; 10.1; 10.2; USACE_ACFStrategy.pdf."},
+ {id:"ATL",camp:"store",name:"Metro Atlanta",tag:"Atlanta Regional Commission · many local governments",
+  who:"Represents the Atlanta Regional Commission. Almost three quarters of the basin's population lives in metro Atlanta; over 3 million people depend on Lake Lanier and the Chattahoochee (role description).",
+  want:["Keep Atlanta supplied with water.","Larger future allocations so the region can grow.","Lake Lanier kept full for the next dry years (role description)."],
+  fear:"Limits on growth, higher water costs, and losing Lanier as a supply (the 2009 Magnuson ruling). Conservation savings take time to show (role description, 9.1).",
+  model:"Metro Atlanta future demand (default 500 cfs, current 300) and its drought conservation factors; the Peachtree Creek minimum flow (750 cfs); Lanier levels.",
+  allies:"State of Georgia and the Lake Lanier Association (12.1).",
+  opp:"Florida, environmental interests, Alabama, navigation, and usually Flint agriculture and the middle Chattahoochee, who want Lanier withdrawals restricted.",
+  ex:"\"Atlanta Example Strategy\": lead with conservation work and that Atlantans pay among the highest water and sewer rates; claims Lanier controls only 9% of flow above the Florida line; argues navigation could be dropped and Lanier recreation ranked last. Sharp in tone; Kiker's advice on tone is on the Negotiate tab.",
+  src:"Role descriptions; 9.1; 12.1; Atlanta Example Strategy.pdf."},
+ {id:"ENV",camp:"release",name:"Downstream environmental interests",tag:"Coalition of groups from AL, FL and GA",
+  who:"Speaks for a coalition of environmental groups across all three states: the bay, the Apalachicola River, and the upper and middle Chattahoochee and Flint too (role description).",
+  want:["Endangered and threatened species protected in low flows.","The right ecological flows for river and estuary health.","All reservoirs used actively in dry years; strong drought plans for every user (role description)."],
+  fear:"Flows defined as a single minimum. Leitman's lesson 10: sustainable flows are \"more complex than simply keeping flow above a minimum threshold\" (10.2). Defining each species' needs is hard (role description).",
+  model:"Woodruff outflow; Florida flow days under thresholds and their timing; Peachtree Creek and Columbus minimum flows; everyone's conservation factors.",
+  allies:"Florida (12.1); navigation on releases; anyone pushing for Lanier to share the load.",
+  opp:"Metro Atlanta, Georgia, the Lake Lanier Association.",
+  ex:"\"EnvironmentalStrategy_3\": five metrics (how far flow drops, how often, timing for sturgeon spawning in spring, how long below a survival level, and how fast flow falls). The student cites about 6,500 cfs for mussels, 10,000 cfs for sturgeon and 20,000 cfs for spawning, and flags these as debated. Least acceptable deal: Atlanta at 500 cfs and a 4,000 cfs floor.",
+  src:"Role descriptions; 9.3; 10.2; 12.1; EnvironmentalStrategy_3.pdf."},
+ {id:"AG",camp:"swing",name:"Flint River agriculture",tag:"Growers in the Flint basin",
+  who:"Speaks for growers in the Flint basin, Georgia's irrigated farm country around Albany (9.1). The Flint has no big storage dams and is fed by groundwater (9.3).",
+  want:["Water secured for growers.","Restrict Lanier withdrawals and give Lanier a bigger role in augmenting flow, especially in the dry season.","Compensation for large-scale cuts, paid by urban users if water moves to them (role description)."],
+  fear:"The Flint carrying the drought burden: in a drought the Flint gives more water than the Chattahoochee (9.3), and in 11.1 Kiker shows the Flint \"bearing the brunt\". A Georgia deal with severe ag cuts but minor ones for Atlanta and Lanier (role description).",
+  model:"Agricultural demand cells (which rise in drought, 10.3); Flint municipal demand; Flint flow versus Middle Chattahoochee flow in RawDataForNegotiations; the Chattahoochee-to-Flint ratio (11.2).",
+  allies:"Middle Chattahoochee. Can swing toward Florida if growers are paid (12.1: \"can go both ways\").",
+  opp:"Metro Atlanta and the Lake Lanier Association. Watch the State of Georgia.",
+  ex:"\"AgricultureStrategy_3\": a metric for the Flint's share of flow into Florida; accept up to 50% in normal years, 55% in moderate drought, 59% in severe drought, and ask for money above that. Hold ag demand constant. Plan: lay low early, run every proposal through the metric.",
+  src:"Role descriptions; 9.1; 9.3; 10.3; 11.1; 11.2; 12.1; AgricultureStrategy_3.pdf."},
+ {id:"LAN",camp:"store",name:"Lake Lanier Association",tag:"Businesses and homeowners on the lake",
+  who:"The lake's lobby: homeowners, marinas and recreation businesses. Kiker in 10.1: a whole organization \"dedicated to making sure Lake Lanier is full of water\". In 12.1 he calls it one of the hardest positions, since everyone else wants its water.",
+  want:["Lanier not over-used under new operating rules.","No extended low lake levels or sudden drops.","Everyone in the basin doing their part (role description)."],
+  fear:"Drawdowns like 2006 to 2008. The 9.1 film shows Lanier at an all-time low of 1,050 ft on Dec 16, 2007, with docks high and dry. Recreation impact levels: 1066 ft initial impact, 1063 ft recreational impact, 1060 ft water access limited (10.1).",
+  model:"Lanier zone levels and releases for every month; the Lake Lanier Elevation sheet; Lanier levels in RawDataForNegotiations (columns K, L, M).",
+  allies:"Metro Atlanta and Georgia (12.1). The USACE example also keeps Lanier fairly high.",
+  opp:"Florida, environmental interests, navigation, Flint agriculture, middle Chattahoochee.",
+  ex:"\"Lake Lanier strategy example\": a stakeholder table with each party's likely aims; key idea: support more water to Atlanta or to downstream users, but not both. Cites visitor and revenue figures from the association's website.",
+  src:"Role descriptions; 9.1; 10.1; 12.1; Lake Lanier strategy example.pdf."},
+ {id:"NAV",camp:"release",name:"Navigation interests",tag:"Shipping and barge traffic",
+  who:"The commercial navigation industry. Columbus, Georgia is the head of navigation; the federal channel runs from there to the Gulf (9.2).",
+  want:["Reservoir releases that keep the 9 x 100 ft federal channel available as much as possible.","Limits on water supply withdrawals.","Georgia interests dividing \"by their interest, not the State they live in\" (role description)."],
+  fear:"Florida has denied the maintenance dredging permit. Inconsistent flows break shipping contracts. When storage drops, the Corps cuts releases to a 7.5 ft channel (role description, 10.1).",
+  model:"Woodruff outflow and days of Florida flow above a navigation threshold; West Point & George releases; consecutive days of usable flow.",
+  allies:"Florida and environmental interests on releases (if not dredging); Alabama; middle Chattahoochee.",
+  opp:"Metro Atlanta, the Lake Lanier Association, Georgia. Florida on dredging.",
+  ex:"\"Navigation Example strategy\": the channel was planned on 9,300 cfs, but the student cites about 19,700 cfs needed without dredging and 13,400 cfs with it; 7.5 ft is the break-even depth, so nothing that drops below 8 ft. Would accept seasonal windows with guaranteed consecutive days.",
+  src:"Role descriptions; 9.2; 10.1; Navigation Example strategy.pdf."},
+ {id:"MID",camp:"swing",name:"Middle Chattahoochee River Association",tag:"Smaller cities and power companies · AL and GA",
+  who:"Represents the middle Chattahoochee and lower Flint: smaller cities such as Columbus, industry, and power companies, on both sides of the Alabama-Georgia line. The role description calls it \"Middle Chattahoochee / Lower Flint Rivers\".",
+  want:["Plenty of water for its cities and industries in the future.","Restrict Lanier withdrawals and give Lanier a bigger role in augmenting flow.","West Point not bearing the total burden of meeting downstream needs (role description)."],
+  fear:"West Point drawn down while Lanier stays full. In 10.1, a Georgia-model proposal kept Lanier high and borrowed from West Point in summer, \"in the middle of our tourist season\". Political bind between Alabama and the other Georgia users.",
+  model:"Columbus and rest-of-basin demands; the Columbus minimum flow (1,350 cfs); West Point & George zone levels and releases; Middle Chattahoochee flow (columns H, I, J).",
+  allies:"Alabama, Flint agriculture, navigation.",
+  opp:"Metro Atlanta and the Lake Lanier Association on Lanier. Florida when West Point is used for downstream flow.",
+  ex:"Two examples. \"MiddleChatStrategy_2\" builds on Richter's Sustainability Boundary Approach and expects future demand up about 50%. \"AL and Middle Chat Strategy\" argues Lanier has the most storage (it cites 63% versus 18% for West Point), so Lanier should do the augmenting.",
+  src:"Role descriptions; Module 10 to 12 role lists; 10.1; 10.4; 12.1; MiddleChatStrategy_2.pdf; AL and Middle Chat Strategy.pdf."}
+];
+var CAMPNAME={store:"keep water upstream",release:"send water downstream",swing:"can go both ways",broker:"broker"};
+var MXORDER=["FL","ENV","NAV","AL","MID","AG","USACE","GA","ATL","LAN"];
+var PLUS=[["FL","ENV"],["FL","NAV"],["ENV","NAV"],["AL","MID"],["AL","NAV"],["MID","NAV"],["MID","AG"],["GA","ATL"],["GA","LAN"],["ATL","LAN"]];
+var MINUS=[["FL","GA"],["FL","ATL"],["FL","LAN"],["ENV","GA"],["ENV","ATL"],["ENV","LAN"],["NAV","ATL"],["NAV","LAN"],["NAV","GA"],["AL","ATL"],["MID","ATL"],["MID","LAN"],["AG","ATL"],["AG","LAN"]];
+
+var BASIN=[
+ {h:"Three rivers, one basin",p:["<b>Chattahoochee</b>: rises in the north Georgia mountains, is caught by Lake Lanier, runs through Atlanta, then forms much of the Alabama-Georgia border. Regulated by dams, fed almost entirely by surface water.","<b>Flint</b>: starts south of Atlanta and runs through Georgia's farm country with almost no storage. One of the last long free-flowing rivers in the US, with large groundwater and spring inflows.","<b>Apalachicola</b>: forms where the two meet at Lake Seminole on the Florida-Georgia line and runs to Apalachicola Bay on the Gulf."],src:"9.1, 9.2, 9.3"},
+ {h:"Size and shares",p:["About <b>20,000 square miles</b>; the <b>fifth largest US watershed by flow</b> (after the Mississippi, Columbia, Mobile and Susquehanna).","Chattahoochee drainage about 8,770 square miles, Flint about 8,460.","About three quarters of the basin is in Georgia, one eighth in Alabama, one eighth in Florida. Yet each state has an equal say in governance (9.2)."],src:"9.2; Module 9 Part I notes"},
+ {h:"Water at the wrong time",p:["Most flow arrives in late winter and spring (January to April). From May the river drops and stays low until late December.","Farms, lawns and lake recreation want water from April to October. \"All the things that people want for water and need for water are when the water is least available\" (9.2).","In a dry year growers need more water, not less, because rain is not doing the work (9.3)."],src:"9.2, 9.3"},
+ {h:"The Flint switch",p:["In a median year the Chattahoochee gives a bit more water than the Flint. In a 1-in-10-year drought they <b>switch</b>: the Flint's groundwater makes it the bigger contributor. \"When the drought hits, people really look to the Flint to bail them out\" (9.3).","Kiker flags this as quiz material."],src:"9.3; Module 9 Part II notes"},
+ {h:"The 5,000 cfs line",p:["Courts set <b>5,000 cfs</b> at the Chattahoochee, Florida gauge (just below Jim Woodruff Dam) as the minimum ecological flow for the Apalachicola (role descriptions, 9.3).","Kiker calls it \"life support\", like 1,200 calories a day, and warns Florida negotiators not to treat it as the goal (9.3, 10.2)."],src:"9.3, 10.2, role descriptions"},
+ {h:"Who operates what",p:["The <b>US Army Corps of Engineers</b> runs the federal dams and coordinates them almost as one system (10.1).","Lanier's purposes include hydropower, navigation, recreation, flood control, water supply, fish and wildlife (9.2 slide). When built, its authorized purposes were flood control, navigation and hydropower; water supply was later the fight (9.1).","Georgia Power runs several small run-of-river dams near Columbus (AL and Middle Chat example)."],src:"9.1, 9.2, 10.1"},
+ {h:"Three legal routes",p:["In the US there are only three ways to settle interstate water <b>quantity</b>: a <b>lawsuit</b> to the US Supreme Court, <b>federal legislation</b> by Congress, or an <b>interstate compact</b> the states agree and Congress ratifies. \"This is a quiz question\" (10.2).","Eastern water law is riparian: you cannot buy or sell water rights; each state permits uses. There are federal rules on water quality between states, not on quantity (10.2)."],src:"10.2"},
+ {h:"Zones and dead storage",p:["Each reservoir has a flood pool on top, a conservation pool in the middle, and dead storage at the bottom that the outlets cannot reach (10.1).","The Corps splits the conservation pool into action zones: full means generous releases downstream; as storage drops, releases get conservative (10.1).","When storage is ample the Corps supports the 9 x 100 ft navigation channel; when depleted, a 7.5 ft channel (10.1 notes)."],src:"10.1"}
+];
+var RESV=[
+ {n:"Lake Lanier (Buford Dam)",m:"Chattahoochee, above Atlanta · built 1957 · 66.4% of storage",p:"The basin's bank account. Huge storage over a small drainage area, so it refills slowly (storage-to-basin ratio 527). Full is about 1071 to 1072 ft; the model's dead zone is 1035 ft. In the model it runs on its own monthly schedule."},
+ {n:"West Point Lake",m:"Chattahoochee, Alabama-Georgia line · built 1975 · 18.7% of storage",p:"Only about 15 ft of conservation storage (635 to 620 ft), and the Corps lets it swing more than Lanier (10.1). Combined with George in the model."},
+ {n:"Lake Eufaula (Walter F. George)",m:"Chattahoochee, below Columbus · built 1964 · 14.9% of storage",p:"Shallow working range, about six feet (10.1). Combined with West Point in the model: dead zone 620 ft on the combined schedule."},
+ {n:"George W. Andrews",m:"Chattahoochee · built 1963",p:"Small; not operated for hydropower (10.1). Not modeled separately."},
+ {n:"Lake Seminole (Jim Woodruff Dam)",m:"Where the rivers meet, Florida-Georgia line · built 1954 · 2.2% of storage",p:"Functionally run-of-river: releasing 5,000 cfs, its storage lasts about three days (10.1). Its outflow is what Florida gets: the \"Jim Woodruff Dam Outflow\" target in the model."}
+];
+var TIMELINE=[
+ ["Before 1989","Low-level disputes over specific flows."],
+ ["1989","Atlanta asks the Corps for more Lake Lanier withdrawals; Alabama sues the Corps and Florida joins. The suit was procedural (was the environmental review adequate?), which stalled the plan and brought everyone to the table (9.2, 10.2)."],
+ ["1992 to 1997","A comprehensive study of water use in the basin. Joint models are built; the class spreadsheet descends from them (10.2)."],
+ ["1998","Congress approves the ACF Compact: the three states must agree on an allocation formula. The first such compact in the Southeast since the 1970s environmental laws."],
+ ["1999 to 2003","Negotiations extended 14 times without agreement. The study and compact cost 8 years and over $25 million (10.2)."],
+ ["2003","An MOU on principles, then the compact is terminated."],
+ ["2006 to 2007","The Corps and US Fish and Wildlife issue Interim Operating Procedures; the 2007 drought brings Emergency Drought Operations and record low flows. Lanier hits 1,050 ft on Dec 16, 2007 (9.1 film)."],
+ ["2008","An appeals court rules for Florida and Alabama on Lanier water supply withdrawals; Georgia appeals."],
+ ["2009","Judge Paul Magnuson rules water supply is not an authorized purpose of Lanier: withdrawals frozen for three years, then back to mid-1970s levels unless Congress acts. He calls it \"draconian\" himself (9.1)."],
+ ["2010 to 2012","The appeals court in Atlanta overturns Magnuson and tells the Corps to update its plan; in 2012 the Supreme Court declines to hear the appeal."],
+ ["Kiker's verdict","\"Don't ever give it up for dead, because this thing has turned more times than your favorite soap opera\" (9.2)."]
+];
+var LESSONS=[
+ "It takes a crisis to start change. Rain puts everyone back to sleep; drought sets them screaming.",
+ "Watershed management must be adaptive, in policy and in technical work.",
+ "Agree at the start how the agreement itself can be changed.",
+ "Technical people do not know everything; learning has to be built in.",
+ "A joint study lets parties work together before the hard issues.",
+ "Joint tools and data keep the debate on issues, not on whose model is better (\"my model rocks, your model sucks\").",
+ "Deciding how to judge model output is harder than building the model.",
+ "Models are only tools. Humans decide; models inform.",
+ "Representation should follow interests as well as state lines. Environmental and farm interests cross borders.",
+ "Ecological flows must be defined and provided, in a way more complex than a single minimum threshold.",
+ "Apply general ideas specifically to this basin, or they will not be used. Florida never translated \"ecosystem flows\" into Apalachicola numbers, so others heard \"historical flows\".",
+ "Process matters as much as product: collaborative, interest-based, trust-building. The compact died of broken trust: unvetted new data, Georgia's side deal over Lanier during talks, and an MOU that skipped Florida's technical experts.",
+ "Excluding key stakeholders and avoiding key issues does not make agreement easier. The teams never named what success meant.",
+ "Parties need a shared, explicit standard of what makes an agreement acceptable.",
+ "A neutral facilitator keeps the process on task and makes parties justify their claims.",
+ "Agree on a standard for information and stick to it. Bring a number, be ready to defend where it came from.",
+ "To manage a region as one system, people have to see it as one system."
+];
+var CP=[
+ ["Metro Atlanta demand","300 now · 500 future","The single biggest withdrawal. Raise it and Lanier drops."],
+ ["Atlanta drought cuts","0.10 moderate · 0.15 severe","Share of demand saved in each drought (0.10 = 10%)."],
+ ["Columbus demand","50 now · 100 future","Cut factors 0.05 and 0.10, also applied to the rest of the Chattahoochee basin."],
+ ["Rest of Chattahoochee","50 now · 100 future","Smaller towns along the river."],
+ ["Flint municipal and industrial","50 now · 75 future","Cut factors 0.05 and 0.10."],
+ ["Flint agriculture","75 now · 100 future","Normal-year irrigation."],
+ ["Ag demand in drought","100 moderate · 100 severe","Given in cfs, not as a cut: irrigation rises in drought (current column shows 100 and 125)."],
+ ["Peachtree Creek minimum","750 cfs","Flow that must pass south of Atlanta."],
+ ["Columbus minimum","1,350 cfs","Flow that must pass Columbus."],
+ ["Jim Woodruff Dam outflow","5,000 cfs","What Florida gets. Also sets West Point & George's drought-zone release."],
+ ["Lanier normal zone (each month)","Top 1071 ft, 4,000 cfs","Top of the normal zone is fixed. Release while the lake is high."],
+ ["Lanier transition zone","Starts 1065 to 1068 ft, 2,000 cfs","Level where cutbacks start, and the release below it."],
+ ["Lanier drought zone","Starts 1050 to 1064 ft, 750 cfs","Level where deep cutbacks start. Dead zone 1035 ft is red."],
+ ["Lanier minimum release","500 cfs, any month","The floor."],
+ ["WP & George normal zone (each month)","Top 637 ft, 10,000 cfs","West Point and George run as one combined reservoir."],
+ ["WP & George transition zone","Starts 632 to 635 ft, 6,000 cfs","4,000 in September by default."],
+ ["WP & George drought zone","Starts 630 to 632 ft","Release comes from the Woodruff target. Dead zone 620 ft."],
+ ["WP & George minimum release","100 cfs, any month","The floor."]
+];
+var SHEETCARDS=[
+ {h:"Two files, two jobs",p:["<b>The model</b>: ACF_Negotiation_Worksheet v5.1, about 18 MB. Where you test settings and read results.","<b>The contract</b>: ACF Negotiation Proposal_Contract v4.1 (.xls). Just the control panel, with boxes for Proposer, Role, Approve/Reject and Amendments. You send and receive these in Phase II, and your two Phase I panels come from it.","Download with the small tray icon, not the Canvas viewer (announcement Oct 2025)."],src:"10.3, 11.2, Module 12 page"},
+ {h:"The sheets you use",p:["<b>ControlPanel</b>: the green inputs.","<b>Lanier Elevation</b>, <b>West Point &amp; George Elevation</b>, <b>Outflow into Florida</b>: charts, one per climate, plus all three overlaid.","<b>RawDataForNegotiations</b>: the daily numbers behind the charts, 2001 to 2010, about 3,650 rows per scenario. Build metrics here.","Everything after that (the climate models, operations sheets, unimpaired data, evaporation, demand data) is the engine. Leave it alone."],src:"10.3, 11.3; v5.1 file"},
+ {h:"Three climates",p:["<b>Average climate</b>, <b>moderate drought</b>, <b>severe drought</b>: real ten-year periods from the record.","They are bad in different ways. The moderate drought lasts longer, so it can pull Lanier lower than the severe one (10.3, 11.1).","\"It's always those drought years that kill you\" (12.1). Always judge a deal in all three."],src:"10.3, 11.1, 12.1"},
+ {h:"Green, red, and legal",p:["Change only <b>green</b> cells. Red cells are fixed; changing one makes a contract infeasible.","Everyone may change <b>all</b> green cells, including other roles' demands. \"Because we are in a negotiation, you are welcome to change Atlanta's, Middle Chat's, ALL green cells\" (announcement).","A contract is void, with no vote, if Lanier or West Point &amp; George reaches dead-zone storage on even one day (announcement, 12.1). \"You can't negotiate fantasies.\""],src:"Announcements Oct and Nov 2025; 12.1"},
+ {h:"Reading someone's contract",p:["Copy the green blocks from their contract file and paste them into the same cells of your model: demands, Lanier table, West Point &amp; George table (11.2).","Read Lanier, West Point &amp; George and Florida results in all three climates, then count your metric in RawDataForNegotiations.","Then approve, reject, or amend. In 11.2 Kiker, playing Florida, finds 359 days under 5,000 cfs in a proposal and drafts an amendment capping it at 30 days in the severe drought."],src:"11.2"},
+ {h:"What your Phase I panels must show",p:["All green cells considered: demands (the vertical column) AND both reservoirs.","For the reservoirs: levels AND releases, month by month, using the seasons.","That is the full-marks band of the 25-point control panel rubric line."],src:"Phase I rubric; 12.1; 10.3"}
+];
+var NEG=[
+ {h:"Separate people from the problem",p:["Recognize emotions, do not react to outbursts. Everyone has interests, and biases they barely notice.","\"Listen, acknowledge, and speak to be understood. Especially when you're typing\" (10.4)."],src:"10.4, 12.1, Module 10 role overview notes"},
+ {h:"Interests, not positions",p:["A position is a number you demand. An interest is why you need it. \"Everybody wants an ACF that works\" (12.1).","Look for compatible interests. \"Not everyone will be your enemy. Actually most people won't be\" (10.4). Walk in their shoes."],src:"10.4, 12.1"},
+ {h:"Build a coalition",p:["In any group of ten, three or four roles lean your way. Cut deals with them, then link your coalition to others (10.4).","\"Knowing who your allies and your competitors are really helps\" (12.1). See the Roles tab for who usually pairs with whom."],src:"10.4, 12.1"},
+ {h:"Invent options",p:["Few rules beyond the spreadsheet. States can move (pretend) money: payments for water services, drought help, a compact-style system. \"When in doubt, ask me\" (10.4, 12.1).","Ideas from the example strategies: Florida helping fund Atlanta's efficiency, paying Flint growers in drought, navigation accepting seasonal windows, Georgia's buy-in market.","\"Judgment hinders imagination\" (Module 10 notes). Aim for everyone getting some satisfaction."],src:"10.4, 12.1, Module 12 examples"},
+ {h:"Objective criteria",p:["\"Use numbers when possible. They will help you out and give you some credibility\" (10.4). Reference them: people will ask where a number came from (12.1).","The spreadsheet is the shared yardstick. Lesson 16: agree on a standard for information (10.2)."],src:"10.4, 12.1, 10.2"},
+ {h:"What people really want",p:["Kiker's bedrock concerns: <b>security</b>, <b>economic well-being</b>, a <b>sense of belonging</b> (people connect to a place and a river), <b>recognition</b>, and <b>control over their own lives</b>.","Hit one of these and you hit a nerve. Good deals protect them for every group and let people save face (10.4, 12.1)."],src:"10.4, 12.1"},
+ {h:"Tone",p:["Professional and polite. \"Being a jerk really doesn't help because people dislike you kind of reflexively\" (12.1).","You can say no: \"This is really interesting, but I can't support it\", plus why (12.1).","\"You don't have to be like the Gettysburg Address\" (12.1). Simple and clear is fine."],src:"12.1"},
+ {h:"Know a good deal from a bad one",p:["\"The most important thing is know what a good or bad deal is for you, because your peers will not tell you\" (12.1).","Reject when it is time to reject. A bad deal can do real damage to the people you represent (12.1).","It is not your job to teach other roles their job (12.1)."],src:"12.1"},
+ {h:"Keep your cards",p:["Do not post your strategy. \"Like playing poker with an open hand... you will get taken\" (Module 12 page).","Never \"all I need is 5,000 cfs\": \"That's like saying all I need is minimum wage for the rest of my life\" (12.1, 10.2). Know what you are for, not only your floor."],src:"12.1, 10.2, Module 12 page"},
+ {h:"Active or patient: both can win",p:["\"There are many ways to win the negotiations... very passive or very active\" (12.1). You do not have to be Type A.","But the rubric pays for initiative: an 80 needs at least one new or amended contract; an 85 needs many (Phase II rubric)."],src:"12.1, Phase II rubric"},
+ {h:"Learn from the 2003 failure",p:["Do not slip in new numbers nobody can check. Do not cut side deals that blindside the group. Name real numbers. Agree on what success looks like (10.2).","Those four broke the real compact."],src:"10.2"}
+];
+var POSTS=[
+ {h:"Your introduction (first days)",p:["<b>Who</b>: your name and the role you represent.","<b>What matters to your people</b>: two or three goals, framed as interests (security, livelihoods, the river they love).","<b>An opening</b>: who you hope to work with, and that you will be checking in daily.","<b>Leave out</b>: your floor, your least acceptable deal, your full strategy.","Kiker's model intro was a Lake Lanier rep's: \"not super long... supportive, positive\" (12.1)."],src:"12.1"},
+ {h:"A vote",p:["<b>Which contract</b>: name the exact number and letter (\"Contract 3a\"). The 2025 announcement asks for this.","<b>Approve, reject, or amend</b>, stated plainly.","<b>Why</b>, in numbers from your model: which lake level or flow, in which climate.","<b>What would change your vote</b>. That keeps the door open."],src:"Announcement Nov 2025; 12.1"},
+ {h:"A contract or amendment",p:["<b>What changed</b>: the green cells you moved, and from what.","<b>Who it helps</b>, in each role's own terms, using their metrics.","<b>What it costs you</b>. Showing your give builds trust.","Check it is feasible in all three climates before posting: no dead-zone days."],src:"11.2, 12.1, announcements"}
+];
+
+var FLASH=[
+ {tp:"basin",q:"Which reservoir holds about two thirds of the ACF's storage?",a:"Lake Lanier (Buford Dam): 66.4% of storage in the course table. The Flint has essentially none.",s:"9.3, 10.1"},
+ {tp:"basin",q:"Why does the Flint matter more in a drought?",a:"Groundwater and springs feed it, so in a 1-in-10-year drought it gives more water than the Chattahoochee. The two rivers switch.",s:"9.3"},
+ {tp:"basin",q:"When does the ACF carry most of its water, and when does everyone want it?",a:"Most flow comes January to April. Farms, lawns and lakes want it May to October. Lots of water at the wrong time.",s:"9.2"},
+ {tp:"basin",q:"What is the 5,000 cfs number?",a:"The court-set minimum ecological flow at the Chattahoochee, Florida gauge below Jim Woodruff Dam. Kiker calls it life support, not a goal.",s:"9.3, role descriptions"},
+ {tp:"basin",q:"Why does Lake Lanier refill so slowly?",a:"Huge storage over a small drainage area (ratio 527, versus 45 for West Point and 1.1 for Seminole). Drawn down, it can take years to refill.",s:"9.3"},
+ {tp:"basin",q:"Storage or run-of-river: Lake Seminole?",a:"Functionally run-of-river. About 2% of storage; at 5,000 cfs it would last about three days.",s:"10.1"},
+ {tp:"basin",q:"Name the federal dams that matter in the ACF.",a:"Buford (Lake Lanier), West Point, Walter F. George (Lake Eufaula), George W. Andrews, Jim Woodruff (Lake Seminole). The Corps operates them.",s:"9.3, 10.1"},
+ {tp:"basin",q:"What started the water war in 1989?",a:"Atlanta asked the Corps for more Lake Lanier withdrawals. Alabama sued the Corps and Florida joined.",s:"9.2"},
+ {tp:"basin",q:"What happened to the ACF Compact?",a:"Approved by Congress in 1998, extended 14 times from 1999 to 2003, then terminated in 2003 with no allocation formula.",s:"9.2"},
+ {tp:"basin",q:"What did Judge Magnuson rule in 2009?",a:"Water supply was not an authorized purpose of Lake Lanier. Withdrawals frozen three years, then back to mid-1970s levels unless Congress acted. Overturned on appeal; the Supreme Court declined review in 2012.",s:"9.2"},
+ {tp:"basin",q:"The only three ways to settle interstate water quantity in the US?",a:"A lawsuit to the US Supreme Court, federal legislation by Congress, or an interstate compact ratified by Congress. Kiker: \"This is a quiz question.\"",s:"10.2"},
+ {tp:"basin",q:"Why did the compact fail?",a:"Trust broke down: unvetted new data, Georgia's side agreement over Lanier during the talks, an MOU that skipped Florida's technical experts, no standard of a good deal, no neutral facilitator.",s:"10.2"},
+ {tp:"basin",q:"Leitman's lesson about models?",a:"Models are only tools. They inform; humans decide.",s:"10.2, lesson 8"},
+ {tp:"basin",q:"Lake Lanier's recreation impact levels?",a:"1066 ft initial impact, 1063 ft recreational impact, 1060 ft water access limited. Full is about 1071.",s:"10.1"},
+ {tp:"sheet",q:"Which cells can you change?",a:"Only the green ones: future demands and drought factors, instream flow targets, and each month's zone levels and releases for Lanier and for West Point & George. Red cells are off limits.",s:"10.3, announcements"},
+ {tp:"sheet",q:"May, Lanier at 1060 ft, Kiker's example schedule. Release?",a:"2,000 cfs: 1060 sits in the transition zone (1065 to 1050).",s:"10.3"},
+ {tp:"sheet",q:"The three climate scenarios?",a:"Average climate, moderate drought, severe drought: real ten-year periods. The moderate drought lasts longer and can pull Lanier lower.",s:"10.3, 11.1"},
+ {tp:"sheet",q:"What makes a contract technically infeasible?",a:"Lanier or West Point & George reaching dead-zone storage on even one day, or any red cell changed. Void, no vote.",s:"Announcement Nov 2025, 12.1"},
+ {tp:"sheet",q:"Where do you build metrics?",a:"RawDataForNegotiations: daily values, ten years, three scenarios. Florida flow in B, D, F; row 3657 counts days under 5,000 cfs.",s:"10.3, 11.3"},
+ {tp:"sheet",q:"How do you check a contract someone posts?",a:"Paste their green blocks into the same cells of your model and read Lanier, West Point & George and Florida results in all three climates.",s:"11.2"},
+ {tp:"sheet",q:"How does the model simplify the dams?",a:"Lanier runs on its own monthly schedule; West Point and George are combined as one reservoir.",s:"10.3, 12.1"},
+ {tp:"sheet",q:"Number one rookie mistake in Phase I?",a:"Leaving the reservoir settings at their defaults.",s:"12.1, 10.3"},
+ {tp:"roles",q:"Which roles usually team up to keep water upstream?",a:"Metro Atlanta, the State of Georgia and the Lake Lanier Association: \"often good pals\".",s:"12.1"},
+ {tp:"roles",q:"Who does Kiker say can go both ways?",a:"Flint River agriculture, the State of Alabama, and the middle Chattahoochee. Florida's big ally is often the environmental coalition.",s:"12.1"},
+ {tp:"roles",q:"What does the middle Chattahoochee role not want?",a:"West Point bearing the whole burden of meeting downstream flow needs.",s:"Role descriptions"},
+ {tp:"roles",q:"What does Flint agriculture want if it cuts back?",a:"Compensation for larger cuts, and dry-year reductions that do not lean too hard on the Flint.",s:"Role descriptions"},
+ {tp:"roles",q:"What channel does navigation want?",a:"The 9 x 100 ft federal channel, available as much as possible, supported by reservoir releases.",s:"Role descriptions"},
+ {tp:"roles",q:"Why must Alabama be careful with Georgia?",a:"They share more than the ACF. If Atlanta cannot get ACF water it may turn to the Alabama-Coosa-Tallapoosa basin.",s:"Role descriptions, 10.2"},
+ {tp:"roles",q:"What is the Corps' job in the role play?",a:"Represent the federal interest, not any one state; get everyone to agree on allocations and reservoir use.",s:"Role descriptions"},
+ {tp:"roles",q:"How many roles, and is the Chattahoochee River association separate?",a:"Ten. The \"Chattahoochee River association\" in the 10.4 transcript is the Middle Chattahoochee River Association (MID).",s:"10.3, 10.4 slides, Module 12"},
+ {tp:"neg",q:"Kiker's four rules from Getting to Yes?",a:"Separate people from the problem; focus on interests, not positions; invent options for mutual gain; insist on objective criteria.",s:"10.4, 12.1"},
+ {tp:"neg",q:"The five bedrock concerns?",a:"Security, economic well-being, a sense of belonging, recognition, control over one's life.",s:"10.4, 12.1"},
+ {tp:"neg",q:"Why never say \"all I need is 5,000 cfs\"?",a:"It is the minimum wage of flows, and you will be held to it. Know what you are for, not just your floor.",s:"12.1, 10.2"},
+ {tp:"neg",q:"How often should you check in during Phase II?",a:"About every 24 to 36 hours; longer and your absence gets noticed.",s:"12.1"},
+ {tp:"neg",q:"Term project weights?",a:"40% of the course. Phase I 35%, Phase II 35%, Phase III 30% of the project.",s:"Syllabus"}
+];
+var TOPICS=[["all","All"],["basin","Basin"],["sheet","Spreadsheet"],["roles","Roles"],["neg","Negotiation"]];
+var QUIZ=[
+ {tp:"basin",q:"About how much of the ACF's reservoir storage is in Lake Lanier?",o:["About one third","About two thirds","About 90%","About 15%"],c:1,e:"Lanier holds 66.4% of storage in the course table; West Point 18.7%, George 14.9%, Seminole 2.2%.",s:"9.3, 10.1"},
+ {tp:"basin",q:"In a 1-in-10-year drought, which river gives more water to the Apalachicola?",o:["The Chattahoochee, because of its dams","The Flint, because of its groundwater","They give the same","Neither; Florida springs make up the flow"],c:1,e:"Kiker's \"switch\": the Flint's groundwater contribution makes it the bigger source in drought.",s:"9.3"},
+ {tp:"basin",q:"When does most ACF flow arrive?",o:["June to August","Late winter to early spring","October and November","Evenly through the year"],c:1,e:"January to April carries most of the water; demand peaks May to October.",s:"9.2"},
+ {tp:"basin",q:"Which are the only three US routes to settle interstate water quantity?",o:["Supreme Court lawsuit, act of Congress, interstate compact","UN arbitration, compact, Supreme Court lawsuit","EPA ruling, compact, lawsuit","Governor's decree, compact, lawsuit"],c:0,e:"Kiker writes these in red and says he tries to trick people with plausible-sounding extras.",s:"10.2"},
+ {tp:"basin",q:"How many times was the ACF Compact negotiation extended from 1999 to 2003?",o:["3","7","14","21"],c:2,e:"Fourteen extensions, then termination in 2003.",s:"9.2"},
+ {tp:"basin",q:"What set off the water war in 1989?",o:["Florida denied a dredging permit","Atlanta asked for more Lake Lanier withdrawals","The mussels were listed as endangered","Judge Magnuson's ruling"],c:1,e:"Atlanta's request led Alabama to sue the Corps; Florida joined.",s:"9.2"},
+ {tp:"basin",q:"What did the 2009 Magnuson ruling say?",o:["Florida is owed 5,000 cfs at all times","Water supply was not an authorized purpose of Lake Lanier","The Corps must drain West Point first","The compact was valid and binding"],c:1,e:"Withdrawals were frozen for three years pending Congress; the ruling was later overturned on appeal.",s:"9.2"},
+ {tp:"basin",q:"Functionally, Lake Seminole is...",o:["The main storage reservoir","A run-of-river reservoir","A flood-control-only dam","Dry most of the year"],c:1,e:"About 2% of storage; at 5,000 cfs its storage lasts about three days.",s:"10.1"},
+ {tp:"basin",q:"Why does Lake Lanier refill slowly?",o:["It sits on porous limestone","Its storage is huge compared with the drainage area above it","Atlanta pumps it dry each summer","Its dam leaks"],c:1,e:"A storage-to-basin ratio of 527, far above the other reservoirs.",s:"9.3"},
+ {tp:"basin",q:"At what Lanier level does water access become limited, per the recreation impact levels?",o:["1071 ft","1066 ft","1063 ft","1060 ft"],c:3,e:"1066 initial impact, 1063 recreational impact, 1060 water access limited.",s:"10.1"},
+ {tp:"basin",q:"Leitman's lesson 10 says ecological flows must be...",o:["Set at the historical average","Defined in a way more complex than a single minimum threshold","Left to the courts","Decided by technical staff alone"],c:1,e:"Timing, frequency, duration and rate of change matter, not just a floor.",s:"10.2"},
+ {tp:"basin",q:"Which was NOT one of the reasons trust broke down in the compact talks?",o:["New data inserted without the agreed review","Georgia's side agreement over Lanier during the talks","An MOU that skipped Florida's technical experts","A neutral facilitator who favored Alabama"],c:3,e:"There was no neutral facilitator at all, which Leitman lists as a lesson (15).",s:"10.2"},
+ {tp:"sheet",q:"It is May and Lanier is at 1060 ft. Kiker's example schedule: Normal 1071 to 1065 releases 4,000; Transition 1065 to 1050 releases 2,000; Drought 1050 to 1035 releases 750. Release?",o:["4,000 cfs","2,000 cfs","750 cfs","500 cfs"],c:1,e:"1060 is in the transition zone.",s:"10.3"},
+ {tp:"sheet",q:"Which of these makes a contract void with no vote?",o:["Atlanta's future demand above 500 cfs","Florida flow under 5,000 cfs for 30 days","Lanier reaching its dead zone for one day","Changing West Point releases in July"],c:2,e:"Dead-zone storage on even one day, or any changed red cell, makes it technically infeasible.",s:"Announcement Nov 2025, 12.1"},
+ {tp:"sheet",q:"Kiker's number one rookie mistake in Phase I?",o:["Too many references","Not touching the reservoir settings","Changing other roles' demands","Using the Contract file"],c:1,e:"\"They didn't touch a thing... they just lost a boatload of Phase I grade.\"",s:"12.1"},
+ {tp:"sheet",q:"Where does the spreadsheet count days with Florida flow under 5,000 cfs?",o:["ControlPanel cell F25","RawDataForNegotiations row 3657","The Climate sheet","The Demands sheet"],c:1,e:"Cells C3657, E3657 and G3657, one per climate. Kiker's recipe for the spreadsheet quiz.",s:"Announcement Oct 2025"},
+ {tp:"sheet",q:"Why can the moderate drought scenario pull Lanier lower than the severe one?",o:["It has less rain overall","It is a longer, more persistent drought","It uses different dams","It is a modeling error"],c:1,e:"Both are real ten-year periods; the moderate one has a long persistent dry stretch.",s:"10.3, 11.1"},
+ {tp:"sheet",q:"Which may you change in a contract?",o:["Only your own role's demands","Only the reservoir releases","All green cells, including other roles' demands","Green and red cells"],c:2,e:"\"You are allowed to change ALL green cells.\" Red cells are off limits.",s:"Announcement Oct 2025"},
+ {tp:"sheet",q:"In the model, agricultural demand in drought...",o:["Drops by a conservation factor","Rises, because rain is not doing the work","Is set to zero","Is fixed by the Corps"],c:1,e:"The panel lists ag demand in cfs for each drought level.",s:"10.3, 11.3"},
+ {tp:"roles",q:"Which trio does Kiker call \"often good pals\"?",o:["Florida, environment, navigation","Atlanta, Georgia, Lake Lanier","Alabama, agriculture, middle Chattahoochee","Corps, Georgia, Florida"],c:1,e:"They all want water held upstream.",s:"12.1"},
+ {tp:"roles",q:"Which role does not want West Point to bear the whole downstream burden?",o:["Navigation","Middle Chattahoochee","Lake Lanier Association","Metro Atlanta"],c:1,e:"Straight from the MID role description.",s:"Role descriptions"},
+ {tp:"roles",q:"Which role should not advocate for any one state?",o:["Environmental interests","US Army Corps of Engineers","Navigation","State of Alabama"],c:1,e:"The Corps has a federal interest in basin management.",s:"Role descriptions"},
+ {tp:"roles",q:"Navigation wants releases to support which channel?",o:["7.5 x 50 ft","9 x 100 ft","12 x 200 ft","5 x 100 ft"],c:1,e:"The authorized federal channel is 9 x 100 ft; when storage is low the Corps targets 7.5 ft.",s:"Role descriptions, 10.1"},
+ {tp:"neg",q:"Which is an interest rather than a position?",o:["\"We demand 6,500 cfs every day.\"","\"Our oyster beds need low salinity through the dry summer.\"","\"Lanier must stay at 1071 ft.\"","\"Atlanta gets 600 cfs.\""],c:1,e:"An interest says why. Positions are the numbers people demand.",s:"10.4, 12.1"},
+ {tp:"neg",q:"Which is NOT one of Kiker's five bedrock concerns?",o:["Security","Recognition","Control over one's life","Winning the vote"],c:3,e:"The five: security, economic well-being, belonging, recognition, control over one's life.",s:"10.4, 12.1"},
+ {tp:"neg",q:"In Phase II, how long can you go without checking the board before it is noticed?",o:["About 24 to 36 hours","About a week","Until the final vote","Two business weeks"],c:0,e:"\"If you're not looking... every 24 to 36 hours and responding, your absence starts to be noted.\"",s:"12.1"},
+ {tp:"neg",q:"What must every negotiator do with every properly submitted contract?",o:["Approve it","Approve, reject, or amend it","Forward it to Kiker","Nothing unless it affects them"],c:1,e:"Amended contracts need a new vote from everyone. Missing votes count against you.",s:"Module 12 page, announcements"},
+ {tp:"neg",q:"Term project weights?",o:["Phase I 50, II 30, III 20","Phase I 35, II 35, III 30","Phase I 30, II 50, III 20","Equal thirds"],c:1,e:"Of a term project worth 40% of the course.",s:"Syllabus"}
+];
+</script>
+<script>
+/* ===================== tabs first, so the page works even if later code throws ===================== */
+function byId(id){return document.getElementById(id);}
+(function(){
+ var tabs=document.querySelectorAll('.tab');
+ tabs.forEach(function(t){
+   t.addEventListener('click',function(){
+     tabs.forEach(function(x){x.classList.remove('on');});
+     document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});
+     t.classList.add('on');
+     var v=byId('v-'+t.getAttribute('data-v')); if(v) v.classList.add('on');
+     state.tab=t.getAttribute('data-v'); save();
+     window.scrollTo(0,0);
+   });
+ });
+})();
+function showTab(name){ var t=document.querySelector('.tab[data-v="'+name+'"]'); if(t) t.click(); }
+
+/* ===================== state (localStorage with memory fallback; iOS file:// can throw) ===================== */
+var LS='acfAOM4643_v1';
+var _mem={};
+function _lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _mem)?_mem[k]:null;}}
+function _lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
+var state={};
+try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
+if(!state.ck) state.ck={};
+function save(){_lsSet(LS,JSON.stringify(state));}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function roleById(id){for(var i=0;i<ROLES.length;i++){if(ROLES[i].id===id) return ROLES[i];}return null;}
+var CHEV='<svg class="chev" viewBox="0 0 18 18"><path d="M6 3 L12 9 L6 15" stroke="currentColor" stroke-width="2" fill="none"/></svg>';
+
+/* ===================== progress + next up ===================== */
+function ckKey(pid,i){return pid+'_'+i;}
+function phaseCount(p){var n=0;p.checks.forEach(function(_,i){if(state.ck[ckKey(p.id,i)]) n++;});return n;}
+function fmtDate(d){
+ try{return d.toLocaleString('en-US',{timeZone:'America/New_York',weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';}
+ catch(e){return d.toDateString();}
+}
+function daysUntil(d){return Math.ceil((d.getTime()-Date.now())/86400000);}
+function upcoming(){var now=Date.now();return DEADLINES.filter(function(x){return new Date(x.at).getTime()>now;});}
+function updateProg(){
+ var tot=0,done=0; PHASES.forEach(function(p){tot+=p.checks.length;done+=phaseCount(p);});
+ byId('pdone').textContent=done; byId('ptot').textContent=tot;
+ byId('pf').style.width=(tot?100*done/tot:0)+'%';
+ var up=upcoming(); var el=byId('pnext');
+ if(up.length){var d=new Date(up[0].at);var n=daysUntil(d);el.textContent='next: '+up[0].t+', '+(n<=0?'today':(n===1?'tomorrow':'in '+n+' days'));}
+ else el.textContent='all deadlines passed';
+}
+function renderNext(){
+ var host=byId('nextup'); if(!host) return;
+ var up=upcoming();
+ if(!up.length){host.innerHTML='<div class="k">All done</div><div class="t">Every listed ACF deadline has passed.</div>';return;}
+ var d=new Date(up[0].at), n=daysUntil(d);
+ var h='<div class="k">Next up</div><div class="t">'+esc(up[0].t)+'</div><div class="d">'+esc(fmtDate(d))+' · '+(n<=0?'today':(n===1?'tomorrow':'in '+n+' days'))+'</div>';
+ if(up.length>1){h+='<div class="more">Then: '+up.slice(1,4).map(function(x){var dd=new Date(x.at);return esc(x.t)+' ('+esc(dd.toLocaleDateString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric'}))+')';}).join(' · ')+'</div>';}
+ host.innerHTML=h;
+}
+function renderMyRole(){
+ var host=byId('myrolebox'); if(!host) return;
+ var r=state.myRole?roleById(state.myRole):null;
+ if(r){host.innerHTML='Your role: <b>'+esc(r.name)+'</b> ('+esc(r.id)+') <button class="btn" id="gomyrole">Open card</button>';
+   byId('gomyrole').addEventListener('click',function(){goRole(r.id);});}
+ else host.innerHTML='Your role: <b>not assigned yet</b>. Expected around Oct 16 to 20 <span class="pill est">estimate</span>. When it lands, mark it on the Roles tab.';
+}
+
+/* ===================== phases ===================== */
+function listHtml(arr,cls){return '<ul class="line'+(cls?' '+cls:'')+'">'+arr.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul>';}
+function renderPhases(){
+ var host=byId('phaselist'); if(!host) return; host.innerHTML='';
+ PHASES.forEach(function(p){
+   var cnt=phaseCount(p), tot=p.checks.length, all=cnt===tot&&tot>0;
+   var det=document.createElement('details'); det.className='ph'+(p.big?' big':'')+(all?' done':''); det.id='ph-'+p.id;
+   if(state['o_'+p.id]) det.open=true;
+   var h='<summary><span class="phn">'+esc(p.n)+'</span><span class="phmid"><span class="phttl">'+esc(p.title)+'</span><div class="phwhen">'+esc(p.when)+(p.est?' <span class="pill est">estimate</span>':'')+(p.pts?' <span class="pill pts">'+esc(p.pts)+'</span>':'')+'</div></span>';
+   h+='<span class="phcount">'+cnt+'/'+tot+'<div class="bar"><i style="width:'+(tot?100*cnt/tot:0)+'%"></i></div></span>'+CHEV+'</summary>';
+   h+='<div class="phbody">';
+   h+='<div class="sec">What to produce</div><p>'+p.produce+'</p>';
+   if(p.note) h+='<div class="note">'+p.note+'</div>';
+   h+='<div class="sec">How it counts</div><p>'+p.weight+'</p>';
+   if(p.rules){h+='<div class="sec">The rules</div>'+listHtml(p.rules);}
+   if(p.datesNote){h+='<div class="note"><span class="pill est">estimate</span> '+p.datesNote+'</div>';}
+   if(p.doit&&p.doit.length){h+='<div class="sec">How to do well</div>'+listHtml(p.doit);}
+   if(p.lose&&p.lose.length){h+='<div class="sec">Ways people lose points</div>'+listHtml(p.lose,'warn');}
+   h+='<div class="sec">Checklist</div><ul class="checks">'+p.checks.map(function(c,i){var on=!!state.ck[ckKey(p.id,i)];return '<li><label class="'+(on?'on':'')+'"><input type="checkbox" data-k="'+ckKey(p.id,i)+'"'+(on?' checked':'')+'><span>'+esc(c)+'</span></label></li>';}).join('')+'</ul>';
+   h+='<div class="src">Sources: '+esc(p.src)+'</div></div>';
+   det.innerHTML=h;
+   det.addEventListener('toggle',function(){state['o_'+p.id]=det.open?1:0;save();});
+   det.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+     cb.addEventListener('change',function(){
+       var k=cb.getAttribute('data-k'); if(cb.checked) state.ck[k]=1; else delete state.ck[k]; save();
+       cb.parentNode.classList.toggle('on',cb.checked);
+       var c2=phaseCount(p); var sc=det.querySelector('.phcount'); sc.innerHTML=c2+'/'+tot+'<div class="bar"><i style="width:'+(100*c2/tot)+'%"></i></div>';
+       det.classList.toggle('done',c2===tot);
+       updateProg();
+     });
+   });
+   host.appendChild(det);
+ });
+}
+
+/* ===================== roles ===================== */
+function goRole(id){showTab('roles');var d=byId('role-'+id);if(!d)return;d.open=true;setTimeout(function(){d.scrollIntoView({behavior:'smooth',block:'start'});},80);}
+function renderMatrix(){
+ var t=byId('mx'); if(!t) return;
+ function rel(a,b){var i;for(i=0;i<PLUS.length;i++){var p=PLUS[i];if((p[0]===a&&p[1]===b)||(p[0]===b&&p[1]===a))return 'p';}for(i=0;i<MINUS.length;i++){var m=MINUS[i];if((m[0]===a&&m[1]===b)||(m[0]===b&&m[1]===a))return 'm';}return '';}
+ var h='<tr><th></th>'+MXORDER.map(function(x){return '<th>'+(x==='USACE'?'CE':x)+'</th>';}).join('')+'</tr>';
+ MXORDER.forEach(function(a){
+   h+='<tr'+(state.myRole===a?' class="me"':'')+'><th class="r">'+a+'</th>';
+   MXORDER.forEach(function(b){
+     if(a===b){h+='<td class="s"></td>';return;}
+     var r=rel(a,b); h+='<td class="'+r+'">'+(r==='p'?'+':(r==='m'?'&#8722;':''))+'</td>';
+   });
+   h+='</tr>';
+ });
+ t.innerHTML=h;
+}
+function renderRoles(){
+ var host=byId('rolelist'); if(!host) return; host.innerHTML='';
+ var order=ROLES.slice(); if(state.myRole){order.sort(function(a,b){return (b.id===state.myRole)-(a.id===state.myRole);});}
+ order.forEach(function(r){
+   var mine=state.myRole===r.id;
+   var det=document.createElement('details'); det.className='role'+(mine?' mine':''); det.id='role-'+r.id;
+   if(state['r_'+r.id]) det.open=true;
+   var h='<summary><span class="rab '+r.camp+'">'+esc(r.id)+'</span><span class="rttl">'+esc(r.name)+(mine?' <span class="pill me">my role</span>':'')+'<small>'+esc(r.tag)+' · '+esc(CAMPNAME[r.camp])+'</small></span>'+CHEV+'</summary>';
+   h+='<div class="rbody">';
+   h+='<div class="sec">Who they are</div><p>'+esc(r.who)+'</p>';
+   h+='<div class="rgrid"><div><div class="sec">What they want</div>'+listHtml(r.want.map(esc))+'</div><div><div class="sec">What they fear</div><p>'+esc(r.fear)+'</p></div></div>';
+   h+='<div class="sec">In the spreadsheet, watch</div><p>'+esc(r.model)+'</p>';
+   h+='<div class="rgrid"><div><div class="sec">Likely allies</div><p>'+esc(r.allies)+'</p></div><div><div class="sec">Likely opponents</div><p>'+esc(r.opp)+'</p></div></div>';
+   h+='<div class="sec">From the example strategy</div><div class="ex">'+esc(r.ex)+'</div>';
+   h+='<div class="src">Sources: '+esc(r.src)+'</div>';
+   h+='<div style="margin-top:12px"><button class="btn'+(mine?'':' pri')+'" data-mine="'+r.id+'">'+(mine?'Unmark as my role':'This is my role')+'</button></div>';
+   h+='</div>';
+   det.innerHTML=h;
+   det.addEventListener('toggle',function(){state['r_'+r.id]=det.open?1:0;save();});
+   det.querySelector('[data-mine]').addEventListener('click',function(){
+     state.myRole=(state.myRole===r.id)?null:r.id; save();
+     renderRoles(); renderMatrix(); renderMyRole();
+     var d=byId('role-'+r.id); if(d) d.scrollIntoView({block:'start'});
+   });
+   host.appendChild(det);
+ });
+}
+
+/* ===================== basin / sheet / negotiate ===================== */
+function cardsHtml(arr){return arr.map(function(c){return '<div class="cardx"><h3>'+c.h+'</h3>'+c.p.map(function(x){return '<p>'+x+'</p>';}).join('')+'<div class="src">'+esc(c.src)+'</div></div>';}).join('');}
+function renderBasin(){
+ var g=byId('basincards'); if(g){
+   var h=cardsHtml(BASIN);
+   h+='<div class="cardx wide"><h3>The reservoirs</h3><div class="resv">'+RESV.map(function(r){return '<div class="r"><div class="n">'+esc(r.n)+'</div><div class="m">'+esc(r.m)+'</div><p>'+esc(r.p)+'</p></div>';}).join('')+'</div><div class="src">Storage shares from the 9.3 and 10.1 storage table (cfs-days, percent of total); levels from 10.1 and the v5.1 ControlPanel.</div></div>';
+   h+='<div class="cardx wide"><h3>Faces from the film (9.1)</h3><p>"Chattahoochee: From Water War to Water Vision" walks the river: an Apalachicola oysterman of 50 years, Flint sweet-corn growers moving to variable-rate irrigation, a Kodak plant in Columbus that cut water use 40%, Eufaula bass anglers, Lake Lanier sailors and marinas, Gwinnett County piping treated water back into Lanier, and Atlanta turning a granite quarry into about 30 days of backup supply. Its closing line: the water war has always been \"more of a struggle between Metro Atlanta and the rest of the basin than a contest between the states.\"</p><p>Kiker uses it to show that every role in the class has real people behind it.</p><div class="src">9.1</div></div>';
+   g.innerHTML=h;
+ }
+ var tl=byId('timeline'); if(tl) tl.innerHTML=TIMELINE.map(function(x){return '<li><b>'+esc(x[0])+'</b><br>'+esc(x[1])+'</li>';}).join('');
+ var ls=byId('lessons'); if(ls) ls.innerHTML=LESSONS.map(function(x){return '<li>'+esc(x)+'</li>';}).join('');
+}
+function renderSheet(){
+ var g=byId('sheetcards'); if(g) g.innerHTML=cardsHtml(SHEETCARDS);
+ var r=byId('cprows'); if(r){
+   r.innerHTML='<div class="rowx hd"><div>Green input</div><div>v5.1 default</div><div>What it does</div></div>'+CP.map(function(x){return '<div class="rowx"><div class="k">'+esc(x[0]||' ')+'</div><div class="v"><span class="who">default</span>'+esc(x[1])+'</div><div><span class="who">does</span>'+esc(x[2])+'</div></div>';}).join('');
+ }
+ var zq=byId('zq'); if(zq){
+   ['4,000 cfs','2,000 cfs','750 cfs'].forEach(function(o,i){var b=document.createElement('button');b.className='btn';b.textContent=o;b.addEventListener('click',function(){var a=byId('zqa');a.hidden=false;a.textContent=(i===1?'Right. ':'Not quite. ')+'1060 ft sits between 1065 and 1050, the transition zone, so the release is 2,000 cfs (10.3).';});zq.appendChild(b);});
+ }
+}
+function renderNeg(){var g=byId('negcards');if(g)g.innerHTML=cardsHtml(NEG);var p=byId('postcards');if(p)p.innerHTML=cardsHtml(POSTS);}
+
+/* ===================== flashcards ===================== */
+var deckFilter='all', deck=[], di=0;
+function topicName(tp){for(var i=0;i<TOPICS.length;i++){if(TOPICS[i][0]===tp)return TOPICS[i][1];}return tp;}
+function buildDeck(){deck=shuffle(FLASH.filter(function(c){return deckFilter==='all'||c.tp===deckFilter;}));di=0;showCard();}
+function showCard(){
+ var f=byId('flash'); if(!f||!deck.length) return; f.classList.remove('flip');
+ var c=deck[di]; byId('fqtag').textContent=topicName(c.tp); byId('fq').textContent=c.q; byId('fa').textContent=c.a; byId('fs').textContent='Source: '+c.s;
+ byId('fcount').textContent=(di+1)+' / '+deck.length;
+}
+function filterBtns(hostId,cur,cb){
+ var host=byId(hostId); if(!host) return;
+ TOPICS.forEach(function(o){var b=document.createElement('button');b.className='fbtn'+(cur===o[0]?' on':'');b.textContent=o[1];b.setAttribute('data-f',o[0]);
+   b.addEventListener('click',function(){host.querySelectorAll('.fbtn').forEach(function(x){x.classList.toggle('on',x===b);});cb(o[0]);});host.appendChild(b);});
+}
+function initFlash(){
+ filterBtns('flashfilters',deckFilter,function(f){deckFilter=f;buildDeck();});
+ byId('flash').addEventListener('click',function(){byId('flash').classList.toggle('flip');});
+ byId('fnext').addEventListener('click',function(){if(!deck.length)return;di=(di+1)%deck.length;showCard();});
+ byId('fprev').addEventListener('click',function(){if(!deck.length)return;di=(di-1+deck.length)%deck.length;showCard();});
+ byId('fshuf').addEventListener('click',buildDeck);
+ buildDeck();
+}
+
+/* ===================== quiz ===================== */
+var quizFilter='all', QUIZ_BATCH=10, qRight=0, qAns=0, qQueue=[];
+function qBank(){return QUIZ.filter(function(q){return quizFilter==='all'||q.tp===quizFilter;});}
+function renderQuiz(){
+ var host=byId('quiz'); if(!host) return; host.innerHTML='';
+ var B=qBank(); var n=Math.min(QUIZ_BATCH,B.length);
+ if(qQueue.length<n) qQueue=shuffle(B.map(function(_,i){return i;}));
+ var batch=qQueue.splice(0,n);
+ batch.forEach(function(idx,qi){
+   var item=B[idx]; var order=shuffle(item.o.map(function(_,i){return i;})); var cp=order.indexOf(item.c);
+   var q=document.createElement('div'); q.className='q';
+   var h='<div class="qmeta"><span class="qlec">'+esc(topicName(item.tp))+' · '+esc(item.s)+'</span></div><div class="qh">'+(qi+1)+'. '+esc(item.q)+'</div>';
+   order.forEach(function(oi,pos){h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[oi])+'</button>';});
+   h+='<div class="qexp">'+esc(item.e)+' <i>('+esc(item.s)+')</i></div>';
+   q.innerHTML=h;
+   q.querySelectorAll('.opt').forEach(function(b){b.addEventListener('click',function(){
+     if(q.dataset.done)return; q.dataset.done='1'; qAns++;
+     var pick=+b.getAttribute('data-pos');
+     q.querySelectorAll('.opt').forEach(function(x,xi){x.disabled=true;if(xi===cp)x.classList.add('correct');});
+     if(pick!==cp) b.classList.add('wrong'); else qRight++;
+     q.querySelector('.qexp').classList.add('show'); updQ();
+   });});
+   host.appendChild(q);
+ });
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ foot.innerHTML='<span class="quizscore" id="qscore"></span><button class="dbtn" id="qnew">Fresh set &#8594;</button>';
+ host.appendChild(foot);
+ byId('qnew').addEventListener('click',function(){window.scrollTo(0,0);renderQuiz();});
+ updQ();
+}
+function updQ(){var s=byId('qscore');if(s)s.textContent=qAns?('Score '+qRight+' / '+qAns):'Pick an answer to begin';}
+function initQuiz(){filterBtns('quizfilters',quizFilter,function(f){quizFilter=f;qQueue=[];qRight=0;qAns=0;renderQuiz();});renderQuiz();}
+
+/* ===================== boot, every init guarded ===================== */
+['renderPhases','updateProg','renderNext','renderMyRole','renderMatrix','renderRoles','renderBasin','renderSheet','renderNeg','initFlash','initQuiz']
+ .forEach(function(fn){try{window[fn]();}catch(e){if(window.console)console.error(fn,e);}});
+try{ if(state.tab && state.tab!=='phases' && document.querySelector('.tab[data-v="'+state.tab+'"]')) showTab(state.tab); }catch(e){}
+</script>
+</body>
+</html>
