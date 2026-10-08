@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ecology Field Guide III, Module 3 (ALS 3153)</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea; --card2:#f5eeddff;
+  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
+  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
+  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#7c95a3; --sky-d:#4a6b78;
+  --line:#d9ccb0; --line2:#c7b797;
+  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #e4e9e6 0%, transparent 60%),
+    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+  color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding:0 16px 60px; min-height:100vh;
+}
+.wrap{max-width:940px;margin:0 auto}
+.top{padding:26px 4px 6px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.crest{width:52px;height:52px;flex:none}
+.hgroup h1{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0;letter-spacing:.2px;color:var(--soil)}
+.hgroup .sub{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.09em;margin-top:6px}
+.hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:64ch}
+.prog{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progbar{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
+.progfill{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--moss));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.progtxt{font-size:13px;color:var(--ink2)}
+.progtxt b{color:var(--soil);font-size:15px}
+.tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 18px;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--line2)}
+.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+.view{display:none;animation:fade .25s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* big picture */
+.bigpic{margin-top:22px}
+.oneliner{font-family:var(--serif);font-size:18px;line-height:1.42;color:var(--soil);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sky-d);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:0 4px 18px}
+.mapwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 8px;margin:0 4px 8px;overflow-x:auto}
+.mapwrap svg{max-width:440px;margin:0 auto}
+.mapcap{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink3);margin:0 10px 22px;text-align:center;line-height:1.4}
+.bigtext p{font-size:14.5px;color:var(--ink2);line-height:1.6;margin:0 4px 13px;max-width:66ch}
+.bigtext b{color:var(--soil);font-family:var(--serif)}
+/* week strip */
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 4px 20px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer;transition:.15s}
+.wk:hover{border-color:var(--line2)}
+.wk.now{border-color:var(--sky-d);box-shadow:0 0 0 2px rgba(74,107,120,.18),var(--shadow)}
+.wk h3{font-family:var(--serif);font-size:17px;margin:0;color:var(--soil)}
+.wk .wlecs{font-size:11.5px;color:var(--ink3)}
+.wk .badge{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px}
+.wk .due{font-size:12px;color:var(--ink2);line-height:1.3}
+.wk .due b{color:var(--clay-d)}
+.ring{width:64px;height:64px}
+.ring .bg{fill:none;stroke:var(--paper2);stroke-width:7}
+.ring .fg{fill:none;stroke:var(--moss);stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .5s}
+.ring text{font-size:15px;font-family:var(--serif);fill:var(--soil);font-weight:700}
+@media(max-width:560px){.weeks{grid-template-columns:1fr 1fr 1fr;gap:8px}.wk{padding:10px 6px 10px}.wk h3{font-size:14px}.wk .due{font-size:11px}.ring{width:52px;height:52px}.wk .badge{font-size:10px;padding:2px 7px}}
+/* lectures */
+.wkhead{display:flex;align-items:baseline;gap:10px;margin:26px 4px 12px}
+.wkhead .n{font-family:var(--serif);font-size:13px;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px;flex:none;font-weight:700}
+.wkhead h2{font-family:var(--serif);font-size:20px;margin:0;color:var(--soil)}
+.wkhead .wdue{font-size:12.5px;color:var(--ink3);margin-left:auto}
+details.lec{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;overflow:hidden}
+details.lec>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:12px}
+details.lec>summary::-webkit-details-marker{display:none}
+details.lec>summary .num{font-family:var(--serif);font-size:13px;color:#fff;background:var(--clay);border-radius:8px;padding:3px 8px;flex:none;font-weight:700}
+details.lec>summary .ttl{font-family:var(--serif);font-size:17px;color:var(--ink);line-height:1.2;flex:1}
+details.lec>summary .meta{font-size:11.5px;color:var(--ink3);white-space:nowrap}
+details.lec>summary .chev{width:18px;height:18px;flex:none;transition:transform .2s;color:var(--ink3)}
+details.lec[open]>summary .chev{transform:rotate(90deg)}
+details.lec>summary .done{width:22px;height:22px;flex:none;border-radius:6px;border:1.5px solid var(--line2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;background:var(--paper)}
+details.lec.studied>summary .done{background:var(--moss);border-color:var(--moss)}
+details.lec.studied>summary .ttl{color:var(--moss-d)}
+.lbody{padding:2px 16px 16px;border-top:1px dashed var(--line2)}
+.gist{font-family:var(--serif);font-size:16px;line-height:1.45;color:var(--soil);margin:14px 0 12px}
+.sec{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--clay-d);font-weight:700;margin:16px 0 8px}
+.line{margin:0;padding-left:18px;color:var(--ink2);font-size:14px;line-height:1.5}
+.line li{margin-bottom:5px}
+.ask{margin:0;padding-left:18px;color:var(--ink2);font-size:13.5px;line-height:1.45}
+.ask li{margin-bottom:4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 10px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sky);opacity:.55}
+.card.m1::before{background:var(--ink3);opacity:.4}
+.card.m2::before{background:var(--wheat)}
+.card.m3::before{background:var(--moss)}
+.card h3{font-family:var(--serif);font-size:16px;margin:0 0 6px;color:var(--ink);line-height:1.2}
+.card p{margin:0 0 8px;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.card .fact{font-size:12.5px;color:var(--soil);background:#efe6d1;border-radius:9px;padding:6px 9px;margin:0 0 10px;line-height:1.4}
+.card .fact b{color:var(--clay-d)}
+.mastery{display:flex;gap:6px;border-top:1px dashed var(--line2);padding-top:10px;margin-top:2px}
+.mbtn{flex:1;font:inherit;font-size:11px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink3);border-radius:9px;padding:6px 4px;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1}
+.mbtn .ic{font-size:14px}
+.mbtn:hover{border-color:var(--line2)}
+.mbtn.on1{background:#efe7d8;color:var(--ink2);border-color:var(--line2)}
+.mbtn.on2{background:#f3e7c6;color:#8a6a1e;border-color:#dcc487}
+.mbtn.on3{background:#e2e7cf;color:var(--moss-d);border-color:#b6c188}
+.studybtn{font:inherit;font-weight:600;font-size:13.5px;border:1px solid var(--moss);background:var(--moss);color:#f6f2e2;border-radius:99px;padding:10px 18px;cursor:pointer;margin-top:16px}
+.studybtn.off{background:var(--card);color:var(--moss-d)}
+/* mini quiz + quiz */
+.quiz{margin-top:8px;display:flex;flex-direction:column;gap:12px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.q .qh{font-family:var(--serif);font-size:15.5px;color:var(--ink);margin:0 0 10px;line-height:1.35}
+.q .qmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700}
+.q .qsrc{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#fff;background:var(--clay-d);border-radius:99px;padding:3px 9px;white-space:nowrap}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
+.opt:hover{border-color:var(--line2)}
+.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt:disabled{cursor:default}
+.qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
+.qexp.show{display:block}
+.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;margin:18px 4px 6px;flex-wrap:wrap;align-items:center}
+.filters .fl{font-size:12px;color:var(--ink3);margin-right:4px}
+.fbtn{font:inherit;font-weight:600;font-size:12.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:6px 14px;cursor:pointer}
+.fbtn.on{background:var(--sky-d);color:#fff;border-color:var(--sky-d)}
+/* flashcards */
+.deckwrap{margin-top:16px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.flash{width:100%;max-width:460px;height:290px;perspective:1400px;cursor:pointer}
+.flinner{position:relative;width:100%;height:100%;transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flash.flip .flinner{transform:rotateY(180deg)}
+.fface{position:absolute;inset:0;backface-visibility:hidden;border-radius:20px;box-shadow:var(--shadow);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;padding:28px 26px;text-align:center}
+.ffront{background:var(--card)}
+.fback{background:linear-gradient(180deg,#e6ebe6,#dfe6dd);transform:rotateY(180deg)}
+.fface .tag{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700;margin-bottom:14px}
+.fface .qq{font-family:var(--serif);font-size:20px;color:var(--soil);line-height:1.3}
+.fface .aa{font-size:15px;color:var(--ink);line-height:1.55}
+.fhint{font-size:12px;color:var(--ink3);position:absolute;bottom:14px;left:0;right:0;text-align:center}
+.deckctl{display:flex;align-items:center;gap:12px}
+.dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 20px;cursor:pointer}
+.dbtn:hover{border-color:var(--line2)}
+.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.dcount{font-size:13px;color:var(--ink2);min-width:70px;text-align:center}
+/* connect */
+.connintro{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:14.5px;margin:22px 4px 14px;max-width:64ch}
+.connboard{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.conncol{display:flex;flex-direction:column;gap:10px}
+.ctile{font:inherit;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:12px 14px;cursor:pointer;color:var(--ink);font-size:13.5px;line-height:1.35;transition:transform .12s,border-color .12s,background .12s;position:relative}
+.conncol#connL .ctile{font-family:var(--serif);font-size:15px;color:var(--soil)}
+.ctile:hover{border-color:var(--line2)}
+.ctile.sel{border-color:var(--clay);background:#f3e4d8;box-shadow:0 0 0 2px rgba(176,98,59,.18),var(--shadow)}
+.ctile.matched{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);cursor:default;box-shadow:none}
+.ctile.matched::after{content:"✦";position:absolute;right:11px;top:50%;transform:translateY(-50%);color:var(--moss);font-size:13px}
+.conncol#connL .ctile.matched{color:var(--moss-d)}
+.ctile.miss{animation:shake .34s;border-color:var(--clay-d);background:#f0dcd2}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.connfoot{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px}
+.conndone{text-align:center;font-family:var(--serif);font-size:17px;color:var(--moss-d);margin-top:14px}
+@media(max-width:520px){.ctile{font-size:12.5px;padding:10px 11px}.conncol#connL .ctile{font-size:13.5px}}
+.placeholder{margin:26px 4px;background:var(--card);border:1px dashed var(--line2);border-radius:16px;padding:26px 20px;text-align:center;font-family:var(--serif);font-style:italic;color:var(--ink3);font-size:16px}
+.foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic}
+/* exam 2 additions */
+.wbw{margin:22px 4px 24px}
+.wbwhead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 6px}
+.wbwhead h2{font-family:var(--serif);font-size:23px;margin:0;color:var(--soil)}
+.wbwsub{font-size:12px;color:var(--ink2);text-transform:uppercase;letter-spacing:.07em}
+.wbwmap{font-size:13.5px;color:var(--ink2);margin:0 0 14px;max-width:72ch;line-height:1.5}
+.wbwmap b{color:var(--soil)}
+.wbwgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:start}
+@media(max-width:880px){.wbwgrid{grid-template-columns:minmax(0,1fr)}}
+.wcard{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 16px 12px;min-width:0}
+.wtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.wtop .n{font-family:var(--serif);font-size:13px;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px;font-weight:700}
+.wdates{font-size:12px;color:var(--ink3)}
+.wsyl{font-family:var(--serif);font-size:16.5px;color:var(--soil);margin:8px 0 9px;line-height:1.3}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px}
+.chip{font:inherit;font-size:12px;background:var(--paper);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:4px 10px;cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--line2)}
+.chip b{color:var(--clay-d);margin-right:3px}
+.chip.extra{border-style:dashed;border-color:var(--line2)}
+.chip.maybe{background:#f3e7c6;border-color:#dcc487}
+.wmap{font-size:12.5px;color:var(--ink3);font-style:italic;margin:0 0 2px;line-height:1.45}
+.wbig{font-size:14px;color:var(--ink2);line-height:1.55;margin:0}
+.wcard .line{font-size:13.5px}
+.suphead{margin:24px 4px 12px;padding:10px 14px;border-left:4px solid var(--wheat);background:rgba(251,246,234,.7);border-radius:0 12px 12px 0}
+.suphead h3{font-family:var(--serif);font-size:17px;margin:0;color:var(--soil)}
+.suphead p{margin:3px 0 0;font-size:12.5px;color:var(--ink2);line-height:1.4}
+.suphead.maybe{border-left-color:var(--clay)}
+.flagpill{display:inline-block;margin-top:4px;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487;border-radius:99px;padding:2px 8px}
+.cmp{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;padding:14px 16px}
+.cmp h3{font-family:var(--serif);font-size:18px;margin:0 0 6px;color:var(--soil)}
+.cmp .cmpintro{font-size:13.5px;color:var(--ink2);margin:0 0 8px;line-height:1.5}
+.cmprow{display:grid;grid-template-columns:132px minmax(0,1fr) minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px dashed var(--line2)}
+.cmphead{border-top:none;padding-bottom:2px}
+.cmphead div{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700}
+.cmpk{font-family:var(--serif);font-weight:700;color:var(--soil);font-size:14.5px;line-height:1.25}
+.cmpc{font-size:13px;color:var(--ink2);line-height:1.45}
+.cmpc .who{display:none}
+.cmptake{font-size:13px;color:var(--soil);background:#efe6d1;border-radius:10px;padding:9px 11px;margin-top:8px;line-height:1.45}
+@media(max-width:640px){.cmprow{grid-template-columns:minmax(0,1fr);gap:6px}.cmphead{display:none}.cmpc .who{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--clay-d);font-weight:700;margin-bottom:1px}}
+.qsrc.m2{background:var(--moss-d)}
+.qsrc.qz{background:var(--sky-d)}
+.fface .tag .qsrc{display:inline-block;margin-left:6px;vertical-align:1px;font-size:9.5px;padding:2px 8px;color:#fff;background:var(--sky-d);border-radius:99px;letter-spacing:.06em}
+.qzlist{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-direction:column;gap:10px}
+.qzlist li{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 14px;font-size:13.5px;color:var(--ink2);line-height:1.45;min-width:0;overflow-wrap:anywhere}
+.qzlist li a{font-family:var(--serif);font-weight:700;color:var(--sky-d);font-size:15px;text-decoration:none}
+.qzlist li a:hover{text-decoration:underline}
+.qzlist .qzm{font-size:11.5px;color:var(--ink3);margin:2px 0 4px}
+.examhub h3.qzh{font-family:var(--serif);font-size:19px;color:var(--soil);margin:24px 0 6px}
+.examhub p.qzp{font-size:13.5px;color:var(--ink2);margin:0 0 12px;line-height:1.5;max-width:70ch}
+.qexp.qnote{color:var(--clay-d);background:#f6e9df;border-top:none;border-left:3px solid var(--clay);border-radius:8px;padding:8px 10px}
+.examhub{margin:22px 4px}
+.examhub .plan{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.examhub .plan li{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:12px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.examhub .plan .pt{flex:1;min-width:200px;font-size:14px;color:var(--ink2);line-height:1.45}
+.examhub .plan .pt b{font-family:var(--serif);color:var(--soil);font-size:15px}
+.examhub .facts{font-size:13.5px;color:var(--ink2);margin:0 0 16px;padding-left:18px;line-height:1.5}
+.qsrc.soil{background:var(--soil)}
+.fface .tag .qsrc.soil{background:var(--soil)}
+.soilgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0 0 14px}
+.soilgrid .wtop .n{background:var(--soil)}
+.soilgrid .sqs{margin-top:6px}
+.soilgrid .q{margin:10px 0 0}
+.soilfoot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.soilfoot .quizscore{flex:1;min-width:140px}
+.soilcav{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:8px}
+.soilcav li{font-size:13.5px;line-height:1.5;color:var(--clay-d);background:#f6e9df;border-left:3px solid var(--clay);border-radius:8px;padding:9px 12px}
+.soilself{font-size:13.5px;color:var(--ink2);line-height:1.5;margin:0;padding-left:18px}
+.soilself b{color:var(--soil)}
+svg{display:block}
+/* module 3 additions */
+.weeks{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:560px){.weeks{grid-template-columns:1fr 1fr}}
+.wk.soon{opacity:.8;border-style:dashed}
+.soonpill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487;border-radius:99px;padding:3px 10px}
+.wk .soonpill{margin:20px 0}
+.soonbox{margin:0 4px 12px;background:var(--card);border:1px dashed var(--line2);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--ink3);line-height:1.5}
+.soonbox b{color:var(--soil);font-family:var(--serif)}
+.chip.soon{cursor:default;border-style:dashed;color:var(--ink3)}
+.fbtn.soon{opacity:.55;cursor:default;border-style:dashed}
+.objs{margin:0 0 16px;padding-left:20px;font-size:13.5px;color:var(--ink2);line-height:1.5;max-width:72ch}
+.objs li{margin-bottom:5px}
+.objwk{font-size:11px;font-weight:700;color:var(--clay-d);white-space:nowrap}
+.wcard.full{grid-column:1/-1}
+.wcard.soon{border-style:dashed}
+.wcard .wtop .soonpill{margin-left:auto}
+</style>
+<noscript><style>.view{display:block !important}.tabs{display:none}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
+      <rect x="2" y="34" width="48" height="14" rx="3" fill="#6b4a31"/>
+      <rect x="2" y="40" width="48" height="8" rx="3" fill="#573f2c"/>
+      <path d="M26 34 C26 26 26 20 26 12" stroke="#4d5a2a" stroke-width="2.4" fill="none"/>
+      <path d="M26 24 C20 22 15 17 14 10 C21 11 25 16 26 24 Z" fill="#6d7b41"/>
+      <path d="M26 18 C31 16 36 12 38 6 C31 7 27 11 26 18 Z" fill="#4a6b78"/>
+      <circle cx="39" cy="26" r="3.2" fill="#b0623b"/><circle cx="12" cy="29" r="2.4" fill="#c69537"/>
+    </svg>
+    <div class="hgroup">
+      <h1>Ecology Field Guide III</h1>
+      <div class="sub">ALS 3153 · Module 3 · Biotic Interactions in Agroecosystems</div>
+    </div>
+  </div>
+  <p class="hnote">Module 3, one lecture at a time, starting with Week 8 for Quiz 08 this Sunday. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your five Week 8 lecture transcripts (3.1 to 3.5). Weeks 9 to 11 are marked coming and fill in later, and your real Quiz 08 questions get their own slot in the Quiz tab once you share them.</p>
+
+  <div class="prog">
+    <div class="progbar"><div class="progfill" id="pf"></div></div>
+    <div class="progtxt"><b id="pstud">0</b> of <span id="ptot">5</span> lectures studied · <span id="psolid">0</span> concepts solid</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-v="overview">Big picture</button>
+    <button class="tab" data-v="lectures">Lectures</button>
+    <button class="tab" data-v="flash">Flashcards</button>
+    <button class="tab" data-v="quiz">Quiz</button>
+    <button class="tab" data-v="connect">Connect</button>
+    <button class="tab" data-v="exam">Exam 03</button>
+  </div>
+
+  <div class="view on" id="v-overview">
+    <div class="bigpic">
+      <div class="oneliner">Module 3 in one breath: a farm is full of living things acting on each other, and the professor's one rule is to learn the mechanism behind every interaction, because the mechanism is what you can manage. Week 8 gives you the processes: who removes what and who adds what, how niches and chemicals decide who wins, how communities change after every disturbance, and how populations grow toward a carrying capacity we can push up for crops and down for pests.</div>
+      <div class="weeks" id="weeks"></div>
+      <div class="mapwrap">
+        <svg viewBox="0 0 400 640" width="100%" role="img" aria-label="How the Week 8 concepts connect">
+          <defs>
+            <marker id="ar" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#573f2c"/></marker>
+            <marker id="arc" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#b0623b"/></marker>
+          </defs>
+          <rect x="70" y="8" width="260" height="56" rx="12" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
+          <text x="200" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#4a6b78" font-family="var(--serif)">Organisms act on each other · 3.1</text>
+          <text x="200" y="48" text-anchor="middle" font-size="10.5" fill="#6c5d45">Odum's signs: + +, - -, + 0, - 0, + -, 0 0</text>
+                    <path d="M150 64 C124 82 106 90 100 104" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <path d="M250 64 C268 82 276 90 280 104" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <rect x="14" y="106" width="170" height="56" rx="12" fill="#f0dcd2" stroke="#b0623b" stroke-width="1.6"/>
+          <text x="99" y="127" text-anchor="middle" font-size="12.5" font-weight="700" fill="#8c4a2b" font-family="var(--serif)">Something removed</text>
+          <text x="99" y="145" text-anchor="middle" font-size="10" fill="#6c5d45">competition, parasitism, herbivory</text>
+          <rect x="196" y="106" width="170" height="56" rx="12" fill="#eef0e2" stroke="#6d7b41" stroke-width="1.6"/>
+          <text x="281" y="127" text-anchor="middle" font-size="12.5" font-weight="700" fill="#4d5a2a" font-family="var(--serif)">Something added</text>
+          <text x="281" y="145" text-anchor="middle" font-size="10" fill="#6c5d45">mutualism, epiphytes, allelopathy</text>
+          <path d="M99 162 L99 190" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <path d="M281 162 L281 190" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <rect x="14" y="192" width="170" height="70" rx="12" fill="#efe6d4" stroke="#8a6a3a" stroke-width="1.6"/>
+          <text x="99" y="213" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6b4a2a" font-family="var(--serif)">Competition · 3.2</text>
+          <text x="99" y="229" text-anchor="middle" font-size="10" fill="#6c5d45">fundamental vs realized niche,</text>
+          <text x="99" y="241" text-anchor="middle" font-size="10" fill="#6c5d45">exclusion, displacement,</text>
+          <text x="99" y="253" text-anchor="middle" font-size="10" fill="#6c5d45">weeds vs crop, row spacing</text>
+          <rect x="196" y="192" width="170" height="70" rx="12" fill="#efe6d4" stroke="#8a6a3a" stroke-width="1.6"/>
+          <text x="281" y="213" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6b4a2a" font-family="var(--serif)">Allelopathy · 3.3</text>
+          <text x="281" y="229" text-anchor="middle" font-size="10" fill="#6c5d45">leach, volatilize, exude,</text>
+          <text x="281" y="241" text-anchor="middle" font-size="10" fill="#6c5d45">decompose; suppress or</text>
+          <text x="281" y="253" text-anchor="middle" font-size="10" fill="#6c5d45">stimulate (rye, corncockle)</text>
+          <path d="M99 262 C99 288 160 300 186 306" stroke="#573f2c" stroke-width="1.6" fill="none" opacity=".6"/>
+          <path d="M281 262 C281 288 240 300 214 306" stroke="#573f2c" stroke-width="1.6" fill="none" opacity=".6"/>
+          <path d="M200 306 L200 318" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <text x="208" y="300" font-size="9.5" fill="#93856a" font-style="italic">over time</text>
+          <rect x="60" y="320" width="280" height="70" rx="12" fill="#f3e7c6" stroke="#c69537" stroke-width="1.6"/>
+          <text x="200" y="341" text-anchor="middle" font-size="13" font-weight="700" fill="#8a6a1e" font-family="var(--serif)">Succession · 3.4</text>
+          <text x="200" y="357" text-anchor="middle" font-size="10" fill="#6c5d45">weeds, perennials, pines, oak-hickory;</text>
+          <text x="200" y="369" text-anchor="middle" font-size="10" fill="#6c5d45">colonizers vs persisters; disturbance resets it</text>
+          <text x="200" y="381" text-anchor="middle" font-size="10" fill="#6c5d45">(intensity, frequency, scale)</text>
+          <path d="M200 390 L200 414" stroke="#573f2c" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+          <rect x="60" y="416" width="280" height="62" rx="12" fill="#e4ecef" stroke="#4a6b78" stroke-width="1.6"/>
+          <text x="200" y="437" text-anchor="middle" font-size="13" font-weight="700" fill="#4a6b78" font-family="var(--serif)">Population dynamics · 3.5</text>
+          <text x="200" y="453" text-anchor="middle" font-size="10" fill="#6c5d45">exponential J curve vs logistic toward K;</text>
+          <text x="200" y="465" text-anchor="middle" font-size="10" fill="#6c5d45">r colonizers vs K persisters</text>
+          <path d="M200 478 L200 494" stroke="#b0623b" stroke-width="1.8" fill="none" marker-end="url(#arc)"/>
+          <rect x="40" y="496" width="320" height="62" rx="14" fill="#6b4a31"/>
+          <text x="200" y="517" text-anchor="middle" font-size="13" font-weight="700" fill="#f4ecdd" font-family="var(--serif)">Conventional farming</text>
+          <text x="200" y="535" text-anchor="middle" font-size="10.5" fill="#efe0cf">restarts succession every season,</text>
+          <text x="200" y="549" text-anchor="middle" font-size="10.5" fill="#efe0cf">removes competitors, pushes crops past K</text>
+          <rect x="30" y="568" width="340" height="62" rx="12" fill="#6d7b41"/>
+          <text x="200" y="589" text-anchor="middle" font-size="12.5" font-weight="700" fill="#f4ecdd" font-family="var(--serif)">The way forward: manage by mechanism</text>
+          <text x="200" y="606" text-anchor="middle" font-size="10.5" fill="#eef0e2">rotational grazing, cover crops, intercrops,</text>
+          <text x="200" y="620" text-anchor="middle" font-size="10.5" fill="#eef0e2">patchy later stages, resistant cultivars</text>
+          <path d="M370 580 C394 500 398 40 334 36" stroke="#b0623b" stroke-width="1.8" fill="none" stroke-dasharray="5 4" marker-end="url(#arc)"/>
+          <text x="390" y="300" font-size="9.5" fill="#b0623b" font-style="italic" text-anchor="middle" transform="rotate(90 390 300)">know the mechanism, then design with it</text>
+        </svg>
+      </div>
+      <div class="mapcap">Read it top to bottom. Every interaction either removes something or adds something; competition and allelopathy are the two big cases. Over time those interactions reshape whole communities (succession) and set how fast each population grows. The dashed line is the loop back: once you know the mechanism, you can design the farm around it.</div>
+      <div class="bigtext">
+        <p><b>Start with the interaction.</b> Odum's classic table names what happens to each partner: mutualism helps both, competition hurts both, commensalism helps one and leaves the other alone, amensalism harms one and leaves the other alone, parasitism and predation help one at the other's cost. The professor cares less about the label than the mechanism. Is the competition over light, water or nutrients? What goods and services does a mutualism trade? Some interactions remove something from the environment (competition, parasitism, herbivory), others add something (epiphytes using a host as habitat, mutualisms, allelopathic chemicals).</p>
+        <p><b>Then the two big contests.</b> Competition happens where niches overlap. A species could live across its whole fundamental niche, but competitors squeeze it into a smaller realized niche, and over generations competition can even reshape a trait, as with the finches' bills. Crops have narrow niches and weeds broad ones, so farmers assume competition everywhere: row spacing, inputs, herbicides. Allelopathy is the chemical contest. Plants leach, volatilize, exude or decompose into compounds that suppress or, at times, stimulate their neighbors, and winter rye, velvet bean and cacao hull mulch put that to work against weeds.</p>
+        <p><b>Then time.</b> Succession is the predictable change in which species are present, and any disturbance resets it. Old farm fields go from annual weeds to perennials, pines and, after 100 to 150 years, oak-hickory forest. Early colonizers are fast, short lived, poor competitors (r strategists); later persisters are slow, long lived, good competitors (K strategists). Farming is a disturbance repeated every season, which holds the field at the earliest stage and makes it depend on inputs.</p>
+        <p><b>And numbers.</b> A population changes through births, deaths, immigration and emigration. Unchecked, it grows exponentially in a J curve; in a limited world it levels off at the carrying capacity. Conventional farming pushes crops past their carrying capacity with inputs and by removing competitors, while a resistant cultivar can pull a pest's carrying capacity down. The rest of Module 3 meets the players (soil organisms, insects, weeds, diseases), then how we manage them, then three case studies.</p>
+      </div>
+      <div class="wbw" id="wbw"></div>
+    </div>
+  </div>
+
+  <div class="view" id="v-lectures"></div>
+
+  <div class="view" id="v-flash">
+    <div class="filters" id="flashfilters"><span class="fl">Deck</span></div>
+    <div class="deckwrap">
+      <div class="flash" id="flash"><div class="flinner">
+        <div class="fface ffront"><div class="tag" id="fqtag"></div><div class="qq" id="fq"></div><div class="fhint">tap to flip</div></div>
+        <div class="fface fback"><div class="aa" id="fa"></div><div class="fhint">tap to flip back</div></div>
+      </div></div>
+      <div class="deckctl">
+        <button class="dbtn" id="fprev">‹ Back</button>
+        <span class="dcount" id="fcount"></span>
+        <button class="dbtn pri" id="fnext">Next ›</button>
+      </div>
+      <div class="progtxt" style="margin-top:2px">Shuffle a fresh pass anytime: <button class="dbtn" id="fshuf" style="padding:5px 12px;font-size:12px">shuffle</button></div>
+    </div>
+  </div>
+
+  <div class="view" id="v-quiz">
+    <div class="oneliner" style="margin:22px 4px 10px">Week 8 practice, ten at a time, answers shuffled, the mechanism under each answer. Every question is written from your 3.1 to 3.5 transcripts. The Quiz 08 pool filter is a reserved slot: once you share your real Quiz 08 questions, they land there with a Quiz 08 pool pill, so you can tell the professor's wording from these practice ones, and they fold into Week 8 too.</div>
+    <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="view" id="v-connect">
+    <p class="connintro">Tap a term on the left, then the idea it belongs with on the right. Get it right and the pair wires together and locks in. Get it wrong and they flash and let go.</p>
+    <div class="connboard"><div class="conncol" id="connL"></div><div class="conncol" id="connR"></div></div>
+    <div class="connfoot"><span class="dcount" id="conncount"></span><button class="dbtn" id="connreset">New round</button></div>
+    <div class="conndone" id="conndone" hidden>All wired. Deal a new round?</div>
+  </div>
+
+  <div class="view" id="v-exam">
+    <div class="examhub" id="examhub"><div class="placeholder">Exam 03 opens Mon Nov 2, 1:00 am ET and closes Wed Nov 4, 11:59 pm ET. If this line stays, scripts are off: scroll the Big picture tab for the week-by-week map.</div></div>
+  </div>
+
+  <div class="foot">Ecology Field Guide III · built from your Module 3 Week 8 transcripts (3.1 to 3.5) · weeks 9 to 11 coming · your marks stay on this device</div>
+</div>
+<script>
+/* ---------- Module 3 data: one entry per lecture, Canvas order. Week 8 built 2026-10-08; weeks 9 to 11 coming ---------- */
+var WEEKS=[
+ {n:8,lecs:["3.1","3.2","3.3","3.4","3.5"],quiz:"Quiz 08",due:"Sun Oct 11, 11:59 pm ET",read:"Section 7, pp. 93 to 105. Watch: Livestock Exclusion and Rotational Grazing (Canvas video)",deck:"The Processes: interactions, competition, allelopathy, succession, populations"},
+ {n:9,lecs:[],soon:["3.6","3.7","3.8","3.9","3.10","3.11","3.12"],quiz:"Quiz 09",due:"Sun Oct 18, 11:59 pm ET",read:"Section 12, pp. 171 to 181",deck:"The Players: soil organisms, nematodes, insects, weeds, diseases"},
+ {n:10,lecs:[],soon:["3.13","3.14","3.15a","3.15b","3.16","3.17","3.18"],quiz:"Quiz 10",due:"Sun Oct 25, 11:59 pm ET",read:"Section 13, pp. 183 to 201",deck:"Management: biocontrol, pests, pesticides, diseases, weeds, nematodes"},
+ {n:11,lecs:[],soon:["3.19","3.20","3.21"],quiz:"Quiz 11",due:"Sun Nov 1, 11:59 pm ET",read:"no section listed; Canvas lists Perusall 4 this week",deck:"Case Studies: colony collapse, thousand cankers, wheat stem rust"}
+];
+var SOONTITLE={"3.6":"Soil Organisms 1","3.7":"Soil Organisms 2","3.8":"Nematodes","3.9":"Arthropods in Agriculture","3.10":"Insect Orders","3.11":"Weed Ecology","3.12":"Plant Diseases","3.13":"Biocontrol","3.14":"Pest Management","3.15a":"Pesticides 1","3.15b":"Pesticides 2","3.16":"Disease Management","3.17":"Weed Management","3.18":"Nematode Management","3.19":"Colony Collapse Disorder","3.20":"Thousand Cankers Disease","3.21":"Wheat Stem Rust"};
+var L=[
+{id:"3.1",wk:8,title:"Biotic Interactions",words:4562,
+ gist:"Biotic interactions are the interactions between living organisms, and the one thing she wants you to carry out of this lecture is the mechanism: what is being competed for, or what goods and services are being traded. Odum's table names the outcome (mutualism + +, competition - -, commensalism + 0, amensalism - 0, parasitism and predation + -, neutralism 0 0). The book adds whether one organism removes something from the environment (competition, parasitism, herbivory) or adds something to it (epiphytism, mutualism, allelopathy).",
+ line:["Up to now the course was physical factors (water, nutrients). Module 3 turns to how organisms interact, and why the mechanism of each interaction gives us management options.",
+  "Odum's classic table gives each interaction an outcome when the two organisms interact and when they do not. Mutualism is + + together and - - apart, because each loses the benefit.",
+  "Removal interference: one organism removes something and lowers its availability for the other. Competition (always negative), parasitism and herbivory.",
+  "Farmers assume competition. Row spacing, heavy inputs, controlled greenhouses and herbicides all try to make sure nothing is limiting.",
+  "Herbivory gets an asterisk: it hurts the individual plant, but managed grazing (rotational grazing) can help the pasture as a whole.",
+  "Addition interference: one organism adds something, and the effect can be positive, negative or neutral. Epiphytism, mutualism and allelopathy.",
+  "Mutualisms are her specialty. She drops the book's term protocooperation: pollination is a mutualism, either facultative (honeybee) or obligate (vanilla and its one bee)."],
+ cards:[
+  {t:"Odum's interaction table",i:"Neutralism 0 0, competition - -, mutualism + +, commensalism + 0, amensalism - 0, parasitism and predation + -. The table also lists the outcome when the two are NOT interacting.",f:"Mutualism: <b>+ +</b> when interacting, <b>- -</b> when apart, since each loses the benefit.",q:"Give the outcome signs for competition, commensalism and amensalism.",a:"Competition: both negative (- -). Commensalism: one benefits, the other is unaffected (+ 0). Amensalism: one is harmed, the other is unaffected (- 0)."},
+  {t:"Mechanism over label",i:"She calls the book's extra construct a bit artificial. Its real point: knowing the outcome is not enough. If two plants compete, is it for light, for nutrients or for water?",f:"Her takeaway: <b>know the mechanism</b>, because the mechanism is what you can manage.",q:"Why does the professor care more about the mechanism than the outcome label?",a:"Because the exact resource being competed for, or the goods and services being exchanged, is the information we use to design more sustainable agroecosystems."},
+  {t:"Removal interference",i:"One organism removes something from the environment and reduces its availability for a second organism. Usually negative, with some exceptions. Competition, parasitism and herbivory are the three she lists.",f:"Competition is a <b>removal</b> interference, and competition is <b>always negative</b>.",q:"What is a removal interference, and which three interactions are removal interferences?",a:"One organism removes something from the environment and lowers its availability for another. Competition, parasitism and herbivory."},
+  {t:"Farmers assume competition",i:"Monoculture plants are spaced at a set distance because we expect same-species competition. Inputs are added so nutrients, light and water are never limiting. Greenhouses control every input. Herbicides cut weed and crop competition.",f:"Conventional agriculture tries to <b>eliminate competition</b> by making nothing limiting, to maximize yield.",q:"Name two ways conventional agriculture works around competition.",a:"Spacing monoculture plants at a set distance, adding inputs so nothing is limiting, controlling every input in greenhouses, and using herbicides against weeds."},
+  {t:"Parasitism",i:"Two organisms live in very close proximity and the parasite draws nourishment from the host without killing it. Animal examples: ticks and the horse botfly larva feeding in the horse's flesh. Plant example: mistletoe getting under the bark of orchard trees such as guava and taking nutrients.",f:"Often the bigger harm is <b>secondary infection</b> or disease vectored by the parasite, more than the tissue lost.",q:"How does a parasite differ from something that kills its host, and what is often the bigger harm?",a:"A parasite takes nourishment from a host it lives on or in without killing it. The bigger harm is often secondary infection or diseases it carries."},
+  {t:"Herbivory, with an asterisk",i:"For the plant: lost biomass, less tissue to photosynthesize, nutrients removed, and lower yield when the harvested part is eaten. At the community level, grazing at a certain level can stimulate new growth and shift species composition in a good direction.",f:"Negative for the <b>individual plant</b>, potentially positive for the <b>community</b> under managed grazing.",q:"Why does herbivory get an asterisk in this lecture?",a:"It is normally + for the feeder and - for the plant, but at the community level managed grazing can stimulate new biomass and improve species composition."},
+  {t:"Rotational grazing",i:"Split one big pasture into small fragments and move the livestock between them, so the rancher controls feeding instead of the cows. The fescue example: grazed every week to 1 inch, grazed on a one-month rotation to 3 inches, or not grazed at all.",f:"Gains: <b>fewer weeds, better forage, bigger healthier roots, even manure, less compaction and erosion</b>. Costs: more active management and movable fences.",q:"List the benefits and the costs of rotational grazing.",a:"Benefits: fewer weeds, more nutritious forage, healthier and larger roots, even fecal nutrient distribution, less compaction and erosion. Costs: more active management and money for movable fences."},
+  {t:"Addition interference",i:"One organism adds something to the environment during the interaction. The effect can be positive, negative or neutral. Epiphytism, mutualism and allelopathy are her three examples.",f:"Addition interference can be <b>positive, negative or neutral</b>; removal interference is typically negative.",q:"Which interactions does she class as addition interferences?",a:"Epiphytism, mutualism and allelopathy."},
+  {t:"Epiphyte or parasite?",i:"An epiphyte grows on another plant but takes nothing from it: the host is only habitat, and the epiphyte gets water and nutrients from the air and rain. That is commensalism. Mistletoe roots into the host's vascular tissue, so it is a parasite.",f:"Local epiphytes: resurrection fern on live oaks, Spanish moss (<b>not a moss</b>, a bromeliad in the pineapple family, genus Tillandsia), air plants, and the vanilla orchid.",q:"Why is an epiphyte a commensal and mistletoe a parasite?",a:"The epiphyte uses the host only as a place to grow and gets its water and nutrients from the environment (+ 0). Mistletoe takes nutrients from the host's vascular tissue (+ -)."},
+  {t:"Facultative vs obligate mutualism",i:"Facultative: take it or leave it. Both benefit when it happens, both get by when it does not. Honeybees visit almost any flower, and most plants have many pollinators. Obligate: both partners need each other, often one to one.",f:"Obligate example: <b>vanilla and the Melipona bee</b>. The flower opens for a few hours on one day; farms now hand pollinate it.",q:"Contrast facultative and obligate mutualism with one example of each.",a:"Facultative: both benefit but can get by without each other, like the honeybee and the many flowers it visits. Obligate: the partners depend on each other, often one to one, like the vanilla orchid and the Melipona bee."},
+  {t:"Pollination is a mutualism",i:"The pollinator moves the plant's gametes so it can outcross and spread its genes (a service). The plant gives nectar, and some bees also eat pollen (a food reward).",f:"She rejects the book's <b>protocooperation</b>: pollination is heavily documented as a mutualism.",q:"What does each partner gain in pollination?",a:"The plant gets its gametes moved, so it can outcross. The bee gets nectar, and sometimes pollen, as food."},
+  {t:"Rhizobia and mycorrhizae",i:"Legumes host rhizobia bacteria in root nodules. The bacteria fix nitrogen gas from the air into inorganic nitrogen for the plant, and the plant pays in carbohydrates. Mycorrhizal fungi on roots supply minerals, especially phosphorus, and the plant pays in sugars.",f:"Mycorrhizae matter for <b>corn, beans, apples and strawberries</b> among other crops.",q:"What does each partner give in the legume and rhizobia mutualism, and in the mycorrhizal one?",a:"Rhizobia give inorganic nitrogen fixed from the air; the legume gives carbohydrates. Mycorrhizae give minerals, especially phosphorus; the plant gives sugars."}
+ ],
+ ask:["Match each Odum interaction to its sign: mutualism + +, competition - -, commensalism + 0, amensalism - 0, parasitism and predation + -, neutralism 0 0.",
+  "Is competition a removal or an addition interference? (Removal, and always negative.)",
+  "Which of these is NOT a removal interference: competition, parasitism, herbivory, allelopathy? (Allelopathy.)",
+  "Why is an epiphyte such as Spanish moss a commensal, while mistletoe is a parasite?",
+  "Facultative versus obligate mutualism, with the honeybee and the vanilla orchid as examples.",
+  "What do the plant and the partner each provide in the rhizobia and mycorrhizal mutualisms?",
+  "List benefits of rotational grazing compared with continuous heavy grazing."],
+ quiz:[
+  {q:"In Odum's table, commensalism is an interaction in which...",o:["one organism benefits and the other is unaffected","both organisms benefit","both organisms are harmed","one organism is harmed and the other is unaffected"],c:0,e:"Commensalism is + 0. Both benefiting is mutualism, both harmed is competition, and one harmed with the other unaffected is amensalism."},
+  {q:"Competition is classed as which kind of interference?",o:["A removal interference","An addition interference","A neutral interference","A facultative interference"],c:0,e:"One organism removes, or defends, a shared resource and lowers its availability for the other. That makes competition a removal interference, and she calls competition always negative."},
+  {q:"Which of these is NOT a removal interference?",o:["Allelopathy","Competition","Parasitism","Herbivory"],c:0,e:"Allelopathy adds a compound to the environment, so it is an addition interference. Competition, parasitism and herbivory all remove something: a resource, nourishment or tissue."},
+  {q:"Spanish moss growing on a live oak is an example of...",o:["commensalism, because the oak is only habitat","parasitism, because it takes the oak's nutrients","an obligate mutualism","amensalism"],c:0,e:"Spanish moss is an epiphyte (a bromeliad, not a true moss). It gets water and nutrients from the air and rain, so the host is only a place to grow: + 0. Mistletoe, which takes nutrients from the host, is the parasite."},
+  {q:"The vanilla orchid and its Melipona bee are her example of...",o:["an obligate mutualism","a facultative mutualism","protocooperation","commensalism"],c:0,e:"In the vanilla's native Mexico one bee species pollinated that orchid, and the flower is open only a few hours on one day. That one-to-one dependence is obligate. In production it is now pollinated by hand."},
+  {q:"Honeybees are called facultative mutualists because...",o:["they can collect nectar and pollen from almost any flower, and plants have other pollinators","they depend on one plant species","they harm the flowers they visit","they only pollinate crops"],c:0,e:"Facultative means take it or leave it: both benefit when it happens, and both get by when it does not. Even so, agriculture depends heavily on the honeybee."},
+  {q:"In the legume and rhizobia mutualism, the plant gives the bacteria...",o:["carbohydrates","inorganic nitrogen","phosphorus","protection from fire"],c:0,e:"The rhizobia fix nitrogen gas from the air into inorganic nitrogen for the plant, and the plant pays them in carbohydrates (sugars), plus a home in the root nodules."},
+  {q:"Which is NOT a benefit of rotational grazing that she lists?",o:["It needs less active management from the rancher","Fewer weeds move in","More even distribution of manure nutrients","Less compaction and erosion"],c:0,e:"It is the reverse: rotational grazing needs more active management and money for movable fences. The payoffs are fewer weeds, better forage, healthier roots, even manure, and less compaction and erosion."}
+ ]},
+{id:"3.2",wk:8,title:"Competition",words:4563,
+ gist:"Competition is the use or defense of a shared resource by one individual that has a negative impact on another. Species whose niches overlap compete, the most limiting resource sets growth (law of the minimum), and too much overlap means one species restricts the other (competitive exclusion). Each species has a fundamental niche (everywhere it could live) and a smaller realized niche (where it actually lives among competitors). Competition can drive character displacement, and on the farm it shows up as weeds against the crop and crop against crop, which is why planting density matters.",
+ line:["Definition: the use or defense of a shared resource by one individual that has a negative impact on another.",
+  "The niche is the theoretical set of everything a species needs to exist: physical conditions (moisture, weather, climate) and biological ones (nutrition, relationships with other organisms).",
+  "Law of the minimum: the most limiting resource sets the growth rate and whether the species can exist there at all. Competitive exclusion: when niches overlap too much, one species restricts the other.",
+  "Fundamental (potential) niche versus realized (actual) niche. The realized niche is never larger. Connell's barnacles show both cases.",
+  "Crops have narrow niches, partly because we bred them that way. Weeds have broad niches and tolerate the harsh conditions of a field.",
+  "Niche partitioning divides a limiting resource. Competition can drive character displacement (Darwin's finches, bee tongues); removing the competitor gives character release.",
+  "On the farm: niche knowledge guides crop choice, intercropping, rotations and research on nutrient partitioning. Inter- and intraspecific competition drive weed control and planting density."],
+ cards:[
+  {t:"Competition, defined",i:"The use or defense of a shared resource by one individual that has a negative impact on another individual. In effect, one individual's activity reduces a resource's availability for another.",f:"Key words: <b>use or defense</b> of a <b>shared</b> resource, with a <b>negative</b> impact.",q:"Define competition as she does.",a:"The use or defense of a shared resource by one individual that has a negative impact on another individual."},
+  {t:"The ecological niche",i:"The combination of resources a species needs to exist in an environment: physical aspects (moisture, precipitation, weather, climate) and biological ones (nutrition, habitat, relationships with other organisms). Every species has one, but it is a theoretical idea that is hard to measure.",f:"Two species with <b>similar niches</b> will compete.",q:"What does a species' ecological niche include?",a:"Everything it needs to survive there: physical conditions like moisture and climate, and biological resources like nutrition, habitat and its relationships with other organisms."},
+  {t:"Law of the minimum (again)",i:"The most limiting resource determines a species' growth rate and can determine whether it can exist there at all. In a tropical rainforest, understory plants may be limited by sunlight while the big canopy trees may be limited by soil nitrogen.",f:"The limiting resource is <b>not always the same</b>, but every organism has one.",q:"Give her rainforest example of the law of the minimum.",a:"Understory plants may be limited by sunlight, while canopy trees may be limited by nitrogen in the soil."},
+  {t:"Competitive exclusion",i:"If the niche requirements of two species overlap too much, they compete for those resources and one restricts the other.",f:"Too much <b>niche overlap</b> means one species <b>restricts</b> the other.",q:"State the competitive exclusion principle.",a:"When two species' niche requirements overlap too much, they compete and one restricts the other."},
+  {t:"Fundamental vs realized niche",i:"Fundamental (also called potential) niche: all the conditions a species could exist in without competitors. Realized (also called actual) niche: where you really find it in nature, usually a smaller piece, limited by competition and other relationships.",f:"The realized niche is <b>never larger</b> than the fundamental niche. It can be equal.",q:"What is the difference between the fundamental and the realized niche, and can the realized one be bigger?",a:"Fundamental is everywhere the species could live without competitors; realized is where it actually lives. The realized niche is never larger, though it can be the same size."},
+  {t:"Connell's barnacles",i:"Pacific Northwest intertidal. Balanus, the large barnacle, lives low; a small brown barnacle (the captions spell it thalamus) lives high. Scraping off the small one: Balanus did not move up, it is limited by its own physiology. Scraping off Balanus: the small one spread over the whole area, so it had been outcompeted.",f:"Balanus: realized = fundamental (<b>superior competitor</b>). The small brown barnacle: huge fundamental niche, <b>small realized niche</b>.",q:"What did Connell learn from removing each barnacle species?",a:"Removing the high barnacle did not let Balanus move up, so Balanus is limited by its physiology. Removing Balanus let the small barnacle spread down, so it was being outcompeted. She says know the niche logic, not every detail."},
+  {t:"Crops narrow, weeds broad",i:"Crops act like the species with a narrow niche: they have specific requirements, largely because we bred them that way. Weeds are often native or pioneer species that withstand a wide variety of harsh conditions, like the species with a large niche.",f:"Crop: <b>narrow niche</b>. Weed: <b>broad niche</b>.",q:"How do the niches of crops and weeds compare?",a:"Crops have narrow niches with specific requirements (bred that way). Weeds, often native or pioneer species, have broad niches and tolerate harsh field conditions."},
+  {t:"Niche partitioning",i:"Species divide up a shared, limiting resource to lessen competition. They can split habitat, latitude, microhabitat, time of day, season of activity, or diet, for example birds that eat different seed sizes or species.",f:"Partitioning <b>lessens competition</b> over a limiting resource.",q:"Name three ways species can partition a niche.",a:"Any three of: habitat, latitude, microhabitat, time of day, season of activity, or diet (such as different seed sizes)."},
+  {t:"Character displacement: the finches",i:"Darwin's finches on the Galapagos, studied for about 30 years (Rosemary Grant is one of the researchers). All are seed eaters, and beak size decides which seeds a bird can open. A species' bill depth shifts depending on which other finches share its island (Santa Cruz, Daphne Major, Los Hermanos).",f:"Character displacement: <b>evolution of a heritable trait in response to competition</b> for a resource, which is rare to document.",q:"What is character displacement, and what trait shifted in Darwin's finches?",a:"Evolution of a heritable trait in response to competition for a resource. In the finches, bill depth shifted depending on which competitors shared the island, because beak size sets which seeds a bird can use."},
+  {t:"Bees and character release",i:"Bees with proboscises of different lengths specialize on flowers with matching corolla lengths, another case of character displacement. Character release is the opposite: remove the competitor, selection relaxes, and the trait spreads over a broader range.",f:"A finch alone on its island shows a <b>broader</b> spread of bill depths: character release.",q:"What is character release?",a:"When a competitor is removed, the selection pressure relaxes and the trait shows a broader distribution in the population."},
+  {t:"The niche on the farm",i:"Niche knowledge decides which crops we can grow where, and in which season and temperature. Intercrop plants with different niches so they complement each other (the three sisters pair very different light needs). Plan rotations so each crop leaves the soil favorable for the next.",f:"Open research: do plants partition <b>nitrogen forms</b> (ammonium vs nitrate, organic vs inorganic), rooting depth or light optima?",q:"How can niche partitioning research help agriculture?",a:"If coexisting plants prefer different nitrogen forms, rooting depths or light levels, we can pair crops or cultivars that use the soil's resources more completely."},
+  {t:"Inter- vs intraspecific",i:"Interspecific: between species, such as corn and a weed, or corn and soybean. Weed management exists to stop it. Intraspecific: within a species or cultivar, such as corn against corn for nutrients or light. Planting density exists to stop it.",f:"Inter = <b>between</b> species (weed control). Intra = <b>within</b> a species (planting density).",q:"Give a farm example of interspecific and of intraspecific competition, and the practice each one drives.",a:"Interspecific: corn against weeds, managed with weed control. Intraspecific: corn against corn, managed through planting density."},
+  {t:"Row spacing in beans",i:"Rows too far apart: few plants, low yield. Rows too close: plants compete and yield falls. In between is the optimum. Narrower rows add plants and shade out weeds, but machinery may no longer fit between rows and disease or pests spread more easily.",f:"Narrow rows: <b>+ more plants, + fewer weeds</b>; <b>- machinery, - disease spread</b>.",q:"Why do both very wide and very narrow rows lower bean yield?",a:"Very wide rows mean too few plants in the field. Very narrow rows make the plants compete with each other. The optimum spacing sits in between."}
+ ],
+ ask:["Define competition (use or defense of a shared resource, negative for another individual).",
+  "Fundamental versus realized niche, and why the realized niche is never larger.",
+  "In Connell's barnacles, which species had the same fundamental and realized niche, and why?",
+  "Define character displacement and character release, using Darwin's finches.",
+  "Interspecific versus intraspecific competition, with a farm example of each.",
+  "Why do crops tend to have narrow niches and weeds broad ones?",
+  "Pros and cons of narrowing the space between crop rows."],
+ quiz:[
+  {q:"Competition is best defined as...",o:["the use or defense of a shared resource by one individual that negatively affects another","any interaction in which one organism eats another","an interaction where both organisms benefit","a chemical released by one plant that harms another"],c:0,e:"That is her definition. Eating another organism is predation or herbivory, both benefiting is mutualism, and a released chemical is allelopathy, an addition interference."},
+  {q:"The realized niche of a species is...",o:["the part of its niche it actually occupies in nature, never larger than the fundamental niche","always larger than the fundamental niche","everywhere it could live without competitors","the same thing as its habitat"],c:0,e:"Realized (actual) is where you find it once competitors and other relationships act on it. Fundamental (potential) is everything it could occupy alone. The realized niche can equal the fundamental but never exceed it."},
+  {q:"When Connell scraped Balanus off the rocks, the small high-zone barnacle...",o:["spread over the cleared area, showing it had been outcompeted","died out","stayed only in the high zone","was replaced by Balanus again"],c:0,e:"The small barnacle could live across the whole tide range, but Balanus kept it out of the lower zone. Remove Balanus and it moves in, so its realized niche had been shrunk by competition."},
+  {q:"Balanus did not move into the high intertidal when the other barnacle was removed. This shows Balanus was limited by...",o:["its own physiology","competition","predation","allelopathy"],c:0,e:"The cleared high zone stayed empty, so nothing was keeping Balanus out except its own tolerance for long exposure out of the water. Its fundamental and realized niches are the same."},
+  {q:"The shift in finch bill depth depending on which other finches share an island is an example of...",o:["character displacement","character release","competitive exclusion","intraspecific competition"],c:0,e:"Character displacement is a heritable trait evolving in response to competition for a resource, here the seeds a beak can open. Character release is the broadening seen when a finch has the island to itself."},
+  {q:"Two corn plants in the same field competing for light is...",o:["intraspecific competition","interspecific competition","allelopathy","character displacement"],c:0,e:"Intra means within: same species or cultivar. Corn against a weed, or corn against soybean, would be interspecific. Intraspecific competition is what planting density decisions are about."},
+  {q:"Which is a DISADVANTAGE of planting rows closer together?",o:["Farm machinery may not fit between the rows","More plants per field","Crops shade out weeds","Yield rises up to a point"],c:0,e:"The other three are the benefits she lists. The costs are equipment that can no longer pass between rows and faster spread of disease or pests when plants nearly touch."},
+  {q:"Compared with weeds, crops typically have...",o:["narrower niches with specific requirements","broader niches","identical niches","no niche at all"],c:0,e:"Crops have specific needs, largely because we bred them that way. Weeds are often native or pioneer species with broad niches that tolerate harsh field conditions."}
+ ]},
+{id:"3.3",wk:8,title:"Allelopathy",words:3636,
+ gist:"Allelopathy is an addition interference: a plant adds a chemical compound to the environment that inhibits other plants or, less often, stimulates them. The compounds (tannins, phenolics, terpenes, alkaloids) leach from leaves in rain, volatilize, exude from living roots, or come out of decomposing residue. It is hard to prove, and much of what we know comes from field observation. Weeds can suppress crops, crops such as winter rye can suppress weeds, and a few compounds, like the one from corncockle, raise crop yield.",
+ line:["Allelopathy is an addition interference: a plant adds a chemical that inhibits or stimulates other plants. Competition, by contrast, is a removal interference.",
+  "Four routes into the environment: leaching from leaf surfaces by rain, volatilizing from leaves, exudation from living roots, and release from decomposing plants.",
+  "Known compounds: tannins (from oaks, they turn local rivers tea-brown), phenolics, terpenes and alkaloids.",
+  "They are short lived, they interact with other compounds, they affect plants differently, and their concentration varies with the plant's age, reproductive status and environment.",
+  "Proving it takes four steps (release, toxic level, inhibition, then the compound and its physiology), so most claims are field observations.",
+  "Weeds suppress crops (bitter grass in corn, lamb's quarters in beans) and crops suppress weeds (winter rye, cucumber and squash, beets).",
+  "Uses: biocontrol of weeds through the crop itself, mulches, cover crops, intercropping and rotation timing. Some compounds are stimulatory, often at low concentration."],
+ cards:[
+  {t:"Allelopathy, defined",i:"A plant adds a chemical compound to the environment, and the compound affects other plants in the community. Negative effects inhibit their growth; positive effects stimulate it.",f:"Allelopathy is an <b>addition</b> interference. Competition is a <b>removal</b> interference.",q:"Define allelopathy and say which kind of interference it is.",a:"A plant releasing a chemical compound that inhibits or stimulates other plants. It is an addition interference."},
+  {t:"Four ways out of the plant",i:"Leaching from the leaf surface by rain, volatilizing as a gas from the leaves, exudation from the roots while the plant is alive, and release as plants decompose in the soil.",f:"Leach, <b>volatilize</b>, exude, decompose.",q:"Name the four ways allelopathic compounds get into the environment.",a:"Leaching from leaves by rain, volatilizing from leaves, exudation from living roots, and release from decomposing plant material."},
+  {t:"The compounds",i:"Tannins, phenolics, terpenes and alkaloids have been identified as allelopathic. Tannins come from oaks, and the tannins leached from plant parts falling into the water are why the rivers around campus are tea-brown.",f:"Four classes: <b>tannins, phenolics, terpenes, alkaloids</b>.",q:"Which compound classes are allelopathic, and which one colors local rivers?",a:"Tannins, phenolics, terpenes and alkaloids. Tannins from oaks make the rivers tea-brown."},
+  {t:"How the compounds behave",i:"Usually short lived, breaking down fairly fast. They interact with other compounds, which can enhance or cancel the effect. Effects differ by target plant (a compound may stop grasses but not broadleaf weeds). Concentration varies with the plant's age, reproductive status and environment.",f:"Much of this variability is <b>not yet worked out</b>, which limits how we can use it.",q:"Name two properties of allelopathic compounds that make them tricky to use.",a:"Any two of: they are short lived, they interact with other compounds, they affect different plants differently, and their concentration varies with age, reproductive stage and environment."},
+  {t:"Why it is hard to prove",i:"Show a compound is released; show it reaches a toxic level in the environment; show it actually inhibits other plants; then identify the compound, the physiology of its release, and its interactions with other organisms. It is slow, so most claims are practitioner observations.",f:"Many plants are <b>suspected</b> allelopaths, not <b>demonstrated</b> ones.",q:"What must be shown to demonstrate allelopathy?",a:"That a compound is released, that it reaches a toxic level, that it inhibits other plants, and then what the compound is, why the plant releases it, and how it interacts with other organisms."},
+  {t:"Weeds suppressing crops",i:"Hard to separate from plain competition for light, space, water and nutrients. Signs of allelopathy: lower germination or emergence of the crop, poorer growth, and harm to soil symbionts such as nitrogen-fixing bacteria.",f:"The compounds are called <b>phytotoxins</b>, released by some weeds and some crops.",q:"What effects suggest a weed is allelopathic to a crop rather than only competing?",a:"Reduced crop germination or emergence, reduced growth, and damage to soil symbionts such as the nitrogen-fixing bacteria of legumes."},
+  {t:"Bitter grass and lamb's quarters",i:"Bitter grass (as the captions give the name) in corn cut leaf number, height and yield whether or not the corn was fertilized: suggestive, but the compound was never extracted and tested. Lamb's quarters stunted beans and reduced root nodulation, with light and nutrients controlled: one step closer to proof.",f:"Bitter grass: <b>indirect</b> evidence. Lamb's quarters: <b>closer to demonstrated</b>, light and nutrients controlled.",q:"Why is the lamb's quarters case stronger evidence than the bitter grass case?",a:"In the lamb's quarters study light and nutrients were controlled, and it showed stunting plus reduced nodulation. The bitter grass study only showed that fertilizing did not remove the yield loss; the compound was never tested directly."},
+  {t:"Crops suppressing weeds",i:"Some crops release phytotoxins while growing, and some release them as residue decomposes on the surface in no-till or reduced-till systems. Known for cereal grains, especially winter rye, and for cucumber, other squash and beets.",f:"Winter rye is very allelopathic and <b>already used heavily</b> for weed suppression.",q:"Which crops does she name as weed-suppressing allelopaths?",a:"Cereal grains, especially winter rye, plus cucumber and other squash, and beets."},
+  {t:"Using it: crop and mulch",i:"Biocontrol here means one plant controlling another. Cucumber leaf extract mixed into irrigation water inhibited two weeds, good evidence for allelopathy over competition. Crushed cacao hulls, left after chocolate is extracted, make a weed-suppressing mulch (the book's example is zucchini).",f:"Cucumber leaf extract <b>in irrigation water</b> inhibited weeds; <b>cacao hull</b> mulch suppresses weeds.",q:"Give her two examples of using allelopathy through the crop itself and through mulch.",a:"Cucumber leaf extract in irrigation water inhibited weeds. Crushed cacao hulls used as mulch, as with zucchini, suppress weeds."},
+  {t:"Cover crops and rotations",i:"Winter rye as a cover crop shades weeds out and also exudes weed-suppressing compounds from its roots. Its residue keeps working after the plant dies. That is good for weeds, but in a rotation you must plant something tolerant next, or wait for the compounds to dissipate.",f:"Know the <b>duration</b> of the effect: rye residue stays allelopathic after the plant dies.",q:"Why does winter rye's allelopathy matter when planning a rotation?",a:"Its residue keeps releasing allelopathic compounds after the rye dies, so the next crop must be tolerant of them, or you wait until they dissipate."},
+  {t:"Corn and velvet bean",i:"Corn is planted first and allowed to reach a certain height, then velvet bean is planted among it. The allelopathic vine covers the ground and suppresses weeds later in the corn's season. Used in subsistence farming in Mexico.",f:"Double duty: <b>weed suppression</b> plus a <b>nitrogen-fixing legume</b> that enriches the soil if left to decompose.",q:"How does the corn and velvet bean intercrop work, and what are its two benefits?",a:"Velvet bean is planted among established corn; the allelopathic vine covers the ground and suppresses weeds. As a nitrogen-fixing legume left to decompose, it also enriches the soil."},
+  {t:"Stimulatory allelopathy",i:"A compound toxic at high concentration can stimulate at low concentration, so a crop could end up feeding the weeds it was meant to suppress. Corncockle among wheat raised wheat yield, first seen in the field and then confirmed in the lab, with the compound identified as agrostemma. Alfalfa residue used like a mulch stimulated tobacco, cucumber and lettuce.",f:"Corncockle's <b>agrostemma</b> raised wheat yield <b>regardless of fertilizer</b>.",q:"Give her two examples of stimulatory allelopathy.",a:"Corncockle releases agrostemma, which raises wheat yield even when the wheat is well fertilized. Alfalfa residue stimulated the growth of tobacco, cucumber and lettuce."}
+ ],
+ ask:["Allelopathy is an addition interference; competition is a removal interference.",
+  "List the four routes by which allelopathic compounds enter the environment.",
+  "Name the allelopathic compound classes (tannins, phenolics, terpenes, alkaloids).",
+  "Why is allelopathy hard to demonstrate, and what steps are needed?",
+  "Which crop is known for strong, lasting allelopathy used against weeds? (Winter rye.)",
+  "Give an example of a stimulatory effect (corncockle and wheat, or alfalfa residue).",
+  "Describe the corn and velvet bean system and its two benefits."],
+ quiz:[
+  {q:"Allelopathy is classed as...",o:["an addition interference","a removal interference","a form of competition","a form of parasitism"],c:0,e:"The plant adds a chemical compound to the environment. Competition removes a resource, which makes it a removal interference; she stresses that allelopathy is separate from competition."},
+  {q:"Which is NOT one of the routes by which allelopathic compounds leave a plant?",o:["Transfer through pollinators","Leaching from leaves by rain","Exudation from living roots","Release from decomposing residue"],c:0,e:"The four routes are leaching from leaves, volatilizing from leaves, exudation from live roots, and release during decomposition. Pollinators are not one of them."},
+  {q:"The tea-brown color of the local rivers comes from...",o:["tannins leached from plant parts such as oak leaves","alkaloids from algae","terpenes from pine needles","phenolics from crop runoff"],c:0,e:"Tannins, produced by oaks, leach out of the plant parts falling into the water and stain the rivers brown. Tannins are one of the four allelopathic compound classes she lists."},
+  {q:"Why is allelopathy often only suspected, not proven?",o:["Proving it means showing release, a toxic level, inhibition and the compound itself, which is slow and complex","Allelopathic compounds last for decades","It only happens in greenhouses","It cannot be measured in plants"],c:0,e:"Each step has to be shown, then the compound and its physiology identified. Because that is time intensive, much of what we hear comes from general field observations."},
+  {q:"In the lamb's quarters study, which effect on beans showed harm beyond plain competition?",o:["Reduced nodulation by nitrogen-fixing bacteria","More flowers per plant","Faster germination","Higher pod weight"],c:0,e:"With light and nutrients controlled, the beans were stunted and formed fewer root nodules with rhizobia. Hitting the symbiont points to allelopathy, not just competition."},
+  {q:"Which crop is especially known for allelopathy that keeps working in its residue after it dies?",o:["Winter rye","Corn","Soybean","Lettuce"],c:0,e:"Winter rye exudes weed-suppressing compounds from its roots, and its residue stays allelopathic beyond the plant's life. That helps weed control but means the next crop in the rotation must tolerate it, or you wait."},
+  {q:"Corncockle growing among wheat...",o:["raised wheat yield through a compound called agrostemma","lowered wheat yield through competition","had no measurable effect","only helped when the wheat was unfertilized"],c:0,e:"This is her best example of stimulatory allelopathy: seen first in the field, confirmed in the lab, compound identified, and the yield boost held regardless of fertilizer."},
+  {q:"In the corn and velvet bean system, the velvet bean...",o:["is planted after the corn is established and suppresses weeds while adding nitrogen","is planted first to shade the corn","is a weed the farmer removes","is harvested as the main crop"],c:0,e:"The corn goes in first. Velvet bean, an allelopathic vine, is planted among it and covers the ground, suppressing late-season weeds. As a legume left to decompose it also enriches the soil."}
+ ]},
+{id:"3.4",wk:8,title:"Succession",words:3820,
+ gist:"Succession is the predictable change in species composition over time, and any disturbance can alter or restart it. Most of what we know comes from old fields, abandoned farmland that moves from annual weeds to perennials, pines and finally an oak-hickory forest. Early colonizers (r-selected) and later persisters (K-selected) have opposite life histories. Agriculture is repeated disturbance that holds fields at the earliest stage and replaces the harvest with inputs; the intermediate disturbance hypothesis suggests patchy systems with several stages at once.",
+ line:["Succession is the predictable change in species composition over time. Any disturbance can alter or restart it.",
+  "Disturbances (wind, floods, tidal surges, fire, temperature extremes, epidemics) are described by intensity, frequency and scale.",
+  "Agriculture adds the disturbance: tilling, planting, harvest and burning restart succession every season and hold the field at an early stage.",
+  "Old-field succession, on abandoned farmland, is where most of our knowledge comes from: annual weeds, then perennials around 5 years, pines at 10 to 15, hardwoods by 50, oak-hickory at 100 to 150 years.",
+  "Primary succession starts on bare rock (lava, glacial retreat, new dunes). Agriculture is always secondary succession on existing soil.",
+  "Colonizers (r-selected) versus persisters (K-selected): dispersal, competitive ability, growth rate, and semelparity versus iteroparity.",
+  "Allogenic (external) and autogenic (internal: facilitation and inhibition) factors drive change. The intermediate disturbance hypothesis points toward patchy farms that use later stages."],
+ cards:[
+  {t:"Succession, defined",i:"The predictable change in species composition over time in natural communities. Any disturbance can alter its trajectory or restart it. Her local example: bare ground to grasses, shrubs, pine forest and, without disturbance, an oak-hickory forest.",f:"The end stage was formerly called a <b>climax community</b>; ecologists are moving away from that term.",q:"Define ecological succession.",a:"The predictable change in species composition over time, whose trajectory any disturbance can alter or restart."},
+  {t:"Describing a disturbance",i:"Intensity: how much biomass is removed, how many organisms die. Frequency: how often disturbances come through. Scale: how big an area, local or regional. Disturbances include windstorms, floods, tidal surges, fire, temperature extremes and disease epidemics.",f:"Three measures: <b>intensity, frequency, scale</b>.",q:"Name the three ways to characterize a disturbance.",a:"Intensity (biomass removed, share of organisms killed), frequency (how often) and scale (how large an area)."},
+  {t:"Farming is disturbance",i:"Tilling, cultivating, planting, harvesting and burning all restart or redirect succession. Conventional agriculture keeps fields in a very early successional stage by restarting the process after every harvest.",f:"Modern agriculture keeps the field at the <b>earliest stage</b> and replaces the harvest with <b>inputs</b> (water, fertilizer).",q:"How does conventional agriculture relate to succession?",a:"It adds the disturbance: tilling and harvest restart succession every season, holding the field at an early stage with high net productivity, and inputs replace what the harvest removes."},
+  {t:"Old-field succession",i:"Old fields are abandoned farmland left fallow. Bare ground first gets annual weeds (crabgrass, ragweed, sedges) from wind-blown seed or the seed bank. Around 5 years: perennials and good competitors (dog fennel, blackberry, goldenrod, perennial grasses, poison ivy, smilax, sumac). At 10 to 15 years: pines. At 50: maturing pines with hardwoods. At 100 to 150: oak-hickory, pines dying out in the shade.",f:"Most of what we know about succession comes from <b>abandoned farmland</b>.",q:"Outline the stages of old-field succession in her UF example, with rough times.",a:"Annual weeds first, perennials and grasses by about 5 years, pines at 10 to 15, pines plus hardwoods by 50, and an oak-hickory forest at 100 to 150 years without disturbance."},
+  {t:"Why weeds come first",i:"Cleared ground is high light and possibly nutrient rich, but harsh: no wind protection, no shade, no vertical structure, low diversity. Annual weeds can capitalize on it, recruiting from wind-dispersed seed or from a seed bank that can be 10, 20 or even 50 years old.",f:"Early colonizers then <b>alter the environment</b> for later species (facilitation).",q:"Why are annual weeds the first colonizers of bare farmland?",a:"They can handle the harsh, open, high-light conditions, and they arrive from wind-dispersed seed or from a long-lived seed bank in the soil."},
+  {t:"Grassland end states",i:"Not every region ends in forest. In many temperate farming regions with 10 to 30 inches of rain a year, too dry for big forest trees and too wet for desert, the end stage is grassland, like the tall and short grass prairie remnants of the Midwest and Great Plains.",f:"Grassland end stage: about <b>10 to 30 inches</b> of rain a year.",q:"Where is grassland, not forest, the end stage of succession?",a:"In temperate regions with about 10 to 30 inches of rain a year, too dry for large forest trees but too wet for desert, such as the Midwest and Great Plains."},
+  {t:"Primary vs secondary",i:"Primary succession colonizes bare rock where no plant community existed: lava flows, ground left by retreating glaciers, new sand dunes. Secondary succession happens on pre-existing soil that once held a plant community, after a disturbance.",f:"Agriculture is <b>always secondary succession</b>: timber harvest patches, shifting cultivation.",q:"What separates primary from secondary succession, and which one applies to agriculture?",a:"Primary starts on bare rock with no previous community (lava, glacial retreat, dunes). Secondary starts on existing soil after a disturbance; all agriculture is secondary."},
+  {t:"Colonizers vs persisters",i:"Colonizers (r-selected): handle extreme environments, wind dispersal and the seed bank, low-diversity habitats, poor competitors, fast growing, often annual. Persisters (K-selected): restrictive habitat needs, often animal dispersal, high-diversity later stages, good competitors, slow growing, invest heavily in offspring.",f:"These are <b>generalized categories</b>, not strict rules.",q:"Contrast colonizers and persisters on dispersal, competitive ability and growth rate.",a:"Colonizers: wind dispersal or seed bank, poor competitors, fast growing. Persisters: often animal dispersal, good competitors, slow growing with heavy investment in offspring."},
+  {t:"Semelparity vs iteroparity",i:"Colonizers grow fast, are often annual or short lived, and reproduce only once: semelparity. Persisters invest in growth, then reproduce many times, each time investing heavily in offspring: iteroparity.",f:"Once = <b>semelparous</b> (colonizer). Many times = <b>iteroparous</b> (persister).",q:"Define semelparity and iteroparity and match each to colonizers or persisters.",a:"Semelparity is reproducing once (colonizers, often annuals). Iteroparity is reproducing many times (persisters)."},
+  {t:"Allogenic vs autogenic",i:"Allogenic factors are external to the community: fire, climate, weather, grazing, human change (the captions write it as allergenic). Her grazing examples: an overgrazed mesquite grassland in Sonora, Mexico, and an overgrazed hillside whose topsoil slid off in the rain. Autogenic factors come from the community's own organisms: facilitation (dune colonizers adding organic matter) and inhibition, mostly through competition.",f:"Fire in pine plantations <b>holds the stage</b> by keeping hardwoods out until harvest.",q:"What is the difference between allogenic and autogenic drivers of succession?",a:"Allogenic drivers come from outside the community (fire, climate, grazing, humans). Autogenic drivers come from the organisms within it, through facilitation or inhibition."},
+  {t:"Intermediate disturbance hypothesis",i:"Diversity and productivity in natural systems are greatest under moderate, periodic disturbance, which leaves a patchy landscape with several successional stages at once. Small burned patches in shifting cultivation inside mature forest are her example.",f:"Moderate disturbance creates <b>patches of many stages</b>, so overall diversity is higher.",q:"State the intermediate disturbance hypothesis.",a:"Diversity and productivity are highest with moderate, periodic disturbance, which creates a patchy landscape with multiple successional stages at the same time."},
+  {t:"Using later stages on the farm",i:"Add perennial trees or shrubs to annual crops, as in agroforestry with an annual crop under young trees. Benefits: less risk of total loss, more soil organic matter (higher biomass), more potential for biological control, better nutrient cycling and greater stability. Management questions: grazing intensity and timing, patch size and recovery time in shifting cultivation, and when to burn.",f:"Goal: <b>less reliance on external inputs</b>.",q:"Name three benefits of building later successional stages into farms.",a:"Any three of: reduced risk of crop loss, more soil organic matter, more biological control, better nutrient cycling, greater stability, less need for external inputs."}
+ ],
+ ask:["Define succession and the three ways to characterize a disturbance (intensity, frequency, scale).",
+  "Primary versus secondary succession; which one applies to agriculture? (Secondary.)",
+  "Order the stages of old-field succession from bare ground to oak-hickory forest.",
+  "Colonizers versus persisters, and semelparity versus iteroparity.",
+  "Allogenic versus autogenic factors, with examples (fire or grazing versus facilitation or inhibition).",
+  "State the intermediate disturbance hypothesis and how it could reshape agriculture.",
+  "Why does conventional agriculture hold fields at an early successional stage?"],
+ quiz:[
+  {q:"Ecological succession is...",o:["the predictable change in species composition over time","the movement of nutrients through a food web","the yearly rotation of crops","the decline of a population after it overshoots carrying capacity"],c:0,e:"Her definition, with the addition that any disturbance can alter or restart the trajectory."},
+  {q:"Which is NOT one of the three ways she characterizes a disturbance?",o:["Diversity","Intensity","Frequency","Scale"],c:0,e:"Intensity is how much biomass is removed or how many organisms die, frequency is how often disturbances come, and scale is how large the area is. Diversity is something disturbance affects, not a way to describe it."},
+  {q:"Colonizing a lava flow or ground left by a retreating glacier is...",o:["primary succession","secondary succession","old-field succession","character release"],c:0,e:"Primary succession starts on bare rock with no previous plant community. Secondary succession, which covers all of agriculture, starts on existing soil after a disturbance."},
+  {q:"In her old-field succession example, which comes first on bare ground?",o:["Annual weeds such as crabgrass and ragweed","Pine trees","Oak and hickory","Shade-tolerant shrubs"],c:0,e:"Annual weeds arrive from wind-blown seed or the seed bank and exploit the harsh, open ground. Perennials follow by about 5 years, pines at 10 to 15, hardwoods by 50, oak-hickory at 100 to 150."},
+  {q:"A plant that reproduces only once in its life is...",o:["semelparous, typical of colonizers","iteroparous, typical of persisters","K-selected","a facultative mutualist"],c:0,e:"Colonizers grow fast, are often annual, and reproduce once: semelparity. Persisters reproduce many times: iteroparity."},
+  {q:"Fire used in a pine plantation to keep hardwoods out is an example of...",o:["an allogenic factor used to hold a successional stage","an autogenic factor","primary succession","facilitation"],c:0,e:"Fire is external to the community, so it is allogenic. Burning keeps hardwoods from encroaching so the pines can be harvested."},
+  {q:"The intermediate disturbance hypothesis predicts that diversity is greatest when...",o:["disturbance is moderate and periodic, leaving a patchy landscape","there is no disturbance at all","disturbance is constant and intense","only primary succession occurs"],c:0,e:"Moderate disturbance leaves patches at different stages, so early and late species both persist. Her example is small burned patches of shifting cultivation inside mature forest."},
+  {q:"Which is NOT a benefit of building later successional stages into a farm?",o:["Keeping the whole field at the earliest stage","Lower risk of total crop loss","More soil organic matter","More potential for biological control"],c:0,e:"Holding the field at the earliest stage is what conventional agriculture already does. Using later stages adds perennials, which lowers risk, raises organic matter, supports biocontrol, improves nutrient cycling and adds stability."}
+ ]},
+{id:"3.5",wk:8,title:"Population Dynamics",words:2666,
+ gist:"Populations change in four ways: births, deaths, immigration and emigration. Exponential growth is the simplest model, an unlimited, density-independent J curve that fits bacteria, disease spread and pests in their early phase. Logistic growth is density dependent and levels off at the carrying capacity, K, the number of individuals a habitat can support. Real populations overshoot K and settle around it, and K itself moves with the environment, which is a management tool. Agriculture pushes crops past K with inputs, and combining r and K strategists could make farms sturdier.",
+ line:["Understanding how pest populations (weeds, insects, diseases) change gives better ways to control them.",
+  "Four ways a population changes: births, deaths, immigration and emigration.",
+  "Exponential growth: unlimited environment, density independent, a J curve. Rate = rP, with r the intrinsic rate of increase (births minus deaths).",
+  "Exponential assumptions: unlimited favorable environment, closed population, no time lags, no age structure, constant birth and death rates. Unrealistic, but many pests grow this way for a while.",
+  "Logistic growth: density dependent, limited environment, levels off at carrying capacity K. Its extra factor (K minus P) over K is near 1 when P is small and near 0 when P nears K.",
+  "Real populations overshoot K and swing back. K changes with conditions: dry versus wet season, resistant versus susceptible cultivars.",
+  "Agriculture adds inputs and removes competitors so crops exceed K. r strategists are colonizers, K strategists persisters; combining them, for example perennial grains, could make farms more robust."],
+ cards:[
+  {t:"Four ways populations change",i:"Births add individuals, deaths remove them, immigration brings individuals in from another population, and emigration sends them out to join another.",f:"<b>Births, deaths, immigration, emigration</b>.",q:"What are the four ways a population changes?",a:"Births, deaths, immigration (moving in from another population) and emigration (leaving to join another population)."},
+  {t:"Exponential growth",i:"Growth in an unlimited environment that does not depend on how many individuals are already there (density independent). On a graph of population size against time it makes a J curve that keeps rising.",f:"Seen in <b>bacteria, disease spread</b> and the human population over the last 200 years.",q:"What are the two defining conditions of exponential growth, and what shape does it make?",a:"An unlimited environment and density independence. It makes a J-shaped curve that keeps rising."},
+  {t:"Intrinsic rate of increase",i:"r is births minus deaths. The rate of change of the population is r times the current population size. Integrated, the population at a future time equals the starting population times e raised to r times the elapsed time: P(t) = P0 e^(rt).",f:"r = <b>births minus deaths</b>; dP/dt = <b>rP</b>.",q:"What is r, and what do you need to project a population with the exponential model?",a:"r, the intrinsic rate of increase, is births minus deaths. You need r, the starting population and the time period."},
+  {t:"Exponential assumptions",i:"An unlimited, favorable environment; a closed population (no immigration or emigration); continuous growth with no time lags; no age structure; constant birth and death rates.",f:"Unrealistic overall, yet useful for <b>pests in a growth spurt</b>: weeds, diseases, other colonizers.",q:"List the assumptions of the exponential model.",a:"Unlimited favorable environment, closed population, continuous growth with no time lags, no age structure, and constant birth and death rates."},
+  {t:"Logistic growth",i:"Density dependent: birth and death rates depend on population size. The environment is limited. It starts like a J curve, then tapers off as the population nears the carrying capacity.",f:"Carrying capacity, <b>K</b>, is the number of individuals a habitat can support.",q:"How does logistic growth differ from exponential growth?",a:"It is density dependent and happens in a limited environment, so growth slows and levels off near the carrying capacity, K."},
+  {t:"Reading the logistic factor",i:"Logistic growth is rP times the factor (K minus P) over K. When P is near zero the factor is about 1 and growth looks exponential. When P is near K the factor is near 0 and growth slows to a stop.",f:"Small P: <b>about 1</b>, exponential-like. P near K: <b>about 0</b>, growth stalls.",q:"What happens to the logistic factor (K minus P)/K when P is tiny, and when P approaches K?",a:"With P tiny it is about 1, so growth is nearly exponential. As P approaches K it heads to 0, so growth slows and the population stabilizes near K."},
+  {t:"Logistic assumptions",i:"Everything the exponential model assumes (closed population, no time lags, no age structure, constant birth and death rates), plus a constant environment, which means a constant carrying capacity.",f:"The extra assumption, <b>constant K</b>, is the least realistic one.",q:"What assumption does the logistic model add to the exponential ones?",a:"A constant environment, which means a constant carrying capacity."},
+  {t:"Overshoot in real populations",i:"In nature populations rarely glide smoothly up to K. They overshoot it, suffer many deaths, drop below, grow again, and eventually ride around the carrying capacity.",f:"Real curve: <b>overshoot and oscillate</b> around K, not a smooth level-off.",q:"How do real populations usually behave near carrying capacity?",a:"They overshoot K, crash below it with many deaths, then rebound, and eventually fluctuate around K."},
+  {t:"K moves, and we can move it",i:"Change the environment and K changes. A weed coming up in the dry season may face a quite low K; the same weed in the wet season faces a different one. A resistant cultivar can lower K for an insect compared with a susceptible one.",f:"Lowering K until a pest no longer hurts yield is a <b>management tool</b>.",q:"Give two examples of carrying capacity changing, and why that matters to farmers.",a:"A weed's K can be quite low in the dry season and different in the wet season; an insect has a lower K on a resistant cultivar than on a susceptible one. Lowering a pest's K so it no longer cuts yield is a management tool."},
+  {t:"Farming past K",i:"Conventional agriculture modifies the environment so crops exceed their normal carrying capacity: adding nutrients, fertilizer and irrigation, and removing competitors with herbicides or hand weeding.",f:"Inputs plus <b>removing competitors</b> lets the crop <b>surpass K</b>.",q:"How does conventional agriculture let crops exceed carrying capacity?",a:"By adding external inputs (nutrients, fertilizer, irrigation) and removing competitors with herbicides or hand weeding."},
+  {t:"r and K strategists",i:"A continuum, not two boxes. r strategists are colonizers: fast growth and early, heavy reproduction with many seeds and little investment in each, a high rate of increase, and a quick response to disturbance (annual weeds). K strategists are persisters: energy into growth and structures, long lives, stable habitats, low reproduction, limited by interactions with other species (shrub weeds in later stages).",f:"r = <b>colonizer</b>. K = <b>persister</b>.",q:"Contrast r and K strategists and give an agricultural example of each.",a:"r strategists grow and reproduce fast with many offspring and respond quickly to disturbance, like annual weeds. K strategists put energy into growth, live long in stable habitats and reproduce slowly, like shrub weeds in later successional stages."},
+  {t:"Combining strategies",i:"Using both r and K strategists in one agroecosystem could make it more robust and sustainable. The book's example: perennial versions of annual grains such as rice and wheat, which would mimic the benefits of later successional stages.",f:"Book example: <b>perennial rice and wheat</b>.",q:"What is the book's example of combining r and K strategies in agriculture?",a:"Developing perennial versions of annual grains such as rice and wheat, to mimic later successional stages."}
+ ],
+ ask:["Name the four ways populations change.",
+  "Exponential versus logistic growth: density dependence, environment, curve shape.",
+  "Define r (births minus deaths) and carrying capacity K.",
+  "What happens to (K minus P)/K when P is small, and when P approaches K?",
+  "List the assumptions of the exponential model, and the extra one in the logistic model.",
+  "How can a resistant cultivar act as a management tool through carrying capacity?",
+  "r versus K strategists, with examples from weeds."],
+ quiz:[
+  {q:"Which is NOT one of the four ways a population changes?",o:["Succession","Births","Immigration","Emigration"],c:0,e:"The four are births, deaths, immigration and emigration. Succession is a change in species composition of a community, not a change in one population's size."},
+  {q:"Exponential growth is...",o:["density independent, in an unlimited environment","density dependent, in a limited environment","limited by carrying capacity","only seen in K-selected species"],c:0,e:"Exponential growth ignores population size and assumes nothing runs out, which gives the J curve. Logistic growth is the density-dependent, limited one."},
+  {q:"The intrinsic rate of increase, r, equals...",o:["births minus deaths","immigration minus emigration","carrying capacity divided by population size","births plus immigration"],c:0,e:"r is births minus deaths. Multiply it by the population size and you get the exponential rate of change, rP."},
+  {q:"In the logistic model, when the population P is close to the carrying capacity K, the factor (K minus P)/K is...",o:["close to 0, so growth slows","close to 1, so growth looks exponential","greater than 1","negative, so the population always crashes"],c:0,e:"K minus P is tiny when P nears K, so the factor approaches 0 and growth levels off. When P is near zero the factor is about 1, which is why the curve starts out looking exponential."},
+  {q:"Which assumption does the logistic model add to those of the exponential model?",o:["A constant environment, and so a constant carrying capacity","An open population with migration","Age structure","Time lags"],c:0,e:"Both models assume a closed population, no time lags, no age structure and constant birth and death rates. Logistic adds a constant environment, meaning K stays fixed, which she calls unrealistic."},
+  {q:"Planting a resistant cultivar can work as pest management because it...",o:["lowers the pest's carrying capacity","raises the pest's intrinsic rate of increase","makes the pest grow exponentially","removes all immigration"],c:0,e:"K depends on the environment. A resistant cultivar supports fewer of a given insect than a susceptible one, and holding the pest below the level that cuts yield is the point."},
+  {q:"An annual weed that grows fast, makes many seeds and quickly colonizes disturbed ground is...",o:["an r strategist","a K strategist","an obligate mutualist","a persister"],c:0,e:"r strategists are colonizers: fast growth, early and heavy reproduction, little investment per offspring, quick response to disturbance. K strategists are the slow, long-lived persisters."},
+  {q:"In nature, a population approaching carrying capacity usually...",o:["overshoots K, crashes, and then fluctuates around it","levels off smoothly exactly at K","grows forever","drops to zero and stays there"],c:0,e:"The smooth logistic curve is the model. Real populations overshoot, suffer heavy deaths, rebound and eventually ride around K."}
+ ]}
+];
+
+/* connect pairs drawn from week 8 terms */
+var PAIRS=[
+ {l:"Mutualism",r:"Both benefit: + + together, - - apart"},
+ {l:"Commensalism",r:"One benefits, the other unaffected"},
+ {l:"Amensalism",r:"One harmed, the other unaffected"},
+ {l:"Removal interference",r:"Competition, parasitism, herbivory"},
+ {l:"Addition interference",r:"Epiphytism, mutualism, allelopathy"},
+ {l:"Epiphyte",r:"Uses the host only as habitat"},
+ {l:"Spanish moss",r:"A bromeliad, not a moss"},
+ {l:"Mistletoe",r:"Parasite under the bark of guava"},
+ {l:"Obligate mutualism",r:"Vanilla orchid and the Melipona bee"},
+ {l:"Facultative mutualism",r:"Honeybee visiting almost any flower"},
+ {l:"Mycorrhizae",r:"Fungus trades phosphorus for sugars"},
+ {l:"Rotational grazing",r:"Small paddocks, livestock moved often"},
+ {l:"Fundamental niche",r:"Everywhere a species could live alone"},
+ {l:"Realized niche",r:"Where it actually lives among competitors"},
+ {l:"Competitive exclusion",r:"Too much niche overlap, one restricts the other"},
+ {l:"Character displacement",r:"Finch bill depth shifts with competitors"},
+ {l:"Character release",r:"Competitor gone, the trait range broadens"},
+ {l:"Intraspecific competition",r:"Corn against corn, set by planting density"},
+ {l:"Interspecific competition",r:"Corn against weeds"},
+ {l:"Tannins",r:"Oak compounds that stain rivers brown"},
+ {l:"Winter rye",r:"Allelopathy that lingers in its residue"},
+ {l:"Agrostemma",r:"Corncockle compound that raises wheat yield"},
+ {l:"Velvet bean",r:"Allelopathic legume vine planted among corn"},
+ {l:"Cacao hulls",r:"Crushed into a weed-suppressing mulch"},
+ {l:"Old field",r:"Abandoned farmland we learn succession from"},
+ {l:"Primary succession",r:"Life colonizing bare rock or new dunes"},
+ {l:"Secondary succession",r:"Recovery on existing soil, all of agriculture"},
+ {l:"Allogenic factor",r:"External driver such as fire or grazing"},
+ {l:"Facilitation",r:"Early colonizers make room for later species"},
+ {l:"Semelparity",r:"Reproduces once, typical of colonizers"},
+ {l:"Iteroparity",r:"Reproduces many times, typical of persisters"},
+ {l:"Intermediate disturbance",r:"Moderate disturbance, highest diversity"},
+ {l:"Exponential growth",r:"J curve, density independent"},
+ {l:"Carrying capacity",r:"Number of individuals a habitat can support"},
+ {l:"Intrinsic rate of increase",r:"Births minus deaths"},
+ {l:"Resistant cultivar",r:"Lowers a pest's carrying capacity"},
+ {l:"r strategist",r:"Colonizer: grows fast, many seeds"},
+ {l:"K strategist",r:"Persister: slow growth, long life"}
+];
+
+/* ---------- Quiz 08 pool: EMPTY on purpose. Mariel will share her real Quiz 08 questions later.
+   Add items here in the same shape as ecology2's POOL5, e.g.
+   {lec:"3.2",q:"Question as worded in Canvas",o:["correct answer","distractor","distractor","distractor"],c:0,e:"why, from the transcript"}
+   They show up under the "Quiz 08 pool" filter in the Quiz tab and fold into Week 8. ---------- */
+var POOL8=[];
+
+/* ---------- Module 3 week by week (Big picture). Weeks 9 to 11 are placeholders until built ---------- */
+var EXAM3={opens:"Mon Nov 2, 1:00 am ET",closes:"Wed Nov 4, 11:59 pm ET"};
+var OBJ=[
+ ["Summarize the range of biotic interactions in agroecosystems and their outcomes for the organisms involved.","Week 8: 3.1 to 3.3"],
+ ["Identify key principles of succession and population growth in natural systems and evaluate their role in agroecosystem management.","Week 8: 3.4, 3.5"],
+ ["Explain the roles of soil organisms in decomposition and in soil structure and fertility.","Week 9: 3.6 to 3.8"],
+ ["Compare and contrast the management of weeds and diseases in agroecosystems.","Weeks 9 and 10"],
+ ["Identify key orders of insects and their role in agricultural and natural ecosystems.","Week 9: 3.9, 3.10"],
+ ["Discuss the methods used to promote or control biotic interactions in agroecosystems.","Weeks 10 and 11"]
+];
+var WBW=[
+ {n:8,dates:"Oct 5 to 11",syl:"Biotic interactions: the processes",
+  lecs:["3.1","3.2","3.3","3.4","3.5"],
+  map:"Week 8 is lectures 3.1 to 3.5, Quiz 08 is due Sunday Oct 11, and the reading is Section 7 (pp. 93 to 105). Canvas also lists the video Livestock Exclusion and Rotational Grazing, which 3.1 asks you to watch.",
+  big:"Organisms on a farm act on each other, and the professor's rule is to learn the mechanism behind each interaction, because that is what you can manage. Some interactions remove a resource (competition, parasitism, herbivory) and some add something (mutualism, epiphytism, allelopathy). Competition plays out through niches; allelopathy through chemicals. Over time the whole community shifts by succession, which farming restarts every season, and each population grows exponentially or logistically toward a carrying capacity that management can push up for crops or down for pests.",
+  must:["Odum's signs: mutualism + +, competition - -, commensalism + 0, amensalism - 0, parasitism and predation + -, neutralism 0 0. Removal versus addition interference.",
+   "Facultative (honeybee) versus obligate (vanilla and Melipona bee) mutualism; rhizobia give nitrogen, mycorrhizae give phosphorus, the plant pays in sugars.",
+   "Fundamental versus realized niche (Connell's barnacles), competitive exclusion, character displacement and release (finches), inter- versus intraspecific competition, row spacing.",
+   "Allelopathy: four release routes, tannins, phenolics, terpenes, alkaloids; hard to prove; winter rye, velvet bean, cacao hulls, corncockle's agrostemma.",
+   "Succession: intensity, frequency, scale; old-field stages; primary versus secondary; colonizers versus persisters; allogenic versus autogenic; intermediate disturbance.",
+   "Populations: births, deaths, immigration, emigration; exponential J curve versus logistic with K; r = births minus deaths; resistant cultivars lower K; r versus K strategists."]},
+ {n:9,dates:"Oct 12 to 18",syl:"Biotic interactions: the players",soon:true,
+  lecs:["3.6","3.7","3.8","3.9","3.10","3.11","3.12"],
+  map:"Coming: soil organisms, nematodes, arthropods, insect orders, weed ecology and plant diseases. Quiz 09 is due Sun Oct 18; reading Section 12 (pp. 171 to 181).",big:"",must:[]},
+ {n:10,dates:"Oct 19 to 25",syl:"Biotic interactions: management",soon:true,
+  lecs:["3.13","3.14","3.15a","3.15b","3.16","3.17","3.18"],
+  map:"Coming: biocontrol, pest management, pesticides, and disease, weed and nematode management. Quiz 10 is due Sun Oct 25; reading Section 13 (pp. 183 to 201).",big:"",must:[]},
+ {n:11,dates:"Oct 26 to Nov 1",syl:"Biotic interactions: case studies",soon:true,
+  lecs:["3.19","3.20","3.21"],
+  map:"Coming: colony collapse disorder, thousand cankers disease and wheat stem rust. Quiz 11 is due Sun Nov 1, and Canvas lists Perusall 4 in this week too.",big:"",must:[]}
+];
+</script>
+<script>
+/* ---------- tabs first, so the page always works even if later code throws ---------- */
+function byId(id){return document.getElementById(id);}
+(function(){
+ var tabs=document.querySelectorAll('.tab');
+ tabs.forEach(function(t){
+   t.addEventListener('click',function(){
+     tabs.forEach(function(x){x.classList.remove('on');});
+     document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});
+     t.classList.add('on');
+     var v=byId('v-'+t.getAttribute('data-v')); if(v) v.classList.add('on');
+     window.scrollTo(0,0);
+   });
+ });
+})();
+function showTab(name){ var t=document.querySelector('.tab[data-v="'+name+'"]'); if(t) t.click(); }
+
+/* ---------- state (localStorage with memory fallback; iOS file:// throws) ---------- */
+var LS='ecoALS3153_m3_v1';
+var _mem={};
+function _lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _mem)?_mem[k]:null;}}
+function _lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
+var state={};
+try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
+function save(){_lsSet(LS,JSON.stringify(state));}
+if(typeof POOL8==='undefined'){ window.POOL8=[]; }
+if(typeof WBW==='undefined'){ window.WBW=[]; }
+if(typeof OBJ==='undefined'){ window.OBJ=[]; }
+/* ids */
+L.forEach(function(lec){ lec.cards.forEach(function(c,ci){ c.id='c'+lec.id.replace('.','_')+'_'+ci; c.lec=lec.id; }); lec.quiz.forEach(function(q){ q.lec=lec.id; q.wk=lec.wk; q.lab='Lecture '+lec.id; }); });
+function lecById(id){ for(var i=0;i<L.length;i++){ if(L[i].id===id) return L[i]; } return null; }
+POOL8.forEach(function(q){ q.wk=8; q.src='Quiz 08'; q.pill='Quiz 08 pool'; q.lab=q.lec?('Lecture '+q.lec):'Quiz 08'; });
+function weekIds(w){ return w.lecs.slice(); }
+function weekHasLecs(n){ return L.some(function(l){ return l.wk===n; }); }
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ---------- progress + week rings ---------- */
+function lecStudied(id){ return !!state['s_'+id]; }
+function weekPct(w){
+ var n=0,d=0;
+ weekIds(w).forEach(function(id){ if(!lecById(id)) return; d++; if(lecStudied(id)) n++; });
+ return d?Math.round(100*n/d):0;
+}
+function updateProg(){
+ var stud=0; L.forEach(function(l){ if(lecStudied(l.id)) stud++; });
+ var solid=0; L.forEach(function(l){ l.cards.forEach(function(c){ if(state[c.id]===3) solid++; }); });
+ byId('pstud').textContent=stud; byId('ptot').textContent=L.length; byId('psolid').textContent=solid;
+ byId('pf').style.width=(100*stud/L.length)+'%';
+ renderWeeks();
+}
+function ringSvg(pct){
+ var r=26, c=2*Math.PI*r, dash=(pct/100)*c;
+ return '<svg class="ring" viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="'+r+'"/><circle class="fg" cx="32" cy="32" r="'+r+'" stroke-dasharray="'+dash.toFixed(1)+' '+c.toFixed(1)+'"/><text x="32" y="37" text-anchor="middle">'+pct+'%</text></svg>';
+}
+function renderWeeks(){
+ var host=byId('weeks'); if(!host) return; host.innerHTML='';
+ WEEKS.forEach(function(w,i){
+   var soon=!w.lecs.length;
+   var d=document.createElement('div'); d.className='wk'+(i===0?' now':'')+(soon?' soon':'');
+   var ids=soon?w.soon:w.lecs;
+   var mid=soon?'<span class="soonpill">coming</span>':ringSvg(weekPct(w));
+   d.innerHTML='<h3>Week '+w.n+'</h3><div class="wlecs">'+ids[0]+' to '+ids[ids.length-1]+' · '+ids.length+' lectures</div>'+mid+'<span class="badge">'+w.quiz+'</span><div class="due">due <b>'+w.due+'</b></div>';
+   d.addEventListener('click',function(){ showTab('lectures'); var h=byId('wk-'+w.n); if(h) setTimeout(function(){ h.scrollIntoView({behavior:'smooth',block:'start'}); },60); });
+   host.appendChild(d);
+ });
+}
+
+/* ---------- lectures ---------- */
+function mastBtns(c){
+ var m=state[c.id]||0;
+ return '<div class="mastery">'+
+  '<button class="mbtn'+(m===1?' on1':'')+'" data-m="1"><span class="ic">•</span>shaky</button>'+
+  '<button class="mbtn'+(m===2?' on2':'')+'" data-m="2"><span class="ic">◐</span>getting it</button>'+
+  '<button class="mbtn'+(m===3?' on3':'')+'" data-m="3"><span class="ic">✦</span>solid</button></div>';
+}
+function renderLectures(){
+ var host=byId('v-lectures'); if(!host) return; host.innerHTML='';
+ var intro=document.createElement('div'); intro.className='oneliner'; intro.style.margin='22px 4px 6px';
+ intro.innerHTML='Week 8 is ready: five lectures in Canvas order, 3.1 to 3.5, for Quiz 08 on Sunday. Each one: the gist, the professor\'s throughline, the concepts with a mastery mark, what the exam could ask, and a mini quiz. Mark a lecture studied when it sits right; the week ring and Quiz tab follow. Weeks 9 to 11 are listed below as coming.';
+ host.appendChild(intro);
+ WEEKS.forEach(function(w){
+   var wh=document.createElement('div'); wh.className='wkhead'; wh.id='wk-'+w.n;
+   wh.innerHTML='<span class="n">Week '+w.n+'</span><h2>'+esc(w.deck)+'</h2><span class="wdue">'+w.quiz+' · '+w.due+'</span>';
+   host.appendChild(wh);
+   var rd=document.createElement('div'); rd.className='progtxt'; rd.style.margin='-6px 4px 12px'; rd.textContent='Read: '+w.read+'.'; host.appendChild(rd);
+   if(w.lecs.length){ w.lecs.forEach(function(id){ lecDet(id,host); }); }
+   else {
+     var ph=document.createElement('div'); ph.className='soonbox';
+     ph.innerHTML='<b>Coming.</b> '+w.soon.map(function(id){ return esc(id)+' '+esc(SOONTITLE[id]||''); }).join(' · ');
+     host.appendChild(ph);
+   }
+ });
+}
+function lecDet(id,host){
+     var lec=lecById(id); if(!lec) return;
+     var det=document.createElement('details'); det.className='lec'+(lecStudied(id)?' studied':''); det.id='lec-'+id.replace('.','_');
+     if(state['o_'+id]) det.open=true;
+     var mins=Math.round(lec.words/140);
+     var h='<summary><span class="num">'+lec.id+'</span><span class="ttl">'+esc(lec.title)+'</span><span class="meta">'+lec.words.toLocaleString()+' words · ~'+mins+' min</span><span class="done">'+(lecStudied(id)?'✓':'')+'</span><svg class="chev" viewBox="0 0 18 18"><path d="M6 3 L12 9 L6 15" stroke="currentColor" stroke-width="2" fill="none"/></svg></summary>';
+     h+='<div class="lbody">';
+     h+='<div class="gist">'+esc(lec.gist)+'</div>';
+     h+='<div class="sec">The professor\'s throughline</div><ol class="line">'+lec.line.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>';
+     h+='<div class="sec">Concepts</div><div class="cards" data-lec="'+lec.id+'"></div>';
+     h+='<div class="sec">Exam could ask</div><ul class="ask">'+lec.ask.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+     h+='<div class="sec">Mini quiz · '+lec.quiz.length+' questions</div><div class="quiz mini" data-lec="'+lec.id+'"></div>';
+     h+='<button class="studybtn'+(lecStudied(id)?'':' off')+'" data-lec="'+lec.id+'">'+(lecStudied(id)?'✓ Studied, tap to unmark':'Mark lecture studied')+'</button>';
+     h+='</div>';
+     det.innerHTML=h;
+     det.addEventListener('toggle',function(){ state['o_'+id]=det.open?1:0; save(); if(det.open && !det.dataset.filled){ det.dataset.filled='1'; fillCards(det,lec); fillMiniQuiz(det,lec); } });
+     det.querySelector('.studybtn').addEventListener('click',function(){ state['s_'+id]=lecStudied(id)?0:1; save(); renderLectures(); updateProg(); });
+     host.appendChild(det);
+     if(det.open){ det.dataset.filled='1'; fillCards(det,lec); fillMiniQuiz(det,lec); }
+}
+function fillCards(det,lec){
+ var grid=det.querySelector('.cards'); if(!grid) return; grid.innerHTML='';
+ lec.cards.forEach(function(c){
+   var m=state[c.id]||0;
+   var card=document.createElement('div'); card.className='card'+(m?' m'+m:'');
+   card.innerHTML='<h3>'+esc(c.t)+'</h3><p>'+esc(c.i)+'</p>'+(c.f?'<div class="fact">'+c.f+'</div>':'')+mastBtns(c);
+   card.querySelectorAll('.mbtn').forEach(function(b){
+     b.addEventListener('click',function(){
+       var v=+b.getAttribute('data-m'); state[c.id]=(state[c.id]===v?0:v); save();
+       card.className='card'+(state[c.id]?' m'+state[c.id]:'');
+       card.querySelectorAll('.mbtn').forEach(function(x){ x.className='mbtn'+(+x.getAttribute('data-m')===state[c.id]?' on'+state[c.id]:''); });
+       updateProg();
+     });
+   });
+   grid.appendChild(card);
+ });
+}
+function questionEl(item,n,showLec){
+ var order=shuffle(item.o.map(function(_,i){return i;}));
+ var correctPos=order.indexOf(item.c);
+ var q=document.createElement('div'); q.className='q';
+ var meta='';
+ if(showLec) meta+='<span class="qlec">'+esc(item.lab||('Lecture '+item.lec))+'</span>';
+ if(item.src) meta+='<span class="qsrc">'+esc(item.pill||(item.src+' pool'))+'</span>';
+ var h=(meta?'<div class="qmeta">'+meta+'</div>':'')+'<div class="qh">'+n+'. '+esc(item.q)+'</div>';
+ order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[origI])+'</button>'; });
+ h+='<div class="qexp">'+esc(item.e)+'</div>';
+ if(item.note) h+='<div class="qexp qnote"><b>'+esc(item.noteLabel||'Note on your marked answer.')+'</b> '+esc(item.note)+'</div>';
+ q.innerHTML=h;
+ return {el:q,correctPos:correctPos};
+}
+function fillMiniQuiz(det,lec){
+ var host=det.querySelector('.quiz.mini'); if(!host) return; host.innerHTML='';
+ var right=0,answered=0;
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ var score=document.createElement('span'); score.className='quizscore'; score.textContent='Pick an answer to begin';
+ var again=document.createElement('button'); again.className='dbtn'; again.textContent='Reset';
+ again.addEventListener('click',function(){ fillMiniQuiz(det,lec); });
+ lec.quiz.forEach(function(item,i){
+   var r=questionEl(item,i+1,false), q=r.el;
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; q.dataset.done='1'; answered++;
+       var pick=+b.getAttribute('data-pos');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
+       if(pick!==r.correctPos) b.classList.add('wrong'); else right++;
+       q.querySelectorAll('.qexp').forEach(function(x){ x.classList.add('show'); });
+       score.textContent='Score '+right+' / '+answered+(answered===lec.quiz.length?' · done':'');
+     });
+   });
+   host.appendChild(q);
+ });
+ foot.appendChild(score); foot.appendChild(again); host.appendChild(foot);
+}
+
+/* ---------- flashcards ---------- */
+var deckFilter='8', deck=[], di=0;
+function buildDeck(){
+ deck=[];
+ L.forEach(function(lec){ if(deckFilter!=='all' && lec.wk!==+deckFilter) return; lec.cards.forEach(function(c){ deck.push({tag:'Lecture '+lec.id+' · '+lec.title,q:c.q,a:c.a}); }); });
+ deck=shuffle(deck); di=0; showCard();
+}
+function showCard(){
+ var f=byId('flash'); if(!f||!deck.length) return;
+ f.classList.remove('flip');
+ var c=deck[di];
+ byId('fqtag').textContent=c.tag; byId('fq').textContent=c.q; byId('fa').textContent=c.a;
+ byId('fcount').textContent=(di+1)+' / '+deck.length;
+}
+function renderFlashFilters(){
+ var host=byId('flashfilters'); if(!host) return;
+ var opts=[];
+ WEEKS.forEach(function(w){ if(weekHasLecs(w.n)) opts.push([String(w.n),'Week '+w.n]); else opts.push(['soon'+w.n,'Week '+w.n+' (coming)']); });
+ opts.push(['all','All of Module 3 so far']);
+ opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(deckFilter===o[0]?' on':''); b.textContent=o[1];
+   if(o[0].indexOf('soon')===0){ b.disabled=true; b.className+=' soon'; }
+   else b.addEventListener('click',function(){ deckFilter=o[0]; host.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); buildDeck(); });
+   host.appendChild(b); });
+}
+function initFlash(){
+ renderFlashFilters();
+ byId('flash').addEventListener('click',function(){ byId('flash').classList.toggle('flip'); });
+ byId('fnext').addEventListener('click',function(){ if(!deck.length) return; di=(di+1)%deck.length; showCard(); });
+ byId('fprev').addEventListener('click',function(){ if(!deck.length) return; di=(di-1+deck.length)%deck.length; showCard(); });
+ byId('fshuf').addEventListener('click',buildDeck);
+ buildDeck();
+}
+
+/* ---------- quiz bank (defaults to Week 8) ---------- */
+var quizFilter='8', QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
+function bank(){
+ if(quizFilter==='pool8') return POOL8.slice();
+ var b=[]; L.forEach(function(lec){ if(quizFilter!=='all' && lec.wk!==+quizFilter) return; lec.quiz.forEach(function(q){ b.push(q); }); });
+ if(quizFilter==='all'||quizFilter==='8') b=POOL8.concat(b);
+ return b;
+}
+function renderQuizFilters(){
+ var host=byId('quizfilters'); if(!host) return;
+ var opts=[['pool8',POOL8.length?('Quiz 08 pool ('+POOL8.length+')'):'Quiz 08 pool (waiting for your questions)']];
+ WEEKS.forEach(function(w){ if(weekHasLecs(w.n)) opts.push([String(w.n),'Week '+w.n]); else opts.push(['soon'+w.n,'Week '+w.n+' (coming)']); });
+ opts.push(['all','All of Module 3 so far']);
+ opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.setAttribute('data-f',o[0]);
+   if(o[0].indexOf('soon')===0){ b.disabled=true; b.className+=' soon'; }
+   else b.addEventListener('click',function(){ setQuizFilter(o[0]); });
+   host.appendChild(b); });
+}
+function setQuizFilter(f){
+ quizFilter=f; var host=byId('quizfilters');
+ if(host) host.querySelectorAll('.fbtn').forEach(function(x){ x.classList.toggle('on',x.getAttribute('data-f')===f); });
+ quizQueue=[]; quizRight=0; quizAnswered=0; renderQuiz();
+}
+function updateQuizScore(){ var s=byId('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
+function renderQuiz(){
+ var host=byId('quiz'); if(!host) return; host.innerHTML='';
+ var B=bank();
+ if(!B.length){
+   host.innerHTML='<div class="placeholder">Reserved for your real Quiz 08 questions. Share them (screenshots or text) and they will appear here with a Quiz 08 pool pill, each answer checked against your 3.1 to 3.5 transcripts. Until then, Week 8 has 40 practice questions.</div>';
+   return;
+ }
+ var n=Math.min(QUIZ_BATCH,B.length);
+ if(quizQueue.length<n) quizQueue=shuffle(B.map(function(_,i){return i;}));
+ var batch=quizQueue.splice(0,n);
+ batch.forEach(function(idx,qi){
+   var item=B[idx]; var r=questionEl(item,qi+1,true), q=r.el;
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; q.dataset.done='1'; quizAnswered++;
+       var pick=+b.getAttribute('data-pos');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
+       if(pick!==r.correctPos) b.classList.add('wrong'); else quizRight++;
+       q.querySelectorAll('.qexp').forEach(function(x){ x.classList.add('show'); });
+       updateQuizScore();
+     });
+   });
+   host.appendChild(q);
+ });
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ foot.innerHTML='<span class="quizscore" id="qscore"></span><button class="dbtn" id="qnew">Fresh set &#8594;</button>';
+ host.appendChild(foot);
+ byId('qnew').addEventListener('click',function(){ window.scrollTo(0,byId('v-quiz').offsetTop-10); renderQuiz(); });
+ updateQuizScore();
+}
+
+/* ---------- connect ---------- */
+var CONN_N=7, selL=null, selR=null, matchedN=0, connPick=[];
+function renderConnect(){
+ matchedN=0; selL=null; selR=null;
+ byId('conndone').hidden=true;
+ connPick=shuffle(PAIRS.map(function(_,i){return i;})).slice(0,Math.min(CONN_N,PAIRS.length));
+ var Lc=byId('connL'), R=byId('connR'); Lc.innerHTML=''; R.innerHTML='';
+ shuffle(connPick).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].l; b.setAttribute('data-id',id); b.setAttribute('data-side','L'); Lc.appendChild(b); });
+ shuffle(connPick).forEach(function(id){ var b=document.createElement('button'); b.className='ctile'; b.textContent=PAIRS[id].r; b.setAttribute('data-id',id); b.setAttribute('data-side','R'); R.appendChild(b); });
+ updateConnCount();
+ [Lc,R].forEach(function(col){ col.querySelectorAll('.ctile').forEach(function(b){ b.addEventListener('click',function(){onConn(b);}); }); });
+}
+function onConn(b){
+ if(b.classList.contains('matched')||b.classList.contains('miss')) return;
+ var side=b.getAttribute('data-side');
+ if(side==='L'){ if(selL)selL.classList.remove('sel'); selL=(selL===b?null:b); }
+ else { if(selR)selR.classList.remove('sel'); selR=(selR===b?null:b); }
+ if(selL)selL.classList.add('sel'); if(selR)selR.classList.add('sel');
+ if(selL&&selR){
+   var a=selL, c=selR;
+   if(a.getAttribute('data-id')===c.getAttribute('data-id')){
+     a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('matched'); c.classList.add('matched');
+     selL=null; selR=null; matchedN++; updateConnCount();
+     if(matchedN===connPick.length) byId('conndone').hidden=false;
+   } else {
+     a.classList.remove('sel'); c.classList.remove('sel'); a.classList.add('miss'); c.classList.add('miss');
+     selL=null; selR=null;
+     setTimeout(function(){ a.classList.remove('miss'); c.classList.remove('miss'); }, 360);
+   }
+ }
+}
+function updateConnCount(){ byId('conncount').textContent=matchedN+' / '+connPick.length+' connected'; }
+function initConnect(){ byId('connreset').addEventListener('click',renderConnect); renderConnect(); }
+
+/* ---------- Module 3 week by week + Exam 03 hub ---------- */
+var SHORT={"3.1":"Biotic interactions","3.2":"Competition","3.3":"Allelopathy","3.4":"Succession","3.5":"Population dynamics"};
+function goLec(id){
+ showTab('lectures');
+ var det=byId('lec-'+id.replace('.','_')); if(!det) return;
+ if(!det.open) det.open=true;
+ setTimeout(function(){ det.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+function renderWBW(){
+ var host=byId('wbw'); if(!host||!WBW.length) return;
+ var h='<div class="wbwhead"><h2>Module 3, week by week</h2><span class="wbwsub">Weeks 8 to 11 · Exam 03 opens '+esc(EXAM3.opens)+' · closes '+esc(EXAM3.closes)+'</span></div>';
+ h+='<p class="wbwmap"><b>The six Canvas objectives for Module 3</b>, and where each one lands. Week 8 covers the first two; the rest arrive with weeks 9 to 11.</p>';
+ h+='<ol class="objs">'+OBJ.map(function(o){ return '<li>'+esc(o[0])+' <span class="objwk">'+esc(o[1])+'</span></li>'; }).join('')+'</ol>';
+ h+='<div class="wbwgrid">';
+ WBW.forEach(function(w){
+   h+='<div class="wcard'+(w.soon?' soon':' full')+'"><div class="wtop"><span class="n">Week '+w.n+'</span><span class="wdates">'+esc(w.dates)+'</span>'+(w.soon?'<span class="soonpill">coming</span>':'')+'</div>';
+   h+='<div class="wsyl">'+esc(w.syl)+'</div>';
+   h+='<div class="chips">'+w.lecs.map(function(id){ var l=lecById(id); if(!l) return '<span class="chip soon"><b>'+esc(id)+'</b>'+esc(SOONTITLE[id]||'')+'</span>'; return '<button class="chip" data-go="'+esc(id)+'"><b>'+esc(id)+'</b>'+esc(SHORT[id]||l.title)+'</button>'; }).join('')+'</div>';
+   h+='<p class="wmap">'+esc(w.map)+'</p>';
+   if(w.big) h+='<div class="sec">Big idea</div><p class="wbig">'+esc(w.big)+'</p>';
+   if(w.must&&w.must.length) h+='<div class="sec">Must know</div><ul class="line">'+w.must.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('')+'</ul>';
+   h+='</div>';
+ });
+ h+='</div>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ goLec(b.getAttribute('data-go')); }); });
+}
+function renderExam(){
+ var host=byId('examhub'); if(!host) return;
+ var h='<div class="oneliner" style="margin:0 0 14px">Exam 03 closes Module 3. It opens '+esc(EXAM3.opens)+' and closes '+esc(EXAM3.closes)+'. Canvas lists it in Week 11, so expect weeks 8 to 11. This tab fills in as the weeks are built; for now it points you at Week 8.</div>';
+ h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) is ready now. Weeks 9, 10 and 11 are coming, each with its own quiz first (Oct 18, Oct 25, Nov 1).</li><li>Once you share your Quiz 08 questions they become the first real question pool here, the way Quiz 05 anchored Exam 02.</li></ul>';
+ var plan=[
+  ['overview','Read the week-by-week map','The six Module 3 objectives, and Week 8\'s big idea and must-know points.','Open the map'],
+  ['8','Drill Week 8','All 40 Week 8 practice questions, ten at a time.','Week 8 quiz'],
+  ['pool8','Quiz 08 pool','Waiting for your real Quiz 08 questions.','Quiz 08 pool'],
+  ['3.1','Start with the lectures','Gist, throughline, cards and mini quiz for 3.1 to 3.5.','Open 3.1']
+ ];
+ h+='<ol class="plan">'+plan.map(function(p,i){ return '<li><div class="pt"><b>'+(i+1)+'. '+esc(p[1])+'</b><br>'+esc(p[2])+'</div><button class="dbtn" data-act="'+p[0]+'">'+esc(p[3])+'</button></li>'; }).join('')+'</ol>';
+ h+='<div class="placeholder">Exam 03 practice, the week-by-week must-knows for weeks 9 to 11, and any question sets you find land here as they come.</div>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-act]').forEach(function(b){ b.addEventListener('click',function(){
+   var a=b.getAttribute('data-act');
+   if(a==='overview'){ showTab('overview'); var w=byId('wbw'); if(w) setTimeout(function(){ w.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
+   else if(a==='8'||a==='pool8'){ showTab('quiz'); setQuizFilter(a); }
+   else goLec(a);
+ }); });
+}
+/* ---------- boot, every init guarded ---------- */
+['renderLectures','updateProg','initFlash','renderQuizFilters','renderQuiz','initConnect','renderWBW','renderExam']
+  .forEach(function(fn){ try{ window[fn](); }catch(e){ if(window.console) console.error(fn,e); } });
+</script>
+</body>
+</html>
