@@ -267,7 +267,7 @@ svg{display:block}
       <div class="sub">ALS 3153 · Module 3 · Biotic Interactions in Agroecosystems</div>
     </div>
   </div>
-  <p class="hnote">Module 3, one lecture at a time: Week 8 for Quiz 08 this Sunday, then Week 9 for Quiz 09 on Sunday Oct 18. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your lecture transcripts: 3.1 to 3.5 for Week 8, 3.6 to 3.12 for Week 9. Weeks 10 and 11 are marked coming and fill in later. Your 27 real Quiz 08 questions sit in their own Quiz 08 pool in the Quiz tab, and an empty Quiz 09 pool is ready for yours.</p>
+  <p class="hnote">Module 3, one lecture at a time: Week 8 for Quiz 08 this Sunday, then Week 9 for Quiz 09 on Sunday Oct 18. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your lecture transcripts: 3.1 to 3.5 for Week 8, 3.6 to 3.12 for Week 9. Weeks 10 and 11 are marked coming and fill in later. Your 27 real Quiz 08 questions sit in their own Quiz 08 pool in the Quiz tab, and your 27 Quiz 09 questions in the Quiz 09 pool.</p>
 
   <div class="prog">
     <div class="progbar"><div class="progfill" id="pf"></div></div>
@@ -443,7 +443,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">Practice ten at a time, answers shuffled, the mechanism under each answer. Pick Week 8 (written from your 3.1 to 3.5 transcripts) or Week 9 (3.6 to 3.12), or both with All of Module 3 so far. The Quiz 08 pool holds your 27 real Quiz 08 questions in the professor's wording, each with a Quiz 08 pool pill and a one-line why from the lecture, and they fold into Week 8 too. The Quiz 09 pool is ready for your Quiz 09 questions and will fold into Week 9 the same way.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Practice ten at a time, answers shuffled, the mechanism under each answer. Pick Week 8 (written from your 3.1 to 3.5 transcripts) or Week 9 (3.6 to 3.12), or both with All of Module 3 so far. The Quiz 08 pool holds your 27 real Quiz 08 questions in the professor's wording, each with a Quiz 08 pool pill and a one-line why from the lecture, and they fold into Week 8 too. The Quiz 09 pool holds your 27 real Quiz 09 questions the same way, and they fold into Week 9.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -1138,9 +1138,64 @@ var PAIRS9=[
 PAIRS.forEach(function(p){ if(!p.wk) p.wk=8; });
 PAIRS9.forEach(function(p){ p.wk=9; PAIRS.push(p); });
 
-/* ---------- Quiz 09 pool: reserved for Mariel's real Quiz 09 questions (due Sun Oct 18). Same shape as POOL8:
-   {lec:"3.x",q:"...",o:[Canvas order],c:index,e:"3.x: one-line why"}. Empty until she sends them. ---------- */
-var POOL9=[];
+/* ---------- Quiz 09 pool: Mariel's real Quiz 09 questions (her msg 7199, 2026-10-13), 27 unique across 3 sets.
+   Options in Canvas order; answers checked against the 3.6 to 3.12 transcripts. Fold into Week 9. ---------- */
+var POOL9=[
+ {lec:"3.6",q:"In denitrification, specific bacteria convert mineralized nitrogen to nitrogen gas.",o:["True", "False"],c:0,
+  e:"True. 3.6: denitrifying bacteria take nitrate and convert it back into nitrogen gas, which is lost from the soil."},
+ {lec:"3.6",q:"The organisms responsible for direct decomposition of plant-based organic matter include all of the following EXCEPT:",o:["Springtails", "Bacteria", "Termites", "Fungi"],c:0,
+  e:"3.6: only bacteria, fungi, actinomycetes and termites directly decompose cellulose and lignin. Springtails (Collembola) are fungivores."},
+ {lec:"3.7",q:"What is one disadvantage of the generalist nature of predator-prey interactions in soil food webs?",o:["Predators may eat beneficial species", "Predators are useful in biological control", "All options presented", "Certain predator species are essential for soil health"],c:0,
+  e:"3.7 and 3.9: generalists eat anything, beneficials included, which also makes them hard to use as biocontrol. The other options are upsides."},
+ {lec:"3.7",q:"Root knot nematodes are:",o:["Beneficial organisms in agroecosystems", "Pest organisms in agroecosystems"],c:1,
+  e:"3.7: root knot nematodes harm plants, \"that's a crop pest\"; other soil organisms help by eating them."},
+ {lec:"3.11",q:"Summer annuals germinate in the fall.",o:["False", "True"],c:0,
+  e:"False. 3.11: summer annuals germinate in spring and set seed by late summer; winter annuals are the ones that germinate in fall."},
+ {lec:"3.12",q:"Which of the following is most likely to promote infectious disease in an agroecosystem?",o:["Drip irrigation", "Drought", "Center pivot irrigation", "Lightning"],c:2,
+  e:"3.12: water pooling on leaves, humidity and overhead sprinklers (splash) let pathogens germinate and infect. Center pivot is overhead; drip keeps leaves dry."},
+ {lec:"3.12",q:"Non-infectious disease agents include all of the following EXCEPT:",o:["Industrial emissions", "Mycoplasmas", "Nutrient deficiencies", "Chilling injury"],c:1,
+  e:"3.12: mycoplasmas are infectious (wall-less bacteria spread by vectors). Non-infectious agents are abiotic: air pollution, nutrient deficiencies, temperature injury."},
+ {lec:"3.12",q:"A vector is:",o:["An organism that causes disease", "All options presented", "An element of the plant disease triangle", "An organism that transmits a pathogen"],c:3,
+  e:"3.12: a vector carries the pathogen to the plant (thrips, beetles, nematodes for viruses). The pathogen causes the disease; the triangle is host, pathogen, environment."},
+ {lec:"3.9",q:"Which arachnid can pose a problem as a plant pest in greenhouse environments?",o:["Scales", "Aphids", "Mites", "Spiders"],c:2,
+  e:"3.9: spider mites are a huge problem in greenhouse ornamentals. Scales and aphids are insects, and spiders are predators."},
+ {lec:"3.9",q:"Which of the following is an accurate list of the characteristics shared by all arthropods?",o:["Segmented body, exoskeleton, compound eyes", "Compound eyes, wings, exoskeleton", "Compound eyes, exoskeleton, jointed appendages", "Segmented body, exoskeleton, jointed appendages"],c:3,
+  e:"3.9: all arthropods share jointed appendages, an exoskeleton and a segmented body. Compound eyes and wings are not universal."},
+ {lec:"3.6",q:"An increase in rates of decomposition frees nutrients for uptake.",o:["True", "False"],c:0,
+  e:"True. 3.6 and 3.7: decomposers mineralize organic matter into plant-available forms like ammonium, so faster decomposition releases nutrients."},
+ {lec:"3.7",q:"Soil food webs are closed systems.",o:["False", "True"],c:0,
+  e:"False. 3.7: \"this is not a closed system\"; it receives inputs from the aboveground food web."},
+ {lec:"3.6",q:"Bacteria in the soil may:",o:["All options presented", "Decompose plant-based organic matter", "Enhance plant growth", "Cause disease"],c:0,
+  e:"3.6 to 3.12: bacteria are direct decomposers, they help plants (N fixers, mineralizers) and some are pathogens (wilts, soft rots)."},
+ {lec:"3.8",q:"Nematodes enhance nutrient cycling.",o:["True", "False"],c:0,
+  e:"True. 3.6 and 3.8: by grazing bacteria and fungi, free-living nematodes release nutrients and are critical to nutrient cycling."},
+ {lec:"3.12",q:"Hyphae are structures associated with:",o:["Viruses", "Fungi", "Mycoplasmas", "Bacteria"],c:1,
+  e:"3.12: fungi grow as filaments called hyphae, which together form the mycelium."},
+ {lec:"3.12",q:"Pathogenic organisms often exhibit exponential growth in the early stages of infection.",o:["True", "False"],c:0,
+  e:"True. 3.12: in good conditions pathogens grow exponentially right off the bat, then taper to logistic growth."},
+ {lec:"3.10",q:"Insects with simple metamorphosis are characterized by:",o:["Chewing mouthparts", "Pupal stage", "All options presented", "External wing development"],c:3,
+  e:"3.9 and 3.10: simple (incomplete) metamorphosis has no pupa, and the wing pads are external even in the nymph. A pupal stage means complete metamorphosis."},
+ {lec:"3.9",q:"Mites serve both beneficial and pest roles in agroecosystems.",o:["False", "True"],c:1,
+  e:"True. 3.6 and 3.9: soil mites are fungivores and predators that speed decomposition, while spider mites are crop pests."},
+ {lec:"3.9",q:"Arachnids include:",o:["Spiders, ticks, springtails", "Spiders, mites, ticks", "Spiders, termites, mites, ticks", "Spiders, scorpions, termites"],c:1,
+  e:"3.9: the arachnids that matter in agriculture are spiders, mites and ticks. Springtails and termites are not arachnids."},
+ {lec:"3.6",q:"Animal-based organic matter can be mineralized by insects.",o:["False", "True"],c:1,
+  e:"True. 3.6: apart from the few direct decomposers, the other soil organisms mineralize animal-based matter; they just can't fully break down lignin."},
+ {lec:"3.7",q:"Mycorrhizae form mutualistic associations with insects.",o:["True", "False"],c:1,
+  e:"False. Mycorrhizae are fungi in mutualism with plant roots, not insects."},
+ {lec:"3.7",q:"Predators in the soil include all of the following EXCEPT:",o:["Mites", "Nematodes", "Mycorrhizae", "Spiders"],c:2,
+  e:"3.6 to 3.8: mites, predatory nematodes and spiders are soil predators. Mycorrhizae are root-associated fungi."},
+ {lec:"3.8",q:"Nematodes are:",o:["All options presented", "Plant parasites", "Predators", "Animal parasites"],c:0,
+  e:"3.8: nematodes fill every role: plant parasites (root knot), predators, and animal parasites."},
+ {lec:"3.11",q:"Crop yield is rarely impacted by weed density.",o:["False", "True"],c:0,
+  e:"False. 3.11: low weed numbers may not matter, but past a threshold density crop yield drops."},
+ {lec:"3.12",q:"Which group is responsible for the majority of plant diseases in agroecosystems?",o:["Viruses", "Fungi", "Mycoplasmas", "Bacteria"],c:1,
+  e:"3.12: fungi cause most plant diseases in agriculture, \"up to 70%\" of them."},
+ {lec:"3.12",q:"Isolates refer to:",o:["Strains of a virus", "Niche partitioning in pathogens", "Plant cultivars", "Genotypes of fungal pathogens"],c:3,
+  e:"3.12: fungal isolates are different genotypes of the same pathogen, and they vary in virulence."},
+ {lec:"3.10",q:"Leafmining pests include insects in the order:",o:["All options presented", "Diptera", "Hemiptera", "Thysanoptera"],c:1,
+  e:"3.10: leafmining flies (Diptera) feed between the leaf layers. Thrips (Thysanoptera) and Hemiptera feed on the surface by piercing and rasping."}
+];
 
 /* ---------- Module 3 week by week (Big picture). Weeks 10 and 11 are placeholders until built ---------- */
 var EXAM3={opens:"Mon Nov 2, 1:00 am ET",closes:"Wed Nov 4, 11:59 pm ET"};
@@ -1520,13 +1575,14 @@ function renderWBW(){
 function renderExam(){
  var host=byId('examhub'); if(!host) return;
  var h='<div class="oneliner" style="margin:0 0 14px">Exam 03 closes Module 3. It opens '+esc(EXAM3.opens)+' and closes '+esc(EXAM3.closes)+'. Canvas lists it in Week 11, so expect weeks 8 to 11. This tab fills in as the weeks are built; for now it points you at Weeks 8 and 9.</div>';
- h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) and Week 9 (3.6 to 3.12) are ready now. Weeks 10 and 11 are coming, each with its own quiz first (Oct 25, Nov 1).</li><li>Your 27 Quiz 08 questions are the first real question pool here, the way Quiz 05 anchored Exam 02. The Quiz 09 pool (due Oct 18) is ready for yours.</li></ul>';
+ h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) and Week 9 (3.6 to 3.12) are ready now. Weeks 10 and 11 are coming, each with its own quiz first (Oct 25, Nov 1).</li><li>Your 27 Quiz 08 questions are the first real question pool here, the way Quiz 05 anchored Exam 02. Your 27 Quiz 09 questions (due Oct 18) are loaded too.</li></ul>';
  var plan=[
   ['overview','Read the week-by-week map','The six Module 3 objectives, and Week 8\'s big idea and must-know points.','Open the map'],
   ['8','Drill Week 8','All of Week 8: 40 practice questions plus your 27 Quiz 08 questions, ten at a time.','Week 8 quiz'],
   ['pool8','Quiz 08 pool','Your 27 real Quiz 08 questions, answers checked against 3.1 to 3.5.','Quiz 08 pool'],
   ['3.1','Start with the lectures','Gist, throughline, cards and mini quiz for 3.1 to 3.5.','Open 3.1'],
-  ['9','Drill Week 9','All of Week 9: 60 practice questions from 3.6 to 3.12, ten at a time; your Quiz 09 questions join them once you send them.','Week 9 quiz'],
+  ['9','Drill Week 9','All of Week 9: 60 practice questions from 3.6 to 3.12 plus your 27 Quiz 09 questions, ten at a time.','Week 9 quiz'],
+  ['pool9','Quiz 09 pool','Your 27 real Quiz 09 questions, answers checked against 3.6 to 3.12.','Quiz 09 pool'],
   ['3.6','Week 9 lectures','Gist, throughline, cards and mini quiz for 3.6 to 3.12, the players.','Open 3.6']
  ];
  h+='<ol class="plan">'+plan.map(function(p,i){ return '<li><div class="pt"><b>'+(i+1)+'. '+esc(p[1])+'</b><br>'+esc(p[2])+'</div><button class="dbtn" data-act="'+p[0]+'">'+esc(p[3])+'</button></li>'; }).join('')+'</ol>';
