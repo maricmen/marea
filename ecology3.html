@@ -267,7 +267,7 @@ svg{display:block}
       <div class="sub">ALS 3153 · Module 3 · Biotic Interactions in Agroecosystems</div>
     </div>
   </div>
-  <p class="hnote">Module 3, one lecture at a time: Week 8 for Quiz 08 this Sunday, then Week 9 for Quiz 09 on Sunday Oct 18. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your lecture transcripts: 3.1 to 3.5 for Week 8, 3.6 to 3.12 for Week 9. Weeks 10 and 11 are marked coming and fill in later. Your 27 real Quiz 08 questions sit in their own Quiz 08 pool in the Quiz tab, and your 27 Quiz 09 questions in the Quiz 09 pool.</p>
+  <p class="hnote">Module 3, one lecture at a time: Week 8 for Quiz 08 this Sunday, then Week 9 for Quiz 09 on Sunday Oct 18. Open a lecture, read it in one breath, work the cards, take its mini quiz, then mark it studied. The week rings fill as you go. Everything here comes from your lecture transcripts: 3.1 to 3.5 for Week 8, 3.6 to 3.12 for Week 9. Weeks 10 and 11 are marked coming and fill in later. Your 27 real Quiz 08 questions sit in their own Quiz 08 pool in the Quiz tab, and your 27 Quiz 09 questions in the Quiz 09 pool. Your 25 Quiz 10 questions are already in a Quiz 10 pool, ahead of the Week 10 lectures.</p>
 
   <div class="prog">
     <div class="progbar"><div class="progfill" id="pf"></div></div>
@@ -443,7 +443,7 @@ svg{display:block}
   </div>
 
   <div class="view" id="v-quiz">
-    <div class="oneliner" style="margin:22px 4px 10px">Practice ten at a time, answers shuffled, the mechanism under each answer. Pick Week 8 (written from your 3.1 to 3.5 transcripts) or Week 9 (3.6 to 3.12), or both with All of Module 3 so far. The Quiz 08 pool holds your 27 real Quiz 08 questions in the professor's wording, each with a Quiz 08 pool pill and a one-line why from the lecture, and they fold into Week 8 too. The Quiz 09 pool holds your 27 real Quiz 09 questions the same way, and they fold into Week 9.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Practice ten at a time, answers shuffled, the mechanism under each answer. Pick Week 8 (written from your 3.1 to 3.5 transcripts) or Week 9 (3.6 to 3.12), or both with All of Module 3 so far. The Quiz 08 pool holds your 27 real Quiz 08 questions in the professor's wording, each with a Quiz 08 pool pill and a one-line why from the lecture, and they fold into Week 8 too. The Quiz 09 pool holds your 27 real Quiz 09 questions the same way, and they fold into Week 9. The Quiz 10 pool holds your 25 Quiz 10 questions, checked against 3.13 to 3.18; until the Week 10 lectures are built, Week 10 shows just that pool.</div>
     <div class="filters" id="quizfilters"><span class="fl">Draw from</span></div>
     <div class="quiz" id="quiz"></div>
   </div>
@@ -1197,6 +1197,63 @@ var POOL9=[
   e:"3.10: leafmining flies (Diptera) feed between the leaf layers. Thrips (Thysanoptera) and Hemiptera feed on the surface by piercing and rasping."}
 ];
 
+/* ---------- Quiz 10 pool: Mariel's real Quiz 10 questions (her msgs 8234 + 8235, 2026-10-23), 25 unique across 3 sets.
+   Options in Canvas order; answers checked against the 3.13 to 3.18 transcripts. Week 10 lectures are not built yet,
+   so the Week 10 filter in the Quiz tab shows this pool on its own. ---------- */
+var POOL10=[
+ {lec:"3.13",q:"Augmentation biological control involves",o:["breeding and releasing large numbers of a non-native control agent", "combining multiple methods of pest management", "utilizing weedy borders to create habitat for a native biological control agent", "breeding and releasing large numbers of a native biological control agent"],c:3,
+  e:"3.13: augmentation takes something already in the environment (lacewings, ladybugs, Encarsia) and rears it in the lab to release in big numbers. Non-native agents are classical; weedy borders are conservation; combining methods is IPM."},
+ {lec:"3.13",q:"Bacillus thuringiensis (Bt) kills insects by",o:["all options presented", "cry proteins disrupting gut function", "jelly proteins blocking spiracles", "enzymes prohibiting oxygen absorption"],c:1,
+  e:"3.13: Bt's cry proteins \"destroy gut function in the specific insects\"; insect gut receptors let the gut cells rupture. 3.15a: its mode of action is in the midgut."},
+ {lec:"3.13",q:"Bacillus thuringiensis (Bt) is known to be toxic to humans.",o:["False", "True"],c:0,
+  e:"False. 3.13: cry proteins \"have no functionality in humans or in mammals\"; we lack the gut receptors, and Bt is exempt from food residue limits."},
+ {lec:"3.15a",q:"The way a pesticide kills an insect is referred to as",o:["method of persistence", "active ingredient", "mode of action", "regulation methodology"],c:2,
+  e:"3.15a: mode of action is \"how is it that they actually kill the insect\", for example blocking gut absorption, nerve function or hormones."},
+ {lec:"3.15b",q:"Which of the following is a biotic driver of pesticide degradation?",o:["water", "sunlight", "microbes", "all options presented"],c:2,
+  e:"3.15b: degradation is biological (soil microflora) or abiotic (light, water, pH). Only microbes are alive."},
+ {lec:"3.15b",q:"Pesticides can be broken down or reformed into more toxic components in the soil. This is called",o:["carryover", "reactivation", "drift", "photodegradation"],c:1,
+  e:"3.15b: reactivation is when the metabolites are more toxic than the parent compound, like PCNB turning into a plant-killing acid in the soil."},
+ {lec:"3.15a",q:"How are pesticides detoxified in the environment?",o:["all options presented", "sun", "water", "microbes"],c:0,
+  e:"3.15a: pesticides break down by photodegradation (sun), hydrolysis (water) and soil microflora (microbes), so all three."},
+ {lec:"3.17",q:"Solarization may fail if",o:["plastic edges are not buried in the soil", "all options presented", "beds are oriented east-west", "weather is cloudy"],c:1,
+  e:"3.17: unburied edges leak heat and let weeds up, beds need north-south orientation, and one UF trial failed in cloudy fall weather."},
+ {lec:"3.17",q:"Solarization requires all of the following EXCEPT",o:["raised beds oriented north to south", "sunny weather", "clear plastic", "dry soil"],c:3,
+  e:"3.17: \"it's important that the soil is moist because this is going to help conduct the heat.\" Clear plastic, sun and north-south beds are all needed."},
+ {lec:"3.15b",q:"The \"pesticide treadmill\" refers to",o:["all options presented", "the movement of pesticides through degradation process", "the evolution of pest resistance", "the increasing cost of pest control"],c:2,
+  e:"3.15b: \"as soon as we develop a pesticide, the insects develop resistance\", so we keep developing new ones. 3.17 calls it the same arms race with weeds."},
+ {lec:"3.13",q:"Parasitoids typically",o:["are generalist biocontrol agents", "find their host as larvae", "pupate inside the host to emerge as adults", "lay eggs in the host"],c:3,
+  e:"3.13: parasitoids \"lay their eggs inside of a living host\", the larvae develop there, then emerge and pupate outside. They are usually very host specific."},
+ {lec:"3.13",q:"Disease-causing organisms can be used as biocontrol agents.",o:["True", "False"],c:0,
+  e:"True. 3.13: the biocontrol methods are predation, parasitism and disease: Bt, marketed viruses like Gemstar, entomopathogenic fungi."},
+ {lec:"3.15a",q:"Pesticides containing bromine and chlorine are",o:["used in genetic engineering", "easily broken down and detoxified", "organohalides", "neonicotinoids"],c:2,
+  e:"3.15a: a halide (fluorine, chlorine, bromine, iodine) attached to carbon makes an organohalide like DDT or EDB; the halide part never breaks down further."},
+ {lec:"3.15a",q:"The use of dried and powdered Chrysanthemum flowers to control insects on a crop is an example of",o:["natural pesticide", "organic pesticide method", "all options presented", "biological control"],c:2,
+  e:"3.15a: pyrethrum from chrysanthemum is a natural pesticide, \"used heavily in organic agriculture\", and \"an example of biological control\" since it is a natural product of an organism."},
+ {lec:"3.15b",q:"Biomagnification refers to the build up of toxins in",o:["the environment", "higher order predators", "pest organisms", "mammals"],c:1,
+  e:"3.15b: biomagnification is \"very high quantities in higher order predators\" (raptors and DDT, tuna, bass). Bioaccumulation is the build-up in one body."},
+ {lec:"3.17",q:"Increased row spacing is useful for managing weeds in an agricultural field.",o:["False", "True"],c:0,
+  e:"False. 3.17: for weeds you narrow the rows so the canopy shades the soil. Wider rows are the disease tool (3.16)."},
+ {lec:"3.17",q:"Post-emergent herbicides control early season weeds.",o:["False", "True"],c:0,
+  e:"False. 3.17: pre-emergent herbicides knock back early season weeds; post-emergent ones \"control for later season weeds\" once the crop is established."},
+ {lec:"3.17",q:"Which of the following is a negative consequence associated with herbicide use?",o:["carry over", "drift", "leaching", "all options presented"],c:3,
+  e:"3.17: the herbicide negatives include drift onto non-target plants, carryover into the next crop, and leaching into groundwater (plus cost and resistance)."},
+ {lec:"3.13",q:"Bacillus thuringiensis (Bt) is a generalist biocontrol agent that kills most insect pests.",o:["False", "True"],c:0,
+  e:"False. 3.13: Bt is \"very specific as to which insects\"; each strain targets lepidopterans, coleopterans or dipterans, and only their larvae."},
+ {lec:"3.13",q:"Classical biological control is an example of applying the idea of",o:["character displacement", "law of the minimum", "competitive exclusion", "niche concept"],c:3,
+  e:"3.13: importing a non-native enemy for a non-native pest is \"a great application of the niche concept\": it fills the empty niche the pest escaped into."},
+ {lec:"3.15b",q:"An endocrine disruptor impacts the ability of an organism to do all of the following EXCEPT",o:["fight disease", "use hormone signaling", "reproduce", "detoxify chemicals"],c:3,
+  e:"3.15b: endocrine disruptors interfere with hormonal signaling (estrogen and testosterone mimics, so reproduction) and make organisms more susceptible to disease. Detoxifying is not on the list."},
+ {lec:"3.15a",q:"Koc refers to",o:["degree of adsorption by soil", "degree to which pesticides bind to soil", "all options presented"],c:2,
+  e:"3.15a: the soil adsorption coefficient is \"the propensity of those soil particles to bind to the pesticides\"; high K means the pesticide stays put. Both statements say that.",
+  noteLabel:"Canvas shows this one twice.",note:"Canvas lists \"all options presented\" twice (2nd and 4th). Both are the same answer; only one is kept here."},
+ {lec:"3.15a",q:"Inorganic pesticides are carbon-based.",o:["False", "True"],c:0,
+  e:"False. 3.15a: inorganic pesticides are \"not carbon based\" and most contain a metal (arsenic, cadmium, lead, mercury); they were used before World War II."},
+ {lec:"3.15b",q:"Pesticides can act as endocrine disruptors.",o:["True", "False"],c:0,
+  e:"True. 3.15b: \"many of the pesticides that are out there that we still currently use are endocrine disruptors\", atrazine among them."},
+ {lec:"3.16",q:"Solarization is used to control",o:["nematodes", "all options presented", "soilborne pathogens", "weeds"],c:1,
+  e:"3.16 to 3.18: clear plastic heats the soil to about 120 degrees, killing pathogenic bacteria and fungi, weed seeds and nematodes."}
+];
+
 /* ---------- Module 3 week by week (Big picture). Weeks 10 and 11 are placeholders until built ---------- */
 var EXAM3={opens:"Mon Nov 2, 1:00 am ET",closes:"Wed Nov 4, 11:59 pm ET"};
 var OBJ=[
@@ -1264,6 +1321,7 @@ try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
 function save(){_lsSet(LS,JSON.stringify(state));}
 if(typeof POOL8==='undefined'){ window.POOL8=[]; }
 if(typeof POOL9==='undefined'){ window.POOL9=[]; }
+if(typeof POOL10==='undefined'){ window.POOL10=[]; }
 if(typeof WBW==='undefined'){ window.WBW=[]; }
 if(typeof OBJ==='undefined'){ window.OBJ=[]; }
 /* ids */
@@ -1271,7 +1329,8 @@ L.forEach(function(lec){ lec.cards.forEach(function(c,ci){ c.id='c'+lec.id.repla
 function lecById(id){ for(var i=0;i<L.length;i++){ if(L[i].id===id) return L[i]; } return null; }
 POOL8.forEach(function(q){ q.wk=8; q.src='Quiz 08'; q.pill='Quiz 08 pool'; q.lab=q.lec?('Lecture '+q.lec):'Quiz 08'; });
 POOL9.forEach(function(q){ q.wk=9; q.src='Quiz 09'; q.pill='Quiz 09 pool'; q.lab=q.lec?('Lecture '+q.lec):'Quiz 09'; });
-function poolFor(w){ return w===8?POOL8:(w===9?POOL9:[]); }
+POOL10.forEach(function(q){ q.wk=10; q.src='Quiz 10'; q.pill='Quiz 10 pool'; q.lab=q.lec?('Lecture '+q.lec):'Quiz 10'; });
+function poolFor(w){ return w===8?POOL8:(w===9?POOL9:(w===10?POOL10:[])); }
 /* remembered filter per tab, falls back to Week 8 when the saved one is not offered */
 function savedFilter(key,valid){ var v=state[key]; return (v && valid.indexOf(v)>=0)?v:'8'; }
 function weekIds(w){ return w.lecs.slice(); }
@@ -1445,19 +1504,21 @@ function initFlash(){
 }
 
 /* ---------- quiz bank (defaults to Week 8) ---------- */
-var quizFilter=savedFilter('fq',['pool8','pool9','8','9','all']), QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
+var quizFilter=savedFilter('fq',['pool8','pool9','pool10','8','9','10','all']), QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
 function bank(){
  if(quizFilter==='pool8') return POOL8.slice();
  if(quizFilter==='pool9') return POOL9.slice();
+ if(quizFilter==='pool10') return POOL10.slice();
  var b=[]; L.forEach(function(lec){ if(quizFilter!=='all' && lec.wk!==+quizFilter) return; lec.quiz.forEach(function(q){ b.push(q); }); });
- if(quizFilter==='all') b=POOL8.concat(POOL9,b);
+ if(quizFilter==='all') b=POOL8.concat(POOL9,POOL10,b);
  else b=poolFor(+quizFilter).concat(b);
  return b;
 }
 function renderQuizFilters(){
  var host=byId('quizfilters'); if(!host) return;
  var opts=[['pool8',POOL8.length?('Quiz 08 pool ('+POOL8.length+')'):'Quiz 08 pool (waiting for your questions)'],['pool9',POOL9.length?('Quiz 09 pool ('+POOL9.length+')'):'Quiz 09 pool (waiting for your questions)']];
- WEEKS.forEach(function(w){ if(weekHasLecs(w.n)) opts.push([String(w.n),'Week '+w.n]); else opts.push(['soon'+w.n,'Week '+w.n+' (coming)']); });
+ if(POOL10.length) opts.push(['pool10','Quiz 10 pool ('+POOL10.length+')']);
+ WEEKS.forEach(function(w){ if(weekHasLecs(w.n)) opts.push([String(w.n),'Week '+w.n]); else if(poolFor(w.n).length) opts.push([String(w.n),'Week '+w.n+' (Quiz '+w.n+' pool so far)']); else opts.push(['soon'+w.n,'Week '+w.n+' (coming)']); });
  opts.push(['all','All of Module 3 so far']);
  opts.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(quizFilter===o[0]?' on':''); b.textContent=o[1]; b.setAttribute('data-f',o[0]);
    if(o[0].indexOf('soon')===0){ b.disabled=true; b.className+=' soon'; }
@@ -1575,7 +1636,7 @@ function renderWBW(){
 function renderExam(){
  var host=byId('examhub'); if(!host) return;
  var h='<div class="oneliner" style="margin:0 0 14px">Exam 03 closes Module 3. It opens '+esc(EXAM3.opens)+' and closes '+esc(EXAM3.closes)+'. Canvas lists it in Week 11, so expect weeks 8 to 11. This tab fills in as the weeks are built; for now it points you at Weeks 8 and 9.</div>';
- h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) and Week 9 (3.6 to 3.12) are ready now. Weeks 10 and 11 are coming, each with its own quiz first (Oct 25, Nov 1).</li><li>Your 27 Quiz 08 questions are the first real question pool here, the way Quiz 05 anchored Exam 02. Your 27 Quiz 09 questions (due Oct 18) are loaded too.</li></ul>';
+ h+='<ul class="facts"><li>Week 8 (3.1 to 3.5) and Week 9 (3.6 to 3.12) are ready now. Weeks 10 and 11 are coming, each with its own quiz first (Oct 25, Nov 1).</li><li>Your 27 Quiz 08 questions are the first real question pool here, the way Quiz 05 anchored Exam 02. Your 27 Quiz 09 questions (due Oct 18) are loaded too, and so are your 25 Quiz 10 questions (due Oct 25).</li></ul>';
  var plan=[
   ['overview','Read the week-by-week map','The six Module 3 objectives, and Week 8\'s big idea and must-know points.','Open the map'],
   ['8','Drill Week 8','All of Week 8: 40 practice questions plus your 27 Quiz 08 questions, ten at a time.','Week 8 quiz'],
@@ -1583,7 +1644,8 @@ function renderExam(){
   ['3.1','Start with the lectures','Gist, throughline, cards and mini quiz for 3.1 to 3.5.','Open 3.1'],
   ['9','Drill Week 9','All of Week 9: 60 practice questions from 3.6 to 3.12 plus your 27 Quiz 09 questions, ten at a time.','Week 9 quiz'],
   ['pool9','Quiz 09 pool','Your 27 real Quiz 09 questions, answers checked against 3.6 to 3.12.','Quiz 09 pool'],
-  ['3.6','Week 9 lectures','Gist, throughline, cards and mini quiz for 3.6 to 3.12, the players.','Open 3.6']
+  ['3.6','Week 9 lectures','Gist, throughline, cards and mini quiz for 3.6 to 3.12, the players.','Open 3.6'],
+  ['pool10','Quiz 10 pool','Your 25 real Quiz 10 questions, answers checked against 3.13 to 3.18.','Quiz 10 pool']
  ];
  h+='<ol class="plan">'+plan.map(function(p,i){ return '<li><div class="pt"><b>'+(i+1)+'. '+esc(p[1])+'</b><br>'+esc(p[2])+'</div><button class="dbtn" data-act="'+p[0]+'">'+esc(p[3])+'</button></li>'; }).join('')+'</ol>';
  h+='<div class="placeholder">Exam 03 practice, the week-by-week must-knows for weeks 10 and 11, and any question sets you find land here as they come.</div>';
@@ -1591,7 +1653,7 @@ function renderExam(){
  host.querySelectorAll('[data-act]').forEach(function(b){ b.addEventListener('click',function(){
    var a=b.getAttribute('data-act');
    if(a==='overview'){ showTab('overview'); var w=byId('wbw'); if(w) setTimeout(function(){ w.scrollIntoView({behavior:'smooth',block:'start'}); },60); }
-   else if(a==='8'||a==='pool8'||a==='9'||a==='pool9'){ showTab('quiz'); setQuizFilter(a); }
+   else if(a==='8'||a==='pool8'||a==='9'||a==='pool9'||a==='pool10'){ showTab('quiz'); setQuizFilter(a); }
    else goLec(a);
  }); });
 }
