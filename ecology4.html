@@ -136,6 +136,9 @@ svg{display:block}
 .soonpill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487;border-radius:99px;padding:3px 10px}
 .soonbox{margin:0 4px 12px;background:var(--card);border:1px dashed var(--line2);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--ink3);line-height:1.5}
 .soonbox b{color:var(--soil);font-family:var(--serif)}
+.dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 20px;cursor:pointer}
+.dbtn:hover{border-color:var(--line2)}
+.dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
 
 /* module 4 additions */
 .examcard{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--clay);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px}
@@ -503,7 +506,133 @@ var IX={
 "4.1_11":{t:"sort",q:"Clear the weedy border, or keep it?",cols:["Clear it","Keep it"],items:[
   ["Boll weevils overwinter in the margin litter",0],["The border weeds are close relatives of the crop",0],["You rely on predators for biocontrol",1],["Border plants feed natural enemies, not the crop pest",1]]},
 "4.1_12":{t:"sort",q:"Designing a field for biological control: which choices help?",cols:["Helps biocontrol","Works against it"],items:[
-  ["Long, thin fields",0],["Windbreaks breaking up big fields",0],["Ecotone plants inside the field",0],["One big square field",1],["Clearing every border to bare ground",1]]}
+  ["Long, thin fields",0],["Windbreaks breaking up big fields",0],["Ecotone plants inside the field",0],["One big square field",1],["Clearing every border to bare ground",1]]},
+/* 4.2 */
+"4.2_0":{t:"sort",q:"Conventional or whole-system management? Sort the habits.",cols:["Conventional","Whole system"],items:[
+  ["Controls one pest at a time",0],["Simplifies and homogenizes the field",0],["Relies on outside inputs",0],["Builds complexity on purpose",1],["Manages at landscape or ecosystem level",1],["Aims for emergent system qualities",1]]},
+"4.2_1":{t:"order",q:"Why does simplifying a farm lead to more inputs? Put the chain in order.",hint:"Cause at the top, result at the bottom.",items:[
+  "Remove weeds and other diversity","Grow one crop on a huge scale","The interactions that regulated the system are gone","Control has to come from outside inputs"]},
+"4.2_2":{t:"sort",q:"Before she lists them: which practices build diversity into a farm?",cols:["Builds diversity","Does not"],items:[
+  ["Intercropping",0],["Using natural weeds",0],["Borders and hedgerows",0],["Crop rotation",0],["Grazing animals",0],["One crop on a large scale",1],["Removing every weed",1]]},
+"4.2_3":{t:"choice",q:"Same species, two communities: in A they are about equally common, in B one species dominates. Which is more diverse?",opts:[
+  ["Community A, the even one",true,"Yes: diversity rises with richness and with evenness."],
+  ["Community B, the dominated one",false,"Dominance means low evenness, which lowers diversity. That is the conventional farm by design."],
+  ["They are equal, same species list",false,"Same richness, but evenness differs, and diversity counts both."]]},
+"4.2_4":{t:"match",q:"Match each scale of diversity.",pairs:[["Alpha","Within one location or habitat"],["Beta","Between locations or habitats"],["Gamma","Across the whole landscape"]]},
+"4.2_5":{t:"sort",q:"Strip intercrop or mixed intercrop of the same three crops?",cols:["Strip","Mixed"],items:[
+  ["Two rows of each crop, alternating",0],["Low alpha, high beta",0],["No rows, crops mingled",1],["High alpha, low beta",1]]},
+"4.2_6":{t:"match",q:"Match each diversity index to what it captures.",pairs:[
+  ["Margalef","Species and individuals only, no evenness"],["Shannon","Rises with more species or more evenness"],["Simpson","The inverse of dominance"]]},
+"4.2_7":{t:"choice",q:"Why do diversity indices struggle with soil life?",opts:[
+  ["You must identify species, and many soil organisms have no name or known role",true,"Yes: a soil mite may lack a species name and a known function."],
+  ["Soil has too few species to count",false,"The opposite: soil diversity is extreme."],
+  ["Indices only work for crops",false,"They are used widely in natural systems; the problem is identification."]]},
+"4.2_8":{t:"match",q:"Ecological diversity has dimensions. Match each one.",pairs:[
+  ["Genetic","Between and within species"],["Vertical","Layers stacked upward"],["Horizontal","Spatial spread and patchiness"],["Structural","Number of niches"],["Functional","Complexity of the habitat (her words)"],["Temporal","Cyclical change over time"]]},
+"4.2_9":{t:"sort",q:"Fruit trees over vegetable beds, plus switching crops by season. Which dimensions go up?",cols:["Goes up","Not this change"],items:[
+  ["Vertical",0],["Structural",0],["Temporal",0],["Alpha diversity in the field",0],["Genetic diversity within one crop variety",1]]},
+/* 4.3 */
+"4.3_0":{t:"sort",q:"Four reasons diversity raises sustainability. Which belong on her list?",cols:["Her reason","Not her reason"],items:[
+  ["Promotes ecological processes",0],["Diversifies production, less risk",0],["Habitat for non-crop organisms",0],["Conserves natural biodiversity",0],["Easier mechanized harvest",1],["One uniform crop for one market",1]]},
+"4.3_1":{t:"tf",q:"A legume cover crop as diversity: true or false?",items:[
+  ["Legumes fix nitrogen from the air into usable soil nitrogen.",1,""],
+  ["A cover crop dries the soil surface out.",0,"It holds moisture and protects the surface from drying."],
+  ["Rye is a legume cover crop that adds nitrogen.",0,"Rye is a grass (Quiz 13)."]]},
+"4.3_2":{t:"choice",q:"Why can red amaranth go in with maize without cutting the maize yield?",opts:[
+  ["It is harvested in under 40 days, long before the maize",true,"Yes, and it adds a second income and family food."],
+  ["It fixes nitrogen for the maize",false,"Amaranth is a leafy vegetable, not a legume."],
+  ["It is planted after the maize harvest",false,"They grow at the same time: an intercrop, not a rotation."]]},
+"4.3_3":{t:"choice",q:"Pigeon pea with sorghum mostly adds what?",opts:[
+  ["Structure: microclimates and habitat for natural enemies",true,"Yes: structural and vertical diversity from 4.2."],
+  ["A cash crop to replace sorghum",false,"Her point here is habitat, not income."],
+  ["Bare ground between rows",false,"It adds cover and structure, the opposite."]]},
+"4.3_4":{t:"sort",q:"Monarch decline: what does the evidence point to?",cols:["Evidence points here","Field evidence does not support"],items:[
+  ["Herbicide on Roundup Ready fields",0],["County roadside herbicide spraying",0],["Bt corn pollen in the field",1]]},
+"4.3_5":{t:"tf",q:"Milkweed and monarchs: true or false?",items:[
+  ["Adult monarchs can nectar on many plants.",1,""],["Monarch caterpillars feed only on milkweed.",1,"It is their host plant."],
+  ["Milkweed is rare and hard to establish.",0,"It is ruderal: it colonizes disturbed ground easily, so it was everywhere."]]},
+"4.3_6":{t:"sort",q:"Stability, two definitions. Sort the phrases.",cols:["Classic definition","Her farm definition"],items:[
+  ["Absence of fluctuations",0],["A steady state",0],["Recovers from disturbance",1],["Robust, self-regulating",1]]},
+"4.3_7":{t:"order",q:"Why are conventional systems \"inherently unstable\"? Order the chain.",items:[
+  "A homogeneous monoculture","Heavy fertilizer and pesticide inputs","Functional links and natural nutrient cycling are lost","More human input and management are needed"]},
+"4.3_8":{t:"sort",q:"Which tools will the next lectures use to add diversity?",cols:["Coming up","Not a diversity tool"],items:[
+  ["Polyculture or intercropping",0],["Crop rotation",0],["Cover crops",0],["Integrated pest management",0],["Bigger monoculture blocks",1],["Blanket herbicide on margins",1]]},
+/* 4.4 */
+"4.4_1":{t:"sort",q:"Island biogeography: which patch recolonizes faster?",cols:["Faster","Slower"],items:[["Large patch",0],["Near other patches",0],["Small patch",1],["Far from other patches",1]]},
+"4.4_2":{t:"tf",q:"New fields and their first colonists: true or false?",items:[
+  ["Niches in a new patch can sit unfilled.",1,""],["Natural enemies usually arrive before the pests.",0,"r-strategist pests colonize first, ahead of their enemies."],
+  ["Niches in fragments are the same as in large habitat.",0,"Quiz 12: False."]]},
+"4.4_3":{t:"choice",q:"A species disappears from one remnant patch but lives on elsewhere. That is...",opts:[
+  ["Extirpation",true,"Yes: a local extinction. Small patches are the most prone."],
+  ["Extinction",false,"Extinction is the species gone everywhere."],
+  ["Emigration",false,"Emigration is individuals leaving, not the population vanishing."]]},
+"4.4_4":{t:"sort",q:"Converting land to farms: what happens to the remaining natural habitat?",cols:["Goes up","Goes down"],items:[["Edge habitat",0],["Isolation of patches",0],["Size of remnant patches",1],["Intact habitat",1]]},
+"4.4_5":{t:"sort",q:"Edges cut both ways. Sort the effects.",cols:["Good for the farm","Bad for the natural area"],items:[
+  ["Mixes species from both sides",0],["Lets natural enemies move in",0],["Predators hunt along edges",1],["Cowbirds spread",1]]},
+"4.4_6":{t:"order",q:"How a cowbird raises its young. Put the steps in order.",items:[
+  "Finds a songbird's nest","Removes host eggs and lays her own","The cowbird chick may push host young out","The hosts keep feeding it, even when it is bigger"]},
+"4.4_7":{t:"order",q:"Isolated patches: order the chain from cause to risk.",items:[
+  "Open farmland between patches","Less movement between fragments","Small populations breed among themselves","Genetic diversity declines","Disease risk and local extinction rise"]},
+"4.4_8":{t:"match",q:"Match each altered disturbance regime to what followed.",pairs:[
+  ["Draining the Everglades","Woody species and Melaleuca islands"],["Fire suppression in Florida","Longleaf pine and wiregrass turn to hardwood hammock"],["Fire suppression in the Midwest","Woody sumac invades prairie"]]},
+"4.4_9":{t:"sort",q:"Buffers: what speeds natural enemies back into the field?",cols:["Speeds recolonization","Slows it"],items:[
+  ["Wide buffers",0],["Vegetation with food and refuge",0],["Swaths reaching into the field",0],["A thin strip at the edge only",1]]},
+"4.4_10":{t:"tf",q:"Large buffers also: true or false?",items:[
+  ["Catch pesticide drift.",1,""],["Hold nutrients leaching from the field.",1,""],["Trap soil moving by erosion.",1,""],["Raise pesticide use in the field.",0,"Nothing in the lecture; they reduce drift."]]},
+/* 4.5 */
+"4.5_0":{t:"choice",q:"A corn and soybean rotation: polyculture or not, in her view?",opts:[
+  ["Not polyculture: a rotational monoculture",true,"Yes: the crops never share the field at the same time."],
+  ["Polyculture, because two crops are grown",false,"Some people call it that, but she does not: they are separated in time."],
+  ["Relay intercropping",false,"Relay crops overlap in the field; a rotation never overlaps."]]},
+"4.5_1":{t:"match",q:"Match the four intercropping types.",pairs:[
+  ["Mixed","No rows, a patchwork"],["Row","Single alternating rows"],["Strip","Blocks of four to six rows each"],["Relay","Second crop planted later, overlapping"]]},
+"4.5_2":{t:"choice",q:"Vanilla, cardamom, coffee and pepper under palms, no rows anywhere. Which type?",opts:[
+  ["Mixed intercrop",true,"Yes, a patchwork (Quiz 12: mixed polyculture)."],["Relay intercrop",false,"Nothing is staggered in time here."],["Strip intercrop",false,"Strips are blocks of rows; this has no rows."]]},
+"4.5_3":{t:"choice",q:"Wheat first, cotton slipped in near the wheat harvest. Which type?",opts:[
+  ["Relay cropping",true,"Yes: staggered, but sharing the field for part of the season."],["Crop rotation",false,"In a rotation the crops never overlap."],["Row intercropping",false,"Rows planted together, not staggered in time."]]},
+"4.5_4":{t:"match",q:"Three sisters: match each crop to its job.",pairs:[
+  ["Corn","C4, uses high light, a pole for the vine"],["Bean","C3 vine in the lower light"],["Squash","Broad leaves shade weeds, hold moisture"]]},
+"4.5_5":{t:"order",q:"Intercropping in the US: order the history.",items:[
+  "Intercropping common on US farms","1940s: cheap synthetic fertilizer and mechanization","Farms specialize in single crops","Polyculture becomes uncommon"]},
+"4.5_6":{t:"match",q:"Match the place to how much is intercropped.",pairs:[["Africa's cowpeas","98%"],["Malawi's farmland","94%"],["Colombia's beans","90%"],["China's farmland","One third"]]},
+"4.5_7":{t:"choice",q:"The main obstacle to polyculture in the US, beyond scale and machines?",opts:[
+  ["Lack of agronomic recommendations",true,"Yes: no planting, irrigation or fertilizer guidance for most intercrops."],
+  ["Polyculture is illegal on large farms",false,"Nothing like that; it is about knowledge and risk."],
+  ["Intercrops always yield less",false,"Often they yield more per hectare (4.6)."]]},
+/* 4.6 */
+"4.6_0":{t:"sort",q:"Benefits of intercropping: sort before she lists them.",cols:["A benefit she lists","Not a benefit"],items:[
+  ["Higher yield per hectare",0],["Less intraspecific competition",0],["Protection if one crop fails",0],["Support for vine crops",0],["More intraspecific competition",1],["Less need for biological knowledge",1]]},
+"4.6_1":{t:"choice",q:"An intercrop has an advantage when...",opts:[
+  ["Interspecific competition is less than intraspecific competition",true,"Yes, the rule to walk away with (Quiz 12)."],
+  ["Interspecific competition is greater than intraspecific",false,"Then the two crops depress each other and the advantage is gone."],
+  ["Both crops chase exactly the same resource",false,"That kills the advantage."]]},
+"4.6_2":{t:"order",q:"Corn with a vining bean, planted as a relay. Order the steps.",items:[
+  "Plant the corn","Let it establish and gain height","Plant the vining bean","The bean climbs the corn"]},
+"4.6_3":{t:"estimate",q:"Corn alone 4,000 kg/ha, soybean alone 1,000. Together: 3,000 kg corn and 750 kg soybean. Estimate the land equivalent ratio (LER).",min:0.5,max:2.5,step:0.05,ans:1.5,dec:2,tol:0.05,start:1,unit:"LER",hint:"Add the two relative yields: intercrop yield / monoculture yield, for each crop."},
+"4.6_4":{t:"sort",q:"Reading the LER: sort each statement.",cols:["LER above 1","LER below 1"],items:[
+  ["The intercrop uses land more efficiently",0],["Monoculture needs more land for the same harvest",0],["The crops do better apart",1],["Rethink cultivars or arrangement",1]]},
+"4.6_5":{t:"sort",q:"Is the overall LER enough, or do you need the partial LER?",cols:["Overall LER is enough","Check the partial LER"],items:[
+  ["Mixed forage grasses for cattle",0],["Corn sold as the cash crop, beans kept at home",1],["Every crop must do better together",1]]},
+"4.6_6":{t:"match",q:"Match each resource to how two crops partition it.",pairs:[
+  ["Light","C4 in the canopy, C3 in the understory"],["Soil","Shallow roots beside a deep taproot"],["Nitrogen","Legume fixes air nitrogen, partner uses soil nitrate"]]},
+"4.6_7":{t:"choice",q:"Her facilitation example with pepper:",opts:[
+  ["Perennial peanut as a living mulch",true,"Yes: it fixes nitrogen and covers the ground against weeds."],
+  ["Wheat grown with maize",false,"In the book's example wheat depressed maize; fava bean facilitated it."],
+  ["Sunflowers raising pirate bugs",false,"That is the natural enemies hypothesis, not facilitation."]]},
+"4.6_8":{t:"match",q:"Match each pest hypothesis to its idea.",pairs:[
+  ["Disruptive crop","A second species scrambles the visual or chemical signal"],["Natural enemies","More predators and parasitoids in diverse habitat"],["Trap crop","A more attractive plant pulls pests away"]]},
+"4.6_9":{t:"sort",q:"Trap crop planted too sparse or too dense?",cols:["Too sparse","Too dense"],items:[
+  ["Not enough lure",0],["Pests stay in the cash crop",0],["Pests explode on the trap crop",1],["They hit carrying capacity and move back",1]]},
+"4.6_10":{t:"match",q:"Molasses grass with maize and sorghum in Kenya: match the numbers.",pairs:[
+  ["Stem borer damage, monoculture","39%"],["Stem borer damage, intercrop","4%"],["Parasitism, monoculture","5%"],["Parasitism, intercrop","20%"]]},
+"4.6_11":{t:"sort",q:"Which system yields more?",cols:["Sprayed monoculture wins","Polyculture wins"],items:[
+  ["Short-term yield vs a sprayed monoculture",0],["Yield when neither is sprayed",1]]},
+"4.3_9":{t:"choice",q:"A corn grower wants monarchs back and fewer inputs. Which pair of changes fits this lecture?",opts:[
+  ["Leave milkweed and weedy margins unsprayed, and add a legume cover crop or intercrop",true,"Yes: caterpillars need milkweed; the legume brings nitrogen, moisture and habitat for natural enemies."],
+  ["Switch from Bt corn to non-Bt corn and spray margins more",false,"Bt pollen is not supported as a field cause, and spraying margins removes milkweed."],
+  ["Plant bigger blocks of corn and plant milkweed only in town",false,"Bigger monoculture blocks remove more habitat; she wants diversity in the farm landscape itself."]]},
+"4.4_0":{t:"sort",q:"Fragmentation, two ways to see it. Sort each picture.",cols:["The field is the island","The field cuts natural areas into islands"],items:[
+  ["A soybean field surrounded by forest",0],["A crop patch that insects must find and colonize",0],["Forest remnants left between triangular soybean fields",1],["Cerrado savanna reduced to scattered dark-green patches",1]]}
 };
 
 /* ---------- Quiz bank: Mariel's Quiz 12, 13 and 14 questions (work/ag-ecology/quiz1[234]-module4-bank.md).
@@ -851,7 +980,7 @@ function renderListen(){
    if(lec.gist) h+='<div class="gist">'+esc(lec.gist)+'</div>';
    if(lec.heads&&lec.heads.length) h+='<ul class="heads">'+lec.heads.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
    if(n){
-     h+='<div class="sec">Prompts in lecture order · tap a card for the answer</div><div class="plist">';
+     h+='<div class="sec">Prompts in lecture order</div><div class="plist">';
      lec.prompts.forEach(function(p,i){
        var on=!!state[pid(lec,i)], x=(typeof IX!=='undefined')&&IX[lec.id+'_'+i];
        h+='<div class="pr k-'+p.k+(on?' done':'')+(x?' hasix':'')+'" data-i="'+i+'"><div class="prtop"><span class="prpart">'+esc(p.part)+'</span><span class="prk">'+esc(KIND[p.k]||p.k)+'</span></div>';
