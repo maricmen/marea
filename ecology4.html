@@ -179,6 +179,47 @@ details.lec>summary .meta b{color:var(--moss-d)}
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 4px 12px;font-size:12px;color:var(--ink2)}
 .legend span{display:inline-flex;align-items:center;gap:5px}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:3px}
+.ix{margin-top:10px}
+.ixhint{font-size:12px;color:var(--ink3);margin:0 0 7px}
+.dz{min-height:44px;border:1.5px dashed var(--line2);border-radius:10px;padding:6px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;background:rgba(251,246,234,.6);transition:background .12s}
+.ixpool{border-style:solid;border-color:var(--line);background:var(--card);margin-bottom:8px}
+.ixcols{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:8px}
+.ixcols.m{grid-template-columns:minmax(0,1fr)}
+.ixcols.m .ixcol{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);gap:8px;align-items:stretch}
+.ixh{font-size:11.5px;font-weight:700;letter-spacing:.03em;color:var(--soil);margin:0 0 5px;line-height:1.3;cursor:pointer}
+.ixcols.m .ixh{font-family:var(--serif);font-size:14px;letter-spacing:0;margin:0;background:#efe6d1;border-radius:10px;padding:8px 10px;display:flex;align-items:center}
+.picking .dz:not(.ixpool){background:#e4ecef;border-color:var(--sky-d)}
+.chip2{display:inline-block;font-size:13px;line-height:1.3;background:#fff;border:1px solid var(--line2);border-radius:9px;padding:7px 10px;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;color:var(--ink);max-width:100%}
+.chip2.sel{border-color:var(--clay);background:#f3e4d8;box-shadow:0 0 0 2px rgba(176,98,59,.25)}
+.chip2.lift{opacity:.3}
+.chip2.ghost{position:fixed;z-index:99;pointer-events:none;box-shadow:0 8px 20px rgba(60,44,24,.25);max-width:240px}
+.chip2.ok{background:#e2e7cf;border-color:#9fb06a;color:var(--moss-d)}
+.chip2.bad{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.solved .chip2{cursor:default}
+.ixbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:9px}
+.ixbar .dbtn{padding:7px 15px;font-size:13px}
+.ixmsg{font-size:13px;color:var(--soil);font-weight:600}
+.ixord{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;counter-reset:o}
+.ixrow{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line2);border-radius:10px;padding:6px 6px 6px 10px;font-size:13.5px;counter-increment:o}
+.ixrow::before{content:counter(o);font-family:var(--serif);font-weight:700;color:var(--clay-d);min-width:14px}
+.ixrow.ok{background:#e2e7cf;border-color:#9fb06a}
+.ixrow.bad{background:#f0dcd2;border-color:#d9a487}
+.ixtxt{flex:1;line-height:1.35}
+.ixarr{display:flex;gap:4px}
+.ixarr button{font:inherit;font-size:12px;width:34px;height:32px;border:1px solid var(--line);background:var(--card);border-radius:8px;color:var(--ink2);cursor:pointer}
+.ixarr button:disabled{opacity:.3;cursor:default}
+.ixfb{display:none;font-size:12.5px;line-height:1.4;margin:-4px 0 8px;padding:6px 10px;border-radius:8px}
+.ixfb.show{display:block}.ixfb.ok{background:#e2e7cf;color:var(--moss-d)}.ixfb.bad{background:#f0dcd2;color:var(--clay-d)}
+.tfrow{background:#fff;border:1px solid var(--line2);border-radius:10px;padding:8px 10px;margin-bottom:6px}
+.tfq{font-size:13.5px;line-height:1.4}
+.tfb{display:flex;gap:6px;margin-top:6px}.tfb .dbtn{padding:5px 14px;font-size:12.5px}
+.tfb .dbtn.picked{border-color:var(--soil);font-weight:700}
+.tfrow.ok{background:#e2e7cf;border-color:#9fb06a}.tfrow.bad{background:#f0dcd2;border-color:#d9a487}
+.tfw{font-size:12.5px;color:var(--ink2);margin-top:4px}.tfw:empty{display:none}
+.ixest input{width:100%;accent-color:var(--clay)}
+.ixval{text-align:center;font-size:14px;color:var(--ink2)}.ixval b{font-family:var(--serif);font-size:22px;color:var(--soil)}
+@media(max-width:520px){.ixcols:not(.m){grid-template-columns:repeat(min(var(--n),2),minmax(0,1fr))}.chip2{font-size:12.5px;padding:6px 9px}.ixcols.m .ixcol{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:380px){.ixcols:not(.m){grid-template-columns:minmax(0,1fr)}}
 @media(max-width:520px){details.lec>summary .meta{white-space:normal;text-align:right;font-size:11px}.prq{font-size:15px}}
 </style>
 <noscript><style>.view{display:block !important}.tabs{display:none}.pra{display:block}</style></noscript>
@@ -224,7 +265,7 @@ details.lec>summary .meta b{color:var(--moss-d)}
   </div>
 
   <div class="view on" id="v-listen">
-    <div class="oneliner" style="margin:22px 4px 10px">Open a lecture, press play, and keep this beside it. The prompts follow the lecture in order, each labeled with the part it belongs to. Pause on a Predict card before she gets there, then check yourself. Tap a card for the answer and tick it done; your ticks stay on this device.</div>
+    <div class="oneliner" style="margin:22px 4px 10px">Open a lecture, press play, and keep this beside it. The prompts follow the lecture in order, each labeled with the part it belongs to. Pause on a Predict card before she gets there, then check yourself. Most cards are quick exercises: sort, match, order, pick or estimate, then Check, and the explanation opens. Tick a card done when it sits right; your ticks stay on this device.</div>
     <div class="legend"><span><i style="background:var(--sky-d)"></i>Predict</span><span><i style="background:var(--moss-d)"></i>Explain why</span><span><i style="background:#9a7426"></i>Connect</span><span><i style="background:var(--clay-d)"></i>Apply to a farm</span></div>
     <div id="listen"><div class="placeholder">If this line stays, scripts are off.</div></div>
   </div>
@@ -424,6 +465,47 @@ var LECS=[
 {id:"4.12",title:"Genetic Engineering",canvas:"Presentation 11",words:8900,url:"https://mediasite.video.ufl.edu/Mediasite/Play/2d0404b8d55e44b4a05e366d03f1f8481d",prompts:[]}
 ];
 
+/* ---------- interactive layer for listen-along prompts, keyed "<lecture>_<prompt index>".
+   The prompt order and indexes in lectures.js never change, so done ticks (p_<lec>_<index>) survive. ---------- */
+var IX={
+/* 4.1 */
+"4.1_0":{t:"choice",q:"Before she defines it: at what scale does landscape ecology work?",opts:[
+  ["A single field and its crop",false,"That is the scale she is stepping back from."],
+  ["Multiple ecosystems: the farm plus everything bordering it",true,"Yes: neighboring fields, natural areas and urban areas, the matrix the farm sits in."],
+  ["One crop species across a region",false,"That is closer to the population level that conventional management works at."]]},
+"4.1_1":{t:"sort",q:"Which pests travel between neighboring farms on their own, and which barely move? Sort them.",cols:["Move farm to farm","Barely move on their own"],items:[
+  ["Insect pests",0],["Fungal spores on the wind",0],["Diseases vectored by insects",0],["Predators and parasitoids",0],["Nematodes in the soil",1]]},
+"4.1_2":{t:"match",q:"What does a bordering natural area do for a farm? Match each part to its service.",pairs:[
+  ["Trees and shrubs as windbreaks","Less soil erosion"],["Soil microbes","Break down pesticides"],["Soil organisms","Use fertilizer before it moves far"],["Crop wild relatives","Genes for new cultivars"]]},
+"4.1_3":{t:"tf",q:"Natural areas as a source of crop pests: quick round.",items:[
+  ["Most crop pests are introduced and specialized on the crop.",1,"That is why native insects rarely switch to it."],
+  ["Native insects in a natural area have no enemies keeping them in check.",0,"They have their own predators, parasitoids and parasites."],
+  ["There is strong evidence that natural areas supply crop pests.",0,"She says it is possible but there is little evidence."]]},
+"4.1_4":{t:"sort",q:"Predators or parasitoids? Sort the traits, then see why natural areas supply one better.",cols:["Predators","Parasitoids"],items:[
+  ["Often generalists",0],["Eat native prey and crop herbivores alike",0],["The better supply from natural areas",0],["Often specialized on one host",1],["Less often supplied by natural areas",1]]},
+"4.1_5":{t:"sort",q:"Agriculture's harm to natural areas: direct or indirect habitat modification?",cols:["Direct","Indirect (degradation)"],items:[
+  ["Loss of habitat to farmland",0],["Fragmentation into small units",0],["Pesticides moving off the farm",1],["Fertilizer runoff",1],["Eutrophication",1]]},
+"4.1_6":{t:"match",q:"Match each invasive to how it arrived. Which one came from agriculture directly?",pairs:[
+  ["Cane toad","Released in sugarcane fields to eat insect pests"],["Melaleuca","Ornamental, planted to dry out Everglades land"],["Emerald ash borer","Came in packing crates from Asia"]]},
+"4.1_7":{t:"tf",q:"Melaleuca in the Everglades: true or false?",items:[
+  ["Prescribed fire is a good way to control it.",0,"It is adapted to fire; fire can even promote it."],
+  ["It grows in both wet and upland ground.",1,""],
+  ["It seeds heavily every year.",1,""],
+  ["It forms monoculture stands that replace sawgrass.",1,"And the litter under them builds islands that change the hydrology."]]},
+"4.1_8":{t:"sort",q:"A farm at the edge of a city: plus or minus?",cols:["Plus","Minus"],items:[
+  ["Sell and distribute locally",0],["Lower distribution costs and carbon footprint",0],["Pesticide drift toward people",1],["High land prices",1]]},
+"4.1_9":{t:"choice",q:"Guess before she says it: compared with the two ecosystems it joins, an ecotone is...",opts:[
+  ["More diverse",true,"Yes: species from both sides overlap there. That is the edge effect."],
+  ["Less diverse",false,"Edges collect species from both sides, so they hold more, not fewer."],
+  ["About the same",false,"Her graph shows the species count peaking right at the ecotone."]]},
+"4.1_10":{t:"order",q:"UK hedgerow study: rank where ground beetles (predators) were densest.",hint:"Most beetles at the top.",items:[
+  "At the field boundary, next to the hedgerow","Partway into the field","The middle of the field"]},
+"4.1_11":{t:"sort",q:"Clear the weedy border, or keep it?",cols:["Clear it","Keep it"],items:[
+  ["Boll weevils overwinter in the margin litter",0],["The border weeds are close relatives of the crop",0],["You rely on predators for biocontrol",1],["Border plants feed natural enemies, not the crop pest",1]]},
+"4.1_12":{t:"sort",q:"Designing a field for biological control: which choices help?",cols:["Helps biocontrol","Works against it"],items:[
+  ["Long, thin fields",0],["Windbreaks breaking up big fields",0],["Ecotone plants inside the field",0],["One big square field",1],["Clearing every border to bare ground",1]]}
+};
+
 /* ---------- Quiz bank: Mariel's Quiz 12, 13 and 14 questions (work/ag-ecology/quiz1[234]-module4-bank.md).
    Keys as in the bank files. unsure:true = the bank could not confirm the key; the note says what the transcript says.
    rebuilt:true = the bank kept the question and key but not the Canvas option list, so the other options are written here.
@@ -592,6 +674,119 @@ var BANK=[
 
 </script>
 <script>
+/* ---------- interactive prompt types: sort, match, order, choice, tf, estimate ---------- */
+function ixShuffleNot(a){ if(a.length<2) return a.slice(); var s; var tries=0; do{ s=shuffle(a); tries++; }while(tries<8 && s.every(function(v,i){return v===a[i];})); return s; }
+function ixBar(h){ return h+'<div class="ixbar"><button class="dbtn pri ixcheck">Check</button><button class="dbtn ixretry" hidden>Try again</button><button class="dbtn ixsol" hidden>Show me</button><span class="ixmsg"></span></div>'; }
+function ixSort(host,x,done){
+ var match=x.t==='match';
+ var cols=match?x.pairs.map(function(p){return p[0];}):x.cols;
+ var items=match?x.pairs.map(function(p,i){return [p[1],i];}):x.items;
+ var h='<div class="dz ixpool" data-z="-1"></div><div class="ixcols'+(match?' m':'')+'" style="--n:'+cols.length+'">';
+ cols.forEach(function(c,i){ h+='<div class="ixcol"><div class="ixh">'+esc(c)+'</div><div class="dz" data-z="'+i+'"></div></div>'; });
+ h+='</div>';
+ host.innerHTML=ixBar('<div class="ixhint">'+(match?'Drag each answer onto its term, or tap an answer, then tap the term.':'Drag each chip into a column, or tap a chip, then tap the column.')+'</div>'+h);
+ var pool=host.querySelector('.ixpool'), sel=null, locked=false;
+ var chips=shuffle(items.map(function(_,i){return i;})).map(function(i){
+   var b=document.createElement('span'); b.className='chip2'; b.setAttribute('data-i',i); b.textContent=items[i][0]; pool.appendChild(b); return b; });
+ function zoneOf(z){ return host.querySelector('.dz[data-z="'+z+'"]'); }
+ function place(chip,zone){
+   if(match && zone!==pool){ var cur=zone.querySelector('.chip2'); if(cur&&cur!==chip) pool.appendChild(cur); }
+   zone.appendChild(chip); chip.classList.remove('ok','bad');
+ }
+ function select(c){ if(sel) sel.classList.remove('sel'); sel=(sel===c)?null:c; if(sel) sel.classList.add('sel'); host.classList.toggle('picking',!!sel); }
+ chips.forEach(function(c){
+   var sx,sy,drag=false,ghost=null,down=false;
+   c.addEventListener('pointerdown',function(e){ if(locked) return; down=true; drag=false; sx=e.clientX; sy=e.clientY; try{c.setPointerCapture(e.pointerId);}catch(_){} });
+   c.addEventListener('pointermove',function(e){
+     if(!down||locked) return;
+     if(!drag && Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>8){ drag=true; ghost=c.cloneNode(true); ghost.classList.add('ghost'); document.body.appendChild(ghost); c.classList.add('lift'); }
+     if(drag){ ghost.style.left=(e.clientX-ghost.offsetWidth/2)+'px'; ghost.style.top=(e.clientY-ghost.offsetHeight/2)+'px'; e.preventDefault(); }
+   });
+   function end(e,cancel){
+     if(!down) return; down=false;
+     if(drag){ ghost.style.display='none'; var el=cancel?null:document.elementFromPoint(e.clientX,e.clientY); ghost.remove(); ghost=null; c.classList.remove('lift');
+       var z=el&&el.closest('.dz'); if(z&&host.contains(z)) place(c,z); if(sel) select(sel); }
+     else if(!cancel) select(c);
+   }
+   c.addEventListener('pointerup',function(e){ end(e,false); });
+   c.addEventListener('pointercancel',function(e){ end(e,true); });
+ });
+ host.querySelectorAll('.dz').forEach(function(z){ z.addEventListener('click',function(e){ if(locked||!sel||e.target.closest('.chip2')) return; place(sel,z); select(sel); }); });
+ host.querySelectorAll('.ixh').forEach(function(hd){ hd.addEventListener('click',function(){ if(locked||!sel) return; place(sel,hd.nextElementSibling); select(sel); }); });
+ var msg=host.querySelector('.ixmsg'), bc=host.querySelector('.ixcheck'), br=host.querySelector('.ixretry'), bs=host.querySelector('.ixsol');
+ function finish(t){ locked=true; host.classList.add('solved'); bc.hidden=true; br.hidden=true; bs.hidden=true; msg.textContent=t; done(); }
+ bc.addEventListener('click',function(){
+   if(pool.querySelector('.chip2')){ msg.textContent='Place every chip first.'; return; }
+   var right=0; chips.forEach(function(c){ var ok=+c.parentNode.getAttribute('data-z')===items[+c.getAttribute('data-i')][1]; c.classList.toggle('ok',ok); c.classList.toggle('bad',!ok); if(ok) right++; });
+   if(right===chips.length) finish('All '+right+' right.');
+   else { msg.textContent=right+' of '+chips.length+' right.'; br.hidden=false; bs.hidden=false; bc.hidden=true; }
+ });
+ br.addEventListener('click',function(){ chips.forEach(function(c){ if(c.classList.contains('bad')) pool.appendChild(c); c.classList.remove('ok','bad'); }); br.hidden=true; bs.hidden=true; bc.hidden=false; msg.textContent=''; });
+ bs.addEventListener('click',function(){ chips.forEach(function(c){ zoneOf(items[+c.getAttribute('data-i')][1]).appendChild(c); c.classList.remove('bad'); c.classList.add('ok'); }); finish('Here is where each one goes.'); });
+}
+function ixOrder(host,x,done){
+ var n=x.items.length, cur=ixShuffleNot(x.items.map(function(_,i){return i;})), locked=false;
+ host.innerHTML=ixBar('<div class="ixhint">'+esc(x.hint||'Put these in order with the arrows, first at the top.')+'</div><ol class="ixord"></ol>');
+ var list=host.querySelector('.ixord');
+ function draw(marks){
+   list.innerHTML='';
+   cur.forEach(function(it,pos){
+     var li=document.createElement('li'); li.className='ixrow'+(marks?(it===pos?' ok':' bad'):'');
+     li.innerHTML='<span class="ixtxt">'+esc(x.items[it])+'</span><span class="ixarr"><button class="ixup" aria-label="move up"'+(pos===0||locked?' disabled':'')+'>&#9650;</button><button class="ixdn" aria-label="move down"'+(pos===n-1||locked?' disabled':'')+'>&#9660;</button></span>';
+     li.querySelector('.ixup').addEventListener('click',function(){ var t=cur[pos-1]; cur[pos-1]=cur[pos]; cur[pos]=t; draw(); });
+     li.querySelector('.ixdn').addEventListener('click',function(){ var t=cur[pos+1]; cur[pos+1]=cur[pos]; cur[pos]=t; draw(); });
+     list.appendChild(li);
+   });
+ }
+ draw();
+ var msg=host.querySelector('.ixmsg'), bc=host.querySelector('.ixcheck'), br=host.querySelector('.ixretry'), bs=host.querySelector('.ixsol');
+ function finish(t){ locked=true; draw(true); host.classList.add('solved'); bc.hidden=true; br.hidden=true; bs.hidden=true; msg.textContent=t; done(); }
+ bc.addEventListener('click',function(){ var right=cur.filter(function(it,pos){return it===pos;}).length;
+   if(right===n) finish('In order.'); else { draw(true); msg.textContent=right+' of '+n+' in the right place.'; bc.hidden=true; br.hidden=false; bs.hidden=false; } });
+ br.addEventListener('click',function(){ draw(); bc.hidden=false; br.hidden=true; bs.hidden=true; msg.textContent=''; });
+ bs.addEventListener('click',function(){ cur=x.items.map(function(_,i){return i;}); finish('Here is the order.'); });
+}
+function ixChoice(host,x,done){
+ var h='<div class="ixhint">'+esc(x.hint||'Pick one. Wrong picks tell you why.')+'</div><div class="ixch">';
+ shuffle(x.opts.map(function(_,i){return i;})).forEach(function(i){ h+='<button class="opt ixopt" data-i="'+i+'">'+esc(x.opts[i][0])+'</button><div class="ixfb" data-f="'+i+'"></div>'; });
+ host.innerHTML=h+'</div>';
+ var solved=false;
+ host.querySelectorAll('.ixopt').forEach(function(b){ b.addEventListener('click',function(){
+   if(solved) return; var i=+b.getAttribute('data-i'), o=x.opts[i], fb=host.querySelector('[data-f="'+i+'"]');
+   b.classList.add(o[1]?'correct':'wrong'); b.disabled=true; if(o[2]){ fb.textContent=o[2]; fb.classList.add('show',o[1]?'ok':'bad'); }
+   if(o[1]){ solved=true; host.querySelectorAll('.ixopt').forEach(function(z){z.disabled=true;}); host.classList.add('solved'); done(); }
+ }); });
+}
+function ixTF(host,x,done){
+ var h='<div class="ixhint">'+esc(x.hint||'Quick round: true or false?')+'</div><div class="ixtf">';
+ x.items.forEach(function(it,i){ h+='<div class="tfrow" data-i="'+i+'"><div class="tfq">'+esc(it[0])+'</div><div class="tfb"><button class="dbtn" data-v="1">True</button><button class="dbtn" data-v="0">False</button></div><div class="tfw"></div></div>'; });
+ host.innerHTML=h+'</div><div class="ixbar"><span class="ixmsg"></span></div>';
+ var answered=0,right=0;
+ host.querySelectorAll('.tfrow').forEach(function(r){
+   var it=x.items[+r.getAttribute('data-i')];
+   r.querySelectorAll('button').forEach(function(b){ b.addEventListener('click',function(){
+     if(r.dataset.done) return; r.dataset.done='1'; answered++;
+     var ok=(+b.getAttribute('data-v')===1)===!!it[1]; if(ok) right++;
+     r.classList.add(ok?'ok':'bad'); b.classList.add('picked');
+     r.querySelector('.tfw').textContent=(it[1]?'True. ':'False. ')+(it[2]||'');
+     if(answered===x.items.length){ host.querySelector('.ixmsg').textContent=right+' of '+answered+' right.'; host.classList.add('solved'); done(); }
+   }); });
+ });
+}
+function ixEstimate(host,x,done){
+ var mid=x.start!=null?x.start:(x.min+x.max)/2;
+ host.innerHTML='<div class="ixhint">'+esc(x.hint||'Slide to your estimate, then lock it in.')+'</div><div class="ixest"><input type="range" min="'+x.min+'" max="'+x.max+'" step="'+x.step+'" value="'+mid+'"><div class="ixval"><b>'+mid+'</b> '+esc(x.unit||'')+'</div></div><div class="ixbar"><button class="dbtn pri ixcheck">Lock it in</button><span class="ixmsg"></span></div>';
+ var r=host.querySelector('input'), v=host.querySelector('.ixval b');
+ function fmt(n){ return (+n).toFixed(x.dec||0); }
+ r.addEventListener('input',function(){ v.textContent=fmt(r.value); });
+ host.querySelector('.ixcheck').addEventListener('click',function(e){
+   var g=+r.value, a=x.ans, off=Math.abs(g-a), tol=x.tol||x.step;
+   r.disabled=true; e.target.hidden=true; host.classList.add('solved');
+   host.querySelector('.ixmsg').innerHTML='You said <b>'+fmt(g)+'</b>. Answer: <b>'+fmt(a)+'</b> '+esc(x.unit||'')+'. '+(off<=tol?'Spot on.':(off<=3*tol?'Close.':'Off this time, see why below.'));
+   done();
+ });
+}
+var IXT={sort:ixSort,match:ixSort,order:ixOrder,choice:ixChoice,tf:ixTF,estimate:ixEstimate};
 /* ---------- tabs first, so the page works even if later code throws ---------- */
 function byId(id){return document.getElementById(id);}
 (function(){
@@ -658,10 +853,11 @@ function renderListen(){
    if(n){
      h+='<div class="sec">Prompts in lecture order · tap a card for the answer</div><div class="plist">';
      lec.prompts.forEach(function(p,i){
-       var on=!!state[pid(lec,i)];
-       h+='<div class="pr k-'+p.k+(on?' done':'')+'" data-i="'+i+'"><div class="prtop"><span class="prpart">'+esc(p.part)+'</span><span class="prk">'+esc(KIND[p.k]||p.k)+'</span></div>';
-       h+='<div class="prq">'+(i+1)+'. '+esc(p.q)+'</div>';
-       h+='<div class="prfoot"><button class="dbtn prshow">Show answer</button><label class="tick"><input type="checkbox"'+(on?' checked':'')+'> done</label></div>';
+       var on=!!state[pid(lec,i)], x=(typeof IX!=='undefined')&&IX[lec.id+'_'+i];
+       h+='<div class="pr k-'+p.k+(on?' done':'')+(x?' hasix':'')+'" data-i="'+i+'"><div class="prtop"><span class="prpart">'+esc(p.part)+'</span><span class="prk">'+esc(KIND[p.k]||p.k)+'</span></div>';
+       h+='<div class="prq">'+(i+1)+'. '+esc((x&&x.q)||p.q)+'</div>';
+       if(x) h+='<div class="ix"></div>';
+       h+='<div class="prfoot"><button class="dbtn prshow">'+(x?'Skip to the answer':'Show answer')+'</button><label class="tick"><input type="checkbox"'+(on?' checked':'')+'> done</label></div>';
        h+='<div class="pra">'+esc(p.a)+'</div></div>';
      });
      h+='</div>';
@@ -673,9 +869,11 @@ function renderListen(){
    det.addEventListener('toggle',function(){ state['o_'+lec.id]=det.open?1:0; save(); });
    det.querySelectorAll('.pr').forEach(function(card){
      var i=+card.getAttribute('data-i'), ans=card.querySelector('.pra'), btn=card.querySelector('.prshow');
-     function toggle(){ var s=ans.classList.toggle('show'); btn.textContent=s?'Hide answer':'Show answer'; }
+     var x=(typeof IX!=='undefined')&&IX[lec.id+'_'+i];
+     function toggle(){ var s=ans.classList.toggle('show'); btn.textContent=s?'Hide answer':(x?'Skip to the answer':'Show answer'); }
      btn.addEventListener('click',function(e){ e.stopPropagation(); toggle(); });
-     card.querySelector('.prq').addEventListener('click',toggle);
+     if(x && IXT[x.t]){ try{ IXT[x.t](card.querySelector('.ix'),x,function(){ ans.classList.add('show'); btn.hidden=true; }); }catch(err){ if(window.console) console.error('ix',lec.id,i,err); } }
+     else card.querySelector('.prq').addEventListener('click',toggle);
      card.querySelector('input').addEventListener('change',function(e){
        if(e.target.checked) state[pid(lec,i)]=1; else delete state[pid(lec,i)];
        save(); card.classList.toggle('done',e.target.checked);
