@@ -139,6 +139,10 @@ svg{display:block}
 .dbtn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--line);background:var(--card);color:var(--ink2);border-radius:99px;padding:10px 20px;cursor:pointer}
 .dbtn:hover{border-color:var(--line2)}
 .dbtn.pri{background:var(--moss);border-color:var(--moss);color:#f6f2e2}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 9px}
+.chip{font:inherit;font-size:12px;background:var(--paper);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:4px 10px;cursor:pointer;text-align:left}
+.chip:hover{border-color:var(--line2)}
+.chip b{color:var(--clay-d);margin-right:3px}
 
 /* module 4 additions */
 .examcard{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--clay);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px}
@@ -223,6 +227,29 @@ details.lec>summary .meta b{color:var(--moss-d)}
 .ixval{text-align:center;font-size:14px;color:var(--ink2)}.ixval b{font-family:var(--serif);font-size:22px;color:var(--soil)}
 @media(max-width:520px){.ixcols:not(.m){grid-template-columns:repeat(min(var(--n),2),minmax(0,1fr))}.chip2{font-size:12.5px;padding:6px 9px}.ixcols.m .ixcol{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:380px){.ixcols:not(.m){grid-template-columns:minmax(0,1fr)}}
+.wkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 4px}
+.wk2{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:13px 15px;min-width:0}
+.wk2top{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.wk2lec{font-family:var(--serif);font-size:12.5px;font-weight:700;color:#fff;background:var(--clay);border-radius:8px;padding:2px 8px}
+.wk2src{font-size:11.5px;color:var(--ink3)}
+.wk2tag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487;border-radius:99px;padding:2px 8px}
+.wk2 h3{font-family:var(--serif);font-size:17px;color:var(--soil);margin:8px 0 5px;line-height:1.25}
+.wk2ask{font-size:13.5px;color:var(--ink2);margin:0 0 8px;line-height:1.45}
+.wk2q{font-family:var(--serif);font-size:14px;color:var(--soil);background:#efe6d1;border-left:3px solid var(--wheat);border-radius:8px;padding:8px 10px;line-height:1.45}
+.wk2q span{display:block;font-family:var(--sans);font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:var(--clay-d);margin-bottom:3px}
+.wk2v{font-size:13.5px;color:var(--ink2);margin:8px 0;line-height:1.5}.wk2v b{color:var(--moss-d)}
+.wk2btns{display:flex;gap:6px;flex-wrap:wrap}.wk2btns .dbtn{padding:6px 12px;font-size:12.5px}
+.tipsfoot2{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink3);margin:16px 4px 0}
+.flow{margin:0 4px;display:flex;flex-direction:column;align-items:stretch}
+.fstep{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:13px 15px}
+.fnum{flex:none;width:30px;height:30px;border-radius:99px;background:var(--sky-d);color:#fff;font-family:var(--serif);font-weight:700;display:flex;align-items:center;justify-content:center}
+.fbody{min-width:0}.fbody h3{font-family:var(--serif);font-size:17px;color:var(--soil);margin:3px 0 5px}
+.fbody p{font-size:14px;color:var(--ink2);margin:0 0 6px;line-height:1.5}
+.fkeys{font-size:12.5px;color:var(--ink3);font-style:italic;margin:0 0 8px;line-height:1.4}
+.farrow{text-align:center;color:var(--line2);font-size:20px;line-height:1;margin:4px 0}
+.threads{display:flex;flex-direction:column;gap:8px;margin:0 4px}
+.thr{font-size:14px;color:var(--ink2);line-height:1.5;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--moss);border-radius:12px;padding:10px 13px}.thr b{color:var(--soil);font-family:var(--serif)}
+@media(max-width:700px){.wkgrid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:520px){details.lec>summary .meta{white-space:normal;text-align:right;font-size:11px}.prq{font-size:15px}}
 </style>
 <noscript><style>.view{display:block !important}.tabs{display:none}.pra{display:block}</style></noscript>
@@ -1319,6 +1346,95 @@ var NEWQ=[
   e:"4.12: the other three are documented in farm settings."}
 ];
 
+/* ---------- Weak spots (from the Quiz 13/14 bank notes) and Big picture ---------- */
+var WEAK=[
+ {t:"Low genetic diversity: cassava or peanut?",lec:"4.10",src:"Quiz 13, Set 1",
+  ask:"A crop with very low genetic diversity. You picked cassava; the bank later guessed that was a miss and peanut was the answer.",
+  quote:"\"Other examples of plants that have very low genetic diversity, of course, are potatoes, sugar cane, sweet potato, and also cassava or manioc.\"",
+  verdict:"Cassava fits the lecture, right after bananas. Peanut is never mentioned in Module 4. If you see this again, any of banana, potato, sugar cane, sweet potato or cassava is the lecture's answer.",tag:"settled in your favor"},
+ {t:"Crop damage threshold vs economic injury level",lec:"4.9",src:"Quiz 13, Set 2",
+  ask:"\"The crop damage threshold is determined by the monetary value of crops lost.\" The bank marked your False as unsure.",
+  quote:"\"The crop damage threshold doesn't have anything to do with money. We're only talking about a loss of yield.\" The economic injury level is \"the pest density at which the value of the yield returned is going to equal the cost of control.\"",
+  verdict:"False is right. Yield only: crop damage threshold. Money: economic injury level. Before money gets that far: action threshold, set below the EIL.",tag:"settled"},
+ {t:"Static vs dynamic situations",lec:"4.9",src:"Quiz 13, Set 2",
+  ask:"\"Aphids on peas represent a ___ situation.\" The bank marked your dynamic as unsure.",
+  quote:"Static: \"you have one option, one chance to react... If you have wireworms and you plant a susceptible corn crop, there's nothing you can do.\" Dynamic: \"something like an aphid in the field, where you could potentially go out and control it.\"",
+  verdict:"Dynamic is right. One chance before planting (soil pests) = static; control possible during the season, maybe again later = dynamic.",tag:"settled"},
+ {t:"Which crop has no GE variety in the US?",lec:"4.12",src:"Quiz 14, Set 2",
+  ask:"Apple, papaya, corn or soybean. The bank keyed apple but flagged it.",
+  quote:"\"Papaya has historically been susceptible to a ringspot virus. Most of the papaya that you find in the store these days has been genetically engineered.\" Soy and corn: \"over 90% of the soy... over 80% of the corn.\" Apple never comes up.",
+  verdict:"Apple, by elimination from the lecture. Outside the course a non-browning GE apple is sold in the US, so this stays the weakest key; if it reappears, answer apple and move on.",tag:"still unsure"},
+ {t:"Managed grazing happens in natural areas",lec:"4.11",src:"Quiz 14, Set 3 (your miss)",
+  ask:"\"Managed grazing involves domesticated animals feeding on vegetation in natural areas.\" You answered False.",
+  quote:"\"They would confine these animals to specific natural areas and in that way would manage their grazing activities in those areas... on the Bureau of Land Management public lands.\"",
+  verdict:"True. Keep the sequence: hunter-gatherers, pastoral nomadism (follow the herd), managed grazing (natural areas), planted pasture (sown forage), integrated animal-crop systems.",tag:"your miss, now settled"},
+ {t:"Animal diversity and trophic levels",lec:"4.11",src:"Quiz 14, Set 3 (likely miss)",
+  ask:"\"Animal diversity is a primary determinant of the number of trophic levels.\" You answered False.",
+  quote:"\"The biomass of the ungulates, or the herbivores... is going to determine the number of higher order predators that exist in that system.\" The savanna's 10 to 12 kinds of ungulates support leopards, cheetahs, lions, wild dogs and hyenas.",
+  verdict:"Most likely True: herbivore diversity and biomass carry the energy that supports more predators. Set 3 lost exactly two questions, this and managed grazing.",tag:"likely, from the lecture"},
+ {t:"Leucaena: living fence and forage?",lec:"4.7",src:"Quiz 13, Set 2",
+  ask:"\"Leucaena is a legume used as a living fence and forage.\" You answered True; Set 2 had one miss that was never identified.",
+  quote:"Leucaena: \"another legume tree that grows very quickly and can also be used as a forage,\" grown as shelterbelt hedges and in alley cropping. Living fences in the lecture are Senna (\"they'll actually utilize these as living fences\") and moringa.",
+  verdict:"Legume and forage: yes. Living fence: not said for Leucaena. True is still the likely key (a hedge around a field works as a fence), but this is the best candidate for that Set 2 miss.",tag:"still unsure"}
+];
+function goLec(id){
+ showTab('listen');
+ var det=byId('lec-'+id.replace('.','_')); if(!det) return;
+ det.open=true; setTimeout(function(){ det.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+function drillLec(id){ showTab('quiz'); srcF='all'; lecF=id; state.qs=srcF; state.ql=lecF; save(); resetQuiz(); }
+function renderWeak(){
+ var host=byId('weak'); if(!host) return;
+ var h='<div class="oneliner" style="margin:22px 4px 14px">The questions your quiz banks could not settle, each next to the lecture passage that decides it. Three are now settled by the transcripts, one went your way, and two stay uncertain because the course key may differ from the lecture.</div>';
+ h+='<div class="wkgrid">';
+ WEAK.forEach(function(w){
+   h+='<div class="wk2"><div class="wk2top"><span class="wk2lec">'+esc(w.lec)+'</span><span class="wk2src">'+esc(w.src)+'</span><span class="wk2tag">'+esc(w.tag)+'</span></div>';
+   h+='<h3>'+esc(w.t)+'</h3><p class="wk2ask">'+esc(w.ask)+'</p>';
+   h+='<div class="wk2q"><span>What '+esc(w.lec)+' says</span>'+esc(w.quote)+'</div>';
+   h+='<p class="wk2v"><b>Verdict.</b> '+esc(w.verdict)+'</p>';
+   h+='<div class="wk2btns"><button class="dbtn" data-drill="'+esc(w.lec)+'">Drill '+esc(w.lec)+' questions</button><button class="dbtn" data-go="'+esc(w.lec)+'">Open '+esc(w.lec)+' listen-along</button></div></div>';
+ });
+ h+='</div><p class="tipsfoot2">Canvas also posted \"What you missed\" documents for Quiz 12 (Nov 12) and Quiz 13 (Nov 19). They are not in this guide; they would confirm the uncertain keys.</p>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-drill]').forEach(function(b){ b.addEventListener('click',function(){ drillLec(b.getAttribute('data-drill')); }); });
+ host.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ goLec(b.getAttribute('data-go')); }); });
+}
+var BIG=[
+ {n:"1",t:"The farm in its landscape",lecs:["4.1","4.4"],
+  s:"A field is never alone. Neighbors, natural areas and towns trade pests, enemies, chemicals and genes with it. Edges and fragments decide who can move where.",
+  k:"Ecotones and the edge effect, island biogeography, fragmentation, buffers"},
+ {n:"2",t:"Diversity and why it brings stability",lecs:["4.2","4.3"],
+  s:"Diversity is richness plus evenness at alpha, beta and gamma scales. It brings stability in the farm sense: the power to recover from disturbance with fewer inputs.",
+  k:"Richness and evenness, Shannon and Simpson, four reasons for diversity, stability as recovery"},
+ {n:"3",t:"Building diversity into cropping systems",lecs:["4.5","4.6","4.7","4.8"],
+  s:"In space: intercrops of every arrangement and trees in agroforestry. In time: relay plantings, rotations and cover crops. The test is whether crops compete less with each other than with their own kind.",
+  k:"Mixed, row, strip, relay; LER; partitioning and facilitation; agroforestry layouts; rotation and green manure"},
+ {n:"4",t:"Managing pests as a system",lecs:["4.9","4.10"],
+  s:"IPM combines tactics and acts on thresholds instead of trying to eradicate. Pests evolve, so resistance must be managed and genetic diversity conserved.",
+  k:"Crop damage threshold, EIL, action threshold; static vs dynamic; resistance management; susceptible, tolerant, resistant"},
+ {n:"5",t:"Animals and genetic engineering",lecs:["4.11","4.12"],
+  s:"Two tools that can serve the whole system or work against it. Animals integrated with crops cycle nutrients; CAFOs concentrate the harm. GE can cut sprays or raise them; it depends on how we use it.",
+  k:"History of animal systems, ecological vs economic benefits, CAFOs; cisgenesis vs transgenesis, Bt, Roundup Ready, golden rice"}
+];
+var THREADS=[
+ ["Know the biology","Weedy borders, trap crops, rotations and thresholds all flip from help to harm depending on the pest's biology. Dr. Weeks' Exam 3 tip: pick an option and explain why."],
+ ["Selection never stops","Super weeds, Bt-resistant rootworm, Ug99 and soybean cyst nematode: any single method used every year selects its own resistance. Swamp the selection."],
+ ["Short term vs long term","Pesticides, uniform cultivars and CAFOs win now; diversity, rotation and integration win later. Most exam trade-offs sit on this line."]
+];
+function renderBig(){
+ var host=byId('big'); if(!host) return;
+ var h='<div class="oneliner" style="margin:22px 4px 14px">Module 4 in one line: step back from the single field, add diversity in space and time, manage pests as a system, and judge animals and genetic engineering by what they do to the whole.</div>';
+ h+='<div class="flow">';
+ BIG.forEach(function(b,i){
+   h+='<div class="fstep"><div class="fnum">'+b.n+'</div><div class="fbody"><h3>'+esc(b.t)+'</h3><p>'+esc(b.s)+'</p><div class="fkeys">'+esc(b.k)+'</div><div class="chips">'+b.lecs.map(function(id){ var l=lecById(id); return '<button class="chip" data-go="'+id+'"><b>'+id+'</b>'+esc(l?l.title:'')+'</button>'; }).join('')+'</div></div></div>';
+   if(i<BIG.length-1) h+='<div class="farrow" aria-hidden="true">&#8595;</div>';
+ });
+ h+='</div><div class="sec" style="margin:24px 4px 8px">Threads that run through all twelve</div><div class="threads">';
+ THREADS.forEach(function(t){ h+='<div class="thr"><b>'+esc(t[0])+'.</b> '+esc(t[1])+'</div>'; });
+ h+='</div>';
+ host.innerHTML=h;
+ host.querySelectorAll('[data-go]').forEach(function(b){ b.addEventListener('click',function(){ goLec(b.getAttribute('data-go')); }); });
+}
 
 </script>
 <script>
