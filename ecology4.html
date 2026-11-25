@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ecology Field Guide IV, Module 4 (ALS 3153)</title>
+<link rel="icon" href="data:,">
+<style>
+:root{
+  --paper:#f2eadb; --paper2:#e9dfc9; --card:#fbf6ea; --card2:#f5eeddff;
+  --ink:#2c2417; --ink2:#6c5d45; --ink3:#93856a;
+  --soil:#573f2c; --clay:#b0623b; --clay-d:#8c4a2b;
+  --moss:#6d7b41; --moss-d:#4d5a2a; --wheat:#c69537; --sky:#7c95a3; --sky-d:#4a6b78;
+  --line:#d9ccb0; --line2:#c7b797;
+  --shadow:0 1px 2px rgba(60,44,24,.06), 0 6px 18px rgba(60,44,24,.07);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:
+    radial-gradient(1200px 500px at 80% -10%, #e4e9e6 0%, transparent 60%),
+    linear-gradient(180deg,#f4ecdd 0%, #efe5d0 100%);
+  color:var(--ink); font-family:var(--sans); font-size:15px; line-height:1.5;
+  -webkit-font-smoothing:antialiased; padding:0 16px 60px; min-height:100vh;
+}
+.wrap{max-width:940px;margin:0 auto}
+.top{padding:26px 4px 6px;display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.crest{width:52px;height:52px;flex:none}
+.hgroup h1{font-family:var(--serif);font-size:30px;line-height:1.05;margin:0;letter-spacing:.2px;color:var(--soil)}
+.hgroup .sub{font-size:12.5px;color:var(--ink2);text-transform:uppercase;letter-spacing:.09em;margin-top:6px}
+.hnote{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:15px;margin:14px 4px 0;max-width:64ch}
+.prog{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.progbar{flex:1;min-width:180px;height:12px;border-radius:99px;background:var(--paper2);overflow:hidden;border:1px solid var(--line)}
+.progfill{height:100%;width:0;background:linear-gradient(90deg,var(--sky),var(--moss));transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.progtxt{font-size:13px;color:var(--ink2)}
+.progtxt b{color:var(--soil);font-size:15px}
+.tabs{display:flex;gap:8px;margin:20px 4px 6px;flex-wrap:wrap}
+.tab{font:inherit;font-weight:600;font-size:13.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:9px 18px;cursor:pointer;transition:.15s}
+.tab:hover{border-color:var(--line2)}
+.tab.on{background:var(--soil);color:#f6efe0;border-color:var(--soil)}
+.view{display:none;animation:fade .25s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+/* big picture */
+.bigpic{margin-top:22px}
+.oneliner{font-family:var(--serif);font-size:18px;line-height:1.42;color:var(--soil);background:var(--card);border:1px solid var(--line);border-left:4px solid var(--sky-d);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px;margin:0 4px 18px}
+.mapwrap{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 8px;margin:0 4px 8px;overflow-x:auto}
+.mapwrap svg{max-width:440px;margin:0 auto}
+.mapcap{font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--ink3);margin:0 10px 22px;text-align:center;line-height:1.4}
+.bigtext p{font-size:14.5px;color:var(--ink2);line-height:1.6;margin:0 4px 13px;max-width:66ch}
+.bigtext b{color:var(--soil);font-family:var(--serif)}
+/* week strip */
+.weeks{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:0 4px 20px}
+.wk{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:14px 12px 12px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;cursor:pointer;transition:.15s}
+.wk:hover{border-color:var(--line2)}
+.wk.now{border-color:var(--sky-d);box-shadow:0 0 0 2px rgba(74,107,120,.18),var(--shadow)}
+.wk h3{font-family:var(--serif);font-size:17px;margin:0;color:var(--soil)}
+.wk .wlecs{font-size:11.5px;color:var(--ink3)}
+.wk .badge{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px}
+.wk .due{font-size:12px;color:var(--ink2);line-height:1.3}
+.wk .due b{color:var(--clay-d)}
+.ring{width:64px;height:64px}
+.ring .bg{fill:none;stroke:var(--paper2);stroke-width:7}
+.ring .fg{fill:none;stroke:var(--moss);stroke-width:7;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dasharray .5s}
+.ring text{font-size:15px;font-family:var(--serif);fill:var(--soil);font-weight:700}
+@media(max-width:560px){.weeks{grid-template-columns:1fr 1fr 1fr;gap:8px}.wk{padding:10px 6px 10px}.wk h3{font-size:14px}.wk .due{font-size:11px}.ring{width:52px;height:52px}.wk .badge{font-size:10px;padding:2px 7px}}
+/* lectures */
+.wkhead{display:flex;align-items:baseline;gap:10px;margin:26px 4px 12px}
+.wkhead .n{font-family:var(--serif);font-size:13px;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 10px;flex:none;font-weight:700}
+.wkhead h2{font-family:var(--serif);font-size:20px;margin:0;color:var(--soil)}
+.wkhead .wdue{font-size:12.5px;color:var(--ink3);margin-left:auto}
+details.lec{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);margin:0 4px 12px;overflow:hidden}
+details.lec>summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;gap:12px}
+details.lec>summary::-webkit-details-marker{display:none}
+details.lec>summary .num{font-family:var(--serif);font-size:13px;color:#fff;background:var(--clay);border-radius:8px;padding:3px 8px;flex:none;font-weight:700}
+details.lec>summary .ttl{font-family:var(--serif);font-size:17px;color:var(--ink);line-height:1.2;flex:1}
+details.lec>summary .meta{font-size:11.5px;color:var(--ink3);white-space:nowrap}
+details.lec>summary .chev{width:18px;height:18px;flex:none;transition:transform .2s;color:var(--ink3)}
+details.lec[open]>summary .chev{transform:rotate(90deg)}
+details.lec>summary .done{width:22px;height:22px;flex:none;border-radius:6px;border:1.5px solid var(--line2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;background:var(--paper)}
+details.lec.studied>summary .done{background:var(--moss);border-color:var(--moss)}
+details.lec.studied>summary .ttl{color:var(--moss-d)}
+.lbody{padding:2px 16px 16px;border-top:1px dashed var(--line2)}
+.gist{font-family:var(--serif);font-size:16px;line-height:1.45;color:var(--soil);margin:14px 0 12px}
+.sec{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--clay-d);font-weight:700;margin:16px 0 8px}
+.line{margin:0;padding-left:18px;color:var(--ink2);font-size:14px;line-height:1.5}
+.line li{margin-bottom:5px}
+.ask{margin:0;padding-left:18px;color:var(--ink2);font-size:13.5px;line-height:1.45}
+.ask li{margin-bottom:4px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;align-items:start}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 10px;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--sky);opacity:.55}
+.card.m1::before{background:var(--ink3);opacity:.4}
+.card.m2::before{background:var(--wheat)}
+.card.m3::before{background:var(--moss)}
+.card h3{font-family:var(--serif);font-size:16px;margin:0 0 6px;color:var(--ink);line-height:1.2}
+.card p{margin:0 0 8px;font-size:13.5px;color:var(--ink2);line-height:1.5}
+.card .fact{font-size:12.5px;color:var(--soil);background:#efe6d1;border-radius:9px;padding:6px 9px;margin:0 0 10px;line-height:1.4}
+.card .fact b{color:var(--clay-d)}
+.mastery{display:flex;gap:6px;border-top:1px dashed var(--line2);padding-top:10px;margin-top:2px}
+.mbtn{flex:1;font:inherit;font-size:11px;font-weight:600;border:1px solid var(--line);background:var(--card);color:var(--ink3);border-radius:9px;padding:6px 4px;cursor:pointer;transition:.12s;display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.1}
+.mbtn .ic{font-size:14px}
+.mbtn:hover{border-color:var(--line2)}
+.mbtn.on1{background:#efe7d8;color:var(--ink2);border-color:var(--line2)}
+.mbtn.on2{background:#f3e7c6;color:#8a6a1e;border-color:#dcc487}
+.mbtn.on3{background:#e2e7cf;color:var(--moss-d);border-color:#b6c188}
+.studybtn{font:inherit;font-weight:600;font-size:13.5px;border:1px solid var(--moss);background:var(--moss);color:#f6f2e2;border-radius:99px;padding:10px 18px;cursor:pointer;margin-top:16px}
+.studybtn.off{background:var(--card);color:var(--moss-d)}
+/* mini quiz + quiz */
+.quiz{margin-top:8px;display:flex;flex-direction:column;gap:12px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.q .qh{font-family:var(--serif);font-size:15.5px;color:var(--ink);margin:0 0 10px;line-height:1.35}
+.q .qmeta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:7px}
+.q .qlec{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--clay-d);font-weight:700}
+.q .qsrc{font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:700;color:#fff;background:var(--clay-d);border-radius:99px;padding:3px 9px;white-space:nowrap}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin-bottom:8px;cursor:pointer;color:var(--ink);transition:.12s}
+.opt:hover{border-color:var(--line2)}
+.opt.correct{background:#e2e7cf;border-color:#b6c188;color:var(--moss-d);font-weight:600}
+.opt.wrong{background:#f0dcd2;border-color:#d9a487;color:var(--clay-d)}
+.opt:disabled{cursor:default}
+.qexp{font-size:13px;color:var(--ink2);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);display:none}
+.qexp.show{display:block}
+.quizscore{background:var(--soil);color:#f4ecdd;font-weight:600;font-size:14px;padding:9px 18px;border-radius:99px;box-shadow:var(--shadow)}
+.quizfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px;flex-wrap:wrap}
+.filters{display:flex;gap:8px;margin:18px 4px 6px;flex-wrap:wrap;align-items:center}
+.filters .fl{font-size:12px;color:var(--ink3);margin-right:4px}
+.fbtn{font:inherit;font-weight:600;font-size:12.5px;background:var(--card);border:1px solid var(--line);color:var(--ink2);border-radius:99px;padding:6px 14px;cursor:pointer}
+.fbtn.on{background:var(--sky-d);color:#fff;border-color:var(--sky-d)}
+.placeholder{margin:26px 4px;background:var(--card);border:1px dashed var(--line2);border-radius:16px;padding:26px 20px;text-align:center;font-family:var(--serif);font-style:italic;color:var(--ink3);font-size:16px}
+.foot{text-align:center;color:var(--ink3);font-size:12px;margin-top:34px;font-family:var(--serif);font-style:italic}
+.qsrc.qz{background:var(--sky-d)}
+.qexp.qnote{color:var(--clay-d);background:#f6e9df;border-top:none;border-left:3px solid var(--clay);border-radius:8px;padding:8px 10px}
+svg{display:block}
+.soonpill{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1e;background:#f3e7c6;border:1px solid #dcc487;border-radius:99px;padding:3px 10px}
+.soonbox{margin:0 4px 12px;background:var(--card);border:1px dashed var(--line2);border-radius:14px;padding:12px 14px;font-size:13.5px;color:var(--ink3);line-height:1.5}
+.soonbox b{color:var(--soil);font-family:var(--serif)}
+
+/* module 4 additions */
+.examcard{margin:18px 4px 4px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--clay);border-radius:14px;box-shadow:var(--shadow);padding:14px 16px}
+.examcard .ek{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--clay-d);font-weight:700}
+.examcard h2{font-family:var(--serif);font-size:22px;margin:4px 0 6px;color:var(--soil);line-height:1.2}
+.examcard .when{display:inline-block;font-size:12px;font-weight:700;color:#fff;background:var(--sky-d);border-radius:99px;padding:3px 11px;margin-bottom:8px}
+.examcard ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink2);line-height:1.5}
+.examcard li{margin-bottom:3px}
+.examcard b{color:var(--soil)}
+.cv{display:block;font-family:var(--sans);font-size:11px;color:var(--ink3);margin-top:2px}
+details.lec>summary .meta b{color:var(--moss-d)}
+.play{display:inline-block;margin-top:14px;font-weight:700;font-size:14px;color:#f6efe0;background:var(--soil);border-radius:99px;padding:9px 16px;text-decoration:none}
+.play:hover{background:var(--clay-d)}
+.playnote{font-size:12px;color:var(--ink3);margin-left:6px}
+.heads{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-direction:column;gap:6px}
+.heads li{font-size:13px;line-height:1.45;color:var(--clay-d);background:#f6e9df;border-left:3px solid var(--clay);border-radius:8px;padding:7px 10px}
+.plist{display:flex;flex-direction:column;gap:10px}
+.pr{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--sky);border-radius:12px;padding:11px 13px}
+.pr.k-explain{border-left-color:var(--moss)}
+.pr.k-connect{border-left-color:var(--wheat)}
+.pr.k-apply{border-left-color:var(--clay)}
+.pr.done{opacity:.62}
+.prtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:5px}
+.prpart{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);font-weight:700}
+.prk{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:var(--sky-d);border-radius:99px;padding:2px 8px;margin-left:auto}
+.k-explain .prk{background:var(--moss-d)}
+.k-connect .prk{background:#9a7426}
+.k-apply .prk{background:var(--clay-d)}
+.prq{font-family:var(--serif);font-size:15.5px;color:var(--ink);line-height:1.38;cursor:pointer}
+.prfoot{display:flex;align-items:center;gap:12px;margin-top:9px}
+.prfoot .dbtn{padding:6px 14px;font-size:12.5px}
+.tick{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:5px;cursor:pointer;margin-left:auto}
+.tick input{width:18px;height:18px;accent-color:var(--moss)}
+.pra{display:none;font-size:14px;color:var(--soil);background:#efe6d1;border-radius:9px;padding:9px 11px;margin-top:9px;line-height:1.5}
+.pra.show{display:block}
+.fbtn.sm{font-size:12px;padding:5px 11px}
+.fbtn.soon{opacity:.5;cursor:default;border-style:dashed}
+.qsrc.nw{background:var(--moss-d)}
+.qsrc.uns{background:#9a7426}
+.qexp.qreb{font-size:12px;color:var(--ink3);font-style:italic}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin:4px 4px 12px;font-size:12px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px}
+@media(max-width:520px){details.lec>summary .meta{white-space:normal;text-align:right;font-size:11px}.prq{font-size:15px}}
+</style>
+<noscript><style>.view{display:block !important}.tabs{display:none}.pra{display:block}</style></noscript>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <svg class="crest" viewBox="0 0 52 52" aria-hidden="true">
+      <rect x="2" y="34" width="48" height="14" rx="3" fill="#6b4a31"/>
+      <rect x="2" y="40" width="48" height="8" rx="3" fill="#573f2c"/>
+      <path d="M26 34 C26 26 26 20 26 12" stroke="#4d5a2a" stroke-width="2.4" fill="none"/>
+      <path d="M26 24 C20 22 15 17 14 10 C21 11 25 16 26 24 Z" fill="#6d7b41"/>
+      <path d="M26 18 C31 16 36 12 38 6 C31 7 27 11 26 18 Z" fill="#4a6b78"/>
+      <circle cx="39" cy="26" r="3.2" fill="#b0623b"/><circle cx="12" cy="29" r="2.4" fill="#c69537"/>
+    </svg>
+    <div class="hgroup">
+      <h1>Ecology Field Guide IV</h1>
+      <div class="sub">ALS 3153 · Module 4 · Agroecosystems as Whole Systems</div>
+    </div>
+  </div>
+
+  <div class="examcard">
+    <div class="ek">Exam 04 · Module 4 only · lectures 4.1 to 4.12</div>
+    <h2>Opens Mon Nov 30, 1:00 AM ET · closes Wed Dec 2, 11:59 PM ET</h2>
+    <span class="when" id="examwhen">Opens Mon Nov 30</span>
+    <ul>
+      <li><b>43 questions, 60 minutes, 100 points</b>, one attempt. Honorlock, closed book.</li>
+      <li>Canvas lists multiple-choice <b>and essay</b> question types. Dr. Weeks' Exam 3 tip still applies: if you get a choice of what to plant or how to manage a farm problem, pick one <b>and explain why</b>. The Apply prompts below practice exactly that.</li>
+      <li>Results stay hidden after you submit, as with the quizzes.</li>
+    </ul>
+  </div>
+
+  <div class="prog">
+    <div class="progbar"><div class="progfill" id="pf"></div></div>
+    <div class="progtxt"><b id="pdone">0</b> of <span id="ptot">0</span> listen-along prompts done · <span id="pbuilt">0</span> of 12 lectures ready</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab on" data-v="listen">Listen along</button>
+    <button class="tab" data-v="quiz">Quiz</button>
+    <button class="tab" data-v="weak" data-need="renderWeak">Weak spots</button>
+    <button class="tab" data-v="big" data-need="renderBig">Big picture</button>
+  </div>
+
+  <div class="view on" id="v-listen">
+    <div class="oneliner" style="margin:22px 4px 10px">Open a lecture, press play, and keep this beside it. The prompts follow the lecture in order, each labeled with the part it belongs to. Pause on a Predict card before she gets there, then check yourself. Tap a card for the answer and tick it done; your ticks stay on this device.</div>
+    <div class="legend"><span><i style="background:var(--sky-d)"></i>Predict</span><span><i style="background:var(--moss-d)"></i>Explain why</span><span><i style="background:#9a7426"></i>Connect</span><span><i style="background:var(--clay-d)"></i>Apply to a farm</span></div>
+    <div id="listen"><div class="placeholder">If this line stays, scripts are off.</div></div>
+  </div>
+
+  <div class="view" id="v-quiz">
+    <div class="oneliner" style="margin:22px 4px 10px">Ten at a time, answers shuffled, the lecture's reason under each. Your real Quiz 12, 13 and 14 questions carry a bank pill; a key the bank could not confirm carries a "key unsure" pill and a note on what the lecture says.</div>
+    <div class="filters" id="qfsrc"></div>
+    <div class="filters" id="qflec" style="margin-top:0"></div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+
+  <div class="view" id="v-weak"><div id="weak"></div></div>
+  <div class="view" id="v-big"><div id="big"></div></div>
+
+  <div class="foot">Ecology Field Guide IV · built from your Module 4 lecture transcripts (4.1 to 4.12) and your Quiz 12 to 14 banks · your ticks stay on this device</div>
+</div>
+<script>
+/* ---------- Module 4 lectures, file order 4.1 to 4.12 (Canvas calls them Presentation 1, 2, 3a, 3b, 4 to 11).
+   Prompts follow each transcript in order. Stage 1 (2026-11-25): prompts for 4.1 to 4.4; 4.5 to 4.12 have play links only. ---------- */
+var LECS=[
+{id:"4.1",title:"Agroecosystems in the Landscape",canvas:"Presentation 1",words:4187,
+ url:"https://mediasite.video.ufl.edu/Mediasite/Play/bd851075e48744938bc3ec2d91a89c161d",
+ gist:"Step back from the single field: a farm sits in a matrix of other farms, natural areas and towns, and each side changes the other. Then the ecotone, the edge where two systems meet, which is richer in species than either side and can be designed in or cleared out.",
+ heads:["The auto-transcript has one garbled line on invasives (\"they're not considered invasive if they're disrupting\"); she means exotic species that disrupt natural systems and spread well are called exotic and invasive."],
+ prompts:[
+  {part:"Early · landscape ecology",k:"predict",q:"Before she defines it: at what scale does landscape ecology work, and what does it count as \"the landscape\" around a farm?",
+   a:"\"The scale that includes multiple ecosystems.\" The landscape is every ecosystem bordering the one you study: for an agroecosystem that means neighboring fields, natural areas and urban areas, the matrix the farm is embedded in."},
+  {part:"Early · farm to farm",k:"predict",q:"Which pests travel between neighboring farms on their own, and which barely move?",
+   a:"Insects and diseases move: fungal spores ride the wind and many diseases are vectored by insects. Nematodes live in the soil and hardly disperse unless machinery or planting material carries them. Beneficials (predators, parasitoids) also move farm to farm."},
+  {part:"Early · natural areas help farms",k:"explain",q:"List what a bordering natural area does for a farm, before she lists it.",
+   a:"Windbreaks that cut erosion; soil microbes that break down pesticides; soil organisms that take up fertilizer before it moves far; and genetic diversity, because crop wild relatives carry genes we can breed or engineer into new cultivars (Quiz 12: natural areas hold genetic resources in crop wild relatives = True)."},
+  {part:"Middle · natural areas as pest sources",k:"explain",q:"Why are natural areas rarely a source of crop pests, even though it is possible?",
+   a:"Most crop pests are introduced and specialized on the crop. Native insects in a natural area already have their own predators, parasitoids and parasites regulating them, so they seldom break out to pest levels. She says there is little evidence for it."},
+  {part:"Middle · natural areas as enemy sources",k:"explain",q:"Natural areas supply predators better than parasitoids. Why the difference, and what helps them move in?",
+   a:"Many predators are generalists: they eat native prey in the natural area and crop herbivores alike. Parasitoids are usually specialized. A buffer strip, vegetation that makes the transition between field and natural area, helps the beneficials cross over."},
+  {part:"Middle · agriculture's effects on natural areas",k:"connect",q:"She sorts agriculture's harm into direct and indirect habitat modification. Which harms from Modules 1 to 3 land in the indirect group?",
+   a:"Direct: loss of habitat and fragmentation (breaking large natural areas into small units). Indirect, habitat degradation: pesticides, runoff and eutrophication, all covered earlier in the course. Erosion and siltation of waterways sits between the two in the transcript, so learn it as a harm without forcing it into one box. Pests escaping from farms into natural areas come last."},
+  {part:"Middle · Melaleuca, cane toad, ash borer",k:"connect",q:"Of her three invasive examples, which one came from agriculture directly? Tie it to a biocontrol type from Module 3.",
+   a:"The cane toad: released into sugarcane fields to control insect pests, it did not control them and spread across South Florida, the Caribbean and Australia. That is importing a non-native enemy, the move behind classical biocontrol (3.13), gone wrong. Melaleuca is indirect (ornamental, and planted to dry out Everglades land for agriculture and development); the emerald ash borer came with global commerce in packing crates from Asia."},
+  {part:"Middle · Melaleuca",k:"explain",q:"Why has Melaleuca been so hard to control in the Everglades?",
+   a:"It grows in both wet and upland ground, outcompetes sawgrass in monoculture stands that pile up litter and form islands, changes the hydrology, is adapted to fire (fire can even help it) and seeds heavily every year."},
+  {part:"Middle · urban edge",k:"apply",q:"A farmer can buy land at the edge of a city. Give her one reason to do it and two reasons to hesitate.",
+   a:"For: she can market and distribute locally, cutting distribution costs and the carbon footprint. Against: pesticide drift or carryover toward people if inputs are misused, and high land prices near cities that make it hard to hold or expand the farm."},
+  {part:"Late · ecotones",k:"predict",q:"Is an ecotone more or less diverse than the two ecosystems it joins? Guess before she says it.",
+   a:"More. Organisms of both sides overlap there, so the edge holds the highest number of species: the edge effect. For a farm that often means more natural enemies. Ecotones are transition zones between two ecosystems; for us, roads, fences, windbreaks and weedy borders."},
+  {part:"Late · UK hedgerow study",k:"predict",q:"Ground beetles (predators) in fields bordered by hedgerows, April to July: where and when are they densest?",
+   a:"Densest right at the boundary, thinning toward the middle of the field; highest early, just after planting in April, and still high through June. The weed-border and forest-edge study shows the same: more predators near both edges than mid-field."},
+  {part:"Late · ecotones as pest sources",k:"apply",q:"When should a farmer clear a weedy border instead of keeping it? Give her two cases.",
+   a:"When it shelters the pest: boll weevils overwinter in field-margin litter, so clearing it can nearly wipe them out. And when the border weeds are closely related to the crop (a wild grass beside wheat): they harbor the crop's insects and diseases between seasons and reinfect the next planting. Quiz 13 asked this: weed control is prudent when crops are closely related to the weeds."},
+  {part:"End · designing the field",k:"apply",q:"Square field or long thin one, if she relies on biological control? What else would she change?",
+   a:"Long, thin borders, for as much ecotone as possible (Quiz 12: long thin rectangular fields maximize edge effects). Break up big fields with windbreaks and even plant ecotone species inside the field so the middle is not a habitat desert. She says to treat those helpful border plants as \"basically just as important as your crop.\""}
+ ]},
+{id:"4.2",title:"Whole System Approach and Diversity",canvas:"Presentation 2",words:2226,
+ url:"https://mediasite.video.ufl.edu/Mediasite/Play/ab16ed508e28471c9944fb1816205ff91d",
+ gist:"Conventional farming simplifies and then controls with inputs; whole-system management builds complexity instead. Diversity is richness plus evenness, measured within a site (alpha), between sites (beta) and across the landscape (gamma), and it has more dimensions than a species count.",
+ heads:["Slip to know: she defines vertical diversity as \"the horizontal layers\". Vertical diversity is the layers stacked upward (canopy over understory); horizontal diversity is the spatial spread, as she says next.",
+  "The auto-transcript writes \"Margulis\" for the first index. The index that counts only species and individuals is Margalef's."],
+ prompts:[
+  {part:"Early · whole system vs conventional",k:"predict",q:"At what level does conventional agriculture manage, and where does she want management to move?",
+   a:"Conventional management works at the individual or population level: control this pest, this disease, add this nutrient. For sustainability she wants the landscape or ecosystem level, because the whole is \"bigger than the sum of its parts.\""},
+  {part:"Early · simplification",k:"explain",q:"Why does simplifying a farm lead to more inputs?",
+   a:"Remove the weeds and other diversity, grow one crop at a huge scale, and the interactions that used to regulate the system are gone, so control has to come from outside as inputs. Quiz 12 asked the same thing: conventional agroecosystems need external inputs because of altered disturbance regimes, modified nutrient cycling and loss of functional links (all options)."},
+  {part:"Early · building diversity",k:"predict",q:"Name the ways a farmer can build diversity in, before she lists them.",
+   a:"Intercropping, using natural weeds, borders and hedgerows, crop rotation and grazing animals. The goal is emergent system qualities: beneficial mutualisms, internal nutrient cycling (no-till or reduced till), and fewer external inputs. Most of the rest of Module 4 is this list, one lecture each."},
+  {part:"Middle · richness and evenness",k:"predict",q:"Two communities have the same species. In one they are equally common; in the other one species dominates. Which is more diverse, and why does it matter for how the farm works?",
+   a:"The even one. Diversity rises with more species (richness) and with more equal abundances (evenness). Low evenness means dominance by one or a few species, which is how conventional farms are designed. If two species provide a beneficial interaction but are rare, they may not deliver that function."},
+  {part:"Middle · alpha, beta, gamma",k:"explain",q:"Say alpha, beta and gamma diversity in one line each.",
+   a:"Alpha: diversity in a single location or habitat. Beta: diversity across multiple locations or habitats, between them. Gamma: the landscape level. (Quiz 12 keyed beta = between-patch and gamma = landscape.)"},
+  {part:"Middle · strip vs mixed intercrop",k:"predict",q:"Three crops as a strip intercrop (two rows of each, alternating) vs the same three as a mixed intercrop. Which has high alpha diversity and which has high beta?",
+   a:"Strip: low alpha (one species where you sample) but high beta (three species across the field). Mixed: high alpha, low beta (every unit looks the same). Which works better depends on what the farmer wants to promote."},
+  {part:"Middle · indices",k:"explain",q:"Why is the first index she names rarely used, and what do Shannon and Simpson add?",
+   a:"Margalef's index uses only the number of species and individuals, so it ignores evenness. Shannon and Simpson both include relative abundance. Shannon rises with more species or more evenness. Simpson is the inverse of a dominance index: higher when no species dominates (Quiz 12 key: diversity in terms of inverse dominance). No calculations on the exam, she says."},
+  {part:"Late · limits of indices",k:"connect",q:"Why do indices struggle with soil life? Think back to the soil food web from earlier in the semester.",
+   a:"An index needs you to identify the species, or at least sort them into functional groups. Soil diversity is extreme and poorly worked out: you can dig up a mite that has no species name and whose role in the system is unknown."},
+  {part:"End · dimensions of diversity",k:"explain",q:"Under the umbrella of ecological diversity, match each dimension to its meaning: genetic, vertical, horizontal, structural, functional, temporal.",
+   a:"Genetic: between species and within one species. Vertical: the layers (see the slip note above). Horizontal: spatial distribution and heterogeneity. Structural: the number of niches. Functional: in her words, the complexity of the habitat. Temporal: cyclical change over time."},
+  {part:"End · apply",k:"apply",q:"A vegetable grower adds a row of fruit trees over her beds and switches crops between seasons. Which dimensions of diversity go up?",
+   a:"Vertical (a new canopy layer over the beds), structural (more niches) and temporal (the seasonal change), plus alpha diversity in the field itself."}
+ ]},
+{id:"4.3",title:"Diversity and Stability",canvas:"Presentation 3a",words:2210,
+ url:"https://mediasite.video.ufl.edu/Mediasite/Play/d0eef6ae1a70412aa062850c78a175cc1d",
+ gist:"Four reasons diversity raises sustainability, each with a field example, then the core claim: diversity promotes stability, where stability means the power to recover from disturbance. Conventional monocultures lose functional links and natural nutrient cycling, which makes them inherently unstable.",
+ heads:["Transcript quirks: \"Agroisolab ecosystem health\" is agroecosystem health, \"functional leaks\" is functional links, \"landscape escape scale\" is landscape scale."],
+ prompts:[
+  {part:"Early · four reasons",k:"predict",q:"She gives four reasons diversity raises sustainability. Name them before she does.",
+   a:"It promotes ecological processes important to agroecosystem health; it diversifies production, cutting the farmer's economic risk; it adds habitat for non-crop organisms; and it conserves the biodiversity of natural systems."},
+  {part:"Early · legume cover crop",k:"explain",q:"How does a legume cover crop count as diversity that \"promotes ecological processes\"?",
+   a:"Legumes fix nitrogen from the air and add usable nitrogen to the soil (replenishment and cycling), and the cover holds soil moisture and keeps the surface from drying out. Quiz 13 tested the flip side: rye is NOT a cover crop used mainly to add nitrogen, because it is a grass."},
+  {part:"Early · maize and red amaranth",k:"apply",q:"Why can a farmer add red amaranth to her maize without losing maize yield, and what does she gain?",
+   a:"Amaranth is harvested in under 40 days, long before the maize, so it does not cut maize yield. She gains a second revenue stream if one crop fails and, in subsistence farming, more varied food for the family. Both grow at the same time, so it is an intercrop."},
+  {part:"Middle · pigeon pea and sorghum",k:"connect",q:"Pigeon pea intercropped with sorghum adds what kind of diversity from 4.2, and who benefits?",
+   a:"Structure: the mixed heights create microclimates and habitat (structural and vertical diversity). That habitat can support natural enemies that help with biocontrol of the crop's pests."},
+  {part:"Middle · monarchs",k:"predict",q:"Bt corn pollen or herbicides: which does the evidence tie to monarch decline? Guess before she answers.",
+   a:"Herbicides. Bt corn expresses cry proteins in all tissues, pollen included, but she says the research does not really support harm in the field (lab only; more in 4.12). Roundup Ready corn lets farmers spray a nonselective herbicide that removes milkweed from fields, and most counties spray roadside weeds too."},
+  {part:"Middle · milkweed",k:"explain",q:"Why does losing milkweed matter so much, and why was it everywhere before?",
+   a:"Adult monarchs nectar on many plants, but the caterpillars feed only on milkweed, their host plant. Milkweed is a ruderal species that colonizes disturbed ground easily, so it grew as a minor weed in fields and along roadsides. Spray it out and a corn landscape becomes \"a desert\" for monarchs, and for native bees and honeybees that lose nectar."},
+  {part:"Middle · defining stability",k:"predict",q:"What is the classic definition of stability, and how does she widen it for farms?",
+   a:"Classic: an absence of fluctuations, a steady state. For agroecosystems: the ability to recover from disturbance or perturbation, the robustness to keep complex interactions going and self-regulate nutrient cycling and moisture. Farms are disturbed constantly by harvest and tillage. Quiz 12: diversity promotes agroecosystem stability = True."},
+  {part:"Late · why conventional is unstable",k:"connect",q:"Why does she call conventional systems \"inherently unstable\"? Link it to what Module 3 said about succession.",
+   a:"A homogeneous monoculture fed by fertilizers and pesticides loses functional links (pesticide resistance, fertilizer harm inside and beyond the field) and natural nutrient cycling (harvest removes biomass), so it needs ever more human input and management. Module 3's picture of conventional farming fits: it restarts succession every season and removes the competitors."},
+  {part:"End · how to add diversity",k:"predict",q:"Which tools will the next lectures use to add diversity? And at which of the three levels does it act?",
+   a:"Polyculture or intercropping, crop rotation, cover crops and integrated pest management. Adding diversity in what you grow raises it at every level: alpha (within group), beta (between groups) and gamma (regional or landscape)."},
+  {part:"End · apply",k:"apply",q:"A corn grower wants monarchs back and fewer inputs. Which two changes from this lecture would you suggest, and why?",
+   a:"Leave milkweed and weedy margins instead of blanket herbicide on field edges and roadsides (caterpillars need milkweed). And add a legume cover crop or an intercrop, which brings nitrogen, moisture retention and habitat for natural enemies, so fewer fertilizer and pesticide inputs."}
+ ]},
+{id:"4.4",title:"Diversity and Fragmentation",canvas:"Presentation 3b",words:3519,
+ url:"https://mediasite.video.ufl.edu/Mediasite/Play/b940a3064a54452eaa3fce826eb6f8421d",
+ gist:"Fields are islands, and fields cut natural areas into islands. Island biogeography explains both: small, distant patches recolonize slowly and lose species. Edges help farms but hurt natural areas, and the design answer is wide, connected buffers of refuge vegetation.",
+ heads:["She opens with \"lecture 3 of module 4\": Canvas lists this one as Presentation 3b, so that matches.",
+  "\"These are strategists\" in the transcript is r-strategists: fast-breeding early colonists.",
+  "She closes with \"up next, agroforestry\", but the next lecture in the course order is Polyculture Part 1 (4.5). The recordings are from 2014 and were not made in this order."],
+ prompts:[
+  {part:"Early · two kinds of fragments",k:"explain",q:"She asks you to see fragmentation two ways. What are they?",
+   a:"Fields as fragments themselves, islands of crop in a matrix; and fields fragmenting natural areas into remnant patches. Fragmentation = large parcels of natural vegetation broken into smaller patches. Her satellite examples: Brazil's Cerrado mostly converted to farmland, and Bolivia's star pattern of triangular soybean fields radiating from small towns with forest remnants between."},
+  {part:"Early · island biogeography",k:"predict",q:"Small island or large one; near or far: which recolonizes more slowly?",
+   a:"The smaller island, and the more distant one. A migrant has a hard time finding a small patch, and distance (the lack of habitat in between) slows arrivals. She uses islands and patches interchangeably (Quiz 12: True), and much of what we know about fragments comes from island biogeography theory (Quiz 12)."},
+  {part:"Early · niches on islands",k:"explain",q:"Why do pests often reach a new field ahead of their natural enemies?",
+   a:"Niches on islands can sit unfilled, and early colonists broaden their niche into the open space. r-strategists colonize first and arrive ahead of the regulatory species, their predators and other natural enemies. So niches in fragments are not the same as in large contiguous habitat (Quiz 12: False)."},
+  {part:"Early · extirpation",k:"explain",q:"Extirpation vs extinction: what is the difference, and which patches are prone to it?",
+   a:"Extirpation is a local extinction: the species is gone from that habitat but may live on in other remnants or regions. Small patches are the most prone."},
+  {part:"Middle · what conversion does",k:"predict",q:"List what converting land to farms does to the natural habitat that remains, before she does.",
+   a:"Loss of intact habitat; smaller remnant patches; more edge; more isolation between patches; and altered disturbance regimes. One block of 640 acres has far less edge than the same area in several small blocks (Quiz 12: fragmentation diminishes edge = False)."},
+  {part:"Middle · edges cut both ways",k:"explain",q:"Edges help a farm but can hurt a natural area. Explain both sides.",
+   a:"For the farm, the edge mixes species from both sides, so it is more diverse and lets predators and natural enemies move in. For the natural area, predators such as coyotes and wolves use edges as hunting grounds and game trails, and edge species such as the cowbird spread."},
+  {part:"Middle · the cowbird",k:"explain",q:"How does the cowbird harm songbirds, and why has its range grown?",
+   a:"It is a native North American bird once confined to prairie and forest edges. Farms and pasture created far more edge, so its range grew. It is a brood (nest) parasite: it removes host eggs and lays its own, the chick may push host young out, and the hosts keep feeding it even when it is much bigger. Host fitness drops, and songbirds are declining across the Midwest. Her point: one landscape change hits a whole guild."},
+  {part:"Middle · patch connectivity",k:"connect",q:"Isolated patches: what happens to beta diversity (from 4.2) and to genetic diversity?",
+   a:"Open farmland is a barrier: songbirds crossing without cover get picked off by raptors. Less movement between fragments lowers beta (between-fragment) diversity, and small populations breed among themselves, so genetic diversity declines, raising the risk of disease and local extinction (Quiz 12: reduced genetic diversity in patches may increase the chance of extirpation)."},
+  {part:"Late · disturbance regimes",k:"connect",q:"Give her two Florida examples of an altered disturbance regime. One links back to 4.1.",
+   a:"Hydrology: draining the Everglades means areas no longer stay wet, so woody species and islands of invasive Melaleuca (4.1) spread. Fire suppression: Florida's fire-dependent longleaf pine and wiregrass ecosystem shifts to hardwood hammocks, which then burn catastrophically; in the Midwest, woody sumac invades prairie once kept open by frequent low-intensity fires."},
+  {part:"End · designing for recolonization",k:"apply",q:"A farmer can afford one buffer: a narrow strip around the field, or wide swaths of refuge vegetation reaching into it. Which, and why?",
+   a:"Wide, penetrating swaths. Natural enemies recolonize faster when the vegetation offers both food and refuge and reaches into the field, and the role of predators and parasitoids increases with area. That raises alpha diversity in the field."},
+  {part:"End · buffers do more",k:"explain",q:"Besides natural enemies, what else does a large buffer do for the farm and its neighbors?",
+   a:"It catches pesticide drift, nutrients leaching from the field and soil moving by erosion, a transition between the field and natural areas or other fields."}
+ ]},
+{id:"4.5",title:"Polyculture / Intercropping Part 1",canvas:"Presentation 4",words:1776,url:"https://mediasite.video.ufl.edu/Mediasite/Play/8271d5720c7e4f33b54585c714fda5381d",prompts:[]},
+{id:"4.6",title:"Polyculture / Intercropping Part 2",canvas:"Presentation 5",words:5318,url:"https://mediasite.video.ufl.edu/Mediasite/Play/e12177a78fe34426ae5e298407881bc51d",prompts:[]},
+{id:"4.7",title:"Agroforestry",canvas:"Presentation 6",words:3363,url:"https://mediasite.video.ufl.edu/Mediasite/Play/935a51e97c014adcb8f55cce396864351d",prompts:[]},
+{id:"4.8",title:"Crop Rotation",canvas:"Presentation 7",words:4329,url:"https://mediasite.video.ufl.edu/Mediasite/Play/32c3c59b62af46c38def068c89e0185d1d",prompts:[]},
+{id:"4.9",title:"Integrated Pest Management",canvas:"Presentation 8",words:6560,url:"https://mediasite.video.ufl.edu/Mediasite/Play/e7456df324a245b28bb4da84addb43631d",prompts:[]},
+{id:"4.10",title:"Host Plant Resistance",canvas:"Presentation 9",words:5237,url:"https://mediasite.video.ufl.edu/Mediasite/Play/2046299529c64cdf808b8db7c59c866d1d",prompts:[]},
+{id:"4.11",title:"Animals in Agriculture",canvas:"Presentation 10",words:4356,url:"https://mediasite.video.ufl.edu/Mediasite/Play/d6130a7beccf41e5b617c3a5ea78ee881d",prompts:[]},
+{id:"4.12",title:"Genetic Engineering",canvas:"Presentation 11",words:8900,url:"https://mediasite.video.ufl.edu/Mediasite/Play/2d0404b8d55e44b4a05e366d03f1f8481d",prompts:[]}
+];
+
+
+
+
+</script>
+<script>
+/* ---------- tabs first, so the page works even if later code throws ---------- */
+function byId(id){return document.getElementById(id);}
+(function(){
+ var tabs=document.querySelectorAll('.tab');
+ tabs.forEach(function(t){
+   t.addEventListener('click',function(){
+     tabs.forEach(function(x){x.classList.remove('on');});
+     document.querySelectorAll('.view').forEach(function(v){v.classList.remove('on');});
+     t.classList.add('on');
+     var v=byId('v-'+t.getAttribute('data-v')); if(v) v.classList.add('on');
+     state.tab=t.getAttribute('data-v'); save();
+     window.scrollTo(0,0);
+   });
+ });
+})();
+function showTab(name){ var t=document.querySelector('.tab[data-v="'+name+'"]'); if(t) t.click(); }
+
+/* ---------- state: localStorage with memory fallback (iOS file:// throws). Key fixed across redeploys. ---------- */
+var LS='ecoALS3153_m4_v1';
+var _mem={};
+function _lsGet(k){try{return localStorage.getItem(k);}catch(e){return (k in _mem)?_mem[k]:null;}}
+function _lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){_mem[k]=v;}}
+var state={};
+try{state=JSON.parse(_lsGet(LS)||'{}')||{};}catch(e){state={};}
+function save(){_lsSet(LS,JSON.stringify(state));}
+if(typeof BANK==='undefined'){ window.BANK=[]; }
+if(typeof NEWQ==='undefined'){ window.NEWQ=[]; }
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function lecById(id){ for(var i=0;i<LECS.length;i++){ if(LECS[i].id===id) return LECS[i]; } return null; }
+
+/* ---------- exam countdown ---------- */
+function renderCountdown(){
+ var el=byId('examwhen'); if(!el) return;
+ var opens=Date.UTC(2026,10,30,6,0,0), closes=Date.UTC(2026,11,3,4,59,59), now=Date.now();
+ var day=86400000, txt;
+ if(now<opens){ var d=Math.ceil((opens-now)/day); txt='Opens in '+d+' day'+(d===1?'':'s'); }
+ else if(now<=closes){ var h=Math.floor((closes-now)/3600000); txt='Open now · closes in '+(h>=48?Math.floor(h/24)+' days':h+' hours'); }
+ else txt='Closed';
+ el.textContent=txt;
+}
+
+/* ---------- listen along ---------- */
+var KIND={predict:'Predict',explain:'Explain why',connect:'Connect',apply:'Apply to a farm'};
+function pid(lec,i){ return 'p_'+lec.id+'_'+i; }
+function lecDone(lec){ var n=0; lec.prompts.forEach(function(_,i){ if(state[pid(lec,i)]) n++; }); return n; }
+function updateProg(){
+ var tot=0,done=0,built=0;
+ LECS.forEach(function(l){ if(l.prompts.length) built++; tot+=l.prompts.length; done+=lecDone(l); });
+ byId('pdone').textContent=done; byId('ptot').textContent=tot; byId('pbuilt').textContent=built;
+ byId('pf').style.width=(tot?100*done/tot:0)+'%';
+}
+function renderListen(){
+ var host=byId('listen'); if(!host) return; host.innerHTML='';
+ LECS.forEach(function(lec){
+   var det=document.createElement('details'); det.className='lec'; det.id='lec-'+lec.id.replace('.','_');
+   var n=lec.prompts.length, d=lecDone(lec), mins=Math.round(lec.words/140);
+   if(state['o_'+lec.id]) det.open=true;
+   var h='<summary><span class="num">'+lec.id+'</span><span class="ttl">'+esc(lec.title)+'<span class="cv">Canvas: '+esc(lec.canvas)+'</span></span><span class="meta">~'+mins+' min'+(n?' · <b class="lcount">'+d+'/'+n+'</b>':' · <span class="soonpill">prompts coming</span>')+'</span><svg class="chev" viewBox="0 0 18 18"><path d="M6 3 L12 9 L6 15" stroke="currentColor" stroke-width="2" fill="none"/></svg></summary>';
+   h+='<div class="lbody">';
+   h+='<a class="play" href="'+esc(lec.url)+'" target="_blank" rel="noopener">&#9654; Play '+esc(lec.id)+' on Mediasite</a> <span class="playnote">opens in a new tab, UF sign-in</span>';
+   if(lec.gist) h+='<div class="gist">'+esc(lec.gist)+'</div>';
+   if(lec.heads&&lec.heads.length) h+='<ul class="heads">'+lec.heads.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+   if(n){
+     h+='<div class="sec">Prompts in lecture order · tap a card for the answer</div><div class="plist">';
+     lec.prompts.forEach(function(p,i){
+       var on=!!state[pid(lec,i)];
+       h+='<div class="pr k-'+p.k+(on?' done':'')+'" data-i="'+i+'"><div class="prtop"><span class="prpart">'+esc(p.part)+'</span><span class="prk">'+esc(KIND[p.k]||p.k)+'</span></div>';
+       h+='<div class="prq">'+(i+1)+'. '+esc(p.q)+'</div>';
+       h+='<div class="prfoot"><button class="dbtn prshow">Show answer</button><label class="tick"><input type="checkbox"'+(on?' checked':'')+'> done</label></div>';
+       h+='<div class="pra">'+esc(p.a)+'</div></div>';
+     });
+     h+='</div>';
+   } else {
+     h+='<div class="soonbox">Prompts for '+esc(lec.id)+' are being written from the transcript now. The play link works already.</div>';
+   }
+   h+='</div>';
+   det.innerHTML=h;
+   det.addEventListener('toggle',function(){ state['o_'+lec.id]=det.open?1:0; save(); });
+   det.querySelectorAll('.pr').forEach(function(card){
+     var i=+card.getAttribute('data-i'), ans=card.querySelector('.pra'), btn=card.querySelector('.prshow');
+     function toggle(){ var s=ans.classList.toggle('show'); btn.textContent=s?'Hide answer':'Show answer'; }
+     btn.addEventListener('click',function(e){ e.stopPropagation(); toggle(); });
+     card.querySelector('.prq').addEventListener('click',toggle);
+     card.querySelector('input').addEventListener('change',function(e){
+       if(e.target.checked) state[pid(lec,i)]=1; else delete state[pid(lec,i)];
+       save(); card.classList.toggle('done',e.target.checked);
+       var c=det.querySelector('.lcount'); if(c) c.textContent=lecDone(lec)+'/'+lec.prompts.length;
+       updateProg();
+     });
+   });
+   host.appendChild(det);
+ });
+}
+
+/* ---------- quiz ---------- */
+var QUIZ_BATCH=10, quizRight=0, quizAnswered=0, quizQueue=[];
+var srcF=state.qs||'all', lecF=state.ql||'all';
+BANK.forEach(function(q){ q.pill=q.pool+' bank'; });
+NEWQ.forEach(function(q){ q.pill='New · '+q.lec; });
+function bySrc(s){
+ if(s==='bank') return BANK.slice();
+ if(s==='new') return NEWQ.slice();
+ if(s==='q12'||s==='q13'||s==='q14'){ var p='Quiz '+s.slice(1); return BANK.filter(function(q){return q.pool===p;}); }
+ if(s==='unsure') return BANK.filter(function(q){return q.unsure;});
+ return BANK.concat(NEWQ);
+}
+function pool(){ var b=bySrc(srcF); if(lecF!=='all') b=b.filter(function(q){return q.lec===lecF;}); return b; }
+function questionEl(item,n){
+ var order=shuffle(item.o.map(function(_,i){return i;}));
+ var correctPos=order.indexOf(item.c);
+ var q=document.createElement('div'); q.className='q';
+ var meta='<span class="qlec">Lecture '+esc(item.lec)+'</span><span class="qsrc'+(item.pool?' qz':' nw')+'">'+esc(item.pill)+'</span>';
+ if(item.unsure) meta+='<span class="qsrc uns">key unsure</span>';
+ var h='<div class="qmeta">'+meta+'</div><div class="qh">'+n+'. '+esc(item.q)+'</div>';
+ order.forEach(function(origI,pos){ h+='<button class="opt" data-pos="'+pos+'">'+esc(item.o[origI])+'</button>'; });
+ h+='<div class="qexp">'+esc(item.e)+'</div>';
+ if(item.note) h+='<div class="qexp qnote"><b>'+esc(item.noteLabel||'Note.')+'</b> '+esc(item.note)+'</div>';
+ if(item.rebuilt) h+='<div class="qexp qreb">Options rebuilt: your bank kept this question and its key, not the full Canvas option list.</div>';
+ q.innerHTML=h;
+ return {el:q,correctPos:correctPos};
+}
+function renderQuizFilters(){
+ var host=byId('qfsrc'), host2=byId('qflec'); if(!host||!host2) return;
+ host.innerHTML='<span class="fl">Draw from</span>'; host2.innerHTML='<span class="fl">Lecture</span>';
+ var n=function(s){return bySrc(s).length;};
+ var srcs=[['all','Everything ('+n('all')+')'],['bank','Quiz bank only ('+n('bank')+')'],['q12','Quiz 12 ('+n('q12')+')'],['q13','Quiz 13 ('+n('q13')+')'],['q14','Quiz 14 ('+n('q14')+')'],['unsure','Unsure keys ('+n('unsure')+')'],['new',NEWQ.length?'New only ('+n('new')+')':'New only (coming)']];
+ srcs.forEach(function(o){ var b=document.createElement('button'); b.className='fbtn'+(srcF===o[0]?' on':''); b.textContent=o[1];
+   if(!n(o[0])){ b.disabled=true; b.className+=' soon'; } else b.addEventListener('click',function(){ srcF=o[0]; state.qs=srcF; save(); resetQuiz(); });
+   host.appendChild(b); });
+ var src=bySrc(srcF);
+ [['all','All']].concat(LECS.map(function(l){return [l.id,l.id];})).forEach(function(o){
+   var c=o[0]==='all'?src.length:src.filter(function(q){return q.lec===o[0];}).length;
+   var b=document.createElement('button'); b.className='fbtn sm'+(lecF===o[0]?' on':''); b.textContent=o[1]+(o[0]==='all'?'':' ('+c+')');
+   if(!c){ b.disabled=true; b.className+=' soon'; } else b.addEventListener('click',function(){ lecF=o[0]; state.ql=lecF; save(); resetQuiz(); });
+   host2.appendChild(b);
+ });
+}
+function resetQuiz(){ quizQueue=[]; quizRight=0; quizAnswered=0; if(!pool().length){ lecF='all'; } renderQuizFilters(); renderQuiz(); }
+function updateQuizScore(){ var s=byId('qscore'); if(s) s.textContent = quizAnswered ? ('Score '+quizRight+' / '+quizAnswered) : 'Pick an answer to begin'; }
+function renderQuiz(){
+ var host=byId('quiz'); if(!host) return; host.innerHTML='';
+ var B=pool();
+ if(!B.length){ host.innerHTML='<div class="placeholder">Your Quiz 12, 13 and 14 questions are being loaded now. Refresh in a little while.</div>'; return; }
+ var n=Math.min(QUIZ_BATCH,B.length);
+ if(quizQueue.length<n) quizQueue=shuffle(B.map(function(_,i){return i;}));
+ var batch=quizQueue.splice(0,n);
+ batch.forEach(function(idx,qi){
+   var item=B[idx]; var r=questionEl(item,qi+1), q=r.el;
+   q.querySelectorAll('.opt').forEach(function(b){
+     b.addEventListener('click',function(){
+       if(q.dataset.done)return; q.dataset.done='1'; quizAnswered++;
+       var pick=+b.getAttribute('data-pos');
+       q.querySelectorAll('.opt').forEach(function(x,xi){ x.disabled=true; if(xi===r.correctPos)x.classList.add('correct'); });
+       if(pick!==r.correctPos) b.classList.add('wrong'); else quizRight++;
+       q.querySelectorAll('.qexp').forEach(function(x){ x.classList.add('show'); });
+       updateQuizScore();
+     });
+   });
+   host.appendChild(q);
+ });
+ var foot=document.createElement('div'); foot.className='quizfoot';
+ foot.innerHTML='<span class="quizscore" id="qscore"></span><button class="dbtn" id="qnew">Fresh set &#8594;</button>';
+ host.appendChild(foot);
+ byId('qnew').addEventListener('click',function(){ window.scrollTo(0,byId('v-quiz').offsetTop-10); renderQuiz(); });
+ updateQuizScore();
+}
+
+/* ---------- optional sections (weak spots, big picture) ---------- */
+function renderExtras(){
+ if(typeof renderWeak==='function') renderWeak();
+ if(typeof renderBig==='function') renderBig();
+ document.querySelectorAll('.tab[data-need]').forEach(function(t){ if(typeof window[t.getAttribute('data-need')]!=='function') t.style.display='none'; });
+}
+function restoreTab(){ if(state.tab && document.querySelector('.tab[data-v="'+state.tab+'"]') && document.querySelector('.tab[data-v="'+state.tab+'"]').style.display!=='none') showTab(state.tab); }
+
+/* ---------- boot, every init guarded ---------- */
+['renderCountdown','renderListen','updateProg','renderQuizFilters','renderQuiz','renderExtras','restoreTab']
+  .forEach(function(fn){ try{ window[fn](); }catch(e){ if(window.console) console.error(fn,e); } });
+
+</script>
+</body>
+</html>
