@@ -1459,21 +1459,30 @@ function ixSort(host,x,done){
  }
  function select(c){ if(sel) sel.classList.remove('sel'); sel=(sel===c)?null:c; if(sel) sel.classList.add('sel'); host.classList.toggle('picking',!!sel); }
  chips.forEach(function(c){
-   var sx,sy,drag=false,ghost=null,down=false;
-   c.addEventListener('pointerdown',function(e){ if(locked) return; down=true; drag=false; sx=e.clientX; sy=e.clientY; try{c.setPointerCapture(e.pointerId);}catch(_){} });
-   c.addEventListener('pointermove',function(e){
-     if(!down||locked) return;
-     if(!drag && Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>8){ drag=true; ghost=c.cloneNode(true); ghost.classList.add('ghost'); document.body.appendChild(ghost); c.classList.add('lift'); }
-     if(drag){ ghost.style.left=(e.clientX-ghost.offsetWidth/2)+'px'; ghost.style.top=(e.clientY-ghost.offsetHeight/2)+'px'; e.preventDefault(); }
-   });
+   var sx,sy,drag=false,ghost=null,pid=null;
+   function kill(){ if(ghost){ ghost.remove(); ghost=null; } c.classList.remove('lift'); }
+   function unbind(){ window.removeEventListener('pointermove',mv); window.removeEventListener('pointerup',up); window.removeEventListener('pointercancel',cn); window.removeEventListener('blur',bl); pid=null; }
+   function mv(e){
+     if(e.pointerId!==pid||locked) return;
+     if(!drag && Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy)>8){ drag=true; ghost=c.cloneNode(true); ghost.classList.remove('sel'); ghost.classList.add('ghost'); document.body.appendChild(ghost); c.classList.add('lift'); }
+     if(drag&&ghost){ ghost.style.left=(e.clientX-ghost.offsetWidth/2)+'px'; ghost.style.top=(e.clientY-ghost.offsetHeight/2)+'px'; if(e.cancelable) e.preventDefault(); }
+   }
    function end(e,cancel){
-     if(!down) return; down=false;
-     if(drag){ ghost.style.display='none'; var el=cancel?null:document.elementFromPoint(e.clientX,e.clientY); ghost.remove(); ghost=null; c.classList.remove('lift');
-       var z=el&&el.closest('.dz'); if(z&&host.contains(z)) place(c,z); if(sel) select(sel); }
+     var was=drag, el=null;
+     if(was&&ghost){ ghost.style.display='none'; if(!cancel) el=document.elementFromPoint(e.clientX,e.clientY); }
+     kill(); drag=false; unbind();
+     if(was){ var z=el&&el.closest('.dz'); if(z&&host.contains(z)) place(c,z); if(sel) select(sel); }
      else if(!cancel) select(c);
    }
-   c.addEventListener('pointerup',function(e){ end(e,false); });
-   c.addEventListener('pointercancel',function(e){ end(e,true); });
+   function up(e){ if(e.pointerId===pid) end(e,false); }
+   function cn(e){ if(e.pointerId===pid) end(e,true); }
+   function bl(){ if(pid!==null){ kill(); drag=false; unbind(); } }
+   c.addEventListener('pointerdown',function(e){
+     if(locked) return;
+     if(pid!==null){ kill(); unbind(); }
+     pid=e.pointerId; drag=false; sx=e.clientX; sy=e.clientY;
+     window.addEventListener('pointermove',mv,{passive:false}); window.addEventListener('pointerup',up); window.addEventListener('pointercancel',cn); window.addEventListener('blur',bl);
+   });
  });
  host.querySelectorAll('.dz').forEach(function(z){ z.addEventListener('click',function(e){ if(locked||!sel||e.target.closest('.chip2')) return; place(sel,z); select(sel); }); });
  host.querySelectorAll('.ixh').forEach(function(hd){ hd.addEventListener('click',function(){ if(locked||!sel) return; place(sel,hd.nextElementSibling); select(sel); }); });
@@ -1551,6 +1560,13 @@ function ixEstimate(host,x,done){
  });
 }
 var IXT={sort:ixSort,match:ixSort,order:ixOrder,choice:ixChoice,tf:ixTF,estimate:ixEstimate};
+
+(function(){ if(window.__ghostSweep) return; window.__ghostSweep=1;
+ function sweep(){ document.querySelectorAll('.chip2.ghost').forEach(function(g){ g.remove(); }); document.querySelectorAll('.chip2.lift').forEach(function(x){ x.classList.remove('lift'); }); }
+ window.addEventListener('pointerdown',sweep,true);
+ document.addEventListener('visibilitychange',sweep);
+ window.addEventListener('pageshow',sweep);
+})();
 /* ---------- tabs first, so the page works even if later code throws ---------- */
 function byId(id){return document.getElementById(id);}
 (function(){
